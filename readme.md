@@ -36,6 +36,8 @@ I am still considering the license for this document and illustrations, but I am
 - naming rules (glyphs, classes, lookups, keywords)
 
 ## Substitutions
+- target and replacement
+-- classes
 - sub by syntax
 - replace one with one
 - replace many with one
@@ -85,6 +87,7 @@ I am still considering the license for this document and illustrations, but I am
 - randomization (trigger, cycle, quantum)
 - swashes with collision detection
 - init, medi, fina without init, medi, fina
+- roman numerals
 
 ## Common Problems
 - all of the rule types in a lookup must be the same type
@@ -135,7 +138,7 @@ I am still considering the license for this document and illustrations, but I am
 
 In OpenType we can define behaviors that we want to happen upon request from users. For example, the user may decide that text should be displayed with small caps. You, the type designer, can define which glyphs should be changed when this request is made by the user. These behaviors are defined in "features." Features can do two things: they can substitute glyphs and they can adjust the positions of glyphs.
 
-The actual behavior within the features are defined with "rules." Following the small caps example above, you can define a rule that states that the *a* glyph should be replaced with *A.sc*.
+The actual behavior within the features are defined with "rules." Following the small caps example above, you can define a rule that states that the a glyph should be replaced with A.sc.
 
 Within a feature, it is often necessary to group a set of rules together. This group of rules is called a "lookup."
 
@@ -183,16 +186,19 @@ Let's also assume that the user wants to apply small caps and ligatures to a gly
 
 A glyph run is processed one feature at a time. So, here is what "Hello" will look like as it enters and exists each feature:
 
+    (this will be an illustration)
     Hello > [feature: small caps] > Hello (with ello in .sc)
     Hello (with ello in .sc) > [feature: ligatures] > Hello (with ello in .sc)
 
 Within each feature, the glyph run is processed one lookup at a time. Here is what our example looks like as it moves through the small caps feature:
 
+    (this will be an illustration)
     Hello > [lookup: letters] > Hello (with ello in .sc)
     Hello (with ello in .sc) > [lookup: numbers] > Hello (with ello in .sc)
 
 Within each lookup, things are a little different. The glyph run is passed one glyph at a time from beginning to end over each rule within the lookup. If a rule transforms the passed glyph, the following rules are skipped for the passed glyph. The next glyph is then passed through the lookup. That's complex, so let's look at it with our example:
 
+    (this will be an illustration)
     H ello > [replace a with A.sc] > H ello
     H ello > [replace b with B.sc] > H ello
     ...
@@ -283,16 +289,27 @@ Lookups are defined in a similar way to features. They have a name, but the name
     } Letters;
 
 ### Classes
-- inline
-- define
-- reference
+
+You'll often run into situations where you want use a group of glyphs in a rule. These groups are called classes and they are defined with a list of glyphs names or class names inside of brackets.
+
+    [A E I O U Y]
+
+Classes can have a name assigned to them so that they can be used more than once. Class names follow the general naming rules and they are always preceded with an @. To create a named class you set the name, then an =, then the class definition and end it with a semicolon.
+
+    @vowels = [A E I O U Y];
+
+After a class has been defined, it can be referenced by name.
+
+    @vowels
+
+(Is this the place to talk about inline classes or should that be in the sub and pos sections?)
 
 ### General Naming Rules
 
 A name for a glyph, class or lookup must adhere to the following constraints:
 
 - No more than 31 characters in length.
-- Use characters in A-Z a-z 0-9 . _.
-- Must not start with a number or period.
+- Only use characters in A-Z a-z 0-9 . _
+- Must not start with a number or a period.
 
 You should avoid naming anything with the same name as a [reserved keyword](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#2.c). If you do need to name a glyph with one of these names, precede an reference to the glyph with a \. But, really, try to avoid needing to do this.
