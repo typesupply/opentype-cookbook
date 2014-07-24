@@ -1,24 +1,17 @@
-This document is going to be a designer friendly introduction to the OpenType processing model and the techniques for implementing features. Specifically, the [Adobe Feature File Syntax](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html) will be shown as the way to implement features.
+**(Please note, this is a work in progress. Feedback is welcome!)**
 
-I believe that a high-level introduction to OpenType features would be beneficial to the general type design community. The Adobe Feature File Syntax is great and the syntax reference is quite useful. But, it has a steep learning curve and the reference makes broad assumptions about what the reader already knows. (As it should. It's a technical document.) That said, I am primarily writing this for my students who want to learn how to write their own OpenType features.
+# Introduction
 
-I'm not sure what the final form of this document will be. I want it to be very portable. There will be illustrations, some may even be animated. Sphinx + Read-the-Docs may be the way to go.
+OpenType features allow fonts to behave smartly. This can behavior can do simple things like change text to small caps or they can do complex things like insert swashes, alternates and ligatures to make text in a script font feel handmade. This document aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you'll be able to create features of your own design.
 
-I am still considering the license for this document and illustrations, but I am leaning towards [Creative Commons Attribution-NonCommercial-ShareAlike](http://creativecommons.org/licenses/by-nc-sa/3.0/). Basically, I don't want someone (other than me, maybe) to encapsulate this document and its illustrations into a sellable form and then profit from it. Developing this is going to be a non-trivial amount of work.
-
-
-## Assumptions
-- general understanding of the parts of a font (glyphs, characters)
-- basic understanding of what substitutions and positioning are trying to do
+This document is written with the assumption that you have a basic working knowledge of the structure of a font. You need to know the differences between characters and glyphs, understand the coordinate system in glyphs and so on.
 
 
-## Intro
-- briefly explain opentype and its capabilities
+# Foundation Concepts
 
+Before we get into writing any code, let's first establish an what we are actually building and how it actually works. This is probably the toughest thing to understand about OpenType features, but understanding the underlying mechanics will free you to build new and innovative features of your own.
 
-## General Concepts
-
-### Structures
+## Structures
 
 In OpenType we can define behaviors that we want to happen upon request from users. For example, the user may decide that text should be displayed with small caps. You, the type designer, can define which glyphs should be changed when this request is made by the user. These behaviors are defined in "features." Features can do two things: they can substitute glyphs and they can adjust the positions of glyphs.
 
@@ -38,7 +31,7 @@ Visually, you can think of features, lookups and rules like this:
     feature
     ...
 
-### Processing
+## Processing
 
 When text is processed, the features that the user wants applied are gathered into two groups: substitution features and positioning features. The substitution features are processed first and then the positioning features are processed. (Add note or footnote here explaining why this is logical.) The order in which you have defined the features is the order in which they will be applied to the text. So, the order of your features, lookups and rules is very important.
 
@@ -121,11 +114,11 @@ That's how processing works and it is the most complex part of OpenType features
 (For you experts reading this: Yeah, I know this isn't technically 100% accurate. But, I don't really want to confuse everyone by going through the processing model with the GSUB and GPOS data structures. Those are different from the .fea syntax just enough to make things **very confusing** unless you know both sides of the process very well. So, I'm going to explain the processing model following the .fea structures.)
 
 
-## Syntax Intro
+# Syntax Intro
 
 You will be writing your features in the [Adobe OpenType Feature File Syntax](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html) (commonly referred to as ".fea"). .fea is a simple, text format that is easily editable in text and font editors. There are other syntaxes and tools for developing features, but .fea is the most widely supported and the most easily accessible. We'll be going through the important parts of .fea in detail, but for now we need to establish some basics.
 
-### Comments
+## Comments
 
 It's useful to be able to write comments about your code. To do this, add a # and everything from the # to the end of the line of text will be marked as a comment.
 
@@ -133,27 +126,27 @@ It's useful to be able to write comments about your code. To do this, add a # an
 
 Comments are ignored when your font is compiled, so you can write anything you want in your comments.
 
-### White Space
+## White Space
 
 In some syntaxes the amount of white space is important. This is not the case in .fea. You can use spaces, tabs and line breaks as much as you like.
 
-### Special Characters
+## Special Characters
 
 Some characters have special meanings in .fea.
 
-#### ;
+### ;
 
 A semicolon indicates the end of something--a feature, lookup, rule, etc. These are important.
 
-#### {}
+### {}
 
 Braces enclose the contents of a feature or lookup.
 
-#### []
+### []
 
 Brackets enclose the contents of a class. More information on classes will be coming shortly.
 
-### Features
+## Features
 
 Features are identified with a four character long feature tag. These are either [registered tags](https://www.microsoft.com/typography/otspec/featurelist.htm) or private tags. Unless you have a very good reason to create a private tag, you should always use the registered tags. Applications that support OpenType features uses these tags to identify which features are supported in your font. For example, if you have a feature with the smcp tag, applications will know that your font supports small caps.
 
@@ -165,7 +158,7 @@ Features are defined with the feature keyword, the appropriate tag, a pair of br
 
 (Should it be noted that these are called blocks? Or is that too much jargon?)
 
-### Lookups
+## Lookups
 
 Lookups are defined in a similar way to features. They have a name, but the name is not restricted to four characters or to a tag database. You can make up your own name, as long as it follows the general naming rules.
 
@@ -173,7 +166,7 @@ Lookups are defined in a similar way to features. They have a name, but the name
         # rules go here
     } Letters;
 
-### Classes
+## Classes
 
 You'll often run into situations where you want use a group of glyphs in a rule. These groups are called classes and they are defined with a list of glyphs names or class names inside of brackets.
 
@@ -189,7 +182,7 @@ After a class has been defined, it can be referenced by name.
 
 (Is this the place to talk about inline classes or should that be in the sub and pos sections?)
 
-### General Naming Rules
+## General Naming Rules
 
 A name for a glyph, class or lookup must adhere to the following constraints:
 
@@ -200,7 +193,7 @@ A name for a glyph, class or lookup must adhere to the following constraints:
 You should avoid naming anything with the same name as a [reserved keyword](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#2.c). If you do need to name a glyph with one of these names, precede an reference to the glyph with a \. But, really, try to avoid needing to do this.
 
 
-## Substitutions
+# Substitutions
 - target and replacement
 -- classes
 - sub by syntax
@@ -210,7 +203,7 @@ You should avoid naming anything with the same name as a [reserved keyword](http
 - replace one from many
 
 
-## Positioning
+# Positioning
 - position, advance
 - value record
 - cumulative
@@ -222,7 +215,7 @@ You should avoid naming anything with the same name as a [reserved keyword](http
 - mark to mark (maybe)
 
 
-## Contextual
+# Contextual
 - backtrack
 - lookahead
 - ignore
@@ -230,11 +223,11 @@ You should avoid naming anything with the same name as a [reserved keyword](http
 - positioning
 
 
-## Features
+# Features
 - common feature tags and descriptions
 
 
-### Special Features
+## Special Features
 - kern
 -- assumptions that this is positioning only
 -- contextual is possible, but not widely supported
@@ -245,7 +238,7 @@ You should avoid naming anything with the same name as a [reserved keyword](http
 -- naming (unsupported)
 
 
-## Advanced Techniques
+# Advanced Techniques
 - languages and scripts
 - include
 - recycling lookups
@@ -253,7 +246,7 @@ You should avoid naming anything with the same name as a [reserved keyword](http
 - useExtension
 
 
-## Common Features (and sample code)
+# Common Features (and sample code)
 - intro about supporting only what is needed, how to order these, etc.
 - small caps (smcp, c2sc)
 - all caps (case, cpsp)
@@ -275,7 +268,7 @@ You should avoid naming anything with the same name as a [reserved keyword](http
 -- roman numerals
 
 
-## Common Problems
+# Common Problems
 - all of the rule types in a lookup must be the same type
 - table overflow
 - bad feature and rule ordering can lead to needless complexity
@@ -283,11 +276,11 @@ You should avoid naming anything with the same name as a [reserved keyword](http
 - complex contextual rules leading to slowness of overflow errors (limit the contexts to what is *likely* to happen, not *everything*)
 
 
-## .fea vs. Compiled Tables
+# .fea vs. Compiled Tables
 - this is technical, but should probably be explained lightly
 
 
-## Things That Should Not Be In This Document (and why)
+# Things That Should Not Be In This Document (and why)
 - ranges in glyph classes (why: not that useful, hard to debug)
 - CID (why: complex)
 - contour point (why: complex)
@@ -305,11 +298,18 @@ You should avoid naming anything with the same name as a [reserved keyword](http
 - known bugs of implementations (why: not something I want to keep up to date)
 
 
-## Copyrights, Credits, etc.
-- The Adobe Feature File Syntax is copyright Adobe Systems Incorporated.
-- OpenType is either a registered trademark or trademark of Microsoft Corporation in the United States and/or other countries.
+# Copyrights, Credits, etc.
+(Please note that the following license statement is a draft. I'm still thinking this through. For now, consider this document Copyright Type Supply LLC.)
+
+The text of this document, except the code samples, is licensed as [Creative Commons Attribution-NonCommercial-ShareAlike](http://creativecommons.org/licenses/by-nc-sa/3.0/).
+
+The code samples are released into the public domain. You may use them in modify them, use them in commercial fonts and distribute them without attribution. You may not claim authorship of the original code or patent or copyright the original code.
+
+The Adobe Feature File Syntax is copyright Adobe Systems Incorporated.
+
+OpenType is either a registered trademark or trademark of Microsoft Corporation in the United States and/or other countries.
 
 
-# Random Ideas
-- in the general concepts section, use plain language to describe the desired behaviors. illustrate how the processing model works by showing an iterative animation that pairs an input glyph run with sequential rules and the line by line result of applying the rules to the glyph run.
-- should there be a section that documents my preferred syntax style?
+# Appendix: My .fea Style Guide
+
+This will be a brief explanation the style guidelines I follow when writing .fea, because, obviously, I'm right. It'll be something like [PEP 8](http://legacy.python.org/dev/peps/pep-0008/), but not as long.
