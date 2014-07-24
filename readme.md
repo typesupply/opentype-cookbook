@@ -6,145 +6,15 @@ I'm not sure what the final form of this document will be. I want it to be very 
 
 I am still considering the license for this document and illustrations, but I am leaning towards [Creative Commons Attribution-NonCommercial-ShareAlike](http://creativecommons.org/licenses/by-nc-sa/3.0/). Basically, I don't want someone (other than me, maybe) to encapsulate this document and its illustrations into a sellable form and then profit from it. Developing this is going to be a non-trivial amount of work.
 
-# Outline
 
 ## Assumptions
 - general understanding of the parts of a font (glyphs, characters)
 - basic understanding of what substitutions and positioning are trying to do
 
+
 ## Intro
 - briefly explain opentype and its capabilities
 
-## General Concepts
-- processing model
--- substitutions and positioning
--- features
--- lookups
--- rules
--- glyph runs / lines
--- ordering
-- classes
-
-## Syntax Intro
-- Adobe Feature File Syntax
-- comments
-- whitespace
-- {} [] ;
-- feature
-- lookup
-- class (define, use)
-- naming rules (glyphs, classes, lookups, keywords)
-
-## Substitutions
-- target and replacement
--- classes
-- sub by syntax
-- replace one with one
-- replace many with one
-- replace one with many
-- replace one from many
-
-## Positioning
-- position, advance
-- value record
-- cumulative
-- single
-- pair
-- cursive (maybe)
-- mark to base (maybe)
-- mark to ligature (maybe)
-- mark to mark (maybe)
-
-## Contextual
-- backtrack
-- lookahead
-- ignore
-- substitutions
-- positioning
-
-## Features
-- common feature tags and descriptions
-
-### Special Features
-- kern
--- assumptions that this is positioning only
--- contextual is possible, but not widely supported
-- aalt
--- one from many
-- stylistic sets
--- designer defined behavior (assumed to be substitutions?)
--- naming (unsupported)
-
-## Advanced Techniques
-- languages and scripts
-- include
-- recycling lookups
-- lookupflag
-- useExtension
-
-## Common Features (and sample code)
-- intro about supporting only what is needed, how to order these, etc.
-- small caps (smcp, c2sc)
-- all caps (case, cpsp)
-- figures (pnum, tnum, lnum, onum)
-- fractions (frac: adobe, contextual; afrc?)
-- numerators
-- denominators
-- swashes (swsh, cswh, demonstrate collision detection)
-- titling alternates
-- ligatures (liga, dlig)
-- localized forms
-- ordinals
-- superscript, subscript
-- aalt
-- fun stuff
--- randomization (trigger, cycle, quantum)
--- swashes with collision detection
--- init, medi, fina without init, medi, fina
--- roman numerals
-
-## Common Problems
-- all of the rule types in a lookup must be the same type
-- table overflow
-- bad feature and rule ordering can lead to needless complexity
-- features can't know if other features are active or not
-- complex contextual rules leading to slowness of overflow errors (limit the contexts to what is *likely* to happen, not *everything*)
-
-## .fea vs. Compiled Tables
-- this is technical, but should probably be explained lightly
-
-## Things That Should Not Be In This Document (and why)
-- ranges in glyph classes (why: not that useful, hard to debug)
-- CID (why: complex)
-- contour point (why: complex)
-- GDEF (why: complex)
-- named value records (why: haven't ever used it)
-- subtable breaking (why: because I said so)
-- enumerating pairs (why: complex)
-- contextual kerning (why: support is consistent)
-- the aalt construction technique of including complete features (why: I don't like it)
-- the optical size feature (why: not supported)
-- tables (OS/2, hhea, name, etc.) (why: your font editor is going to do this for you)
-- anonymous data blocks (why: obviously)
-- reversed chaining lookup types (why: too complex for this)
-- feature implementations (adobe CS, CSS, etc.) (why: not something I want to keep up to date)
-- known bugs of implementations (why: not something I want to keep up to date)
-
-## Copyrights, Credits, etc.
-- The Adobe Feature File Syntax is copyright Adobe Systems Incorporated.
-- OpenType is either a registered trademark or trademark of Microsoft Corporation in the United States and/or other countries.
-
-
-# Random Ideas
-- in the general concepts section, use plain language to describe the desired behaviors. illustrate how the processing model works by showing an iterative animation that pairs an input glyph run with sequential rules and the line by line result of applying the rules to the glyph run.
-- should there be a section that documents my preferred syntax style?
-
-# Style Notes
-- don't refer to a type designer in abstract. always use "you" instead.
-- the person using a font should be referred to as "user."
-
-
-# Content
 
 ## General Concepts
 
@@ -250,6 +120,7 @@ That's how processing works and it is the most complex part of OpenType features
 
 (For you experts reading this: Yeah, I know this isn't technically 100% accurate. But, I don't really want to confuse everyone by going through the processing model with the GSUB and GPOS data structures. Those are different from the .fea syntax just enough to make things **very confusing** unless you know both sides of the process very well. So, I'm going to explain the processing model following the .fea structures.)
 
+
 ## Syntax Intro
 
 You will be writing your features in the [Adobe OpenType Feature File Syntax](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html) (commonly referred to as ".fea"). .fea is a simple, text format that is easily editable in text and font editors. There are other syntaxes and tools for developing features, but .fea is the most widely supported and the most easily accessible. We'll be going through the important parts of .fea in detail, but for now we need to establish some basics.
@@ -327,3 +198,118 @@ A name for a glyph, class or lookup must adhere to the following constraints:
 - Must not start with a number or a period.
 
 You should avoid naming anything with the same name as a [reserved keyword](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#2.c). If you do need to name a glyph with one of these names, precede an reference to the glyph with a \. But, really, try to avoid needing to do this.
+
+
+## Substitutions
+- target and replacement
+-- classes
+- sub by syntax
+- replace one with one
+- replace many with one
+- replace one with many
+- replace one from many
+
+
+## Positioning
+- position, advance
+- value record
+- cumulative
+- single
+- pair
+- cursive (maybe)
+- mark to base (maybe)
+- mark to ligature (maybe)
+- mark to mark (maybe)
+
+
+## Contextual
+- backtrack
+- lookahead
+- ignore
+- substitutions
+- positioning
+
+
+## Features
+- common feature tags and descriptions
+
+
+### Special Features
+- kern
+-- assumptions that this is positioning only
+-- contextual is possible, but not widely supported
+- aalt
+-- one from many
+- stylistic sets
+-- designer defined behavior (assumed to be substitutions?)
+-- naming (unsupported)
+
+
+## Advanced Techniques
+- languages and scripts
+- include
+- recycling lookups
+- lookupflag
+- useExtension
+
+
+## Common Features (and sample code)
+- intro about supporting only what is needed, how to order these, etc.
+- small caps (smcp, c2sc)
+- all caps (case, cpsp)
+- figures (pnum, tnum, lnum, onum)
+- fractions (frac: adobe, contextual; afrc?)
+- numerators
+- denominators
+- swashes (swsh, cswh, demonstrate collision detection)
+- titling alternates
+- ligatures (liga, dlig)
+- localized forms
+- ordinals
+- superscript, subscript
+- aalt
+- fun stuff
+-- randomization (trigger, cycle, quantum)
+-- swashes with collision detection
+-- init, medi, fina without init, medi, fina
+-- roman numerals
+
+
+## Common Problems
+- all of the rule types in a lookup must be the same type
+- table overflow
+- bad feature and rule ordering can lead to needless complexity
+- features can't know if other features are active or not
+- complex contextual rules leading to slowness of overflow errors (limit the contexts to what is *likely* to happen, not *everything*)
+
+
+## .fea vs. Compiled Tables
+- this is technical, but should probably be explained lightly
+
+
+## Things That Should Not Be In This Document (and why)
+- ranges in glyph classes (why: not that useful, hard to debug)
+- CID (why: complex)
+- contour point (why: complex)
+- GDEF (why: complex)
+- named value records (why: haven't ever used it)
+- subtable breaking (why: because I said so)
+- enumerating pairs (why: complex)
+- contextual kerning (why: support is consistent)
+- the aalt construction technique of including complete features (why: I don't like it)
+- the optical size feature (why: not supported)
+- tables (OS/2, hhea, name, etc.) (why: your font editor is going to do this for you)
+- anonymous data blocks (why: obviously)
+- reversed chaining lookup types (why: too complex for this)
+- feature implementations (adobe CS, CSS, etc.) (why: not something I want to keep up to date)
+- known bugs of implementations (why: not something I want to keep up to date)
+
+
+## Copyrights, Credits, etc.
+- The Adobe Feature File Syntax is copyright Adobe Systems Incorporated.
+- OpenType is either a registered trademark or trademark of Microsoft Corporation in the United States and/or other countries.
+
+
+# Random Ideas
+- in the general concepts section, use plain language to describe the desired behaviors. illustrate how the processing model works by showing an iterative animation that pairs an input glyph run with sequential rules and the line by line result of applying the rules to the glyph run.
+- should there be a section that documents my preferred syntax style?
