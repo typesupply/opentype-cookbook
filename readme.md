@@ -82,12 +82,26 @@ I am still considering the license for this document and illustrations, but I am
 - lookupflag
 - useExtension
 
-## Useful Algorithms
-- fractions (adobe, contextual)
-- randomization (trigger, cycle, quantum)
-- swashes with collision detection
-- init, medi, fina without init, medi, fina
-- roman numerals
+## Common Features (and sample code)
+- intro about supporting only what is needed, how to order these, etc.
+- small caps (smcp, c2sc)
+- all caps (case, cpsp)
+- figures (pnum, tnum, lnum, onum)
+- fractions (frac: adobe, contextual; afrc?)
+- numerators
+- denominators
+- swashes (swsh, cswh, demonstrate collision detection)
+- titling alternates
+- ligatures (liga, dlig)
+- localized forms
+- ordinals
+- superscript, subscript
+- aalt
+- fun stuff
+-- randomization (trigger, cycle, quantum)
+-- swashes with collision detection
+-- init, medi, fina without init, medi, fina
+-- roman numerals
 
 ## Common Problems
 - all of the rule types in a lookup must be the same type
@@ -270,7 +284,7 @@ Brackets enclose the contents of a class. More information on classes will be co
 
 ### Features
 
-Features are identified with a four character long feature tag. These are either [registered tags](link_to_registry) or private tags. Unless you have a very good reason to create a private tag, you should always use the registered tags. Applications that support OpenType features uses these tags to identify which features are supported in your font. For example, if you have a feature with the smcp tag, applications will know that your font supports small caps.
+Features are identified with a four character long feature tag. These are either [registered tags](https://www.microsoft.com/typography/otspec/featurelist.htm) or private tags. Unless you have a very good reason to create a private tag, you should always use the registered tags. Applications that support OpenType features uses these tags to identify which features are supported in your font. For example, if you have a feature with the smcp tag, applications will know that your font supports small caps.
 
 Features are defined with the feature keyword, the appropriate tag, a pair of braces and a semicolon.
 
