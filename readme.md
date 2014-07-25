@@ -313,22 +313,7 @@ You should avoid naming anything with the same name as a [reserved keyword](http
 - positioning
 
 
-# Features
-- common feature tags and descriptions
-
-
-## Special Features
-- kern
--- assumptions that this is positioning only
--- contextual is possible, but not widely supported
-- aalt
--- one from many
-- stylistic sets
--- designer defined behavior (assumed to be substitutions?)
--- naming (unsupported)
-
-
-# Advanced Techniques
+## Advanced Techniques
 - languages and scripts
 - include
 - recycling lookups
@@ -336,30 +321,68 @@ You should avoid naming anything with the same name as a [reserved keyword](http
 - useExtension
 
 
-# Common Features (and sample code)
+# Common Features And Techniques
 - intro about supporting only what is needed, how to order these, bad feature and rule ordering can lead to needless complexity, etc.
-- small caps (smcp, c2sc)
-- all caps (case, cpsp)
-- figures (pnum, tnum, lnum, onum)
-- fractions (frac: adobe, contextual; afrc?)
-- numerators
-- denominators
-- swashes (swsh, cswh, demonstrate collision detection)
-- titling alternates
-- ligatures (liga, dlig)
-- localized forms
-- ordinals
-- superscript, subscript
-- aalt
-- fun stuff
--- swashes with collision detection
--- line and boundary detection
--- randomization (trigger, cycle, quantum)
--- random positioning
--- roman numerals
+
+## Glyph Run and Word Boundary Detection
+any, all, filled, empty metaclasses
+
+## Collision Detection
+
+## Small Caps
+smcp, c2sc
+
+## All Caps
+case, cpsp
+
+## Figures
+pnum, tnum, lnum, onum
+
+## Fractions
+
+### Method 1: Individual
+
+### Method 2: Contextual
+
+### Numerators
+
+### Denominators
+
+## Swashes
+swsh, cswh
+
+## Titling Alternates
+
+## Ligatures
+liga, dlig
+
+## Script And Language Specific Forms
+
+## Ordinals
+
+## Superscript
+
+## Subscript
+
+## Manual Alternate Access
+aalt
+
+## Fun Stuff
+
+### Randomization
+
+#### Method 1: Rotation
+
+#### Method 2: Triggers
+
+#### Method 3: Quantum
+
+#### Bonus: Positioning
+
+### Roman Numerals
 
 
-# Common Problems
+# Trouble Shooting
 - did you forget a special character? you probably forgot a } ; or something like that.
 - all of the rule types in a lookup must be the same type
 - table overflow
