@@ -319,57 +319,80 @@ Note that the keyword in the middle of the rule changes from by to from.
 
 ## Positioning
 
+Positioning glyphs may not be as visually interesting as what can be achieved with substitution, but the positioning support in OpenType is incredibly powerful. The positioning rules can be broken into two separate categories to make them easier to understand:
+
+1. Simple Rules -- These adjust either the space around one glyph or the space between two glyphs.
+2. Mind-Blowingly Complex and Astonishingly Powerful Rules -- These do things like properly shift combining marks to align precisely with the base forms in Arabic and Devanagari so that things look incredibly spontaneous and beautiful.
+
+We're going to cover the simple rules in this document. The complex rules are amazing, but too advanced for now.
+
 ### Position and Advance
 
-#### value record
+Before we go much further we need to talk about coordinate systems and value records. As you know, the coordinate system in fonts is based on X and Y axes. The X axes moves from left to right with numbers increasing as you move to the right. The Y axis moves from bottom to top with numbers increasing as you move up. The origin for these axis is the intersection of the 0 X coordinate, otherwise known as the baseline, and the 0 Y coordinate.
+
+    (illustration showing a g with the origin and axes highlighted)
+
+In the positioning rules, we can adjust the placement and advance of glyphs. The placement is the spot at which the origin of the glyph will be aligned. The advance is the width and the height of the glyph from the origin. In horizontal typesetting, the height will be zero and the width will be the width of the glyph. The placement and advance can each be broken down into X and Y values. Thus, there is an x placement, a y placement, an x advance and a y advance.
+
+    (illustration showing a g with the placements and advance highlighted)
+
+The units that these values represent are the same units in which you have drawn your glyph. Together, these four values form a value record. In the .fea syntax, we express these value records like this:
 
     <xPlacement yPlacement xAdvance yAdvance>
 
-#### cumulative
+For example:
+
+    <1 2 3 4>
+
+In this case, the value record is adjusting the x placement to the right by one unit, the y placement up by two units, the x advance by 3 unites and the y advance by four units.
+
+When the positioning features are started, each glyph in the glyph run has a value record of <0 0 0 0>. As the processing happens and rules are matched, these value records are modified cumulative. So, if one feature adjust a glyph's x placement by 10 units and then another feature adjust the glyph's x placement by 30 units, the glyph's x placement would be 40 units.
 
 ### Adjustment Of One Glyph
 
-    pos glyph <xPlacement yPlacement xAdvance yAdvance>;
+To adjust the space around a single thing, you do this:
+
+    pos target valueRecord;
+
+(In the .fea documentation, this is known as GPOS Lookup Type 1: Single Adjustment Positioning.)
+
+For example, to put some space to the left and right of the A, you would do this:
 
     pos A <10 0 20 0>;
 
+You can also use a class as the target:
+
+    pos [A B C] <10 0 20 0>;
     pos @upperclass <10 0 20 0>;
 
 ### Adjustment Of The Space Between Two Glyphs
 
-(note that this is specific to kerning and good editors will automatically build this feature)
+To adjust the space between two glyphs, you do this:
 
-    pos glyph1 glyph2 xAdvance;
+    pos target1 target2 valueRecord;
+
+(In the .fea documentation, this is known as GPOS Lookup Type 2: Pair Adjustment Positioning.)
+
+In this case, you can shorten the value record to be only the x advance adjustment. Or, you can use the full value record if you prefer that.
+
+This rule is used almost exclusively for kerning. In fact, this is so common that you shouldn't have to write any of these rules yourself. Your font and/or kerning editor should do this for you.
+
+If you do want to see all the ways that you can use glyphs and classes in this rule, here you go:
 
     pos A T -50;
-
     pos [A Aacute] T -50;
-
     pos A [T Tbar] -50;
-
     pos [A Aacute] [T Tbar] -50;
-
     pos @A @T -50;
-
     pos @A T -50;
-
     pos A @T -50;
-
     pos @A [T Tbar] -50;
-
     pos [A Aacute] @T -50;
 
-### Stuff that I'm not sure if I will cover
-
-(I don't know much about these and I don't have a good way to test them readily available.)
-
-- cursive (maybe)
-- mark to base (maybe)
-- mark to ligature (maybe)
-- mark to mark (maybe)
+But, seriously, let your editor do this for you.
 
 
-## Substitutions and Positions Based on Context
+## Substitutions and Positioning Based on Context
 - before target (aka backtrack)
 
 - after target (aka lookahead)
@@ -386,8 +409,6 @@ Note that the keyword in the middle of the rule changes from by to from.
 - languages and scripts
 - include
 - recycling lookups
-- lookupflag
-- useExtension
 
 
 # Common Features And Techniques
@@ -451,10 +472,10 @@ aalt
 ### Roman Numerals
 
 
-# Trouble Shooting
+# Troubleshooting
 - did you forget a special character? you probably forgot a } ; or something like that.
 - all of the rule types in a lookup must be the same type
-- table overflow
+- table overflow (subtable, useExtension)
 - features can't know if other features are active or not
 - complex contextual rules leading to slowness of overflow errors (limit the contexts to what is *likely* to happen, not *everything*)
 
@@ -479,7 +500,11 @@ aalt
 - reversed chaining lookup types (why: too complex for this)
 - feature implementations (adobe CS, CSS, etc.) (why: not something I want to keep up to date)
 - known bugs of implementations (why: not something I want to keep up to date)
-
+- cursive positioning (why: too complex for this; not easy to test)
+- mark to base positioning (why: too complex for this; not easy to test)
+- mark to ligature positioning (why: too complex for this; not easy to test)
+- mark to mark positioning (why: too complex for this; not easy to test)
+- lookupflag (why: relates to the positioning rules that aren't covered)
 
 # Thanks
 
