@@ -111,6 +111,8 @@ Here is our example, animated:
 
 That's how processing works and it is the most complex part of OpenType features that you will need to understand. Now we can move on to the fun stuff.
 
+**note that this is the same for positioning**
+
 (For you experts reading this: Yeah, I know this isn't technically 100% accurate. But, I don't really want to confuse everyone by going through the processing model with the GSUB and GPOS data structures. Those are different from the .fea syntax just enough to make things **very confusing** unless you know both sides of the process very well. So, I'm going to explain the processing model following the .fea structures.)
 
 
@@ -193,33 +195,121 @@ A name for a glyph, class or lookup must adhere to the following constraints:
 You should avoid naming anything with the same name as a [reserved keyword](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#2.c). If you do need to name a glyph with one of these names, precede an reference to the glyph with a \. But, really, try to avoid needing to do this.
 
 
-# Substitutions
+# Rules
+
+## Substitutions
 - target and replacement
 -- classes
-- sub by syntax
-- replace one with one
-- replace many with one
-- replace one with many
-- replace one from many
+
+### Replace One With One
+
+    sub glyph by glyph;
+
+    sub a by A.sc;
+
+    sub [a b c] by [A.sc B.sc C.sc];
+
+    sub @lowercase by @smallcaps;
+
+### Replace Many With One
+
+    sub sequence of glyphs by glyph;
+
+    sub f i by f_i;
+
+    sub [f f.alt] i by f_i;
+
+    sub f [i i.alt] by f_i;
+
+    sub [f f.alt] [i i.alt] by f_i;
+
+    sub @f @i by f_i;
+
+    sub @f i by f_i;
+
+    sub f @i by f_i;
+
+    sub @f [i i.alt] by f_i;
+    
+    sub [f f.alt] @i by f_i;
+
+### Replace One With Many
+
+    sub glyph by sequence of glyphs;
+
+    sub f_i by f i;
+
+### Replace One From Many
+
+    sub glyph from options;
+
+    sub a from [a.alt1 a.alt2];
+
+    sub a from @aAlternates;
 
 
-# Positioning
-- position, advance
-- value record
-- cumulative
-- single
-- pair
+## Positioning
+
+### Position and Advance
+
+#### value record
+
+    <xPlacement yPlacement xAdvance yAdvance>
+
+#### cumulative
+
+### Adjustment Of One Glyph
+
+    pos glyph <xPlacement yPlacement xAdvance yAdvance>;
+
+    pos A <10 0 20 0>;
+
+    pos @upperclass <10 0 20 0>;
+
+### Adjustment Of The Space Between Two Glyphs
+
+(note that this is specific to kerning and good editors will automatically build this feature)
+
+    pos glyph1 glyph2 xAdvance;
+
+    pos A T -50;
+
+    pos [A Aacute] T -50;
+
+    pos A [T Tbar] -50;
+
+    pos [A Aacute] [T Tbar] -50;
+
+    pos @A @T -50;
+
+    pos @A T -50;
+
+    pos A @T -50;
+
+    pos @A [T Tbar] -50;
+
+    pos [A Aacute] @T -50;
+
+### Stuff that I'm not sure if I will cover
+
+(I don't know much about these and I don't have a good way to test them readily available.)
+
 - cursive (maybe)
 - mark to base (maybe)
 - mark to ligature (maybe)
 - mark to mark (maybe)
 
 
-# Contextual
-- backtrack
-- lookahead
+## Substitutions and Positions Based on Context
+- before target (aka backtrack)
+
+- after target (aka lookahead)
+
 - ignore
+"If this is matched, skip everything else in this lookup for the glyph being processed."
+
 - substitutions
+
 - positioning
 
 
@@ -247,7 +337,7 @@ You should avoid naming anything with the same name as a [reserved keyword](http
 
 
 # Common Features (and sample code)
-- intro about supporting only what is needed, how to order these, etc.
+- intro about supporting only what is needed, how to order these, bad feature and rule ordering can lead to needless complexity, etc.
 - small caps (smcp, c2sc)
 - all caps (case, cpsp)
 - figures (pnum, tnum, lnum, onum)
@@ -262,16 +352,17 @@ You should avoid naming anything with the same name as a [reserved keyword](http
 - superscript, subscript
 - aalt
 - fun stuff
--- randomization (trigger, cycle, quantum)
 -- swashes with collision detection
--- init, medi, fina without init, medi, fina
+-- line and boundary detection
+-- randomization (trigger, cycle, quantum)
+-- random positioning
 -- roman numerals
 
 
 # Common Problems
+- did you forget a special character? you probably forgot a } ; or something like that.
 - all of the rule types in a lookup must be the same type
 - table overflow
-- bad feature and rule ordering can lead to needless complexity
 - features can't know if other features are active or not
 - complex contextual rules leading to slowness of overflow errors (limit the contexts to what is *likely* to happen, not *everything*)
 
@@ -298,12 +389,20 @@ You should avoid naming anything with the same name as a [reserved keyword](http
 - known bugs of implementations (why: not something I want to keep up to date)
 
 
-# Copyrights, Credits, etc.
+# Thanks
+
+Thanks to the Adobe Type Department for developing the .fea syntax. It gets criticized from time to time, but it is actually a great abstraction of the GSUB, GPOS and GDEF binary data structures. I've tried, and failed, to invent a better syntax several times. .fea is hard to beat. Thanks Adobe!
+
+
+# Licenses, Copyrights and Credits
+
 (Please note that the following license statement is a draft. I'm still thinking this through. For now, consider this document Copyright Type Supply LLC.)
 
 The text of this document, except the code samples, is licensed as [Creative Commons Attribution-NonCommercial-ShareAlike](http://creativecommons.org/licenses/by-nc-sa/3.0/).
 
-The code samples are released into the public domain. You may use them in modify them, use them in commercial fonts and distribute them without attribution. You may not claim authorship of the original code or patent or copyright the original code.
+The code samples are released into the public domain. You may modify them, use them in commercial fonts and distribute them without attribution. You may not claim authorship of the original code or patent or copyright the original code.
+
+The demo font included with this document is copyright Type Supply LLC. It may be used for reference only. You may not modify, extend, convert or sell it. I have used one of the fonts developed by my foundry so that there would be a high-quality example for you to study. Please be courteous.
 
 The Adobe Feature File Syntax is copyright Adobe Systems Incorporated.
 
