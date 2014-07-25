@@ -412,21 +412,25 @@ But, seriously, let your editor do this for you.
 
 
 # Common Features And Techniques
-- intro about supporting only what is needed, how to order these, bad feature and rule ordering can lead to needless complexity, etc.
+intro about supporting only what is needed, how to order these, bad feature and rule ordering can lead to needless complexity, etc.
 
 ## Glyph Run and Word Boundary Detection
 any, all, filled, empty metaclasses
 
 ## Collision Detection
 
-## Small Caps
-smcp, c2sc
+## Script And Language Specific Forms
 
-## All Caps
-case, cpsp
+    feature locl {
 
-## Figures
-pnum, tnum, lnum, onum
+        script latn;
+
+            language NLD exclude_dflt;
+                lookup DutchIJ {
+                    sub IJ by IJ.dutch;
+                } DutchIJ;
+
+    } locl;
 
 ## Fractions
 
@@ -434,25 +438,190 @@ pnum, tnum, lnum, onum
 
 ### Method 2: Contextual
 
+    feature frac {
+
+        lookup FractionBar {
+        ignore sub slash @figures @figures @figures @figures @figures @figures @figures @figures @figures @figures slash';
+        ignore sub slash' @figures @figures @figures @figures @figures @figures @figures @figures @figures @figures slash;
+        ignore sub slash @figures @figures @figures @figures @figures @figures @figures @figures @figures slash';
+        ignore sub slash' @figures @figures @figures @figures @figures @figures @figures @figures @figures slash;
+        ignore sub slash @figures @figures @figures @figures @figures @figures @figures @figures slash';
+        ignore sub slash' @figures @figures @figures @figures @figures @figures @figures @figures slash;
+        ignore sub slash @figures @figures @figures @figures @figures @figures @figures slash';
+        ignore sub slash' @figures @figures @figures @figures @figures @figures @figures slash;
+        ignore sub slash @figures @figures @figures @figures @figures @figures slash';
+        ignore sub slash' @figures @figures @figures @figures @figures @figures slash;
+        ignore sub slash @figures @figures @figures @figures @figures slash';
+        ignore sub slash' @figures @figures @figures @figures @figures slash;
+        ignore sub slash @figures @figures @figures @figures slash';
+        ignore sub slash' @figures @figures @figures @figures slash;
+        ignore sub slash @figures @figures @figures slash';
+        ignore sub slash' @figures @figures @figures slash;
+        ignore sub slash @figures @figures slash';
+        ignore sub slash' @figures @figures slash;
+        ignore sub slash @figures slash';
+        ignore sub slash' @figures slash;
+        ignore sub slash slash';
+        ignore sub slash' slash;
+        sub @figures slash' @figures by fraction;
+        } FractionBar;
+
+        lookup Numerator1 {
+        sub @figures' fraction by @figuresNumerator;
+        } Numerator1;
+
+        lookup Numerator2 {
+        sub @figures' @figuresNumerator fraction by @figuresNumerator;
+        } Numerator2;
+
+        lookup Numerator3 {
+        sub @figures' @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
+        } Numerator3;
+
+        lookup Numerator4 {
+        sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
+        } Numerator4;
+
+        lookup Numerator5 {
+        sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
+        } Numerator5;
+
+        lookup Numerator6 {
+        sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
+        } Numerator6;
+
+        lookup Numerator7 {
+        sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
+        } Numerator7;
+
+        lookup Numerator8 {
+        sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
+        } Numerator8;
+
+        lookup Numerator9 {
+        sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
+        } Numerator9;
+
+        lookup Numerator10 {
+        sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
+        } Numerator10;
+
+        lookup Denominator {
+        sub [fraction @figuresDenominator] @figures' by @figuresDenominator;
+        } Denominator;
+
+        sub @figures space' @figuresNumerator by uni2009;
+    } frac;
+
 ### Numerators
+
+    feature numr {
+        sub @figures' by @figuresNumerator;
+    } numr;
 
 ### Denominators
 
-## Swashes
-swsh, cswh
-
-## Titling Alternates
-
-## Ligatures
-liga, dlig
-
-## Script And Language Specific Forms
-
-## Ordinals
+    feature dnom {
+        sub @figures' by @figuresDenominator;
+    } dnom;
 
 ## Superscript
 
+    feature sups {
+        sub @figures' by @figuresSuperscript;
+    } sups;
+
 ## Subscript
+
+    feature subs {
+        sub @figures' by @figuresSubscript;
+    } subs;
+
+## Figures
+
+    feature lnum {
+        sub @figuresOldStyle by @figures;
+    } lnum;
+
+
+    feature onum {
+        sub @figures by @figuresOldStyle;
+    } onum;
+
+
+    feature pnum {
+        sub @figuresTabular by @figures;
+        sub @figuresOldStyleTabular by @figuresOldStyle;
+    } pnum;
+
+
+    feature tnum {
+        sub @figures by @figuresTabular;
+        sub @figuresOldStyle by @figuresOldStyleTabular;
+    } tnum;
+
+## Ordinals
+
+    feature ordn {
+        sub [A a] by ordfeminine;
+        sub [O o] by ordmasculine;
+    } ordn;
+
+## Small Caps
+
+    feature smcp {
+        sub @lowercase by @smallCaps;
+    } smcp;
+
+    feature c2sc {
+        sub @uppercase by @smallCaps;
+        sub @lowercase by @smallCaps;
+        sub @figures by @figuresSmallCap;
+    } c2sc;
+
+## All Caps
+
+    feature case {
+        sub @punctuationUppercaseOff by @punctuationUppercaseOn;
+    } case;
+
+    feature cpsp {
+        pos @uppercase <100 0 200 0>;
+        pos @punctuationUppercaseOn <100 0 200 0>;
+    } cpsp;
+
+## Swashes
+
+    feature swsh {
+        sub @uppercase by @swashCaps;
+    } swsh;
+
+Need cswh example.
+
+## Titling Alternates
+
+    feature titl {
+        sub @uppercase by @titlingCaps;
+    } titl;
+
+## Stylistic Sets
+
+    feature ss01 {
+        sub J by J.alt;
+        sub J.sc by J.scalt;
+    } ss01;
+
+## Ligatures
+
+    feature liga {
+        sub f i by f_i;
+        sub f l by f_l;
+    } liga;
+
+
+    feature dlig {
+        sub O O by O_O;
+    } dlig;
 
 ## Manual Alternate Access
 aalt
@@ -463,11 +632,219 @@ aalt
 
 #### Method 1: Rotation
 
-#### Method 2: Triggers
+    feature calt {
+        @randomCycle1 = [@uppercase];
+        @randomCycle2 = [A.random1 B.random1 C.random1 D.random1 E.random1 F.random1 G.random1 H.random1 I.random1 J.random1 K.random1 L.random1 M.random1 N.random1 O.random1 P.random1 Q.random1 R.random1 S.random1 T.random1 U.random1 V.random1 W.random1 X.random1 Y.random1 Z.random1];
+        @randomCycle3 = [A.random2 B.random2 C.random2 D.random2 E.random2 F.random2 G.random2 H.random2 I.random2 J.random2 K.random2 L.random2 M.random2 N.random2 O.random2 P.random2 Q.random2 R.random2 S.random2 T.random2 U.random2 V.random2 W.random2 X.random2 Y.random2 Z.random2];
+
+        sub @randomCycle1 @randomCycle1' by @randomCycle2;
+        sub @randomCycle2 @randomCycle1' by @randomCycle3;
+    } calt;
+
+#### Method 2: Duplicates
+
+    feature calt {
+
+        @randomDuplicateSkip = [@uppercase];
+
+        lookup RandomDuplicate1 {
+            sub A A' by A.random1;
+            sub B B' by B.random1;
+            sub C C' by C.random1;
+            sub D D' by D.random1;
+            sub E E' by E.random1;
+            sub F F' by F.random1;
+            sub G G' by G.random1;
+            sub H H' by H.random1;
+            sub I I' by I.random1;
+            sub J J' by J.random1;
+            sub K K' by K.random1;
+            sub L L' by L.random1;
+            sub M M' by M.random1;
+            sub N N' by N.random1;
+            sub O O' by O.random1;
+            sub P P' by P.random1;
+            sub Q Q' by Q.random1;
+            sub R R' by R.random1;
+            sub S S' by S.random1;
+            sub T T' by T.random1;
+            sub U U' by U.random1;
+            sub V V' by V.random1;
+            sub W W' by W.random1;
+            sub X X' by X.random1;
+            sub Y Y' by Y.random1;
+            sub Z Z' by Z.random1;
+        } RandomDuplicate1;
+
+        lookup RandomDuplicate2 {
+            sub A @randomDuplicateSkip A' by A.random1;
+            sub B @randomDuplicateSkip B' by B.random1;
+            sub C @randomDuplicateSkip C' by C.random1;
+            sub D @randomDuplicateSkip D' by D.random1;
+            sub E @randomDuplicateSkip E' by E.random1;
+            sub F @randomDuplicateSkip F' by F.random1;
+            sub G @randomDuplicateSkip G' by G.random1;
+            sub H @randomDuplicateSkip H' by H.random1;
+            sub I @randomDuplicateSkip I' by I.random1;
+            sub J @randomDuplicateSkip J' by J.random1;
+            sub K @randomDuplicateSkip K' by K.random1;
+            sub L @randomDuplicateSkip L' by L.random1;
+            sub M @randomDuplicateSkip M' by M.random1;
+            sub N @randomDuplicateSkip N' by N.random1;
+            sub O @randomDuplicateSkip O' by O.random1;
+            sub P @randomDuplicateSkip P' by P.random1;
+            sub Q @randomDuplicateSkip Q' by Q.random1;
+            sub R @randomDuplicateSkip R' by R.random1;
+            sub S @randomDuplicateSkip S' by S.random1;
+            sub T @randomDuplicateSkip T' by T.random1;
+            sub U @randomDuplicateSkip U' by U.random1;
+            sub V @randomDuplicateSkip V' by V.random1;
+            sub W @randomDuplicateSkip W' by W.random1;
+            sub X @randomDuplicateSkip X' by X.random1;
+            sub Y @randomDuplicateSkip Y' by Y.random1;
+            sub Z @randomDuplicateSkip Z' by Z.random1;
+        } RandomDuplicate2;
+
+        lookup RandomDuplicate3 {
+            sub A @randomDuplicateSkip @randomDuplicateSkip A' by A.random1;
+            sub B @randomDuplicateSkip @randomDuplicateSkip B' by B.random1;
+            sub C @randomDuplicateSkip @randomDuplicateSkip C' by C.random1;
+            sub D @randomDuplicateSkip @randomDuplicateSkip D' by D.random1;
+            sub E @randomDuplicateSkip @randomDuplicateSkip E' by E.random1;
+            sub F @randomDuplicateSkip @randomDuplicateSkip F' by F.random1;
+            sub G @randomDuplicateSkip @randomDuplicateSkip G' by G.random1;
+            sub H @randomDuplicateSkip @randomDuplicateSkip H' by H.random1;
+            sub I @randomDuplicateSkip @randomDuplicateSkip I' by I.random1;
+            sub J @randomDuplicateSkip @randomDuplicateSkip J' by J.random1;
+            sub K @randomDuplicateSkip @randomDuplicateSkip K' by K.random1;
+            sub L @randomDuplicateSkip @randomDuplicateSkip L' by L.random1;
+            sub M @randomDuplicateSkip @randomDuplicateSkip M' by M.random1;
+            sub N @randomDuplicateSkip @randomDuplicateSkip N' by N.random1;
+            sub O @randomDuplicateSkip @randomDuplicateSkip O' by O.random1;
+            sub P @randomDuplicateSkip @randomDuplicateSkip P' by P.random1;
+            sub Q @randomDuplicateSkip @randomDuplicateSkip Q' by Q.random1;
+            sub R @randomDuplicateSkip @randomDuplicateSkip R' by R.random1;
+            sub S @randomDuplicateSkip @randomDuplicateSkip S' by S.random1;
+            sub T @randomDuplicateSkip @randomDuplicateSkip T' by T.random1;
+            sub U @randomDuplicateSkip @randomDuplicateSkip U' by U.random1;
+            sub V @randomDuplicateSkip @randomDuplicateSkip V' by V.random1;
+            sub W @randomDuplicateSkip @randomDuplicateSkip W' by W.random1;
+            sub X @randomDuplicateSkip @randomDuplicateSkip X' by X.random1;
+            sub Y @randomDuplicateSkip @randomDuplicateSkip Y' by Y.random1;
+            sub Z @randomDuplicateSkip @randomDuplicateSkip Z' by Z.random1;
+        } RandomDuplicate3;
+
+    } calt;
 
 #### Method 3: Quantum
 
+    feature calt {
+        @randomQuantumTrigger1 = [A.random1 A.random2 B B.random2 C C.random1 C.random2 D D.random1 E.random1 G G.random2 H H.random2 I J K.random1 L.random2 N.random1 O O.random1 P.random1 P.random2 Q.random1 S S.random1 S.random2 T T.random1 U.random2 V W.random1 W.random2 X X.random1 Y Y.random1 Y.random2 Z.random2];
+        @randomQuantumTrigger2 = [A B.random1 D.random2 E E.random2 F F.random1 F.random2 G.random1 H.random1 I.random1 I.random2 J.random1 J.random2 K K.random2 L L.random1 M M.random1 M.random2 N N.random2 O.random2 P Q Q.random2 R R.random1 R.random2 T.random2 U U.random1 V.random1 V.random2 W X.random2 Z Z.random1 space];
+
+        @randomQuantumState1 = [A         B         C         D         E         F         G         H         I         J         K         L         M         N         O         P         Q         R         S         T         U         V         W         X         Y         Z];
+        @randomQuantumState2 = [A.random1 B.random1 C.random1 D.random1 E.random1 F.random1 G.random1 H.random1 I.random1 J.random1 K.random1 L.random1 M.random1 N.random1 O.random1 P.random1 Q.random1 R.random1 S.random1 T.random1 U.random1 V.random1 W.random1 X.random1 Y.random1 Z.random1];
+        @randomQuantumState3 = [A.random2 B.random2 C.random2 D.random2 E.random2 F.random2 G.random2 H.random2 I.random2 J.random2 K.random2 L.random2 M.random2 N.random2 O.random2 P.random2 Q.random2 R.random2 S.random2 T.random2 U.random2 V.random2 W.random2 X.random2 Y.random2 Z.random2];
+
+        @randomQuantumSkip = [@uppercase space];
+
+        lookup RandomQuantum10 {
+            sub @randomQuantumTrigger1 @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumState1' by @randomQuantumState2;
+        } RandomQuantum10;
+
+        lookup RandomQuantum9 {
+            sub @randomQuantumTrigger2 @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumState2' by @randomQuantumState3;
+        } RandomQuantum9;
+
+        lookup RandomQuantum8 {
+            sub @randomQuantumTrigger1 @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumState3' by @randomQuantumState1;
+        } RandomQuantum8;
+
+        lookup RandomQuantum7 {
+            sub @randomQuantumTrigger2 @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumState1' by @randomQuantumState2;
+        } RandomQuantum7;
+
+        lookup RandomQuantum6 {
+            sub @randomQuantumTrigger1 @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumState2' by @randomQuantumState3;
+        } RandomQuantum6;
+
+        lookup RandomQuantum5 {
+            sub @randomQuantumTrigger2 @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumState3' by @randomQuantumState1;
+        } RandomQuantum5;
+
+        lookup RandomQuantum4 {
+            sub @randomQuantumTrigger1 @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumState1' by @randomQuantumState2;
+        } RandomQuantum4;
+
+        lookup RandomQuantum3 {
+            sub @randomQuantumTrigger2 @randomQuantumSkip @randomQuantumSkip @randomQuantumSkip @randomQuantumState2' by @randomQuantumState3;
+        } RandomQuantum3;
+
+        lookup RandomQuantum2 {
+            sub @randomQuantumTrigger1 @randomQuantumSkip @randomQuantumSkip @randomQuantumState3' by @randomQuantumState1;
+        } RandomQuantum2;
+
+        lookup RandomQuantum1 {
+            sub @randomQuantumTrigger2 @randomQuantumState1' by @randomQuantumState2;
+        } RandomQuantum1;
+
+        lookup RandomQuantum0 {
+            sub @randomQuantumTrigger1 @randomQuantumState2' by @randomQuantumState3;
+        } RandomQuantum0;
+
+    } calt;
+
 #### Bonus: Positioning
+
+    feature ss01 {
+        @randomPositionQuantumTrigger1 = [A.random2 B B.random1 C.random2 D D.random1 E.random2 F F.random1 F.random2 G G.random2 H H.random2 I.random1 I.random2 J.random1 J.random2 K.random2 L.random1 M.random1 N O Q Q.random1 R S S.random1 T.random1 T.random2 U U.random1 U.random2 W.random1 X.random1 X.random2 Z Z.random2 space];
+        @randomPositionQuantumTrigger2 = [A A.random1 B.random2 C C.random1 D.random2 E E.random1 G.random1 H.random1 I J K K.random1 L L.random2 M M.random2 N.random1 N.random2 O.random1 O.random2 P P.random1 P.random2 Q.random2 R.random1 R.random2 S.random2 T V V.random1 V.random2 W W.random2 X Y Y.random1 Y.random2 Z.random1];
+
+        @randomPositionQuantumTarget = [@randomPositionQuantumTrigger1 @randomPositionQuantumTrigger2];
+
+        @randomPositioningQuantumSkip = [@randomPositionQuantumTrigger1 @randomPositionQuantumTrigger2];
+
+        lookup RandomPositioningQuantum9 {
+            pos @randomQuantumTrigger2 @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositionQuantumTarget' <0 50 0 0>;
+        } RandomPositioningQuantum9;
+
+        lookup RandomPositioningQuantum8 {
+            pos @randomQuantumTrigger1 @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositionQuantumTarget' <0 40 0 0>;
+        } RandomPositioningQuantum8;
+
+        lookup RandomPositioningQuantum7 {
+            pos @randomQuantumTrigger2 @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositionQuantumTarget' <0 30 0 0>;
+        } RandomPositioningQuantum7;
+
+        lookup RandomPositioningQuantum6 {
+            pos @randomQuantumTrigger1 @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositionQuantumTarget' <0 20 0 0>;
+        } RandomPositioningQuantum6;
+
+        lookup RandomPositioningQuantum5 {
+            pos @randomQuantumTrigger2 @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositionQuantumTarget' <0 10 0 0>;
+        } RandomPositioningQuantum5;
+
+        lookup RandomPositioningQuantum4 {
+            pos @randomQuantumTrigger1 @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositionQuantumTarget' <0 -10 0 0>;
+        } RandomPositioningQuantum4;
+
+        lookup RandomPositioningQuantum3 {
+            pos @randomQuantumTrigger2 @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositionQuantumTarget' <0 -20 0 0>;
+        } RandomPositioningQuantum3;
+
+        lookup RandomPositioningQuantum2 {
+            pos @randomQuantumTrigger1 @randomPositioningQuantumSkip @randomPositioningQuantumSkip @randomPositionQuantumTarget' <0 -30 0 0>;
+        } RandomPositioningQuantum2;
+
+        lookup RandomPositioningQuantum1 {
+            pos @randomQuantumTrigger2 @randomPositioningQuantumSkip @randomPositionQuantumTarget' <0 -40 0 0>;
+        } RandomPositioningQuantum1;
+
+        lookup RandomPositioningQuantum0 {
+            pos @randomQuantumTrigger1 @randomPositionQuantumTarget' <0 -50 0 0>;
+        } RandomPositioningQuantum0;
+
+    } ss01;
 
 ### Roman Numerals
 
