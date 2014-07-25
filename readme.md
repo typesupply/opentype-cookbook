@@ -197,56 +197,125 @@ You should avoid naming anything with the same name as a [reserved keyword](http
 
 # Rules
 
+Now that we have introduced some terminology, covered the way text is processed and established the general syntax rules, we can get into the fun part: actually doing stuff.
+
 ## Substitutions
-- target and replacement
--- classes
+
+Substitutions are the most visually transformative thing that features can do to text. And, they are easy to understand. There are two main parts to a substitution:
+
+1. Target -- This is what will be replaced.
+2. Replacement -- This is what will be inserted in place of the target.
+
+The syntax for a substitution is:
+
+    substitute target by replacement;
+
+We can abbreviate substitute with sub to cut down on how much stuff we have to type, so let's do that:
+
+    sub target by replacement;
+
+Targets and replacements can often be classes. These classes can be referenced by name or they can be defined as an unnamed class inside of a rule.
 
 ### Replace One With One
 
-    sub glyph by glyph;
+To replace one thing with another, you do this:
+
+    sub target by replacement;
+
+(In the .fea documentation, this is known as GSUB Lookup Type 1: Single Substitution.)
+
+For example, to transform a to A.sc, you would do this:
 
     sub a by A.sc;
 
+If you have more than one thing that can be replaced with a single thing, you can use a class as the target and a glyph as the replacement:
+
+    sub [A A.alt1 A.alt2] by A.alt4;
+
+If you want to replace several things with corresponding things, you can use classes as both the target and the replacement.
+
     sub [a b c] by [A.sc B.sc C.sc];
+
+It's usually more readable if define the classes earlier in your code and then reference them by name.
 
     sub @lowercase by @smallcaps;
 
+The order of the glyphs in your classes in this situation is critical. In the example above, the classes will correspond with each other like this:
+
+    a -> A.sc
+    b -> B.sc
+    c -> C.sc
+
+If you order the target and replacement classes incorrectly, things will go wrong. For example, if you have this as your rule:
+
+    sub [a b c] by [B.sc C.sc A.sc];
+
+The classes will correspond like this:
+
+    a -> B.sc
+    b -> C.sc
+    c -> A.sc
+
+This is obviously undesired behavior, so keep your classes ordered properly.
+
 ### Replace Many With One
 
-    sub sequence of glyphs by glyph;
+To replace a sequence of things with one thing, you do this:
+
+    sub target sequence with replacement;
+
+(In the .fea documentation, this is known as GSUB Lookup Type 4: Ligature Substitution.)
+
+For example, for a fi ligature, you would do this:
 
     sub f i by f_i;
 
+You can also use classes as part of the target sequence:
+
     sub [f f.alt] i by f_i;
-
     sub f [i i.alt] by f_i;
-
     sub [f f.alt] [i i.alt] by f_i;
-
     sub @f @i by f_i;
-
     sub @f i by f_i;
-
     sub f @i by f_i;
-
     sub @f [i i.alt] by f_i;
-    
     sub [f f.alt] @i by f_i;
+
+(Obviously you wouldn't use all of these rules in real code since they do the same thing.)
 
 ### Replace One With Many
 
-    sub glyph by sequence of glyphs;
+To replace a sequence of things with a single thing, you do this:
+
+    sub target by replacement sequence;
+
+(In the .fea documentation, this is known as GSUB Lookup Type 2: Multiple Substitution.)
+
+For example, to convert an fi ligature back into f and i, you would do this:
 
     sub f_i by f i;
 
+Classes can't be used as the target or the replacement in this rule type.
+
 ### Replace One From Many
 
-    sub glyph from options;
+To give the user a choice of alternates, you do this:
 
-    sub a from [a.alt1 a.alt2];
+    sub target from replacement;
+
+(In the .fea documentation, this is known as GSUB Lookup Type 3: Alternate Substitution.)
+
+The replacement must be a glyph class.
+
+For example, to give the user several options to replace a with, you would do this:
+
+    sub a from [a.alt1 a.alt2 a.alt3];
+
+If you want to name the class and reference it in the rule, you can do this:
 
     sub a from @aAlternates;
 
+Note that the keyword in the middle of the rule changes from by to from.
 
 ## Positioning
 
