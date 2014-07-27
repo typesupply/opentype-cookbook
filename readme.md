@@ -406,9 +406,16 @@ But, seriously, let your editor do this for you.
 
 
 ## Advanced Techniques
+- lookups
+- recycling lookups
 - languages and scripts
 - include
-- recycling lookups
+
+
+# Putting It All Together
+- show the general structure of a .fea file
+- show how these things are combined
+- note that the first lookup is implied
 
 
 # Common Features And Techniques
@@ -512,6 +519,8 @@ any, all, filled, empty metaclasses
 
         sub @figures space' @figuresNumerator by uni2009;
     } frac;
+
+Thanks to Karsten Luecke for helping me find and resolve some edge cases in this code.
 
 ### Numerators
 
@@ -630,7 +639,23 @@ aalt
 
 ### Randomization
 
-#### Method 1: Rotation
+Everyone wants their font to look like the glyphs were randomly drawn. But, let's establish something first: No one will ever do randomization better than LettError did in their famous Beowolf. No one. Still want try some randomization? Okay.
+
+Randomization is a bit of a Holy Grail in the OpenType world. The problem is that it's not actually possible for a couple of reasons. For one thing, we can only select from alternates, not actually modify glyph outlines. For another, for true pseudo-randomization there needs to be an external source that influences the random selection process and we can't build a random seed generator with the OpenType tables. So, we have to fake it. There are a number of methods that can be used to do this. I have three that I like.
+
+(PS: That rand "random alternates" feature in the OpenType Layout Tag Registry? It's not supported widely, if at all. Sorry.)
+
+#### Method 1: Endless Cycle
+
+This method is useful when you don't have a preferred version of a glyph. For example, say you draw three glyphs for every character and you want those spread out across the text. This method will cycle between the glyphs.
+
+For example:
+
+    (illustration of AAAAAAAAAAAA in the demo font)
+
+Given enough alternates, this creates an effective illusion in a large block of text.
+
+The code is very simple:
 
     feature calt {
         @randomCycle1 = [@uppercase];
@@ -641,7 +666,15 @@ aalt
         sub @randomCycle2 @randomCycle1' by @randomCycle3;
     } calt;
 
-#### Method 2: Duplicates
+#### Method 2: Duplicate Eliminator
+
+This method is useful if you want to tightly control the deployment of alternates. Specifically, if you only want an alternate to appear if the glyph that it is an alternate to has appeared recently.
+
+For example:
+
+    (illustration of BOOKKEEPING in the demo font)
+
+The code is lengthy, but fairly straightforward:
 
     feature calt {
 
@@ -738,13 +771,33 @@ aalt
 
 #### Method 3: Quantum
 
+This method is for dedicated randomization aficionados. A little history about how this came about: in 2005 I wanted to see if I could come up with a randomization technique that produced less predictable results than the methods above. I realized that I could use the text that the feature is transforming as a poor man's random seed. I was reading a tiny bit about quantum mechanics around the same time and my very limited understanding of some of the experiments in that field gave me an idea. That's a story that I won't get into here. Anyway, the code is long and convoluted, but the idea is pretty simple. I'll give you an overview.
+
+Before we get to rules, we establish several important classes. First we create two trigger classes. The first will contain half of the glyphs in the font and the next will contain the other half of the glyphs. These need to be randomly chosen. In other words, don't put A-z in the same class. That won't produce the desired result. Next, we establish alternate states for glyphs. These states are defined in a series of classes. Each of these classes contain a glyph and its alternate. The next class contains the opposite of the previous class. For example:
+
+    @class1 = [A A.alt];
+    @class2 = [A.alt A];
+
+Finally, we establish a skip class that contains everything in the font.
+
+The glyph processing happens in a series of lookups that each pass over the entire glyph run. As a glyph, let's call it P, is being processed the lookup backtracks a specific number of glyphs. The glyph at the beginning of that backtrack, let's call it B, is then tested against a class, let's call it @T. Importantly, @T only contains half of the glyphs in the font. If B is in @T, P is switched to an alternate state. Thus, each glyph state is dependent on the state of all the glyphs that precede it. Given that the text is most likely going to have unpredictable letter combinations, we get a fairly effective randomization. For example:
+
+    (illustration of the same string repeated in the demo font)
+
+Is it real randomization? No. Is it perfect? No. Is it incredibly complex and hard to write? Yes (unless you use a script to write it). Can it be slow if a font contains a large number of glyphs and the glyph run being processed is very long? Yes. Is it awesome anyway? I think so.
+
+
     feature calt {
         @randomQuantumTrigger1 = [A.random1 A.random2 B B.random2 C C.random1 C.random2 D D.random1 E.random1 G G.random2 H H.random2 I J K.random1 L.random2 N.random1 O O.random1 P.random1 P.random2 Q.random1 S S.random1 S.random2 T T.random1 U.random2 V W.random1 W.random2 X X.random1 Y Y.random1 Y.random2 Z.random2];
         @randomQuantumTrigger2 = [A B.random1 D.random2 E E.random2 F F.random1 F.random2 G.random1 H.random1 I.random1 I.random2 J.random1 J.random2 K K.random2 L L.random1 M M.random1 M.random2 N N.random2 O.random2 P Q Q.random2 R R.random1 R.random2 T.random2 U U.random1 V.random1 V.random2 W X.random2 Z Z.random1 space];
 
-        @randomQuantumState1 = [A         B         C         D         E         F         G         H         I         J         K         L         M         N         O         P         Q         R         S         T         U         V         W         X         Y         Z];
-        @randomQuantumState2 = [A.random1 B.random1 C.random1 D.random1 E.random1 F.random1 G.random1 H.random1 I.random1 J.random1 K.random1 L.random1 M.random1 N.random1 O.random1 P.random1 Q.random1 R.random1 S.random1 T.random1 U.random1 V.random1 W.random1 X.random1 Y.random1 Z.random1];
-        @randomQuantumState3 = [A.random2 B.random2 C.random2 D.random2 E.random2 F.random2 G.random2 H.random2 I.random2 J.random2 K.random2 L.random2 M.random2 N.random2 O.random2 P.random2 Q.random2 R.random2 S.random2 T.random2 U.random2 V.random2 W.random2 X.random2 Y.random2 Z.random2];
+    @randomQuantumGlyphs1 = [A         B         C         D         E         F         G         H         I         J         K         L         M         N         O         P         Q         R         S         T         U         V         W         X         Y         Z];
+    @randomQuantumGlyphs2 = [A.random1 B.random1 C.random1 D.random1 E.random1 F.random1 G.random1 H.random1 I.random1 J.random1 K.random1 L.random1 M.random1 N.random1 O.random1 P.random1 Q.random1 R.random1 S.random1 T.random1 U.random1 V.random1 W.random1 X.random1 Y.random1 Z.random1];
+    @randomQuantumGlyphs3 = [A.random2 B.random2 C.random2 D.random2 E.random2 F.random2 G.random2 H.random2 I.random2 J.random2 K.random2 L.random2 M.random2 N.random2 O.random2 P.random2 Q.random2 R.random2 S.random2 T.random2 U.random2 V.random2 W.random2 X.random2 Y.random2 Z.random2];
+
+    @randomQuantumState1 = [@randomQuantumGlyphs1 @randomQuantumGlyphs3 @randomQuantumGlyphs2];
+    @randomQuantumState2 = [@randomQuantumGlyphs2 @randomQuantumGlyphs1 @randomQuantumGlyphs3];
+    @randomQuantumState3 = [@randomQuantumGlyphs3 @randomQuantumGlyphs2 @randomQuantumGlyphs1];
 
         @randomQuantumSkip = [@uppercase space];
 
@@ -794,7 +847,11 @@ aalt
 
     } calt;
 
-#### Bonus: Positioning
+#### Bonus: Quantum Positioning
+
+It's possible to extend the quantum randomization method above and use it to randomly shift glyphs around. Possible, but probably not advisable. The support for this is almost certainly going to be uneven.
+
+The code is similar to the substitution method. In this case, instead of states, the cumulative effect that lookups have on glyph records is used.
 
     feature ss01 {
         @randomPositionQuantumTrigger1 = [A.random2 B B.random1 C.random2 D D.random1 E.random2 F F.random1 F.random2 G G.random2 H H.random2 I.random1 I.random2 J.random1 J.random2 K.random2 L.random1 M.random1 N O Q Q.random1 R S S.random1 T.random1 T.random2 U U.random1 U.random2 W.random1 X.random1 X.random2 Z Z.random2 space];
@@ -851,6 +908,7 @@ aalt
 
 # Troubleshooting
 - did you forget a special character? you probably forgot a } ; or something like that.
+- did you name a lookup or class with the same name twice?
 - all of the rule types in a lookup must be the same type
 - table overflow (subtable, useExtension)
 - features can't know if other features are active or not
