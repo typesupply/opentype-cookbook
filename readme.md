@@ -578,14 +578,54 @@ You can even include multiple files in a single font source file.
 
 
 # Common Features And Techniques
-intro about supporting only what is needed, how to order these, bad feature and rule ordering can lead to needless complexity, etc.
 
-- give an overview of how to approach complex features (think of it abstractly)
+Up until now, almost everything that has been discussed has been indisputable. The next section is far more subjective as there are numerous ways to write the code to create certain behaviors. What follows includes my own personal opinion.
 
 ## Glyph Run and Word Boundary Detection
-any, all, filled, empty metaclasses
 
-## Collision Detection
+Often we want to make substitutions based on the bounds of words and glyph runs. For example, to inset a swash only at the beginning or at the end. There are three features in the specification for dealing with these situations:
+
+- init -- Performs substitutions only at the beginning of a word.
+- fina -- Performs substitutions only at the end of a word.
+- medi - Performs substitutions only on the glyphs between the first and last in a word.
+
+Unfortunately the specification is a bit vague about how these are supposed to be implemented. What exactly constitutes a word boundary? The Unicode specification details a word boundary detection algorithm and conceivably that's what would be used by the layout engines that are processing your font. That specification is quite thorough, but it thinks about word boundaries in a different way than type designers do (or at least this type designer does). For example, where are the word boundaries in this text?
+
+    Hello “World!”
+
+They are at the o, the W and the d. (I'm 99.999999% sure about this, but I should test it again.) If we use this for swashes our W and d are likely to clash with the marks “ and ! around them. We think of word boundaries as an empty space around words. If we want to use init and fina, we'll need to build in exceptions. You can certainly do that, but I generally do it all myself with some special classes:
+
+- all -- This class contains all glyphs.
+- filled -- This class contains all glyphs that contain positive space.
+- empty -- This glyph contains all glyphs that contain only negative space.
+
+With these, we can build lookups that handle boundary detection reasonable well enough for things like swashes.
+
+    lookup GlyphRunInitial {
+        ignore sub @all @initialsOff';
+        sub @initialsOff by @initialsOn;
+    } GlyphRunInitial;
+
+    lookup GlyphRunFinal {
+        ignore sub @finalsOff' @all;
+        sub @finalsOff by @finalsOn;
+    } GlyphRunFinal;
+
+    lookup WordInitial {
+        ignore sub @filled @initialsOff';
+        sub @initialsOff by @initialsOn;
+    } WordInitial;
+
+    lookup WordMedial {
+        sub @filled @medialOff' @filled by @medialOn;
+    } WordMedial;
+
+    lookup WordFinal {
+        ignore sub @finalsOff' @filled;
+        sub @finalsOff by @finalsOn;
+    } WordFinal;
+
+To be clear, you should not use this for shaping a Arabic or anything like that. This is strictly for things like swashes.
 
 ## Script And Language Specific Forms
 
