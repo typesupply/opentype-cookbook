@@ -7,6 +7,8 @@ OpenType features allow fonts to behave smartly. This can behavior can do simple
 This document is written with the assumption that you have a basic working knowledge of the structure of a font. You need to know the differences between characters and glyphs, understand the coordinate system in glyphs and so on.
 
 
+(make a note about writing direction. that the examples show LTR, but the features are language agnostic.)
+
 # Foundation Concepts
 
 Before we get into writing any code, let's first establish an what we are actually building and how it actually works. This is probably the toughest thing to understand about OpenType features, but understanding the underlying mechanics will free you to build new and innovative features of your own.
@@ -393,16 +395,43 @@ But, seriously, let your editor do this for you.
 
 
 ## Substitutions and Positioning Based on Context
-- before target (aka backtrack)
 
-- after target (aka lookahead)
+The substitution and positioning rules that we have discussed so far are quite useful, but the real power is in triggering these rules only when certain conditions are met. These are known as contextual rules.
 
-- ignore
-"If this is matched, skip everything else in this lookup for the glyph being processed."
+Contextual rules allow you to specify a sequence before and/or a sequence after the target in a substitution or positioning rule. For example: replace r with r.alt if the r is preceded by wo and followed by ds. There are two new parts of this rule type in addition to the parts we defined in the substitution and positioning sections.
 
-- substitutions
+1. Backtrack -- This is the sequence of things that occur before the target in the rule. This sequence can be composed of glyphs, classes or a mix of both.
+2. Lookahead -- This is the sequence of glyphs that occur after the target in the rule. Like the backtrack, this sequence can be composed of glyphs, classes or a mix of both.
 
-- positioning
+The backtrack and lookahead are both optional. Either can appear (or neither, but we'll cover that later). If a sequence is present, it can contain one or more things.
+
+In addition to the backtrack and lookahead, a new character is needed in these rules: '. This character is used to mark the target of the rule.
+
+Here is the words example from above in the correct syntax:
+
+    sub w o r' d s by r.alt;
+
+All of the substitution and positioning rule types can be defined with a context.
+
+- replace one with one: sub a b' c by b.alt;
+- replace many with one: sub a b' c' d by b_c;
+- replace one with many: sub a b_c' d by b c;
+- replace one from many: sub a b' c from [b.alt1 b.alt2];
+- adjust position of one glyph: pos A B' C <10 0 20 0>;
+- adjust positioning of the space between two glyphs: pos A B' C' D -50;
+
+Please note that just because you can apply this to all rule types doesn't mean that you should.
+
+### Exceptions
+
+What if you have a short context that you want to match, but a longer context that contains the short context? For example, say we want to change the r in words but not in words!. To do that we can specify an exception to the contextual rule. For example:
+
+    ignore sub w o r' d s exclam;
+    sub w o r' d s by r.alt;
+
+The ignore keyword followed by a backtrack (optional), target and lookahead (optional) creates the exception.
+
+These can also be used to reduce the number and complexity of subsequent rules. (need an exmaple of this)
 
 
 ## Advanced Techniques
@@ -416,6 +445,7 @@ But, seriously, let your editor do this for you.
 - show the general structure of a .fea file
 - show how these things are combined
 - note that the first lookup is implied
+- give an overview of how to approach complex features (think of it abstractly)
 
 
 # Common Features And Techniques
