@@ -581,6 +581,10 @@ You can even include multiple files in a single font source file.
 
 Up until now, almost everything that has been discussed has been indisputable. The next section is far more subjective as there are numerous ways to write the code to create certain behaviors. What follows includes my own personal opinion.
 
+I have prepared a demo font that includes all of the features and techniques defined below. You can open it up in your favorite font editor and play around with the features if you want to see how they work. The feature tags in the code below doesn't always match the tags in the font. I had to do it this way since there can't be more than one version of each feature.
+
+The features in the demo font are by no means to complete or an indication of what is necessary to include in a particular feature. You should develop your own interpretation of what should be included in each feature based on the design of your font.
+
 ## Glyph Run and Word Boundary Detection
 
 Often we want to make substitutions based on the bounds of words and glyph runs. For example, to inset a swash only at the beginning or at the end. There are three features in the specification for dealing with these situations:
@@ -629,6 +633,8 @@ To be clear, you should not use this for shaping a Arabic or anything like that.
 
 ## Script And Language Specific Forms
 
+The locl feature is specifically designed to implement global script and language specific changes that need to happen before any other features are processed. You can certainly put stylistic specific changes in other features, but the big important ones should be in locl.
+
     feature locl {
 
         script latn;
@@ -642,9 +648,23 @@ To be clear, you should not use this for shaping a Arabic or anything like that.
 
 ## Fractions
 
+I have used two different algorithms for implementing on-the-fly fractions. The first is fairly straightforward. The second is more complex but I think it is easier for users.
+
 ### Method 1: Individual
 
+This method has been along for as long as I have been working on OpenType features. Adobe probably developed it in the very early days of the .fea language. It is probably still the most common implementation.
+
+    (need to dig up an example)
+
 ### Method 2: Contextual
+
+Around 2006 Kent Lew asked me if I had any ideas for a better fraction implementation. Specifically, he was referring to the fact that with the existing implementation, users had to manually select only the text that should be converted to fractions and apply the feature. If the feature was applied to more than just that text, all numbers not in a fraction would be converted to numerators. This was a big problem in things like cookbooks where there could be thousands of little bits of text that had to be converted to fractions.
+
+I developed a new method that is built on the common form of writing fractions as an integer, a space, a numerator, a slash and a denominator. For example: 2 1/2. The code considers 1-10 numbers followed by a slash followed by 1 or more numbers to be a fraction. The slash is converted to a fraction bar, the numbers before the slash are converted to numerators and the numbers after the slash are converted to denominators. If the new fraction is preceded by a number followed by a space, the space is converted to a thin space to pull the fraction closer to the integer.
+
+After I published the first version of this code, Karsten Luecke pointed out some some problems with dates, German tax numbers and things like that. I published a new version that handles these properly and this version is below.
+
+With this implementation, users can globally activate fractions. The only drawback that I have found with this is that it doesn't allow numerators to be longer than 10 numbers long. In the unlikely event that a user runs into this problem, they can select the unconverted numerators and activate the numerator feature.
 
     feature frac {
 
@@ -721,9 +741,9 @@ To be clear, you should not use this for shaping a Arabic or anything like that.
         sub @figures space' @figuresNumerator by uni2009;
     } frac;
 
-Thanks to Karsten Luecke for helping me find and resolve some edge cases in this code.
-
 ### Numerators
+
+The numr feature is designed to convert all numbers to numerators.
 
     feature numr {
         sub @figures' by @figuresNumerator;
@@ -731,11 +751,15 @@ Thanks to Karsten Luecke for helping me find and resolve some edge cases in this
 
 ### Denominators
 
+The dnom feature is designed to convert all numbers to denominators.
+
     feature dnom {
         sub @figures' by @figuresDenominator;
     } dnom;
 
 ## Superscript
+
+The sups feature is for superscript forms.
 
     feature sups {
         sub @figures' by @figuresSuperscript;
@@ -743,27 +767,30 @@ Thanks to Karsten Luecke for helping me find and resolve some edge cases in this
 
 ## Subscript
 
+The subs feature is for subscript forms.
+
     feature subs {
         sub @figures' by @figuresSubscript;
     } subs;
 
 ## Figures
 
+If your font only includes one figure style, you don't need to do anything. If you do have more than one, you have to do some awkward things due to some odd behaviors in various applications. First off, it's best to define a feature for your default figures even though it will never be used. For example, in the demo font the default figures are lining and there are old style figures as alternates. First up we need to define the lining figures feature (lnum) even though it will never actually be used. Then we define the old style feature (onum).
+
     feature lnum {
         sub @figuresOldStyle by @figures;
     } lnum;
-
 
     feature onum {
         sub @figures by @figuresOldStyle;
     } onum;
 
+Likewise, if your default figures are proportional and you have tabular alternates, you need to define the proportional figures feature (pnum) and then define the tabular figures feature (tnum).
 
     feature pnum {
         sub @figuresTabular by @figures;
         sub @figuresOldStyleTabular by @figuresOldStyle;
     } pnum;
-
 
     feature tnum {
         sub @figures by @figuresTabular;
@@ -772,12 +799,16 @@ Thanks to Karsten Luecke for helping me find and resolve some edge cases in this
 
 ## Ordinals
 
+The sups feature is for ordinal forms.
+
     feature ordn {
         sub [A a] by ordfeminine;
         sub [O o] by ordmasculine;
     } ordn;
 
 ## Small Caps
+
+There are two features that invoke small caps: small caps (smcp) and all small caps (c2sc). The all small caps version is for situations in which the user wants everything possible, not just letters, to be converted to small cap forms.
 
     feature smcp {
         sub @lowercase by @smallCaps;
@@ -791,14 +822,20 @@ Thanks to Karsten Luecke for helping me find and resolve some edge cases in this
 
 ## All Caps
 
+There are two features that should be invoked when the user indicates that they want all text converted to uppercase. The first feature (case) transforms any glyphs that should be changed to an uppercase alternate. You should not define the transformation from lowercase to uppercase for alphabetic forms. The layout engine will do that for you.
+
     feature case {
         sub @punctuationUppercaseOff by @punctuationUppercaseOn;
     } case;
+
+The second feature (cpsp) allows you to define all caps specific spacing.
 
     feature cpsp {
         pos @uppercase <100 0 200 0>;
         pos @punctuationUppercaseOn <100 0 200 0>;
     } cpsp;
+
+Note that these features will be invoked whenever the user types in all capitals. The features must be activated manually.
 
 ## Swashes
 
@@ -815,6 +852,9 @@ Need cswh example.
     } titl;
 
 ## Stylistic Sets
+
+- 1-20
+- mention naming syntax but refer to the .fea spec
 
     feature ss01 {
         sub J by J.alt;
