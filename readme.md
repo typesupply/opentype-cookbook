@@ -654,7 +654,16 @@ I have used two different algorithms for implementing on-the-fly fractions. The 
 
 This method has been along for as long as I have been working on OpenType features. Adobe probably developed it in the very early days of the .fea language. It is probably still the most common implementation.
 
-    (need to dig up an example)
+    feature locl {
+
+        script latn;
+
+            language NLD exclude_dflt;
+                lookup DutchIJ {
+                    sub IJ by IJ.dutch;
+                } DutchIJ;
+
+    } locl;
 
 ### Method 2: Contextual
 
@@ -666,76 +675,76 @@ After I published the first version of this code, Karsten Luecke pointed out som
 
 With this implementation, users can globally activate fractions. The only drawback that I have found with this is that it doesn't allow numerators to be longer than 10 numbers long. In the unlikely event that a user runs into this problem, they can select the unconverted numerators and activate the numerator feature.
 
-    feature frac {
+     feature frac {
 
         lookup FractionBar {
-        ignore sub slash @figures @figures @figures @figures @figures @figures @figures @figures @figures @figures slash';
-        ignore sub slash' @figures @figures @figures @figures @figures @figures @figures @figures @figures @figures slash;
-        ignore sub slash @figures @figures @figures @figures @figures @figures @figures @figures @figures slash';
-        ignore sub slash' @figures @figures @figures @figures @figures @figures @figures @figures @figures slash;
-        ignore sub slash @figures @figures @figures @figures @figures @figures @figures @figures slash';
-        ignore sub slash' @figures @figures @figures @figures @figures @figures @figures @figures slash;
-        ignore sub slash @figures @figures @figures @figures @figures @figures @figures slash';
-        ignore sub slash' @figures @figures @figures @figures @figures @figures @figures slash;
-        ignore sub slash @figures @figures @figures @figures @figures @figures slash';
-        ignore sub slash' @figures @figures @figures @figures @figures @figures slash;
-        ignore sub slash @figures @figures @figures @figures @figures slash';
-        ignore sub slash' @figures @figures @figures @figures @figures slash;
-        ignore sub slash @figures @figures @figures @figures slash';
-        ignore sub slash' @figures @figures @figures @figures slash;
-        ignore sub slash @figures @figures @figures slash';
-        ignore sub slash' @figures @figures @figures slash;
-        ignore sub slash @figures @figures slash';
-        ignore sub slash' @figures @figures slash;
-        ignore sub slash @figures slash';
-        ignore sub slash' @figures slash;
-        ignore sub slash slash';
-        ignore sub slash' slash;
-        sub @figures slash' @figures by fraction;
+            ignore sub slash @figures @figures @figures @figures @figures @figures @figures @figures @figures @figures slash';
+            ignore sub slash' @figures @figures @figures @figures @figures @figures @figures @figures @figures @figures slash;
+            ignore sub slash @figures @figures @figures @figures @figures @figures @figures @figures @figures slash';
+            ignore sub slash' @figures @figures @figures @figures @figures @figures @figures @figures @figures slash;
+            ignore sub slash @figures @figures @figures @figures @figures @figures @figures @figures slash';
+            ignore sub slash' @figures @figures @figures @figures @figures @figures @figures @figures slash;
+            ignore sub slash @figures @figures @figures @figures @figures @figures @figures slash';
+            ignore sub slash' @figures @figures @figures @figures @figures @figures @figures slash;
+            ignore sub slash @figures @figures @figures @figures @figures @figures slash';
+            ignore sub slash' @figures @figures @figures @figures @figures @figures slash;
+            ignore sub slash @figures @figures @figures @figures @figures slash';
+            ignore sub slash' @figures @figures @figures @figures @figures slash;
+            ignore sub slash @figures @figures @figures @figures slash';
+            ignore sub slash' @figures @figures @figures @figures slash;
+            ignore sub slash @figures @figures @figures slash';
+            ignore sub slash' @figures @figures @figures slash;
+            ignore sub slash @figures @figures slash';
+            ignore sub slash' @figures @figures slash;
+            ignore sub slash @figures slash';
+            ignore sub slash' @figures slash;
+            ignore sub slash slash';
+            ignore sub slash' slash;
+            sub @figures slash' @figures by fraction;
         } FractionBar;
 
         lookup Numerator1 {
-        sub @figures' fraction by @figuresNumerator;
+            sub @figures' fraction by @figuresNumerator;
         } Numerator1;
 
         lookup Numerator2 {
-        sub @figures' @figuresNumerator fraction by @figuresNumerator;
+            sub @figures' @figuresNumerator fraction by @figuresNumerator;
         } Numerator2;
 
         lookup Numerator3 {
-        sub @figures' @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
+            sub @figures' @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
         } Numerator3;
 
         lookup Numerator4 {
-        sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
+            sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
         } Numerator4;
 
         lookup Numerator5 {
-        sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
+            sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
         } Numerator5;
 
         lookup Numerator6 {
-        sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
+            sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
         } Numerator6;
 
         lookup Numerator7 {
-        sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
+            sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
         } Numerator7;
 
         lookup Numerator8 {
-        sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
+            sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
         } Numerator8;
 
         lookup Numerator9 {
-        sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
+            sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
         } Numerator9;
 
         lookup Numerator10 {
-        sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
+            sub @figures' @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator @figuresNumerator fraction by @figuresNumerator;
         } Numerator10;
 
         lookup Denominator {
-        sub [fraction @figuresDenominator] @figures' by @figuresDenominator;
+            sub [fraction @figuresDenominator] @figures' by @figuresDenominator;
         } Denominator;
 
         sub @figures space' @figuresNumerator by uni2009;
@@ -1032,13 +1041,13 @@ Is it real randomization? No. Is it perfect? No. Is it incredibly complex and ha
         @randomQuantumTrigger1 = [A.random1 A.random2 B B.random2 C C.random1 C.random2 D D.random1 E.random1 G G.random2 H H.random2 I J K.random1 L.random2 N.random1 O O.random1 P.random1 P.random2 Q.random1 S S.random1 S.random2 T T.random1 U.random2 V W.random1 W.random2 X X.random1 Y Y.random1 Y.random2 Z.random2];
         @randomQuantumTrigger2 = [A B.random1 D.random2 E E.random2 F F.random1 F.random2 G.random1 H.random1 I.random1 I.random2 J.random1 J.random2 K K.random2 L L.random1 M M.random1 M.random2 N N.random2 O.random2 P Q Q.random2 R R.random1 R.random2 T.random2 U U.random1 V.random1 V.random2 W X.random2 Z Z.random1 space];
 
-    @randomQuantumGlyphs1 = [A         B         C         D         E         F         G         H         I         J         K         L         M         N         O         P         Q         R         S         T         U         V         W         X         Y         Z];
-    @randomQuantumGlyphs2 = [A.random1 B.random1 C.random1 D.random1 E.random1 F.random1 G.random1 H.random1 I.random1 J.random1 K.random1 L.random1 M.random1 N.random1 O.random1 P.random1 Q.random1 R.random1 S.random1 T.random1 U.random1 V.random1 W.random1 X.random1 Y.random1 Z.random1];
-    @randomQuantumGlyphs3 = [A.random2 B.random2 C.random2 D.random2 E.random2 F.random2 G.random2 H.random2 I.random2 J.random2 K.random2 L.random2 M.random2 N.random2 O.random2 P.random2 Q.random2 R.random2 S.random2 T.random2 U.random2 V.random2 W.random2 X.random2 Y.random2 Z.random2];
+        @randomQuantumGlyphs1 = [A         B         C         D         E         F         G         H         I         J         K         L         M         N         O         P         Q         R         S         T         U         V         W         X         Y         Z];
+        @randomQuantumGlyphs2 = [A.random1 B.random1 C.random1 D.random1 E.random1 F.random1 G.random1 H.random1 I.random1 J.random1 K.random1 L.random1 M.random1 N.random1 O.random1 P.random1 Q.random1 R.random1 S.random1 T.random1 U.random1 V.random1 W.random1 X.random1 Y.random1 Z.random1];
+        @randomQuantumGlyphs3 = [A.random2 B.random2 C.random2 D.random2 E.random2 F.random2 G.random2 H.random2 I.random2 J.random2 K.random2 L.random2 M.random2 N.random2 O.random2 P.random2 Q.random2 R.random2 S.random2 T.random2 U.random2 V.random2 W.random2 X.random2 Y.random2 Z.random2];
 
-    @randomQuantumState1 = [@randomQuantumGlyphs1 @randomQuantumGlyphs3 @randomQuantumGlyphs2];
-    @randomQuantumState2 = [@randomQuantumGlyphs2 @randomQuantumGlyphs1 @randomQuantumGlyphs3];
-    @randomQuantumState3 = [@randomQuantumGlyphs3 @randomQuantumGlyphs2 @randomQuantumGlyphs1];
+        @randomQuantumState1 = [@randomQuantumGlyphs1 @randomQuantumGlyphs3 @randomQuantumGlyphs2];
+        @randomQuantumState2 = [@randomQuantumGlyphs2 @randomQuantumGlyphs1 @randomQuantumGlyphs3];
+        @randomQuantumState3 = [@randomQuantumGlyphs3 @randomQuantumGlyphs2 @randomQuantumGlyphs1];
 
         @randomQuantumSkip = [@uppercase space];
 
