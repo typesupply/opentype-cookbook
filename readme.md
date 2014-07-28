@@ -2,7 +2,7 @@
 
 # Introduction
 
-OpenType features allow fonts to behave smartly. This can behavior can do simple things like change text to small caps or they can do complex things like insert swashes, alternates and ligatures to make text in a script font feel handmade. This document aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you'll be able to create features of your own design.
+OpenType features allow fonts to behave smartly. This behavior can do simple things like change text to small caps or they can do complex things like insert swashes, alternates and ligatures to make text in a script font feel handmade. This document aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you'll be able to create features of your own design.
 
 This document is written with the assumption that you have a basic working knowledge of the structure of a font. You need to know the differences between characters and glyphs, understand the coordinate system in glyphs and so on.
 
@@ -11,7 +11,7 @@ This document is written with the assumption that you have a basic working knowl
 
 # Foundation Concepts
 
-Before we get into writing any code, let's first establish an what we are actually building and how it actually works. This is probably the toughest thing to understand about OpenType features, but understanding the underlying mechanics will free you to build new and innovative features of your own.
+Before we get into writing any code, let's first establish what we are actually building and how it actually works. This is probably the toughest thing to understand about OpenType features, but understanding the underlying mechanics will free you to build new and innovative features of your own.
 
 ## Structures
 
@@ -484,15 +484,103 @@ Then, inside of your features you can have this lookup called by referencing its
 
 
 # Putting It All Together
-- show the general structure of a .fea file
-- show how these things are combined
-- note that the first lookup is implied
-- give an overview of how to approach complex features (think of it abstractly)
-- include
+
+You know how the building blocks for writing everything from simple to complex features and you understand how it is actually going to work. Right? Great! Now, let's start looking at the bigger picture.
+
+All of your features will be in a text file somewhere, either stored in your font source file or in an external file. I like to structure the code in my files like this:
+
+1. languagesystem declarations
+2. global classes
+3. all substitution features
+4. all positioning features
+
+The language system declarations must come first. After that, the order is up to you, but I like to add any classes that I will use frequently, then all of the substitution features and then all of the positioning features.
+
+## Building a Feature
+
+Here is a basic example of a lot of this stuff combined into the proper form:
+
+    languagesystem DFLT dflt;
+    langaugesystem latn dflt;
+
+    @lowercase = [a    b    c];
+    @uppercase = [A    B    C];
+    @smallCaps = [A.sc B.sc C.sc];
+
+    @figures         = [zero    one    two];
+    @figuresSmallCap = [zero.sc one.sc two.sc];
+
+    @punctuation         = [exclam];
+    @punctuationSmallcap = [exclam.sc];
+
+    feature smcp {
+        sub @lowercase by @smallcaps;
+    } smcp;
+
+    feature c2sc {
+        sub @uppercase by @smallcaps;
+        sub @lowercase by @smallcaps;
+        sub @figures by @figuresSmallcap;
+        sub @punctuation by @punctuationSmallcap;
+    } c2sc;
+
+Note that there are no lookups declared. Why? The first lookup is implied to be anything before you define a lookup. Consider this example:
+
+    feature c2sc {
+        sub @uppercase by @smallcaps;
+
+        lookup Lowercase {
+            sub @lowercase by @smallcaps;
+        } Lowercase;
+    } c2sc;
+
+The first rule, sub @uppercase by @smallcaps;, is implicitly in a lookup. The result is the same as this:
+
+    feature c2sc {
+        lookup Uppercase {
+            sub @uppercase by @smallcaps;
+        } Uppercase;
+
+        lookup Lowercase {
+            sub @lowercase by @smallcaps;
+        } Lowercase;
+    } c2sc;
+
+That's pretty much how you combine things. There will be more examples that demonstrate advanced techniques that you can study later.
+
+## Feature Order
+
+The order in which you list your features is very important. This is the order in which they will be processed. If you do something like put your ligatures before any alternates, your alternate code will have to take into account ligatures. It may even possibly have to break the ligatures down. That's possible, but results in overly complex code that is hard to read, edit and debug. I generally order my features like this:
+
+1. script language specific forms (locl)
+2. fractions (frac, numr, dnom)
+3. superscript and subscript (sups, subs)
+4. figures (lnum, tnum, pnum, tnum)
+5. ordinals (ordn)
+6. small caps (smcp, c2sc)
+7. all caps (case)
+8. various alternates (cswh, titl, salt, ss01, ss02, ss...)
+9. ligatures (liga, dlig)
+10. manual alternate access (aalt)
+11. capital spacing (cpsp)
+
+There are, of course, exceptions. The point is that you should think through this ordering so that you don't make things harder on yourself than you have to.
+
+## Including an External File
+
+If you are working on a family that shares features across multiple styles, it's cumbersome to store the features in each font source file. To get around this, you can store the features in an external file and reference them from the features in your font source file. To do this you use the include keyword:
+
+    include(features/family.fea);
+
+The text inside of the parenthesis must be the path to your external features file relative to the font source file. In the example above, the file family.fea is located in a folder called features right next to my font source file.
+
+You can even include multiple files in a single font source file.
 
 
 # Common Features And Techniques
 intro about supporting only what is needed, how to order these, bad feature and rule ordering can lead to needless complexity, etc.
+
+- give an overview of how to approach complex features (think of it abstractly)
 
 ## Glyph Run and Word Boundary Detection
 any, all, filled, empty metaclasses
