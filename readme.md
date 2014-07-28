@@ -431,14 +431,56 @@ What if you have a short context that you want to match, but a longer context th
 
 The ignore keyword followed by a backtrack (optional), target and lookahead (optional) creates the exception.
 
-These can also be used to reduce the number and complexity of subsequent rules. (need an exmaple of this)
+These can also be used to reduce the number and complexity of subsequent rules. (need an example of this)
 
 
 ## Advanced Techniques
-- lookups
-- recycling lookups
-- languages and scripts
-- include
+
+By now you have the rules needed to make most features that you'll need to make--small caps, ligatures, tabular figures, etc. But, when you want to do some more complex things, you'll need a few more things.
+
+Everything covered so far is enough for most features. You can make small caps, ligatures, tabular figures and more.
+
+### Language Systems
+
+One of OpenType's best attributes is the way that it handles languages and scripts. You can define rules that only apply when the user has indicated that they are writing a particular language or using a particular script. To do this, you state the script and the language that the rules apply to. After these have been made, all subsequent rules in the feature belong to this language and script unless you declare another language and script.
+
+Let's look at an example. Let's say that we have a special IJ that should only be used when Dutch is the declared language. We need to say: when the script is latin and the language is Dutch, replace IJ with IJ.alt. Here is how we do that:
+
+    script latn;
+    language NLD;
+    sub IJ by IJ.alt;
+
+When you do this, you need to register that the features include a particular language and script combination, known as a language system. We'll go over where to do this later, but for now, this is the syntax:
+
+    languagesystem script language;
+
+The script tags are defined [here](https://www.microsoft.com/typography/otspec/scripttags.htm) and language tags are defined [here](http://www.microsoft.com/typography/developers/opentype/languagetags.aspx). For example, this is what we would use for our example:
+
+    languagesystem latn NLD;
+
+Before you define any language system, you should always declare this:
+
+    languagesystem DFLT dflt;
+
+This will register all rules for a fallback system in case an OpenType layout gets confused about which language or script your features apply to. Additionally, before you register a script with a specific language, you should register it with the default language for the same reason. So, the complete set of language system statements would look like this:
+
+    languagesystem DFLT dflt;
+    languagesystem latn dflt;
+    languagesystem latn NLD;
+
+### Lookups
+
+We studied lookups when we went through the feature processing model, but they deserve some extra emphasis. Multiple lookups are allowed in a single feature and the fact that they process an entire glyph run before moving on to the next lookup makes them incredibly useful. You can use this technique to produce some very complex behavior. (Need to come up with an example for this.)
+
+You can also reuse lookups if they are declared outside of a feature. To do this, define your lookup like this:
+
+    lookup Example {
+        # rules go here
+    } Example;
+
+Then, inside of your features you can have this lookup called by referencing its name:
+
+    lookup Example;
 
 
 # Putting It All Together
@@ -446,6 +488,7 @@ These can also be used to reduce the number and complexity of subsequent rules. 
 - show how these things are combined
 - note that the first lookup is implied
 - give an overview of how to approach complex features (think of it abstractly)
+- include
 
 
 # Common Features And Techniques
