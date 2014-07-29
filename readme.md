@@ -1314,27 +1314,27 @@ Rules are defined with the short version of the keyword, sub and pos, instead of
 
 Script and language definitions each increase the indentation level by one level until the next script or language definition or until the end of the feature. For example:
 
-  feature locl {
+    feature locl {
 
-      script latn;
+        script latn;
 
-          language TRK exclude_dflt;
+            language TRK exclude_dflt;
 
-              lookup IDOT {
-                  sub i' by idotaccent;
-              } IDOT;
+                lookup IDOT {
+                    sub i' by idotaccent;
+                } IDOT;
 
-          language AZE exclude_dflt;
-              lookup IDOT;
+            language AZE exclude_dflt;
+                lookup IDOT;
 
-          language CRT exclude_dflt;
-              lookup IDOT;
+            language CRT exclude_dflt;
+                lookup IDOT;
 
-          language ROM exclude_dflt;
+            language ROM exclude_dflt;
 
-              lookup SCEDILLA {
-                  sub scedilla by uni0219;
-                  sub Scedilla by uni0218;
-              } SCEDILLA;
+                lookup SCEDILLA {
+                    sub scedilla by uni0219;
+                    sub Scedilla by uni0218;
+                } SCEDILLA;
 
-  } locl;
+    } locl;
