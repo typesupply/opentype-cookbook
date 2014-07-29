@@ -15,24 +15,24 @@ This needs a nice title. OpenType Features Intro is only a placeholder. Your sug
 
 # Introduction
 
-OpenType features allow fonts to behave smartly. This behavior can do simple things like change text to small caps or they can do complex things like insert swashes, alternates and ligatures to make text in a script font feel handmade. This document aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you'll be able to create features of your own design.
+OpenType features allow fonts to behave smartly. This behavior can do simple things like change text to small caps or they can do complex things like insert swashes, alternates and ligatures to make text set in a script font feel handmade. This document aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you'll be able to create features of your own design.
 
 This document is written with the assumption that you have a basic working knowledge of the structure of a font. You need to know the differences between characters and glyphs, understand the coordinate system in glyphs and so on.
 
-(make a note about writing direction. that the examples show LTR, but the features are language agnostic.)
+OpenType is writing direction agnostic, but the examples in this document are for left to right writing systems. Refer to the official specifications for further information on this matter.
 
 
 # Foundation Concepts
 
-Before we get into writing any code, let's first establish what we are actually building and how it actually works. This is probably the toughest thing to understand about OpenType features, but understanding the underlying mechanics will free you to build new and innovative features of your own.
+Before we get into writing any code, let's first establish what we are actually building and how it works. This is probably the toughest thing to understand about OpenType features, but understanding the underlying mechanics will free you to build new and innovative features of your own.
 
 ## Structures
 
-In OpenType we can define behaviors that we want to happen upon request from users. For example, the user may decide that text should be displayed with small caps. You, the type designer, can define which glyphs should be changed when this request is made by the user. These behaviors are defined in "features." Features can do two things: they can substitute glyphs and they can adjust the positions of glyphs.
+In OpenType we can define behaviors that we want to happen upon request from users. For example, the user may decide that text should be displayed with small caps. You, the type designer, can define which glyphs should be changed when this request is made by the user. These behaviors are defined in features. Features can do two things: they can substitute glyphs and they can adjust the positions of glyphs.
 
-The actual behavior within the features are defined with "rules." Following the small caps example above, you can define a rule that states that the a glyph should be replaced with A.sc.
+The actual behavior within the features are defined with rules. Following the small caps example above, you can define a rule that states that the a glyph should be replaced with A.sc.
 
-Within a feature, it is often necessary to group a set of rules together. This group of rules is called a "lookup."
+Within a feature, it is often necessary to group a set of rules together. This group of rules is called a lookup.
 
 Visually, you can think of features, lookups and rules like this:
 
@@ -48,11 +48,11 @@ Visually, you can think of features, lookups and rules like this:
 
 ## Processing
 
-When text is processed, the features that the user wants applied are gathered into two groups: substitution features and positioning features. The substitution features are processed first and then the positioning features are processed. (Add note or footnote here explaining why this is logical.) The order in which you have defined the features is the order in which they will be applied to the text. So, the order of your features, lookups and rules is very important.
+When text is processed, the features that the user wants applied are gathered into two groups: substitution features and positioning features. The substitution features are processed first and then the positioning features are processed. The order in which you have defined the features, lookups and rules is the order in which they will be applied to the text. This order is very important.
 
-Features process sequences of glyphs known as "glyph runs." These glyph runs may represent a complete line of text or a sub-section of a line of text.
+Features process sequences of glyphs known as glyph runs." These glyph runs may represent a complete line of text or a sub-section of a line of text.
 
-For the following, let's assume that you have the following features, lookups and rules:
+For example, let's assume that you have the following features, lookups and rules:
 
     feature: small caps
         lookup: letters
@@ -88,7 +88,7 @@ Within each feature, the glyph run is processed one lookup at a time. Here is wh
     Hello > [lookup: letters] > Hello (with ello in .sc)
     Hello (with ello in .sc) > [lookup: numbers] > Hello (with ello in .sc)
 
-Within each lookup, things are a little different. The glyph run is passed one glyph at a time from beginning to end over each rule within the lookup. If a rule transforms the passed glyph, the following rules are skipped for the passed glyph. The next glyph is then passed through the lookup. That's complex, so let's look at it with our example:
+Within each lookup, things are a little different. The glyph run is passed one glyph at a time from beginning to end over each rule within the lookup. If a rule transforms the current glyph, the following rules are skipped for the current glyph. The next glyph is then current through the lookup. That's complex, so let's look at it with our example:
 
     (this will be an illustration)
     H ello > [replace a with A.sc] > H ello
@@ -122,18 +122,18 @@ Within each lookup, things are a little different. The glyph run is passed one g
 
 Here is our example, animated:
 
-    ideally I will be able to include an animation of a complete processing run
+    (ideally I will be able to include an animation of a complete processing run)
 
-That's how processing works and it is the most complex part of OpenType features that you will need to understand. Now we can move on to the fun stuff.
+The process is the same for positioning features, except that instead of rule evaluation stopping when a glyph is transformed, the evaluation is stopped when a glyph's position is changed.
 
-**note that this is the same for positioning**
+That's how processing works and it is the most complex part of OpenType features that you will need to understand. Got it? Great!
 
 (For you experts reading this: Yeah, I know this isn't technically 100% accurate. But, I don't really want to confuse everyone by going through the processing model with the GSUB and GPOS data structures. Those are different from the .fea syntax just enough to make things **very confusing** unless you know both sides of the process very well. So, I'm going to explain the processing model following the .fea structures.)
 
 
 # Syntax Intro
 
-You will be writing your features in the [Adobe OpenType Feature File Syntax](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html) (commonly referred to as ".fea"). .fea is a simple, text format that is easily editable in text and font editors. There are other syntaxes and tools for developing features, but .fea is the most widely supported and the most easily accessible. We'll be going through the important parts of .fea in detail, but for now we need to establish some basics.
+We will be writing our features in the [Adobe OpenType Feature File Syntax](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html) (commonly referred to as ".fea"). .fea is a simple, text format that is easily editable in text and font editors. There are other syntaxes and tools for developing features, but .fea is the most widely supported and the most easily accessible. We'll be going through the important parts of .fea in detail, but for now we need to establish some basics.
 
 ## Comments
 
@@ -153,7 +153,7 @@ Some characters have special meanings in .fea.
 
 ### ;
 
-A semicolon indicates the end of something--a feature, lookup, rule, etc. These are important.
+A semicolon indicates the closing of something--a feature, lookup, rule, etc. These are important.
 
 ### {}
 
@@ -161,19 +161,17 @@ Braces enclose the contents of a feature or lookup.
 
 ### []
 
-Brackets enclose the contents of a class. More information on classes will be coming shortly.
+Brackets enclose the contents of a class.
 
 ## Features
 
-Features are identified with a four character long feature tag. These are either [registered tags](https://www.microsoft.com/typography/otspec/featurelist.htm) or private tags. Unless you have a very good reason to create a private tag, you should always use the registered tags. Applications that support OpenType features uses these tags to identify which features are supported in your font. For example, if you have a feature with the smcp tag, applications will know that your font supports small caps.
+Features are identified with a four character tag. These are either [registered tags](https://www.microsoft.com/typography/otspec/featurelist.htm) or private tags. Unless you have a very good reason to create a private tag, you should always use the registered tags. Applications that support OpenType features uses these tags to identify which features are supported in your font. For example, if you have a feature with the smcp tag, applications will know that your font supports small caps.
 
 Features are defined with the feature keyword, the appropriate tag, a pair of braces and a semicolon.
 
     feature smcp {
         # lookups and rules go here
     } smcp;
-
-(Should it be noted that these are called blocks? Or is that too much jargon?)
 
 ## Lookups
 
@@ -196,8 +194,6 @@ Classes can have a name assigned to them so that they can be used more than once
 After a class has been defined, it can be referenced by name.
 
     @vowels
-
-(Is this the place to talk about inline classes or should that be in the sub and pos sections?)
 
 ## General Naming Rules
 
@@ -251,7 +247,7 @@ If you want to replace several things with corresponding things, you can use cla
 
     sub [a b c] by [A.sc B.sc C.sc];
 
-It's usually more readable if define the classes earlier in your code and then reference them by name.
+It's usually more readable to define the classes earlier in your code and then reference them by name.
 
     sub @lowercase by @smallcaps;
 
@@ -334,7 +330,7 @@ Note that the keyword in the middle of the rule changes from by to from.
 
 ## Positioning
 
-Positioning glyphs may not be as visually interesting as what can be achieved with substitution, but the positioning support in OpenType is incredibly powerful. The positioning rules can be broken into two separate categories to make them easier to understand:
+Positioning glyphs may not be as visually interesting as what can be achieved with substitution, but the positioning support in OpenType is incredibly powerful. The positioning rules can be broken into two separate categories:
 
 1. Simple Rules -- These adjust either the space around one glyph or the space between two glyphs.
 2. Mind-Blowingly Complex and Astonishingly Powerful Rules -- These do things like properly shift combining marks to align precisely with the base forms in Arabic and Devanagari so that things look incredibly spontaneous and beautiful.
@@ -359,13 +355,23 @@ For example:
 
     <1 2 3 4>
 
-In this case, the value record is adjusting the x placement to the right by one unit, the y placement up by two units, the x advance by 3 unites and the y advance by four units.
+In this case, the value record is adjusting the x placement to the right by one unit, the y placement up by two units, the x advance by 3 units and the y advance by four units.
 
 When the positioning features are started, each glyph in the glyph run has a value record of <0 0 0 0>. As the processing happens and rules are matched, these value records are modified cumulative. So, if one feature adjust a glyph's x placement by 10 units and then another feature adjust the glyph's x placement by 30 units, the glyph's x placement would be 40 units.
 
-### Adjustment Of One Glyph
+The syntax for a positioning rule is:
 
-To adjust the space around a single thing, you do this:
+    position target valueRecord;
+
+We can abbreviate position with pos to cut down on how much stuff we have to type, so let's do that:
+
+    pos target valueRecord;
+
+Targets can be classes. These classes can be referenced by name or they can be defined as an unnamed class inside of a rule.
+
+### Adjust the Position of One Glyph
+
+To adjust the space around a single target, you do this:
 
     pos target valueRecord;
 
@@ -380,9 +386,9 @@ You can also use a class as the target:
     pos [A B C] <10 0 20 0>;
     pos @upperclass <10 0 20 0>;
 
-### Adjustment Of The Space Between Two Glyphs
+### Adjust the Space Between Two Glyphs
 
-To adjust the space between two glyphs, you do this:
+To adjust the space between two targets, you do this:
 
     pos target1 target2 valueRecord;
 
@@ -411,12 +417,12 @@ But, seriously, let your editor do this for you.
 
 The substitution and positioning rules that we have discussed so far are quite useful, but the real power is in triggering these rules only when certain conditions are met. These are known as contextual rules.
 
-Contextual rules allow you to specify a sequence before and/or a sequence after the target in a substitution or positioning rule. For example: replace r with r.alt if the r is preceded by wo and followed by ds. There are two new parts of this rule type in addition to the parts we defined in the substitution and positioning sections.
+Contextual rules allow us to specify a sequence before, a sequence after the target or both in a substitution or positioning rule. For example: replace r with r.alt if the r is preceded by wo and followed by ds. There are two new parts of this rule type in addition to the parts we defined in the substitution and positioning sections.
 
 1. Backtrack -- This is the sequence of things that occur before the target in the rule. This sequence can be composed of glyphs, classes or a mix of both.
 2. Lookahead -- This is the sequence of glyphs that occur after the target in the rule. Like the backtrack, this sequence can be composed of glyphs, classes or a mix of both.
 
-The backtrack and lookahead are both optional. Either can appear (or neither, but we'll cover that later). If a sequence is present, it can contain one or more things.
+The backtrack and lookahead are both optional. Either, or neither, can appear. If a sequence is present, it can contain one or more things.
 
 In addition to the backtrack and lookahead, a new character is needed in these rules: '. This character is used to mark the target of the rule.
 
@@ -437,25 +443,21 @@ Please note that just because you can apply this to all rule types doesn't mean 
 
 ### Exceptions
 
-What if you have a short context that you want to match, but a longer context that contains the short context? For example, say we want to change the r in words but not in words!. To do that we can specify an exception to the contextual rule. For example:
+What if we have a short context that you want to match, but a longer context that contains the short context? For example, say we want to change the r in words but not in words!. To do that we can specify an exception to the contextual rule. For example:
 
     ignore sub w o r' d s exclam;
     sub w o r' d s by r.alt;
 
 The ignore keyword followed by a backtrack (optional), target and lookahead (optional) creates the exception.
 
-These can also be used to reduce the number and complexity of subsequent rules. (need an example of this)
-
 
 ## Advanced Techniques
 
-By now you have the rules needed to make most features that you'll need to make--small caps, ligatures, tabular figures, etc. But, when you want to do some more complex things, you'll need a few more things.
-
-Everything covered so far is enough for most features. You can make small caps, ligatures, tabular figures and more.
+By now we have established the rules needed to make most features that you'll want to add to your fonts--small caps, ligatures, tabular figures, etc. But, when you want to do some more complex things, you'll need a few more things.
 
 ### Language Systems
 
-One of OpenType's best attributes is the way that it handles languages and scripts. You can define rules that only apply when the user has indicated that they are writing a particular language or using a particular script. To do this, you state the script and the language that the rules apply to. After these have been made, all subsequent rules in the feature belong to this language and script unless you declare another language and script.
+One of OpenType's best attributes is the way that it handles languages and scripts. We can define rules that only apply when the user has indicated that they are writing a particular language or using a particular script. To do this, we state the script and the language that the rules apply to. After these have been made, all subsequent rules in the feature belong to this language and script unless you declare another language and script.
 
 Let's look at an example. Let's say that we have a special IJ that should only be used when Dutch is the declared language. We need to say: when the script is latin and the language is Dutch, replace IJ with IJ.alt. Here is how we do that:
 
@@ -463,15 +465,17 @@ Let's look at an example. Let's say that we have a special IJ that should only b
     language NLD;
     sub IJ by IJ.alt;
 
-When you do this, you need to register that the features include a particular language and script combination, known as a language system. We'll go over where to do this later, but for now, this is the syntax:
+The script tags are defined [here](https://www.microsoft.com/typography/otspec/scripttags.htm) and language tags are defined [here](http://www.microsoft.com/typography/developers/opentype/languagetags.aspx).
+
+If you add language or script specific rules you also need to register that the features include a particular language and script combination, known as a language system, before any of your feature definitions. This is the syntax:
 
     languagesystem script language;
 
-The script tags are defined [here](https://www.microsoft.com/typography/otspec/scripttags.htm) and language tags are defined [here](http://www.microsoft.com/typography/developers/opentype/languagetags.aspx). For example, this is what we would use for our example:
+And in our example, we would do this:
 
     languagesystem latn NLD;
 
-Before you define any language system, you should always declare this:
+Before you define any specific language system, you should always declare this:
 
     languagesystem DFLT dflt;
 
@@ -483,7 +487,7 @@ This will register all rules for a fallback system in case an OpenType layout ge
 
 ### Lookups
 
-We studied lookups when we went through the feature processing model, but they deserve some extra emphasis. Multiple lookups are allowed in a single feature and the fact that they process an entire glyph run before moving on to the next lookup makes them incredibly useful. You can use this technique to produce some very complex behavior. (Need to come up with an example for this.)
+We studied lookups when we went through the feature processing model, but they deserve some extra emphasis. Multiple lookups are allowed in a single feature and the fact that they process an entire glyph run before moving on to the next lookup makes them incredibly useful. We can use this technique to produce some very complex behavior. For example, in a swash feature it is often best to insert swashes first at the beginning and then at the end of words in separate passes. We can do this easily with lookups.
 
 You can also reuse lookups if they are declared outside of a feature. To do this, define your lookup like this:
 
@@ -495,10 +499,12 @@ Then, inside of your features you can have this lookup called by referencing its
 
     lookup Example;
 
+This is useful if you want to share some rules across multiple features.
+
 
 # Putting It All Together
 
-You know how the building blocks for writing everything from simple to complex features and you understand how it is actually going to work. Right? Great! Now, let's start looking at the bigger picture.
+You now have the building blocks for writing everything from simple to complex features and you understand how it is actually going to work. Right? Great! Now, let's start looking at the bigger picture.
 
 All of your features will be in a text file somewhere, either stored in your font source file or in an external file. I like to structure the code in my files like this:
 
@@ -511,17 +517,17 @@ The language system declarations must come first. After that, the order is up to
 
 ## Building a Feature
 
-Here is a basic example of a lot of this stuff combined into the proper form:
+Here is a basic example combined into the proper form:
 
     languagesystem DFLT dflt;
     langaugesystem latn dflt;
 
     @lowercase = [a    b    c];
     @uppercase = [A    B    C];
-    @smallCaps = [A.sc B.sc C.sc];
+    @smallcaps = [A.sc B.sc C.sc];
 
     @figures         = [zero    one    two];
-    @figuresSmallCap = [zero.sc one.sc two.sc];
+    @figuresSmallcap = [zero.sc one.sc two.sc];
 
     @punctuation         = [exclam];
     @punctuationSmallcap = [exclam.sc];
@@ -563,12 +569,12 @@ That's pretty much how you combine things. There will be more examples that demo
 
 ## Feature Order
 
-The order in which you list your features is very important. This is the order in which they will be processed. If you do something like put your ligatures before any alternates, your alternate code will have to take into account ligatures. It may even possibly have to break the ligatures down. That's possible, but results in overly complex code that is hard to read, edit and debug. I generally order my features like this:
+The order in which you list your features is very important. This is the order in which they will be processed. If you do something like put your ligatures before any alternates, your alternate code will have to take into account potential ligatures. It may even possibly have to break the ligatures down. That's possible, but it results in overly complex code that is hard to read, edit and debug. I generally order my features like this:
 
 1. script language specific forms (locl)
 2. fractions (frac, numr, dnom)
 3. superscript and subscript (sups, subs)
-4. figures (lnum, tnum, pnum, tnum)
+4. figures (lnum, onum, pnum, tnum)
 5. ordinals (ordn)
 6. small caps (smcp, c2sc)
 7. all caps (case)
@@ -587,30 +593,33 @@ If you are working on a family that shares features across multiple styles, it's
 
 The text inside of the parenthesis must be the path to your external features file relative to the font source file. In the example above, the file family.fea is located in a folder called features right next to my font source file.
 
-You can even include multiple files in a single font source file.
+You can even include multiple files in a single font source file. For example:
+
+    include(features/family.fea);
+    include(features/bold-kern.fea);
 
 
 # Common Features And Techniques
 
-Up until now, almost everything that has been discussed has been indisputable. The next section is far more subjective as there are numerous ways to write the code to create certain behaviors. What follows includes my own personal opinion.
+Up until now, almost everything that has been discussed has been the official way to do things or established common practice. The next section is far more subjective as there are numerous ways to write the code to create certain behaviors. What follows includes my own personal opinion.
 
-I have prepared a demo font that includes all of the features and techniques defined below. You can open it up in your favorite font editor and play around with the features if you want to see how they work. The feature tags in the code below doesn't always match the tags in the font. I had to do it this way since there can't be more than one version of each feature.
+I have prepared a demo font that includes all of the features and techniques defined below. You can open it up in your favorite font editor and play around with the features if you want to see how they work. The feature tags in the code below don't always match the tags in the font. I had to do it this way since there can't be more than one version of each feature.
 
 The features in the demo font are by no means to complete or an indication of what is necessary to include in a particular feature. You should develop your own interpretation of what should be included in each feature based on the design of your font.
 
 ## Glyph Run and Word Boundary Detection
 
-Often we want to make substitutions based on the bounds of words and glyph runs. For example, to inset a swash only at the beginning or at the end. There are three features in the specification for dealing with these situations:
+Often we want to make substitutions based on the bounds of words and glyph runs. For example, to insert a swash only at the beginning or at the end of a word. There are three features in the specification for dealing with these situations:
 
 - init -- Performs substitutions only at the beginning of a word.
 - fina -- Performs substitutions only at the end of a word.
 - medi - Performs substitutions only on the glyphs between the first and last in a word.
 
-Unfortunately the specification is a bit vague about how these are supposed to be implemented. What exactly constitutes a word boundary? The Unicode specification details a word boundary detection algorithm and conceivably that's what would be used by the layout engines that are processing your font. That specification is quite thorough, but it thinks about word boundaries in a different way than type designers do (or at least this type designer does). For example, where are the word boundaries in this text?
+Unfortunately the specification is a bit vague about how these are supposed to be implemented. The Unicode specification details a word boundary detection algorithm and conceivably that's what would be used by the layout engines that are processing your font. That specification is quite thorough, but it thinks about word boundaries in a different way than type designers do (or at least the type designer writing this does). For example, where are the word boundaries in this text?
 
     Hello “World!”
 
-They are at the o, the W and the d. (I'm 99.999999% sure about this, but I should test it again.) If we use this for swashes our W and d are likely to clash with the marks “ and ! around them. We think of word boundaries as an empty space around words. If we want to use init and fina, we'll need to build in exceptions. You can certainly do that, but I generally do it all myself with some special classes:
+They are at the o, the W and the d. (I'm 99.999999% sure about this, but I should test it again.) If we use this for swashes our W and d are likely to clash with the marks “ and ! around them. We often think of word boundaries as an empty space around words. If we want to use init and fina, we'll need to build in exceptions. You can certainly do that, but I generally do it all myself with some special classes:
 
 - all -- This class contains all glyphs.
 - filled -- This class contains all glyphs that contain positive space.
@@ -642,7 +651,7 @@ With these, we can build lookups that handle boundary detection reasonable well 
         sub @finalsOff by @finalsOn;
     } WordFinal;
 
-To be clear, you should not use this for shaping a Arabic or anything like that. This is strictly for things like swashes.
+To be clear, you should not use this for shaping Arabic or anything like that. This is strictly for aesthetic substitutions like swashes.
 
 ## Script And Language Specific Forms
 
@@ -667,26 +676,24 @@ I have used two different algorithms for implementing on-the-fly fractions. The 
 
 This method has been along for as long as I have been working on OpenType features. Adobe probably developed it in the very early days of the .fea language. It is probably still the most common implementation.
 
-    feature locl {
+    feature frac {
+        @slash = [slash fraction];
 
-        script latn;
+        lookup FractionNumerators {
+            sub @figures by @figuresNumerator;
+        } FractionNumerators;
 
-            language NLD exclude_dflt;
-                lookup DutchIJ {
-                    sub IJ by IJ.dutch;
-                } DutchIJ;
-
-    } locl;
+        sub [@slash @figuresDenominator] @figuresNumerator' by @figuresDenominator;
+        sub slash by fraction;
+    } frac;
 
 ### Method 2: Contextual
 
-Around 2006 Kent Lew asked me if I had any ideas for a better fraction implementation. Specifically, he was referring to the fact that with the existing implementation, users had to manually select only the text that should be converted to fractions and apply the feature. If the feature was applied to more than just that text, all numbers not in a fraction would be converted to numerators. This was a big problem in things like cookbooks where there could be thousands of little bits of text that had to be converted to fractions.
+Around 2006 Kent Lew asked me if I had any ideas for a better fraction implementation. Specifically, he was referring to the fact that with the existing implementation users had to manually select only the text that should be converted to fractions and apply the feature. If the feature was applied to more than just that text all numbers not in a fraction would be converted to numerators. This was a big problem in things like cookbooks where there could be thousands of little bits of text that had to be converted to fractions.
 
-I developed a new method that is built on the common form of writing fractions as an integer, a space, a numerator, a slash and a denominator. For example: 2 1/2. The code considers 1-10 numbers followed by a slash followed by 1 or more numbers to be a fraction. The slash is converted to a fraction bar, the numbers before the slash are converted to numerators and the numbers after the slash are converted to denominators. If the new fraction is preceded by a number followed by a space, the space is converted to a thin space to pull the fraction closer to the integer.
+I developed a new method that is built on the common form of writing fractions as an integer, a space, a numerator, a slash and a denominator. For example: 2 1/2. The code considers 1-10 numbers followed by a slash followed by 1 or more numbers to be a fraction. The slash is converted to a fraction bar, the numbers before the slash are converted to numerators and the numbers after the slash are converted to denominators. If the new fraction is preceded by a number followed by a space, the space is converted to a thin space to pull the fraction closer to the integer. After I published the first version of this code, Karsten Luecke pointed out some some problems with dates, German tax numbers and things like that. I published a new version that handles these properly and this version is below.
 
-After I published the first version of this code, Karsten Luecke pointed out some some problems with dates, German tax numbers and things like that. I published a new version that handles these properly and this version is below.
-
-With this implementation, users can globally activate fractions. The only drawback that I have found with this is that it doesn't allow numerators to be longer than 10 numbers long. In the unlikely event that a user runs into this problem, they can select the unconverted numerators and activate the numerator feature.
+With this users can globally activate fractions. The only drawback that I have found with this is that it doesn't allow numerators to be longer than 10 numbers long. In the unlikely event that a user runs into this problem, they can select the unconverted numerators and activate the numerator feature.
 
      feature frac {
 
@@ -844,7 +851,7 @@ There are two features that invoke small caps: small caps (smcp) and all small c
 
 ## All Caps
 
-There are two features that should be invoked when the user indicates that they want all text converted to uppercase. The first feature (case) transforms any glyphs that should be changed to an uppercase alternate. You should not define the transformation from lowercase to uppercase for alphabetic forms. The layout engine will do that for you.
+There are two features that should be activated when the user indicates that they want all text converted to uppercase. The first feature (case) transforms any glyphs that should be changed to an uppercase alternate. You should not define the transformation from lowercase to uppercase for alphabetic forms. The layout engine will do that for you.
 
     feature case {
         sub @punctuationUppercaseOff by @punctuationUppercaseOn;
@@ -857,7 +864,7 @@ The second feature (cpsp) allows you to define all caps specific spacing.
         pos @punctuationUppercaseOn <100 0 200 0>;
     } cpsp;
 
-Note that these features will be invoked whenever the user types in all capitals. The features must be activated manually.
+Note that these features will not be activated whenever the user types in all capitals. The features must be activated manually.
 
 ## Swashes
 
@@ -1091,9 +1098,9 @@ The code is lengthy, but fairly straightforward:
 
 #### Method 3: Quantum
 
-This method is for dedicated randomization aficionados. A little history about how this came about: in 2005 I wanted to see if I could come up with a randomization technique that produced less predictable results than the methods above. I realized that I could use the text that the feature is transforming as a poor man's random seed. I was reading a tiny bit about quantum mechanics around the same time and my very limited understanding of some of the experiments in that field gave me an idea. That's a story that I won't get into here. Anyway, the code is long and convoluted, but the idea is pretty simple. I'll give you an overview.
+This method is for dedicated randomization aficionados. A little history about how this came about: in 2005 I wanted to see if I could come up with a randomization technique that produced less predictable results than the methods above. I realized that I could use the text that the feature is transforming as a psurdo-pseudo-random seed. I was reading a tiny bit about quantum mechanics around the same time and my very limited understanding of some of the experiments in that field gave me an idea. That's a story that I won't get into here. Anyway, the code is long and convoluted, but the idea is pretty simple. I'll give you an overview.
 
-Before we get to rules, we establish several important classes. First we create two trigger classes. The first will contain half of the glyphs in the font and the next will contain the other half of the glyphs. These need to be randomly chosen. In other words, don't put A-z in the same class. That won't produce the desired result. Next, we establish alternate states for glyphs. These states are defined in a series of classes. Each of these classes contain a glyph and its alternate. The next class contains the opposite of the previous class. For example:
+Before we get to rules, we establish several important classes. First we create two trigger classes. The first will contain half of the glyphs in the font and the next will contain the other half of the glyphs. These need to be randomly chosen. In other words, don't put A-Z in the same class. That won't produce the desired result. Next, we establish alternate states for glyphs. These states are defined in a series of classes. Each of these classes contain a glyph and its alternate. The next class contains the opposite of the previous class. For example:
 
     @class1 = [A A.alt];
     @class2 = [A.alt A];
@@ -1104,7 +1111,7 @@ The glyph processing happens in a series of lookups that each pass over the enti
 
     (illustration of the same string repeated in the demo font)
 
-Is it real randomization? No. Is it perfect? No. Is it incredibly complex and hard to write? Yes (unless you use a script to write it). Can it be slow if a font contains a large number of glyphs and the glyph run being processed is very long? Yes. Is it awesome anyway? I think so.
+Is it real randomization? No. Is it perfect? No. Is it incredibly complex and hard to write? Yes. (Unless you use a script to write it.) Can it be slow if a font contains a large number of glyphs and the glyph run being processed is very long? Yes. Is it awesome anyway? I think so.
 
 
     feature calt {
@@ -1237,6 +1244,9 @@ Should this section even be in here? What form should it take?
 
 
 # Things That Should Not Be In This Document (and why)
+
+Should this be in the final document? It's here now to keep me on track.
+
 - ranges in glyph classes (why: not that useful, hard to debug)
 - CID (why: complex)
 - contour point (why: complex)
@@ -1258,6 +1268,7 @@ Should this section even be in here? What form should it take?
 - mark to mark positioning (why: too complex for this; not easy to test)
 - lookupflag (why: relates to the positioning rules that aren't covered)
 
+
 # Thanks
 
 Thanks to the Adobe Type Department for developing the .fea syntax. It gets criticized from time to time, but it is actually a great abstraction of the GSUB, GPOS and GDEF binary data structures. I've tried, and failed, to invent a better syntax several times. .fea is hard to beat. Thanks Adobe!
@@ -1269,7 +1280,7 @@ Thanks to the Adobe Type Department for developing the .fea syntax. It gets crit
 
 The text of this document, except the code samples, is licensed as [Creative Commons Attribution-NonCommercial-ShareAlike](http://creativecommons.org/licenses/by-nc-sa/3.0/).
 
-The code samples are released into the public domain. You may modify them, use them in commercial fonts and distribute them without attribution. You may not claim authorship of the original code or patent or copyright the original code.
+The code samples are released into the public domain. You may modify them, use them in commercial fonts and distribute them without attribution. You may not claim authorship of the original code or patent or copyright the original code. the code is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. in no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the code.
 
 The demo font included with this document is copyright Type Supply LLC. It may be used for reference only. You may not modify, extend, convert or sell it. I have used one of the fonts developed by my foundry so that there would be a high-quality example for you to study. Please be courteous.
 
@@ -1280,7 +1291,7 @@ OpenType is either a registered trademark or trademark of Microsoft Corporation 
 
 # Appendix: My .fea Style Guide
 
-I like to make my code look nice. I'm a designer, so I'll even go so far as to say that I try to make it look typographic. My goal is to make it comfortable to read because, as Guido van Rossum once put it, code is read much more often than it is written. Debugging problems is not fun. Debugging problems in poorly structured, hard to read code is a nightmare of not fun.
+I like to make my code look nice. I'm a designer, so I'll even go so far as to say that I try to make it look typographic. My goal is to make it comfortable to read because, as Guido van Rossum once put it, code is read much more often than it is written. Debugging problems is not fun. Debugging problems in poorly structured, hard to read code is a bag of hurt.
 
 Honestly, I don't really care if you use my style recommendations or if you invent your own. There is plenty in this style guide to disagree with and even I don't always follow these rules. What I do hope you will do is find a consistent way to structure and style your code so that it is easy for you to work with. That said, I am 100% right and everyone else is 100% wrong.
 
@@ -1336,7 +1347,7 @@ Features always have two blank lines between them and whatever is next in the fi
 
 ## Lookups
 
-Lookups are structured line this:
+Lookups are structured like this:
 
     lookup ExampleLookup1 {
         # rules
@@ -1365,7 +1376,7 @@ Classes should be defined on a single line. The definition may be broken into mu
 
 Class names should be descriptive of the class' contents and purpose. For example, @uppercase, @figuresNumerator, @randomCycle1. If there are two classes that are intended for substituting with each other, for example if you have swash targets and swash replacements, it's good to tag the classes with Off and On for clarity. For example, @swashInitialsOff and @swashInitialsOn. Class names are composed of characters in A-z a-z and 0-9. The first letter should be lowercase and other letters may be capitalized as needed to improve readability.
 
-If classes are two or more classes that are intended for substituting with each other, readability can be greatly increased by using spaces between glyph names as alignment padding. For example:
+If there are two or more classes that are intended for substituting with each other, readability can be greatly increased by using spaces between glyph names as alignment padding. For example:
 
     @figures         = [zero     one     two];
     @figuresTabular  = [zero.tab one.tab two.tab];
@@ -1373,7 +1384,7 @@ If classes are two or more classes that are intended for substituting with each 
 
 ## Rules
 
-Rules are defined with the short version of the keyword, sub and pos, instead of the long version, substitution and position. The rules are always on a single line and they are always written at the current indentation level. Class names are preferred over inline classes, but that's not always practical or possible. There should be no double spaces and there should be no space before the closing semicolon.
+Rules are defined with the short version of the keywords, sub and pos, instead of the long versions, substitution and position. The rules are always on a single line and they are always written at the current indentation level. Class names are preferred over inline classes, but that's not always practical or possible. There should be no double spaces and there should be no space before the closing semicolon.
 
 ## Script and Language
 
