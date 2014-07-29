@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="one.oldtab" format="1">
+  <advance width="591.0"/>
+  <outline>
+    <contour>
+      <point x="513" y="0" type="line"/>
+      <point x="513" y="41" type="line"/>
+      <point x="370" y="41" type="line"/>
+      <point x="370" y="645" type="line"/>
+      <point x="268" y="645" type="line"/>
+      <point x="233" y="588"/>
+      <point x="151" y="495"/>
+      <point x="99" y="451" type="curve"/>
+      <point x="99" y="398" type="line"/>
+      <point x="143" y="429"/>
+      <point x="214" y="499"/>
+      <point x="242" y="538" type="curve"/>
+      <point x="242" y="41" type="line"/>
+      <point x="99" y="41" type="line"/>
+      <point x="99" y="0" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.typemytype.robofont.layerData</key>
+      <dict>
+      </dict>
+    </dict>
+  </lib>
+</glyph>

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ascender</key>
+	<integer>750</integer>
+	<key>capHeight</key>
+	<integer>750</integer>
+	<key>copyright</key>
+	<string>Copyright 2012-2014 Type Supply LLC. All rights reserved.</string>
+	<key>descender</key>
+	<integer>-180</integer>
+	<key>familyName</key>
+	<string>OpenType Feature Intro</string>
+	<key>openTypeHheaAscender</key>
+	<integer>820</integer>
+	<key>openTypeHheaCaretOffset</key>
+	<integer>0</integer>
+	<key>openTypeHheaCaretSlopeRise</key>
+	<integer>1</integer>
+	<key>openTypeHheaCaretSlopeRun</key>
+	<integer>0</integer>
+	<key>openTypeHheaDescender</key>
+	<integer>-180</integer>
+	<key>openTypeHheaLineGap</key>
+	<integer>0</integer>
+	<key>openTypeNameDesigner</key>
+	<string>Tal Leming</string>
+	<key>openTypeNameDesignerURL</key>
+	<string>http://typesupply.com</string>
+	<key>openTypeNameLicense</key>
+	<string>Type Supply LLC
+Font Software End User License Agreement
+
+Please read this document carefully and we recommend that you print a copy for further reference. 
+
+This End User License Agreement (the "Agreement" "EULA," "License," "Agreement" or "License Agreement") is a legal agreement between you and Type Supply LLC. ("Type Supply") and becomes a binding contract between you and Type Supply LLC. This Agreement governs the terms of use of the Font Software and the design of the Fonts embodied therein (collectively, "Font Software"), together with any media, printed materials, electronic documentation, updates, add-ons, artwork, web services and any other material that may be associated with the product now or in the future. This Agreement becomes effective (a) when you click on the area marked "I agree to all terms and conditions of the applicable license agreement(s)," or (b) if you are acquiring Font Software on a Compact Disc or Digital Video Disk (CD, DVD), or (c) as a compressed archive delivered via e-mail attachment, when you open the package in which the font is contained. If you do not wish to enter into this Agreement, do not purchase, access, use, or otherwise download or install the Font Software.
+
+1. Upon payment in full, Type Supply will grant you a non-exclusive terminable License to the Font Software that accompanies this EULA. Use of the Font Software is limited to Personal or Internal Business Use only. For the purposes of the License, "Font Software" shall be defined as the design of the Fonts together with the Font Software which, when used generates typeface and typographic designs and ornaments. Personal or Internal Business Use shall mean Use of the Font Software for your customary, personal, or internal business purposes and, except as may be otherwise permitted herein, shall not mean the commercial distribution or use of Font Software or any component thereof in any Commercial Product whatsoever. You hereby agree that the Font Software shall further comprise all bitmap and/or outline representations of typeface and typographic designs and ornaments created by or derived from the Font Software. The Font Software shall be deemed to include, if applicable, any upgrades, updates, related files, permitted modifications, permitted copies, and related documentation.
+2. If you are a design consultancy, advertising agency, or purchasing this license for use by or on behalf of such an entity, the ultimate end user should also purchase a license appropriate for the intended use of the Font Software. Specifically, if the ultimate client will need copies of the Font Software, the client must also purchase a License. The license granted herein is for personal use does not extend to uses by temporary employees, freelance or independent contractors using the Font Software in professional environments or for other professional uses. Specifically, you may not make copies greater than that your license allows for temporary use by freelance users, temporary employees or independent contractors, additional copies outside of those permitted by this License require the purchase of additional licenses. Under such circumstances the employer and/or the ultimate end user are required to purchase a license appropriate for their usage.
+3. For the purpose of this Agreement, "Commercial Product" shall mean, by way of example, not limitation, a user editable electronic document created by Use of the Font Software which is offered for distribution to the public as a Commercial Product in exchange for a separate fee or other consideration. By way of example, not limitation, an electronic book or electronic magazine distributed for a fee shall be considered a Commercial Product; a document distributed in connection with a commercial transaction in which the consideration is unrelated to such document (for example, a business letter or a receipt for purchase of tangible goods such as clothing) shall not be considered a Commercial Product.
+4. Except as may be otherwise prohibited herein, you are permitted to electronically distribute a "Personal or Internal Business Use" document (that is, a document other than a Commercial Product as defined above) (i) that is in a static graphic image (for example, a "gif") or in an embedded electronic document, and (ii) which is distributed in a format that permits only the viewing and printing (and not the editing, altering, enhancing, modifying or extraction of the Font Software) of such static graphic image or embedded document. Personal or Internal Business Use shall not include any use of the Font Software by persons that are not members of your immediate household, your authorized employees, or your authorized agents. All such users shall be notified by you as to the terms and conditions of the Agreement.
+5. Type Supply, its successors, and its assigns, retain all right, title and interest in and to the Font Software together with the design of the Font embodied therein together with any trademarks used in connection therewith. Except as may be otherwise expressly permitted herein, you agree not to copy the Font Software or create derivative works based upon the design of the Font or the Font Software. You hereby agree that the unauthorized use of the design of the Font and/or the Font Software shall be an infringement of Type Supply's exclusive rights causing significant monetary harm. You further agree that such damages cannot be readily estimated and Type Supply shall be entitled to seek a restraining order to prevent any unauthorized uses. Type Supply's rights and remedies in the event of infringement shall be cumulative. 
+6. You may install and Use the Font Software on a single file server for Use on a single local area network (LAN) only when the Use of such Font Software is limited to the workstations licensed under this Agreement, i.e., the total number of workstations that could use the Font Software, not the total number of workstations that might have access to the Font Software at any one time.
+7. You may not alter the Font Software or the designs embodied therein in any manner whatsoever. Reformatting the Font Software into other formats or for use in other operating systems is expressly prohibited. Altering or amending the embedding bits characteristics of the Font Software is expressly prohibited. The Font Software may not be used to create or distribute any electronic document in which the Font Software, or any part thereof, is embedded in a format that permits editing, alterations, enhancements, or modifications or extraction of the Font Software by the recipient. You hereby agree not to transmit any electronic document to any party that intends to "hack," edit, alter, enhance, or otherwise modify or remove the Font Software.
+8. You may make one (1) back-up copy of Font Software for archival purposes only, and you agree to retain exclusive custody and control over any such copy. Upon termination of the Agreement, you must destroy the original and any and all copies of the Font Software. The unauthorized sharing, lending, renting, sale, or other unauthorized use or misuse of the back-up copy is a material breach of this Agreement and will result in the immediate termination of this License.
+9. You may take a digitized copy of the Font Software used for a particular document, or Font Software embedded in an electronic document, to a commercial printer or service bureau for use by the printer or service bureau in printing the document, provided that the printer or service bureau represents that it shall destroy any and all copies of the Font Software upon completion of its services.
+10. The design of the Font, the Font Software and any trademarks associated therewith are the exclusive property of Type Supply LLC and are protected by the copyright and other intellectual property law of the United States, by the copyright and design laws of other nations, and by other international treaties. You agree to treat the Font Software as you would any other copyrighted material, such as a film or book. 
+11. You agree not to modify, adapt, translate, reverse engineer, decompile, disassemble, alter, or otherwise attempt to discover the source code of the Font Software. Other jurisdictions may provide for additional rights, and if applicable, you may reverse engineer or decompile the Font Software only to the extent that sufficient information is not available for the purpose of creating an interoperable software program (but only for such purpose and only to the extent that sufficient information is not provided by Type Supply upon written request). All trademarks shall be used in accepted trademark practice, including identification of the trademark owner's name. Use of the trademarks associated with the Font Software inures solely to the benefit of Type Supply. You may not change any trademark or trade name designation for the Font Software.
+12. Use of Type Supply Font Software in the following circumstances and/or applications is not permitted without first obtaining the appropriate licensing upgrade. In order to obtain a license upgrade, you must contact Type Supply at license@typesupply.com for more information. If you are unsure whether your use of the Font Software is specifically permitted under this Agreement, contact Type Supply.
+
+a) alphabet or letterform-related products for resale or letterform creation products or devices;
+b) embedding in electronic devices; all gaming uses and/or devices;
+c) embedding in software;
+d) storing, caching, serving or otherwise providing access to the font software to third parties via the internet for use or display on the internet.
+
+i) Letterform or Alphabet Products include, but are not limited to, signage and/or scrapbooking uses involving reproductions of individual letterforms, use in the creation of signage or numbering products, rubber stamps, die-cut products, stencil products, tattoo, flash, or adhesive sticker alphabet products or any other product containing any image of or derived from the design of the Font embodied in the Font Software of which any likeness of the alphabet can be reproduced.
+ii) Embedding of the Fonts in a print/preview format is permitted. Notwithstanding, embedding or other use of the Fonts or the outlines thereof in any method which permits the extraction of the Font Software of the designs embodied therein is expressly prohibited. Any such use requires the express written permission of Type Supply and may or may not require the purchase of a license upgrade at the sole discretion of Type Supply.
+iii) In the event any dingbats or other art forms are part of the Font Software, use of the artwork is further restricted. You may use the artwork, drawings and/or dingbats on goods for sale, in logo design, retail packaging or in point of sale uses only after the purchase of a license upgrade.
+
+13. Embedded Electronic Devices includes the use of the Font Software for any on-screen display or on an electronic device outside a single location. For example, and not by way of limitation, such electronic devices include a kiosk, gaming devices, embroidery or sewing machines. The Font Software may be embedded and resident within an electronic device provided it cannot be extracted from the device. Note: This restriction does not include laptop/notebook CPUs which are defined as a standard device in this License Agreement.
+14. The Font Software is licensed for use by a specific number of workstations. Use of the Font Software in more than one geographic location or by means of server or central CPU is permitted provided that each workstation or potential workstation is licensed.
+15. Except as may be otherwise expressly provided for herein, you expressly agree not to rent, lease, sublicense, give, lend, or further distribute the Font Software. You may transfer all your rights under this Agreement to another person or entity provided that (i) the transferee accepts and agrees to be bound by all the terms and conditions of this Agreement, and (ii) you destroy all copies of the Font Software, including all copies stored in the memory of a hardware device.
+16. Type Supply warrants that the Font Software will perform substantially in accordance with its documentation for ninety (90) days following delivery of the Font Software. To make a warranty claim, you must either return the Font Software to the location from which you obtained it together with a copy of your sales receipt or, if acquired on-line, contact the on-line provider with sufficient information regarding your acquisition of the Font Software to permit the confirmation of the effective date of this License. Type Supply hereby EXPRESSLY DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. TYPE SUPPLY DOES NOT WARRANT THAT THE OPERATION OF THE FONT SOFTWARE WILL BE UNINTERRUPTED OR ERROR-FREE, OR THAT THE FONT SOFTWARE IS WITHOUT DEFECTS. UNDER NO CIRCUMSTANCES SHALL TYPE SUPPLY BE LIABLE TO YOU OR ANY OTHER PARTY, WHETHER IN CONTRACT OR TORT (INCLUDING NEGLIGENCE) OR OTHERWISE, FOR ANY SPECIAL, CONSEQUENTIAL, OR INCIDENTAL DAMAGES, INCLUDING LOST PROFITS, SAVINGS OR BUSINESS INTERRUPTION AS A RESULT OF THE USE OF THE FONT SOFTWARE EVEN IF NOTIFIED IN ADVANCE OF SUCH POSSIBILITY. You hereby agree that your entire, exclusive, and cumulative liability and remedy shall be limited to the cost of the Font Software or replacement thereof, either at Type Supply's discretion. Under no circumstances shall Type Supply's liability to you exceed either the refunding of the cost of the Font Software or replacement of the Font Software, either of which shall be at Type Supply's sole discretion.
+17. Other Law. non-business users only. Some jurisdictions do not allow the exclusion or limitation of incidental, consequential, special damages, or implied warranties. ANY IMPLIED WARRANTY OR OTHER RIGHT CREATED BY LAW IS ONLY EFFECTIVE FOR THE SHORTEST WARRANTY PERIOD ALLOWED BY LAW. THERE ARE NO WARRANTIES OR CONDITIONS OF ANY KIND THEREAFTER. In the alternative and to the extent permissible by law, you agree that all implied warranties are not to be effective for more than thirty (30) days. 
+18. You expressly agree that this Agreement shall be governed by the laws of the State of New York, U.S.A., as they apply to contracts wholly performed therein and without respect to its conflict of laws provisions or the conflict of laws provisions of any other jurisdiction. You expressly submit to the jurisdiction of the state and federal courts in the State of New York, U.S.A. You hereby expressly agree that the application of the United Nations Convention of Contracts for the International Sale of Goods is expressly excluded.
+19. Notwithstanding the foregoing, to the extent that any law, statute, treaty, or governmental regulation shall be deemed by a court of competent jurisdiction to provide you with additional or different rights from those provided herein. Such rights are determined to be deemed non-waiveable as a matter of law and to supersede the rights or any limitations specifically provided herein. Then such law, statute, treaty, or governmental regulation shall be deemed to be made a part of the Agreement. To the extent that any such rights created by any law, statute, treaty, or governmental regulation are waiveable, you agree that your acceptance of the Agreement shall constitute an effective and irrevocable waiver of any such right. This Agreement may, at Type Supply's sole discretion, be enforced by an authorized agent acting on its behalf.
+20. You acknowledge that you have read this agreement and understand it and that by using the software you will be bound by its terms and conditions. You further agree that it is the complete and exclusive statement of the agreement between Type Supply and you which supersedes any proposal or prior agreement, oral or written as well as any other communications relating to the subject matter of this Agreement. No variation of the terms of this Agreement or any different terms will be enforceable against Type Supply in the absence of an express written amendment or consent, including a written express waiver of the affected terms of this Agreement. If any provision of this Agreement is declared by a court of competent jurisdiction to be invalid, void or unenforceable, the remaining provisions of this Agreement shall continue in full force and effect, and the invalid provision shall be replaced by Type Supply with a provision that affects the intent of the invalid provision.
+21. Type Supply expressly reserves the right to amend or modify this License Agreement at any time and without prior notification, to the extent permitted by law.
+22. The Agreement shall automatically terminate in the event you or any authorized user breaches the terms set forth herein. Notwithstanding any termination of this License, Type Supply expressly reserves any and all other remedies under equity or law. The Agreement may only be modified in a writing signed by an authorized officer of Type Supply.
+23. You agree to be responsible for compliance with all laws, foreign and domestic relating to the control of exports or the transfer of technology. If you are purchasing this License for government use, or under a government contract, you agree to familiarize yourself with and follow any applicable rules and regulations relating to the purchase of a license to use software and the actual use thereof.
+All inquiries may be sent via e-mail to license@typesupply.com. Type Supply's website is located at www.typesupply.com.
+
+v20130331</string>
+	<key>openTypeNameLicenseURL</key>
+	<string>http://typesupply.com/license</string>
+	<key>openTypeNameManufacturer</key>
+	<string>Type Supply</string>
+	<key>openTypeNameManufacturerURL</key>
+	<string>http://typesupply.com</string>
+	<key>openTypeOS2CodePageRanges</key>
+	<array>
+		<integer>0</integer>
+		<integer>1</integer>
+		<integer>4</integer>
+		<integer>7</integer>
+		<integer>29</integer>
+	</array>
+	<key>openTypeOS2Panose</key>
+	<array>
+		<integer>2</integer>
+		<integer>11</integer>
+		<integer>7</integer>
+		<integer>3</integer>
+		<integer>7</integer>
+		<integer>7</integer>
+		<integer>2</integer>
+		<integer>3</integer>
+		<integer>2</integer>
+		<integer>4</integer>
+	</array>
+	<key>openTypeOS2StrikeoutPosition</key>
+	<integer>366</integer>
+	<key>openTypeOS2StrikeoutSize</key>
+	<integer>43</integer>
+	<key>openTypeOS2SubscriptXOffset</key>
+	<integer>0</integer>
+	<key>openTypeOS2SubscriptXSize</key>
+	<integer>550</integer>
+	<key>openTypeOS2SubscriptYOffset</key>
+	<integer>0</integer>
+	<key>openTypeOS2SubscriptYSize</key>
+	<integer>550</integer>
+	<key>openTypeOS2SuperscriptXOffset</key>
+	<integer>0</integer>
+	<key>openTypeOS2SuperscriptXSize</key>
+	<integer>550</integer>
+	<key>openTypeOS2SuperscriptYOffset</key>
+	<integer>340</integer>
+	<key>openTypeOS2SuperscriptYSize</key>
+	<integer>550</integer>
+	<key>openTypeOS2Type</key>
+	<array>
+		<integer>2</integer>
+	</array>
+	<key>openTypeOS2TypoAscender</key>
+	<integer>820</integer>
+	<key>openTypeOS2TypoDescender</key>
+	<integer>-180</integer>
+	<key>openTypeOS2TypoLineGap</key>
+	<integer>0</integer>
+	<key>openTypeOS2UnicodeRanges</key>
+	<array>
+		<integer>0</integer>
+		<integer>1</integer>
+		<integer>2</integer>
+	</array>
+	<key>openTypeOS2VendorID</key>
+	<string>TPSP</string>
+	<key>openTypeOS2WeightClass</key>
+	<integer>500</integer>
+	<key>openTypeOS2WidthClass</key>
+	<integer>5</integer>
+	<key>openTypeOS2WinAscent</key>
+	<integer>960</integer>
+	<key>openTypeOS2WinDescent</key>
+	<integer>210</integer>
+	<key>postscriptBlueFuzz</key>
+	<integer>0</integer>
+	<key>postscriptBlueScale</key>
+	<real>0.039625</real>
+	<key>postscriptBlueShift</key>
+	<integer>7</integer>
+	<key>postscriptBlueValues</key>
+	<array>
+		<integer>-10</integer>
+		<integer>0</integer>
+		<integer>412</integer>
+		<integer>422</integer>
+		<integer>553</integer>
+		<integer>563</integer>
+		<integer>645</integer>
+		<integer>655</integer>
+		<integer>750</integer>
+		<integer>760</integer>
+	</array>
+	<key>postscriptFamilyBlues</key>
+	<array>
+		<integer>-10</integer>
+		<integer>0</integer>
+		<integer>412</integer>
+		<integer>422</integer>
+		<integer>553</integer>
+		<integer>563</integer>
+		<integer>645</integer>
+		<integer>655</integer>
+		<integer>750</integer>
+		<integer>760</integer>
+	</array>
+	<key>postscriptFamilyOtherBlues</key>
+	<array>
+		<integer>-190</integer>
+		<integer>-180</integer>
+		<integer>328</integer>
+		<integer>338</integer>
+	</array>
+	<key>postscriptForceBold</key>
+	<false/>
+	<key>postscriptOtherBlues</key>
+	<array>
+		<integer>-190</integer>
+		<integer>-180</integer>
+		<integer>328</integer>
+		<integer>338</integer>
+	</array>
+	<key>postscriptStemSnapH</key>
+	<array>
+		<integer>43</integer>
+	</array>
+	<key>postscriptStemSnapV</key>
+	<array>
+		<integer>133</integer>
+		<integer>125</integer>
+	</array>
+	<key>postscriptUnderlinePosition</key>
+	<integer>-138</integer>
+	<key>postscriptUnderlineThickness</key>
+	<integer>43</integer>
+	<key>styleName</key>
+	<string>Regular</string>
+	<key>trademark</key>
+	<string></string>
+	<key>unitsPerEm</key>
+	<integer>1000</integer>
+	<key>versionMajor</key>
+	<integer>0</integer>
+	<key>versionMinor</key>
+	<integer>1</integer>
+	<key>xHeight</key>
+	<integer>553</integer>
+</dict>
+</plist>

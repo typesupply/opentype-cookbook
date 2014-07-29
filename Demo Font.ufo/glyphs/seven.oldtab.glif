@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="seven.oldtab" format="1">
+  <advance width="591.0"/>
+  <outline>
+    <contour>
+      <point x="188" y="-105" type="line"/>
+      <point x="323" y="-105" type="line"/>
+      <point x="323" y="-56" type="line" smooth="yes"/>
+      <point x="323" y="241"/>
+      <point x="379" y="399"/>
+      <point x="546" y="544" type="curve"/>
+      <point x="546" y="645" type="line"/>
+      <point x="44" y="645" type="line"/>
+      <point x="44" y="536" type="line"/>
+      <point x="489" y="536" type="line"/>
+      <point x="290" y="389"/>
+      <point x="188" y="217"/>
+      <point x="188" y="-56" type="curve"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.typemytype.robofont.layerData</key>
+      <dict>
+      </dict>
+    </dict>
+  </lib>
+</glyph>

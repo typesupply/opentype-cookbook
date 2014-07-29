@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="t" format="1">
+  <advance width="339"/>
+  <unicode hex="0074"/>
+  <outline>
+    <contour>
+      <point x="82" y="37"/>
+      <point x="119" y="0"/>
+      <point x="233" y="0" type="curve" smooth="yes"/>
+      <point x="317" y="0" type="line"/>
+      <point x="317" y="40" type="line"/>
+      <point x="269" y="40" type="line" smooth="yes"/>
+      <point x="223" y="40"/>
+      <point x="206" y="56"/>
+      <point x="206" y="120" type="curve" smooth="yes"/>
+      <point x="206" y="513" type="line"/>
+      <point x="317" y="513" type="line"/>
+      <point x="317" y="553" type="line"/>
+      <point x="206" y="553" type="line"/>
+      <point x="206" y="694" type="line"/>
+      <point x="82" y="694" type="line"/>
+      <point x="82" y="553" type="line"/>
+      <point x="16" y="553" type="line"/>
+      <point x="16" y="513" type="line"/>
+      <point x="82" y="513" type="line"/>
+      <point x="82" y="140" type="line" smooth="yes"/>
+    </contour>
+    <contour>
+      <point x="204" y="343" type="move" name="center"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.typemytype.robofont.layerData</key>
+      <dict>
+      </dict>
+    </dict>
+  </lib>
+</glyph>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="E.sc" format="1">
+  <advance width="478"/>
+  <outline>
+    <contour>
+      <point x="54" y="0" type="line"/>
+      <point x="438" y="0" type="line"/>
+      <point x="438" y="43" type="line"/>
+      <point x="182" y="43" type="line"/>
+      <point x="182" y="312" type="line"/>
+      <point x="417" y="312" type="line"/>
+      <point x="417" y="355" type="line"/>
+      <point x="182" y="355" type="line"/>
+      <point x="182" y="602" type="line"/>
+      <point x="438" y="602" type="line"/>
+      <point x="438" y="645" type="line"/>
+      <point x="54" y="645" type="line" smooth="yes"/>
+    </contour>
+    <contour>
+      <point x="255" y="323" type="move" name="center"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.typemytype.robofont.layerData</key>
+      <dict>
+      </dict>
+    </dict>
+  </lib>
+</glyph>
