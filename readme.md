@@ -12,14 +12,15 @@ This needs a nice title. OpenType Features Intro is only a placeholder. Your sug
 - Learning OpenType Features
 - Building Blocks of Features
 
+
 # Introduction
 
 OpenType features allow fonts to behave smartly. This behavior can do simple things like change text to small caps or they can do complex things like insert swashes, alternates and ligatures to make text in a script font feel handmade. This document aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you'll be able to create features of your own design.
 
 This document is written with the assumption that you have a basic working knowledge of the structure of a font. You need to know the differences between characters and glyphs, understand the coordinate system in glyphs and so on.
 
-
 (make a note about writing direction. that the examples show LTR, but the features are language agnostic.)
+
 
 # Foundation Concepts
 
@@ -820,7 +821,7 @@ Likewise, if your default figures are proportional and you have tabular alternat
 
 ## Ordinals
 
-The sups feature is for ordinal forms.
+The ordn feature is for ordinal forms.
 
     feature ordn {
         sub [A a] by ordfeminine;
@@ -860,13 +861,16 @@ Note that these features will be invoked whenever the user types in all capitals
 
 ## Swashes
 
-    feature swsh {
-        sub @uppercase by @swashCaps;
-    } swsh;
+There are two swash features (swsh and cswh). I prefer to use the contextual version (cswh). What this feature does will depend on the swash glyphs in your font.
 
-Need cswh example.
+    feature cswh {
+        ignore sub @filled @swashInitialsOff';
+        sub @swashInitialsOff' by @swashInitialsOn;
+    } cswh;
 
 ## Titling Alternates
+
+The titling alternates feature (titl) is, as its name suggests, for titling specific alternates.
 
     feature titl {
         sub @uppercase by @titlingCaps;
@@ -874,30 +878,80 @@ Need cswh example.
 
 ## Stylistic Sets
 
-- 1-20
-- mention naming syntax but refer to the .fea spec
-
-    feature ss01 {
-        sub J by J.alt;
-        sub J.sc by J.scalt;
-    } ss01;
+There are 20 special feature tags that allow you to develop your own behavior that doesn't neatly fit into any of the registered layout tags. These are known as stylistic sets and have tags ss01, ss02, ss03 and so on. The implementation of the rules in these is completely arbitrary.
 
 ## Ligatures
 
-- explain rule ordering
+There are several features that are designed to work with features. The two most prominent are Common Ligatures (liga) and Discretionary Ligatures (liga).
+
+The Common Ligatures feature is for ligatures that you think should be used almost all of the time.
 
     feature liga {
         sub f i by f_i;
         sub f l by f_l;
     } liga;
 
+The Discretionary Ligatures feature is for ligatures that you think should be used sparingly.
 
     feature dlig {
         sub O O by O_O;
     } dlig;
 
+As everywhere else, the ordering of the rules is very important within these features. You should always order them from longest glyph sequence to shortest. For example:
+
+    sub o f f i by o_f_f_i; 
+    sub f f i by f_f_i;
+    sub f f by f_f;
+    sub f i by f_i;
+
 ## Manual Alternate Access
-aalt
+
+There is one special feature that is used to determine the alternates displayed in the glyph access palette in popular design software. This feature (aalt) is processed after all other substitution features regardless of where you have it ordered in your feature definitions.
+
+There are a couple of different ways to define the rules in this feature, but I prefer to do it manually with individual one from many rules.
+
+    feature aalt {
+        sub A from [A.swash A.title A.random1 A.random2 A.sc];
+        sub B from [B.swash B.title B.random1 B.random2 B.sc];
+        sub C from [C.swash C.title C.random1 C.random2 C.sc];
+        sub D from [D.swash D.title D.random1 D.random2 D.sc];
+        sub E from [E.swash E.title E.random1 E.random2 E.sc];
+        sub F from [F.swash F.title F.random1 F.random2 F.sc];
+        sub G from [G.swash G.title G.random1 G.random2 G.sc];
+        sub H from [H.swash H.title H.random1 H.random2 H.sc];
+        sub I from [I.swash I.title I.random1 I.random2 I.sc];
+        sub J from [J.swash J.title J.random1 J.random2 J.alt J.scalt J.sc];
+        sub K from [K.swash K.title K.random1 K.random2 K.sc];
+        sub L from [L.swash L.title L.random1 L.random2 L.sc];
+        sub M from [M.swash M.title M.random1 M.random2 M.sc];
+        sub N from [N.swash N.title N.random1 N.random2 N.sc];
+        sub O from [O.swash O.title O.random1 O.random2 O.sc];
+        sub P from [P.swash P.title P.random1 P.random2 P.sc];
+        sub Q from [Q.swash Q.title Q.random1 Q.random2 Q.sc];
+        sub R from [R.swash R.title R.random1 R.random2 R.sc];
+        sub S from [S.swash S.title S.random1 S.random2 S.sc];
+        sub T from [T.swash T.title T.random1 T.random2 T.sc];
+        sub U from [U.swash U.title U.random1 U.random2 U.sc];
+        sub V from [V.swash V.title V.random1 V.random2 V.sc];
+        sub W from [W.swash W.title W.random1 W.random2 W.sc];
+        sub X from [X.swash X.title X.random1 X.random2 X.sc];
+        sub Y from [Y.swash Y.title Y.random1 Y.random2 Y.sc];
+        sub Z from [Z.swash Z.title Z.random1 Z.random2 Z.sc];
+        sub IJ from [IJ.dutch];
+        sub zero from [zero.den zero.num zero.old zero.sub zero.sup zero.tab zero.oldtab zero.sc];
+        sub one from [one.den one.num one.old one.sub one.sup one.tab one.oldtab one.sc];
+        sub two from [two.den two.num two.old two.sub two.sup two.tab two.oldtab two.sc];
+        sub three from [three.den three.num three.old three.sub three.sup three.tab three.oldtab three.sc];
+        sub four from [four.den four.num four.old four.sub four.sup four.tab four.oldtab four.sc];
+        sub five from [five.den five.num five.old five.sub five.sup five.tab five.oldtab five.sc];
+        sub six from [six.den six.num six.old six.sub six.sup six.tab six.oldtab six.sc];
+        sub seven from [seven.den seven.num seven.old seven.sub seven.sup seven.tab seven.oldtab seven.sc];
+        sub eight from [eight.den eight.num eight.old eight.sub eight.sup eight.tab eight.oldtab eight.sc];
+        sub nine from [nine.den nine.num nine.old nine.sub nine.sup nine.tab nine.oldtab nine.sc];
+        sub exclamdown from [exclamdown.uc];
+        sub questiondown from [questiondown.uc];
+        sub at from [at.uc];
+    } aalt;
 
 ## Fun Stuff
 
