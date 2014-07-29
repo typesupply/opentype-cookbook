@@ -1,4 +1,16 @@
-**(Please note, this is a work in progress. Feedback is welcome!)**
+# Read Me First
+
+**This is an in-progress rough draft. Your feedback is welcome!**
+
+This is currently a single Markdown formatted file. Once the first draft has been reviewed by a few peers I will convert this to Sphinx format. It will most likely end up as a small static website that I host. I considered using the great Read The Docs for this, but the .fea code will require a custom syntax highlighter and RTD doesn't seem to support that.
+
+This needs a nice title. OpenType Features Intro is only a placeholder. Your suggestions are more than welcome! A current list of potential titles:
+
+- OpenType Features and You
+- Introduction to OpenType Features
+- OpenType Feature Cookbook
+- Learning OpenType Features
+- Building Blocks of Features
 
 # Introduction
 
@@ -1159,16 +1171,15 @@ The code is similar to the substitution method. In this case, instead of states,
 
 
 # Troubleshooting
+
+Should this section even be in here? What form should it take?
+
 - did you forget a special character? you probably forgot a } ; or something like that.
 - did you name a lookup or class with the same name twice?
 - all of the rule types in a lookup must be the same type
 - table overflow (subtable, useExtension)
 - features can't know if other features are active or not
 - complex contextual rules leading to slowness of overflow errors (limit the contexts to what is *likely* to happen, not *everything*)
-
-
-# .fea vs. Compiled Tables
-- this is technical, but should probably be explained lightly
 
 
 # Things That Should Not Be In This Document (and why)
