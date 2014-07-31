@@ -889,7 +889,7 @@ There are 20 special feature tags that allow you to develop your own behavior th
 
 ## Ligatures
 
-There are several features that are designed to work with features. The two most prominent are Common Ligatures (liga) and Discretionary Ligatures (liga).
+There are several features that are designed to work with features. The two most prominent are Common Ligatures (liga) and Discretionary Ligatures (dlig).
 
 The Common Ligatures feature is for ligatures that you think should be used almost all of the time.
 
