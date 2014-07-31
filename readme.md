@@ -326,7 +326,7 @@ If you want to name the class and reference it in the rule, you can do this:
 
     sub a from @aAlternates;
 
-Note that the keyword in the middle of the rule changes from by to from.
+Note that the keyword in the middle of the rule changes from *by* to *from*.
 
 ## Positioning
 
