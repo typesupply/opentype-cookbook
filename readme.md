@@ -243,7 +243,7 @@ If you have more than one thing that can be replaced with a single thing, you ca
 
     sub [A A.alt1 A.alt2] by A.alt4;
 
-If you want to replace several things with corresponding things, you can use classes as both the target and the replacement.
+If you want to replace several things with corresponding things, you can use classes as both the target and the replacement. However, in this case the number of things in the two classes needs to be the same, unlike above.
 
     sub [a b c] by [A.sc B.sc C.sc];
 
