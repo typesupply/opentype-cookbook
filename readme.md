@@ -8,14 +8,14 @@ This needs a nice title. OpenType Features Intro is only a placeholder. Your sug
 
 - OpenType Features and You
 - Introduction to OpenType Features
-- OpenType Feature Cookbook
-- Learning OpenType Features
+- OpenType Feature Cookbook *
+- Learning OpenType Features *
 - Building Blocks of Features
 
 
 # Introduction
 
-OpenType features allow fonts to behave smartly. This behavior can do simple things like change text to small caps or they can do complex things like insert swashes, alternates and ligatures to make text set in a script font feel handmade. This document aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you'll be able to create features of your own design.
+OpenType features allow fonts to behave smartly. This behavior can do simple things like change text to small caps or they can do complex things like insert swashes, alternates, and ligatures to make text set in a script font feel handmade. This document aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you'll be able to create features of your own design.
 
 This document is written with the assumption that you have a basic working knowledge of the structure of a font. You need to know the differences between characters and glyphs, understand the coordinate system in glyphs and so on.
 
@@ -145,7 +145,7 @@ Comments are ignored when your font is compiled, so you can write anything you w
 
 ## White Space
 
-In some syntaxes the amount of white space is important. This is not the case in .fea. You can use spaces, tabs and line breaks as much as you like.
+In some syntaxes the amount of white space is important. This is not the case in .fea. You can use spaces, tabs and line breaks as much and in any combination as you like.
 
 ## Special Characters
 
@@ -167,7 +167,7 @@ Brackets enclose the contents of a class.
 
 Features are identified with a four character tag. These are either [registered tags](https://www.microsoft.com/typography/otspec/featurelist.htm) or private tags. Unless you have a very good reason to create a private tag, you should always use the registered tags. Applications that support OpenType features uses these tags to identify which features are supported in your font. For example, if you have a feature with the smcp tag, applications will know that your font supports small caps.
 
-Features are defined with the feature keyword, the appropriate tag, a pair of braces and a semicolon.
+Features are defined with the feature keyword, the appropriate tag, a pair of braces, the tag again, and a semicolon.
 
     feature smcp {
         # lookups and rules go here
@@ -243,7 +243,7 @@ If you have more than one thing that can be replaced with a single thing, you ca
 
     sub [A A.alt1 A.alt2] by A.alt4;
 
-If you want to replace several things with corresponding things, you can use classes as both the target and the replacement.
+If you want to replace several things with corresponding things, you can use classes as both the target and the replacement. However, in this case the number of things in the two classes needs to be the same, unlike above.
 
     sub [a b c] by [A.sc B.sc C.sc];
 
@@ -326,7 +326,7 @@ If you want to name the class and reference it in the rule, you can do this:
 
     sub a from @aAlternates;
 
-Note that the keyword in the middle of the rule changes from by to from.
+Note that the keyword in the middle of the rule changes from *by* to *from*.
 
 ## Positioning
 
@@ -837,7 +837,7 @@ The ordn feature is for ordinal forms.
 
 ## Small Caps
 
-There are two features that invoke small caps: small caps (smcp) and all small caps (c2sc). The all small caps version is for situations in which the user wants everything possible, not just letters, to be converted to small cap forms.
+There are two features that invoke small caps: small caps (smcp) and all small caps (c2sc). The all small caps version is for situations in which the user wants everything possible, not just letters, to be converted to small cap forms. (something about not doing case conversion, but being aware of things like the germanbls, dotlessi?)
 
     feature smcp {
         sub @lowercase by @smallCaps;
@@ -889,7 +889,7 @@ There are 20 special feature tags that allow you to develop your own behavior th
 
 ## Ligatures
 
-There are several features that are designed to work with features. The two most prominent are Common Ligatures (liga) and Discretionary Ligatures (liga).
+There are several features that are designed to work with features. The two most prominent are Common Ligatures (liga) and Discretionary Ligatures (dlig).
 
 The Common Ligatures feature is for ligatures that you think should be used almost all of the time.
 
@@ -1234,6 +1234,8 @@ The code is similar to the substitution method. In this case, instead of states,
 # Troubleshooting
 
 Should this section even be in here? What form should it take?
+
+(Yes, but perhaps Trouble and Tips?)
 
 - did you forget a special character? you probably forgot a } ; or something like that.
 - did you name a lookup or class with the same name twice?
