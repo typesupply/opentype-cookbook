@@ -8,14 +8,14 @@ This needs a nice title. OpenType Features Intro is only a placeholder. Your sug
 
 - OpenType Features and You
 - Introduction to OpenType Features
-- OpenType Feature Cookbook
-- Learning OpenType Features
+- OpenType Feature Cookbook *
+- Learning OpenType Features *
 - Building Blocks of Features
 
 
 # Introduction
 
-OpenType features allow fonts to behave smartly. This behavior can do simple things like change text to small caps or they can do complex things like insert swashes, alternates and ligatures to make text set in a script font feel handmade. This document aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you'll be able to create features of your own design.
+OpenType features allow fonts to behave smartly. This behavior can do simple things like change text to small caps or they can do complex things like insert swashes, alternates, and ligatures to make text set in a script font feel handmade. This document aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you'll be able to create features of your own design.
 
 This document is written with the assumption that you have a basic working knowledge of the structure of a font. You need to know the differences between characters and glyphs, understand the coordinate system in glyphs and so on.
 
