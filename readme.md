@@ -1235,6 +1235,8 @@ The code is similar to the substitution method. In this case, instead of states,
 
 Should this section even be in here? What form should it take?
 
+(Yes, but perhaps Trouble and Tips?)
+
 - did you forget a special character? you probably forgot a } ; or something like that.
 - did you name a lookup or class with the same name twice?
 - all of the rule types in a lookup must be the same type
