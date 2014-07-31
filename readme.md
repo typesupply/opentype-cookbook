@@ -837,7 +837,7 @@ The ordn feature is for ordinal forms.
 
 ## Small Caps
 
-There are two features that invoke small caps: small caps (smcp) and all small caps (c2sc). The all small caps version is for situations in which the user wants everything possible, not just letters, to be converted to small cap forms.
+There are two features that invoke small caps: small caps (smcp) and all small caps (c2sc). The all small caps version is for situations in which the user wants everything possible, not just letters, to be converted to small cap forms. (something about not doing case conversion, but being aware of things like the germanbls, dotlessi?)
 
     feature smcp {
         sub @lowercase by @smallCaps;
