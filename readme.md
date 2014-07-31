@@ -167,7 +167,7 @@ Brackets enclose the contents of a class.
 
 Features are identified with a four character tag. These are either [registered tags](https://www.microsoft.com/typography/otspec/featurelist.htm) or private tags. Unless you have a very good reason to create a private tag, you should always use the registered tags. Applications that support OpenType features uses these tags to identify which features are supported in your font. For example, if you have a feature with the smcp tag, applications will know that your font supports small caps.
 
-Features are defined with the feature keyword, the appropriate tag, a pair of braces and a semicolon.
+Features are defined with the feature keyword, the appropriate tag, a pair of braces, the tag again, and a semicolon.
 
     feature smcp {
         # lookups and rules go here
