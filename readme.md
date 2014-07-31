@@ -145,7 +145,7 @@ Comments are ignored when your font is compiled, so you can write anything you w
 
 ## White Space
 
-In some syntaxes the amount of white space is important. This is not the case in .fea. You can use spaces, tabs and line breaks as much as you like.
+In some syntaxes the amount of white space is important. This is not the case in .fea. You can use spaces, tabs and line breaks as much and in any combination as you like.
 
 ## Special Characters
 
