@@ -14,6 +14,7 @@ This needs a nice title. OpenType Features Intro is only a placeholder. Your sug
 - OpenType Features – Fonts’ Secret Superpower 
 - OpenType Features in a Nutshell
 - The OpenType Features Cookbook 😜
+- OpenType Cookbook
 
 
 # Introduction
@@ -1401,7 +1402,7 @@ If there are two or more classes that are intended for substituting with each ot
 
     @figures         = [zero     one     two];
     @figuresTabular  = [zero.tab one.tab two.tab];
-    #figuresSmallCap = [zero.sc  one.sc  two.sc];
+    @figuresSmallCap = [zero.sc  one.sc  two.sc];
 
 ## Rules
 
