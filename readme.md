@@ -11,15 +11,19 @@ This needs a nice title. OpenType Features Intro is only a placeholder. Your sug
 - OpenType Feature Cookbook *
 - Learning OpenType Features *
 - Building Blocks of Features
+- OpenType Features – Fonts’ Secret Superpower 
+- OpenType Features in a Nutshell
+- The OpenType Features Cookbook 😜
+- OpenType Cookbook
 
 
 # Introduction
 
-OpenType features allow fonts to behave smartly. This behavior can do simple things like change text to small caps or they can do complex things like insert swashes, alternates, and ligatures to make text set in a script font feel handmade. This document aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you'll be able to create features of your own design.
+OpenType features allow fonts to behave smartly. This behavior can do simple things (e.g. change letters to small caps) or they can do complex things (insert swashes, alternates, and ligatures to make text set in a script font feel handmade). This document aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you'll be able to create OpenType features to take your own design one step further.
 
 This document is written with the assumption that you have a basic working knowledge of the structure of a font. You need to know the differences between characters and glyphs, understand the coordinate system in glyphs and so on.
 
-OpenType is writing direction agnostic, but the examples in this document are for left to right writing systems. Refer to the official specifications for further information on this matter.
+OpenType is writing direction agnostic, but the examples in this document are for left to right writing systems. Refer to the official OpenType specifications for further information on this matter.
 
 
 # Foundation Concepts
@@ -30,9 +34,10 @@ Before we get into writing any code, let's first establish what we are actually 
 
 In OpenType we can define behaviors that we want to happen upon request from users. For example, the user may decide that text should be displayed with small caps. You, the type designer, can define which glyphs should be changed when this request is made by the user. These behaviors are defined in features. Features can do two things: they can substitute glyphs and they can adjust the positions of glyphs.
 
-The actual behavior within the features are defined with rules. Following the small caps example above, you can define a rule that states that the a glyph should be replaced with A.sc.
+The actual behavior within the features are defined with rules. Following the small caps example above, you can define a rule that states that the `a` glyph should be replaced with `A.sc`.
 
-Within a feature, it is often necessary to group a set of rules together. This group of rules is called a lookup.
+Within a feature, it is often necessary to group a set of rules together. This group of rules is called a lookup.  
+_I think you might be jumping into lookups (an advanced concept) too early. While it is clear to us that every feature block basically is a lookup, I think it would be easier to first state really simple substitutions; e.g. ligatures._
 
 Visually, you can think of features, lookups and rules like this:
 
@@ -50,7 +55,7 @@ Visually, you can think of features, lookups and rules like this:
 
 When text is processed, the features that the user wants applied are gathered into two groups: substitution features and positioning features. The substitution features are processed first and then the positioning features are processed. The order in which you have defined the features, lookups and rules is the order in which they will be applied to the text. This order is very important.
 
-Features process sequences of glyphs known as glyph runs." These glyph runs may represent a complete line of text or a sub-section of a line of text.
+Features process sequences of glyphs. These glyph runs may represent a complete line of text or a sub-section of a line of text.
 
 For example, let's assume that you have the following features, lookups and rules:
 
@@ -72,6 +77,7 @@ For example, let's assume that you have the following features, lookups and rule
             replace f i with f_i
             replace f l with f_l
 
+_Code shown in a code format – without actually being real code – might be problematic._  
 (Note: this is an odd example. there is no reason for the lookups, but I can't think of a way to show lookups at this point that doesn't make things overly complex.)
 
 Let's also assume that the user wants to apply small caps and ligatures to a glyph run that displays "Hello".
@@ -165,7 +171,7 @@ Brackets enclose the contents of a class.
 
 ## Features
 
-Features are identified with a four character tag. These are either [registered tags](https://www.microsoft.com/typography/otspec/featurelist.htm) or private tags. Unless you have a very good reason to create a private tag, you should always use the registered tags. Applications that support OpenType features uses these tags to identify which features are supported in your font. For example, if you have a feature with the smcp tag, applications will know that your font supports small caps.
+Features are identified with a four character tag. These are either [registered tags](https://www.microsoft.com/typography/otspec/featurelist.htm) or private tags. Unless you have a very good reason to create a private tag, you should always use the registered tags. Applications that support OpenType features use these tags to identify which features are supported in your font. For example, if you have a feature with the smcp tag, applications will know that your font supports small caps.
 
 Features are defined with the feature keyword, the appropriate tag, a pair of braces, the tag again, and a semicolon.
 
@@ -183,7 +189,7 @@ Lookups are defined in a similar way to features. They have a name, but the name
 
 ## Classes
 
-You'll often run into situations where you want use a group of glyphs in a rule. These groups are called classes and they are defined with a list of glyphs names or class names inside of brackets.
+You'll often run into situations where you want use a group of glyphs in a rule. These groups are called classes and they are defined with a list of glyph names or class names inside of brackets.
 
     [A E I O U Y]
 
@@ -200,11 +206,11 @@ After a class has been defined, it can be referenced by name.
 A name for a glyph, class or lookup must adhere to the following constraints:
 
 - No more than 31 characters in length.
-- Only use characters in A-Z a-z 0-9 . _
+- Only use characters in A-Z a-z 0-9 . _ (alphanumeric)
 - Must not start with a number or a period.
 
-You should avoid naming anything with the same name as a [reserved keyword](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#2.c). If you do need to name a glyph with one of these names, precede an reference to the glyph with a \. But, really, try to avoid needing to do this.
-
+You should avoid naming anything with the same name as a [reserved keyword](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#2.c). If you do need to name a glyph with one of these names, precede an reference to the glyph with a `.` But, really, try to avoid needing to do this.  
+_Too specialized?_  
 
 # Rules
 
@@ -216,6 +222,9 @@ Substitutions are the most visually transformative thing that features can do to
 
 1. Target -- This is what will be replaced.
 2. Replacement -- This is what will be inserted in place of the target.
+
+
+_In my opionion, the use of the word “Target” here is confusing. “Target” could also mean the replacement glyph; and “Source” could mean the previously-existing glyph._ 
 
 The syntax for a substitution is:
 
@@ -316,7 +325,7 @@ To give the user a choice of alternates, you do this:
 
 (In the .fea documentation, this is known as GSUB Lookup Type 3: Alternate Substitution.)
 
-The replacement must be a glyph class.
+The replacement must be a glyph class, and (unlike above) does not happen automatically, but usually requires active user interaction (e.g. picking glyphs from a selection of alternates).
 
 For example, to give the user several options to replace a with, you would do this:
 
@@ -330,7 +339,7 @@ Note that the keyword in the middle of the rule changes from *by* to *from*.
 
 ## Positioning
 
-Positioning glyphs may not be as visually interesting as what can be achieved with substitution, but the positioning support in OpenType is incredibly powerful. The positioning rules can be broken into two separate categories:
+Positioning glyphs may not be as visually interesting as what can be achieved with substitution, but the positioning support in OpenType is incredibly powerful and important. The positioning rules can be broken into two separate categories:
 
 1. Simple Rules -- These adjust either the space around one glyph or the space between two glyphs.
 2. Mind-Blowingly Complex and Astonishingly Powerful Rules -- These do things like properly shift combining marks to align precisely with the base forms in Arabic and Devanagari so that things look incredibly spontaneous and beautiful.
@@ -357,7 +366,7 @@ For example:
 
 In this case, the value record is adjusting the x placement to the right by one unit, the y placement up by two units, the x advance by 3 units and the y advance by four units.
 
-When the positioning features are started, each glyph in the glyph run has a value record of <0 0 0 0>. As the processing happens and rules are matched, these value records are modified cumulative. So, if one feature adjust a glyph's x placement by 10 units and then another feature adjust the glyph's x placement by 30 units, the glyph's x placement would be 40 units.
+When the positioning features are started, each glyph in the glyph run has a value record of `<0 0 0 0>`. As the processing happens and rules are matched, these value records are modified cumulative. So, if one feature adjust a glyph's x placement by 10 units and then another feature adjust the glyph's x placement by 30 units, the glyph's x placement would be 40 units.
 
 The syntax for a positioning rule is:
 
@@ -417,7 +426,7 @@ But, seriously, let your editor do this for you.
 
 The substitution and positioning rules that we have discussed so far are quite useful, but the real power is in triggering these rules only when certain conditions are met. These are known as contextual rules.
 
-Contextual rules allow us to specify a sequence before, a sequence after the target or both in a substitution or positioning rule. For example: replace r with r.alt if the r is preceded by wo and followed by ds. There are two new parts of this rule type in addition to the parts we defined in the substitution and positioning sections.
+Contextual rules allow us to specify a sequence before, a sequence after the target or both in a substitution or positioning rule. For example: replace `r` with `r.alt` if the `r` is preceded by `wo` and followed by `ds`. There are two new parts of this rule type in addition to the parts we defined in the substitution and positioning sections.
 
 1. Backtrack -- This is the sequence of things that occur before the target in the rule. This sequence can be composed of glyphs, classes or a mix of both.
 2. Lookahead -- This is the sequence of glyphs that occur after the target in the rule. Like the backtrack, this sequence can be composed of glyphs, classes or a mix of both.
@@ -432,14 +441,14 @@ Here is the words example from above in the correct syntax:
 
 All of the substitution and positioning rule types can be defined with a context.
 
-- replace one with one: sub a b' c by b.alt;
-- replace many with one: sub a b' c' d by b_c;
-- replace one with many: sub a b_c' d by b c;
-- replace one from many: sub a b' c from [b.alt1 b.alt2];
-- adjust position of one glyph: pos A B' C <10 0 20 0>;
-- adjust positioning of the space between two glyphs: pos A B' C' D -50;
+- replace one with one: `sub a b' c by b.alt;`
+- replace many with one: `sub a b' c' d by b_c;`
+- replace one with many: `sub a b_c' d by b c;`
+- replace one from many: `sub a b' c from [b.alt1 b.alt2];`
+- adjust position of one glyph: `pos A B' C <10 0 20 0>;`
+- adjust positioning of the space between two glyphs: `pos A B' C' D -50;`
 
-Please note that just because you can apply this to all rule types doesn't mean that you should.
+Please note that just because you can apply this to all rule types doesn't mean that it always makes sense; or that you should.
 
 ### Exceptions
 
@@ -463,7 +472,7 @@ Let's look at an example. Let's say that we have a special IJ that should only b
 
     script latn;
     language NLD;
-    sub IJ by IJ.alt;
+    sub IJ by IJ.dutch;
 
 The script tags are defined [here](https://www.microsoft.com/typography/otspec/scripttags.htm) and language tags are defined [here](http://www.microsoft.com/typography/developers/opentype/languagetags.aspx).
 
@@ -499,7 +508,8 @@ Then, inside of your features you can have this lookup called by referencing its
 
     lookup Example;
 
-This is useful if you want to share some rules across multiple features.
+This is useful if you want to share some rules across multiple features.  
+_Example for sharing lookup?_  
 
 
 # Putting It All Together
@@ -598,6 +608,10 @@ You can even include multiple files in a single font source file. For example:
     include(features/family.fea);
     include(features/bold-kern.fea);
 
+Even in other folders, below the current one:
+
+    include(../tables.fea);
+
 
 # Common Features And Techniques
 
@@ -611,9 +625,9 @@ The features in the demo font are by no means to complete or an indication of wh
 
 Often we want to make substitutions based on the bounds of words and glyph runs. For example, to insert a swash only at the beginning or at the end of a word. There are three features in the specification for dealing with these situations:
 
-- init -- Performs substitutions only at the beginning of a word.
-- fina -- Performs substitutions only at the end of a word.
-- medi - Performs substitutions only on the glyphs between the first and last in a word.
+- `init` — Performs substitutions only at the beginning of a word.
+- `fina` — Performs substitutions only at the end of a word.
+- `medi` — Performs substitutions only on the glyphs between the first and last in a word.
 
 Unfortunately the specification is a bit vague about how these are supposed to be implemented. The Unicode specification details a word boundary detection algorithm and conceivably that's what would be used by the layout engines that are processing your font. That specification is quite thorough, but it thinks about word boundaries in a different way than type designers do (or at least the type designer writing this does). For example, where are the word boundaries in this text?
 
@@ -674,7 +688,7 @@ I have used two different algorithms for implementing on-the-fly fractions. The 
 
 ### Method 1: Individual
 
-This method has been along for as long as I have been working on OpenType features. Adobe probably developed it in the very early days of the .fea language. It is probably still the most common implementation.
+This method has been around for as long as I have been working on OpenType features. Adobe probably developed it in the very early days of the .fea language. It is probably still the most common implementation.
 
     feature frac {
         @slash = [slash fraction];
@@ -772,7 +786,7 @@ With this users can globally activate fractions. The only drawback that I have f
 
 ### Numerators
 
-The numr feature is designed to convert all numbers to numerators.
+The `numr` feature is designed to convert all numbers to numerators.
 
     feature numr {
         sub @figures' by @figuresNumerator;
@@ -780,7 +794,7 @@ The numr feature is designed to convert all numbers to numerators.
 
 ### Denominators
 
-The dnom feature is designed to convert all numbers to denominators.
+The `dnom` feature is designed to convert all numbers to denominators.
 
     feature dnom {
         sub @figures' by @figuresDenominator;
@@ -788,18 +802,20 @@ The dnom feature is designed to convert all numbers to denominators.
 
 ## Superscript
 
-The sups feature is for superscript forms.
+The `sups` feature is for superscript forms.
 
     feature sups {
         sub @figures' by @figuresSuperscript;
+        sub @letters' by @lettersSuperscript;
     } sups;
 
 ## Subscript
 
-The subs feature is for subscript forms.
+The `subs` feature is for subscript forms.
 
     feature subs {
         sub @figures' by @figuresSubscript;
+        sub @letters' by @lettersSubscript;
     } subs;
 
 ## Figures
@@ -828,7 +844,8 @@ Likewise, if your default figures are proportional and you have tabular alternat
 
 ## Ordinals
 
-The ordn feature is for ordinal forms.
+The ordn feature is for ordinal forms.   
+_The neccessity of this feature is questionable, since the languages that use ordinals have them on the keyboard._
 
     feature ordn {
         sub [A a] by ordfeminine;
@@ -837,7 +854,7 @@ The ordn feature is for ordinal forms.
 
 ## Small Caps
 
-There are two features that invoke small caps: small caps (smcp) and all small caps (c2sc). The all small caps version is for situations in which the user wants everything possible, not just letters, to be converted to small cap forms. (something about not doing case conversion, but being aware of things like the germanbls, dotlessi?)
+There are two features that invoke small caps: small caps `smcp` and “caps to small caps” or “all small caps” `c2sc`. The latter version is for situations in which the user wants everything possible, not just letters, to be converted to small cap forms. (something about not doing case conversion, but being aware of things like the germanbls, dotlessi?)
 
     feature smcp {
         sub @lowercase by @smallCaps;
@@ -851,13 +868,13 @@ There are two features that invoke small caps: small caps (smcp) and all small c
 
 ## All Caps
 
-There are two features that should be activated when the user indicates that they want all text converted to uppercase. The first feature (case) transforms any glyphs that should be changed to an uppercase alternate. You should not define the transformation from lowercase to uppercase for alphabetic forms. The layout engine will do that for you.
+There are two features that should be activated when the user indicates that they want all text converted to uppercase. The `case` feature transforms any glyphs that should be changed to an uppercase alternate. You should not define the transformation from lowercase to uppercase for alphabetic forms. The layout engine will do that for you.
 
     feature case {
         sub @punctuationUppercaseOff by @punctuationUppercaseOn;
     } case;
 
-The second feature (cpsp) allows you to define all caps specific spacing.
+The `cpsp` feature allows you to define specific spacing for all caps settings:
 
     feature cpsp {
         pos @uppercase <100 0 200 0>;
@@ -868,7 +885,7 @@ Note that these features will not be activated whenever the user types in all ca
 
 ## Swashes
 
-There are two swash features (swsh and cswh). I prefer to use the contextual version (cswh). What this feature does will depend on the swash glyphs in your font.
+There are two swash features `swsh` `cswh`. I prefer to use the contextual version `cswh`. What this feature does will depend on the swash glyphs in your font.
 
     feature cswh {
         ignore sub @filled @swashInitialsOff';
@@ -877,7 +894,7 @@ There are two swash features (swsh and cswh). I prefer to use the contextual ver
 
 ## Titling Alternates
 
-The titling alternates feature (titl) is, as its name suggests, for titling specific alternates.
+The titling alternates feature `titl` is, as its name suggests, for titling specific alternates.
 
     feature titl {
         sub @uppercase by @titlingCaps;
@@ -885,11 +902,11 @@ The titling alternates feature (titl) is, as its name suggests, for titling spec
 
 ## Stylistic Sets
 
-There are 20 special feature tags that allow you to develop your own behavior that doesn't neatly fit into any of the registered layout tags. These are known as stylistic sets and have tags ss01, ss02, ss03 and so on. The implementation of the rules in these is completely arbitrary.
+There are 20 special feature tags that allow you to develop your own behavior that doesn't neatly fit into any of the registered layout tags. These are known as stylistic sets and have tags `ss01`, `ss02`, `ss03` and so on. The implementation of the rules in these is completely arbitrary.
 
 ## Ligatures
 
-There are several features that are designed to work with features. The two most prominent are Common Ligatures (liga) and Discretionary Ligatures (dlig).
+There are several features that are designed to work with ligatures. The two most prominent are Common Ligatures `liga` and Discretionary Ligatures `dlig`.
 
 The Common Ligatures feature is for ligatures that you think should be used almost all of the time.
 
@@ -911,9 +928,11 @@ As everywhere else, the ordering of the rules is very important within these fea
     sub f f by f_f;
     sub f i by f_i;
 
+Would this sequence be ordered from bottom to top, the `f_f_i` and `o_f_f_i`  would have no chance of ever occurring, since their source glyphs already would have been converted beforehand.
+
 ## Manual Alternate Access
 
-There is one special feature that is used to determine the alternates displayed in the glyph access palette in popular design software. This feature (aalt) is processed after all other substitution features regardless of where you have it ordered in your feature definitions.
+There is one special feature that is used to determine the alternates displayed in the glyph access palette in popular design software. This feature `aalt` is processed after all other substitution features regardless of where you have it ordered in your feature definitions.
 
 There are a couple of different ways to define the rules in this feature, but I prefer to do it manually with individual one from many rules.
 
@@ -970,7 +989,7 @@ Everyone wants their font to look like the glyphs were randomly drawn. But, let'
 
 Randomization is a bit of a Holy Grail in the OpenType world. The problem is that it's not actually possible for a couple of reasons. For one thing, we can only select from alternates, not actually modify glyph outlines. For another, for true pseudo-randomization there needs to be an external source that influences the random selection process and we can't build a random seed generator with the OpenType tables. So, we have to fake it. There are a number of methods that can be used to do this. I have three that I like.
 
-(PS: That rand "random alternates" feature in the OpenType Layout Tag Registry? It's not supported widely, if at all. Sorry.)
+(PS: That `rand` "random alternates" feature in the OpenType Layout Tag Registry? It's not supported widely, if at all. Sorry.)
 
 #### Method 1: Endless Cycle
 
@@ -1258,11 +1277,12 @@ Should this be in the final document? It's here now to keep me on track.
 - enumerating pairs (why: complex)
 - contextual kerning (why: support is consistent)
 - the aalt construction technique of including complete features (why: I don't like it)
-- the optical size feature (why: not supported)
+- the optical size feature (why: not widely supported) _(I think we use it for InDesign)_
 - tables (OS/2, hhea, name, etc.) (why: your font editor is going to do this for you)
 - anonymous data blocks (why: obviously)
 - reversed chaining lookup types (why: too complex for this)
 - feature implementations (adobe CS, CSS, etc.) (why: not something I want to keep up to date)
+_Link to the Typotheque Table – still a good overview._
 - known bugs of implementations (why: not something I want to keep up to date)
 - cursive positioning (why: too complex for this; not easy to test)
 - mark to base positioning (why: too complex for this; not easy to test)
@@ -1382,7 +1402,7 @@ If there are two or more classes that are intended for substituting with each ot
 
     @figures         = [zero     one     two];
     @figuresTabular  = [zero.tab one.tab two.tab];
-    #figuresSmallCap = [zero.sc  one.sc  two.sc];
+    @figuresSmallCap = [zero.sc  one.sc  two.sc];
 
 ## Rules
 
