@@ -643,17 +643,17 @@ With these, we can build lookups that handle boundary detection reasonable well 
 
     lookup GlyphRunInitial {
         ignore sub @all @initialsOff';
-        sub @initialsOff by @initialsOn;
+        sub @initialsOff' by @initialsOn;
     } GlyphRunInitial;
 
     lookup GlyphRunFinal {
         ignore sub @finalsOff' @all;
-        sub @finalsOff by @finalsOn;
+        sub @finalsOff' by @finalsOn;
     } GlyphRunFinal;
 
     lookup WordInitial {
         ignore sub @filled @initialsOff';
-        sub @initialsOff by @initialsOn;
+        sub @initialsOff' by @initialsOn;
     } WordInitial;
 
     lookup WordMedial {
@@ -662,7 +662,7 @@ With these, we can build lookups that handle boundary detection reasonable well 
 
     lookup WordFinal {
         ignore sub @finalsOff' @filled;
-        sub @finalsOff by @finalsOn;
+        sub @finalsOff' by @finalsOn;
     } WordFinal;
 
 To be clear, you should not use this for shaping Arabic or anything like that. This is strictly for aesthetic substitutions like swashes.
@@ -789,7 +789,7 @@ With this users can globally activate fractions. The only drawback that I have f
 The `numr` feature is designed to convert all numbers to numerators.
 
     feature numr {
-        sub @figures' by @figuresNumerator;
+        sub @figures by @figuresNumerator;
     } numr;
 
 ### Denominators
@@ -797,7 +797,7 @@ The `numr` feature is designed to convert all numbers to numerators.
 The `dnom` feature is designed to convert all numbers to denominators.
 
     feature dnom {
-        sub @figures' by @figuresDenominator;
+        sub @figures by @figuresDenominator;
     } dnom;
 
 ## Superscript
@@ -805,8 +805,8 @@ The `dnom` feature is designed to convert all numbers to denominators.
 The `sups` feature is for superscript forms.
 
     feature sups {
-        sub @figures' by @figuresSuperscript;
-        sub @letters' by @lettersSuperscript;
+        sub @figures by @figuresSuperscript;
+        sub @letters by @lettersSuperscript;
     } sups;
 
 ## Subscript
@@ -814,8 +814,8 @@ The `sups` feature is for superscript forms.
 The `subs` feature is for subscript forms.
 
     feature subs {
-        sub @figures' by @figuresSubscript;
-        sub @letters' by @lettersSubscript;
+        sub @figures by @figuresSubscript;
+        sub @letters by @lettersSubscript;
     } subs;
 
 ## Figures
