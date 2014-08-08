@@ -136,6 +136,7 @@ That's how processing works and it is the most complex part of OpenType features
 
 (For you experts reading this: Yeah, I know this isn't technically 100% accurate. But, I don't really want to confuse everyone by going through the processing model with the GSUB and GPOS data structures. Those are different from the .fea syntax just enough to make things **very confusing** unless you know both sides of the process very well. So, I'm going to explain the processing model following the .fea structures.)
 
+_This whole Processing section made things feel very complex very fast. Can it be removed, moved to an Advanced Knowledge section, or moved to later in the document?_
 
 # Syntax Intro
 
@@ -209,8 +210,9 @@ A name for a glyph, class or lookup must adhere to the following constraints:
 - Only use characters in A-Z a-z 0-9 . _ (alphanumeric)
 - Must not start with a number or a period.
 
-You should avoid naming anything with the same name as a [reserved keyword](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#2.c). If you do need to name a glyph with one of these names, precede an reference to the glyph with a `.` But, really, try to avoid needing to do this.  
+You should avoid naming anything (including glyphs) with the same name as a [reserved keyword](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#2.c). If you do need to name a glyph with one of these names, precede an reference to the glyph with a `.` But, really, try to avoid needing to do this.  
 _Too specialized?_  
+_I think this is a very important thing to know_
 
 # Rules
 
@@ -251,6 +253,8 @@ For example, to transform a to A.sc, you would do this:
 If you have more than one thing that can be replaced with a single thing, you can use a class as the target and a glyph as the replacement:
 
     sub [A A.alt1 A.alt2] by A.alt4;
+
+_I can't think of that many basic situations (i.e. non-contextual) where you'd want/need to do a substitution like this. I'd remove this example because people might confuse it with GSUB Type 4, Ligature substitution._
 
 If you want to replace several things with corresponding things, you can use classes as both the target and the replacement. However, in this case the number of things in the two classes needs to be the same, unlike above.
 
@@ -301,6 +305,8 @@ You can also use classes as part of the target sequence:
     sub @f [i i.alt] by f_i;
     sub [f f.alt] @i by f_i;
 
+_I find this a bit overkill and somewhat confusing. I'd reduce the number of permutations, and split them into one-line code snippets to make it very clear that these are not meant to be used together nor at the same time._
+
 (Obviously you wouldn't use all of these rules in real code since they do the same thing.)
 
 ### Replace One With Many
@@ -335,7 +341,7 @@ If you want to name the class and reference it in the rule, you can do this:
 
     sub a from @aAlternates;
 
-Note that the keyword in the middle of the rule changes from *by* to *from*.
+Note that the keyword in the middle of the rule is *from* instead of *by*.
 
 ## Positioning
 
@@ -348,11 +354,13 @@ We're going to cover the simple rules in this document. The complex rules are am
 
 ### Position and Advance
 
-Before we go much further we need to talk about coordinate systems and value records. As you know, the coordinate system in fonts is based on X and Y axes. The X axes moves from left to right with numbers increasing as you move to the right. The Y axis moves from bottom to top with numbers increasing as you move up. The origin for these axis is the intersection of the 0 X coordinate, otherwise known as the baseline, and the 0 Y coordinate.
+Before we go much further we need to talk about coordinate systems and value records. As you know, the coordinate system in fonts is based on X and Y axes. The X axis moves from left to right with numbers increasing as you move to the right. The Y axis moves from bottom to top with numbers increasing as you move up. The origin for these axis is the intersection of the 0 X coordinate, otherwise known as the baseline, and the 0 Y coordinate.
 
     (illustration showing a g with the origin and axes highlighted)
 
 In the positioning rules, we can adjust the placement and advance of glyphs. The placement is the spot at which the origin of the glyph will be aligned. The advance is the width and the height of the glyph from the origin. In horizontal typesetting, the height will be zero and the width will be the width of the glyph. The placement and advance can each be broken down into X and Y values. Thus, there is an x placement, a y placement, an x advance and a y advance.
+
+_"width of the glyph" may be interpreted as the width of the outlines, whereas you mean outlines + sidebearings. I usually refer to it as "advanced width", but the term might be too technical. An illustration will definitely help here._
 
     (illustration showing a g with the placements and advance highlighted)
 
@@ -367,6 +375,8 @@ For example:
 In this case, the value record is adjusting the x placement to the right by one unit, the y placement up by two units, the x advance by 3 units and the y advance by four units.
 
 When the positioning features are started, each glyph in the glyph run has a value record of `<0 0 0 0>`. As the processing happens and rules are matched, these value records are modified cumulative. So, if one feature adjust a glyph's x placement by 10 units and then another feature adjust the glyph's x placement by 30 units, the glyph's x placement would be 40 units.
+
+_I think this paragraph has too much detail, and may be better placed later in the doc._
 
 The syntax for a positioning rule is:
 
@@ -389,6 +399,8 @@ To adjust the space around a single target, you do this:
 For example, to put some space to the left and right of the A, you would do this:
 
     pos A <10 0 20 0>;
+
+_Illustration here?_
 
 You can also use a class as the target:
 
@@ -419,6 +431,8 @@ If you do want to see all the ways that you can use glyphs and classes in this r
     pos @A [T Tbar] -50;
     pos [A Aacute] @T -50;
 
+_This is overkill like the ligature example. I suggest breaking up the lines as well._
+
 But, seriously, let your editor do this for you.
 
 
@@ -426,7 +440,7 @@ But, seriously, let your editor do this for you.
 
 The substitution and positioning rules that we have discussed so far are quite useful, but the real power is in triggering these rules only when certain conditions are met. These are known as contextual rules.
 
-Contextual rules allow us to specify a sequence before, a sequence after the target or both in a substitution or positioning rule. For example: replace `r` with `r.alt` if the `r` is preceded by `wo` and followed by `ds`. There are two new parts of this rule type in addition to the parts we defined in the substitution and positioning sections.
+Contextual rules allow us to specify a sequence before the target, a sequence after the target or both in a substitution or positioning rule. For example: replace `r` with `r.alt` if the `r` is preceded by `wo` and followed by `ds`. There are two new parts of this rule type in addition to the parts we defined in the substitution and positioning sections.
 
 1. Backtrack -- This is the sequence of things that occur before the target in the rule. This sequence can be composed of glyphs, classes or a mix of both.
 2. Lookahead -- This is the sequence of glyphs that occur after the target in the rule. Like the backtrack, this sequence can be composed of glyphs, classes or a mix of both.
@@ -443,10 +457,10 @@ All of the substitution and positioning rule types can be defined with a context
 
 - replace one with one: `sub a b' c by b.alt;`
 - replace many with one: `sub a b' c' d by b_c;`
-- replace one with many: `sub a b_c' d by b c;`
-- replace one from many: `sub a b' c from [b.alt1 b.alt2];`
+- replace one with many: `sub a b_c' d by b c;` _I don't think this syntax is allowed. To do this you need to do `b_c -> b c` in a standalone lookup, and then refer to that lookup in the context._
+- replace one from many: `sub a b' c from [b.alt1 b.alt2];` _I don't think this is supported either_
 - adjust position of one glyph: `pos A B' C <10 0 20 0>;`
-- adjust positioning of the space between two glyphs: `pos A B' C' D -50;`
+- adjust positioning of the space between two glyphs: `pos A B' C' D -50;` _The value record needs to be used after the context, not at the very end. This `pos A B' C' -50 D;` will compile, but I don't know if it will produce the desired results._
 
 Please note that just because you can apply this to all rule types doesn't mean that it always makes sense; or that you should.
 
@@ -510,6 +524,7 @@ Then, inside of your features you can have this lookup called by referencing its
 
 This is useful if you want to share some rules across multiple features.  
 _Example for sharing lookup?_  
+_A lookup for superior letters may be a good example; you can define the lookup inside `ordn`, and then reuse it in `sups`. An example with inferior numerals that uses `subs` and `sinf` may be even better._
 
 
 # Putting It All Together
@@ -548,7 +563,7 @@ Here is a basic example combined into the proper form:
 
     feature c2sc {
         sub @uppercase by @smallcaps;
-        sub @lowercase by @smallcaps;
+        sub @lowercase by @smallcaps; _Is this line necessary?_
         sub @figures by @figuresSmallcap;
         sub @punctuation by @punctuationSmallcap;
     } c2sc;
@@ -1290,6 +1305,7 @@ _Link to the Typotheque Table – still a good overview._
 - mark to mark positioning (why: too complex for this; not easy to test)
 - lookupflag (why: relates to the positioning rules that aren't covered)
 
+_I think that the cursive and the mark-related features are interesting, and actually not that difficult to write and to understand. But I agree that it does not need to be in version 1 of this document because they'll be only relevant to a small set of people._
 
 # Thanks
 
