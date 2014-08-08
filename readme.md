@@ -619,7 +619,7 @@ Unfortunately the specification is a bit vague about how these are supposed to b
 
     Hello “World!”
 
-They are at the o, the W and the d. (I'm 99.999999% sure about this, but I should test it again.) If we use this for swashes our W and d are likely to clash with the marks “ and ! around them. We often think of word boundaries as an empty space around words. If we want to use init and fina, we'll need to build in exceptions. You can certainly do that, but I generally do it all myself with some special classes:
+They are at the o, the W and the d. *(I'm 99.999999% sure about this, but I should test it again.)* If we use this for swashes our W and d are likely to clash with the marks “ and ! around them. We often think of word boundaries as an empty space around words. If we want to use init and fina, we'll need to build in exceptions. You can certainly do that, but I generally do it all myself with some special classes:
 
 - all -- This class contains all glyphs.
 - filled -- This class contains all glyphs that contain positive space.
