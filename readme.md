@@ -28,8 +28,7 @@ In OpenType we can define behaviors that we want to happen upon request from use
 
 The actual behavior within the features are defined with rules. Following the small caps example above, you can define a rule that states that the `a` glyph should be replaced with `A.sc`.
 
-Within a feature, it is often necessary to group a set of rules together. This group of rules is called a lookup.  
-_I think you might be jumping into lookups (an advanced concept) too early. While it is clear to us that every feature block basically is a lookup, I think it would be easier to first state really simple substitutions; e.g. ligatures._
+Within a feature, it is often necessary to group a set of rules together. This group of rules is called a lookup.
 
 Visually, you can think of features, lookups and rules like this:
 
@@ -68,9 +67,6 @@ For example, let's assume that you have the following features, lookups and rule
             replace f f with f_f
             replace f i with f_i
             replace f l with f_l
-
-_Code shown in a code format – without actually being real code – might be problematic._  
-(Note: this is an odd example. there is no reason for the lookups, but I can't think of a way to show lookups at this point that doesn't make things overly complex.)
 
 Let's also assume that the user wants to apply small caps and ligatures to a glyph run that displays "Hello".
 
@@ -127,8 +123,6 @@ The process is the same for positioning features, except that instead of rule ev
 That's how processing works and it is the most complex part of OpenType features that you will need to understand. Got it? Great!
 
 (For you experts reading this: Yeah, I know this isn't technically 100% accurate. But, I don't really want to confuse everyone by going through the processing model with the GSUB and GPOS data structures. Those are different from the .fea syntax just enough to make things **very confusing** unless you know both sides of the process very well. So, I'm going to explain the processing model following the .fea structures.)
-
-_This whole Processing section made things feel very complex very fast. Can it be removed, moved to an Advanced Knowledge section, or moved to later in the document?_
 
 # Syntax Intro
 
