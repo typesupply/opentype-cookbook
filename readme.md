@@ -828,16 +828,6 @@ Likewise, if your default figures are proportional and you have tabular alternat
         sub @figuresOldStyle by @figuresOldStyleTabular;
     } tnum;
 
-## Ordinals
-
-The ordn feature is for ordinal forms.   
-_The neccessity of this feature is questionable, since the languages that use ordinals have them on the keyboard._
-
-    feature ordn {
-        sub [A a] by ordfeminine;
-        sub [O o] by ordmasculine;
-    } ordn;
-
 ## Small Caps
 
 There are two features that invoke small caps: small caps `smcp` and “caps to small caps” or “all small caps” `c2sc`. The latter version is for situations in which the user wants everything possible, not just letters, to be converted to small cap forms. (something about not doing case conversion, but being aware of things like the germanbls, dotlessi?)
