@@ -2,19 +2,9 @@
 
 **This is an in-progress rough draft. Your feedback is welcome!**
 
-This is currently a single Markdown formatted file. Once the first draft has been reviewed by a few peers I will convert this to Sphinx format. It will most likely end up as a small static website that I host. I considered using the great Read The Docs for this, but the .fea code will require a custom syntax highlighter and RTD doesn't seem to support that.
+This document will eventually be hosted on a small, static website. This site will either be generated with Sphinx or built directly as HTML files. If HTML is built directly, this [syntax highlighter](http://alexgorbatchev.com/SyntaxHighlighter/manual/brushes/custom.html) could be used with a customization to support .fea.
 
-This needs a nice title. OpenType Features Intro is only a placeholder. Your suggestions are more than welcome! A current list of potential titles:
-
-- OpenType Features and You
-- Introduction to OpenType Features
-- OpenType Feature Cookbook *
-- Learning OpenType Features *
-- Building Blocks of Features
-- OpenType Features – Fonts’ Secret Superpower 
-- OpenType Features in a Nutshell
-- The OpenType Features Cookbook 😜
-- OpenType Cookbook
+The planned title is <drumroll> The OpenType Cookbook. I know that the document doesn't cover "OpenType" in totality, but, details details.
 
 
 # Introduction
