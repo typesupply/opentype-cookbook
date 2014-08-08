@@ -463,7 +463,7 @@ Before you define any specific language system, you should always declare this:
 
     languagesystem DFLT dflt;
 
-This will register all rules for a fallback system in case an OpenType layout gets confused about which language or script your features apply to. Additionally, before you register a script with a specific language, you should register it with the default language for the same reason. So, the complete set of language system statements would look like this:
+This will register all rules for a fallback system in case an OpenType layout engine gets confused about which language or script your features apply to. Additionally, before you register a script with a specific language, you should register it with the default language for the same reason. So, the complete set of language system statements would look like this:
 
     languagesystem DFLT dflt;
     languagesystem latn dflt;
@@ -483,9 +483,19 @@ Then, inside of your features you can have this lookup called by referencing its
 
     lookup Example;
 
-This is useful if you want to share some rules across multiple features.  
-_Example for sharing lookup?_  
-_A lookup for superior letters may be a good example; you can define the lookup inside `ordn`, and then reuse it in `sups`. An example with inferior numerals that uses `subs` and `sinf` may be even better._
+This is useful if you want to share some rules across multiple features.
+
+    lookup Inferiors {
+        sub @inferiorOff by @inferiorOn;
+    } Inferiors;
+
+		feature subs {
+        lookup Inferiors;
+    } subs;
+
+		feature sinf {
+        lookup Inferiors;
+    } sinf;
 
 
 # Putting It All Together
