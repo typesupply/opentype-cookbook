@@ -326,9 +326,7 @@ Before we go much further we need to talk about coordinate systems and value rec
 
 In the positioning rules, we can adjust the placement and advance of glyphs. The placement is the spot at which the origin of the glyph will be aligned. The advance is the width and the height of the glyph from the origin. In horizontal typesetting, the height will be zero and the width will be the width of the glyph. The placement and advance can each be broken down into X and Y values. Thus, there is an x placement, a y placement, an x advance and a y advance.
 
-_"width of the glyph" may be interpreted as the width of the outlines, whereas you mean outlines + sidebearings. I usually refer to it as "advanced width", but the term might be too technical. An illustration will definitely help here._
-
-    (illustration showing a g with the placements and advance highlighted)
+    (illustration showing a g with the placements and advance highlighted. be sure to clearly show the advance width of the glyph.)
 
 The units that these values represent are the same units in which you have drawn your glyph. Together, these four values form a value record. In the .fea syntax, we express these value records like this:
 
@@ -366,12 +364,7 @@ For example, to put some space to the left and right of the A, you would do this
 
     pos A <10 0 20 0>;
 
-_Illustration here?_
-
-You can also use a class as the target:
-
-    pos [A B C] <10 0 20 0>;
-    pos @upperclass <10 0 20 0>;
+		(illustration showing before and after)
 
 ### Adjust the Space Between Two Glyphs
 
@@ -385,21 +378,19 @@ In this case, you can shorten the value record to be only the x advance adjustme
 
 This rule is used almost exclusively for kerning. In fact, this is so common that you shouldn't have to write any of these rules yourself. Your font and/or kerning editor should do this for you.
 
-If you do want to see all the ways that you can use glyphs and classes in this rule, here you go:
+You can use a class as target1, target2 or both:
 
-    pos A T -50;
-    pos [A Aacute] T -50;
-    pos A [T Tbar] -50;
-    pos [A Aacute] [T Tbar] -50;
-    pos @A @T -50;
     pos @A T -50;
+
+Or:
+
     pos A @T -50;
-    pos @A [T Tbar] -50;
-    pos [A Aacute] @T -50;
 
-_This is overkill like the ligature example. I suggest breaking up the lines as well._
+Or:
 
-But, seriously, let your editor do this for you.
+    pos @A @T -50;
+
+But, seriously, let your editor write these rules for you.
 
 
 ## Substitutions and Positioning Based on Context
