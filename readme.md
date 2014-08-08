@@ -191,12 +191,10 @@ After a class has been defined, it can be referenced by name.
 A name for a glyph, class or lookup must adhere to the following constraints:
 
 - No more than 31 characters in length.
-- Only use characters in A-Z a-z 0-9 . _ (alphanumeric)
+- Only use characters in A-Z a-z 0-9 . _
 - Must not start with a number or a period.
 
-You should avoid naming anything (including glyphs) with the same name as a [reserved keyword](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#2.c). If you do need to name a glyph with one of these names, precede an reference to the glyph with a `.` But, really, try to avoid needing to do this.  
-_Too specialized?_  
-_I think this is a very important thing to know_
+You should avoid naming anything (including glyphs) with the same name as a [reserved keyword](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#2.c). If you do need to name a glyph with one of these names, precede an reference to the glyph with a `.` But, really, try to avoid needing to do this.
 
 # Rules
 
@@ -208,9 +206,6 @@ Substitutions are the most visually transformative thing that features can do to
 
 1. Target -- This is what will be replaced.
 2. Replacement -- This is what will be inserted in place of the target.
-
-
-_In my opionion, the use of the word “Target” here is confusing. “Target” could also mean the replacement glyph; and “Source” could mean the previously-existing glyph._ 
 
 The syntax for a substitution is:
 
@@ -233,12 +228,6 @@ To replace one thing with another, you do this:
 For example, to transform a to A.sc, you would do this:
 
     sub a by A.sc;
-
-If you have more than one thing that can be replaced with a single thing, you can use a class as the target and a glyph as the replacement:
-
-    sub [A A.alt1 A.alt2] by A.alt4;
-
-_I can't think of that many basic situations (i.e. non-contextual) where you'd want/need to do a substitution like this. I'd remove this example because people might confuse it with GSUB Type 4, Ligature substitution._
 
 If you want to replace several things with corresponding things, you can use classes as both the target and the replacement. However, in this case the number of things in the two classes needs to be the same, unlike above.
 
@@ -280,18 +269,15 @@ For example, for a fi ligature, you would do this:
 
 You can also use classes as part of the target sequence:
 
-    sub [f f.alt] i by f_i;
-    sub f [i i.alt] by f_i;
-    sub [f f.alt] [i i.alt] by f_i;
     sub @f @i by f_i;
+
+Or:
+
     sub @f i by f_i;
+
+Or:
+
     sub f @i by f_i;
-    sub @f [i i.alt] by f_i;
-    sub [f f.alt] @i by f_i;
-
-_I find this a bit overkill and somewhat confusing. I'd reduce the number of permutations, and split them into one-line code snippets to make it very clear that these are not meant to be used together nor at the same time._
-
-(Obviously you wouldn't use all of these rules in real code since they do the same thing.)
 
 ### Replace One With Many
 
@@ -320,10 +306,6 @@ The replacement must be a glyph class, and (unlike above) does not happen automa
 For example, to give the user several options to replace a with, you would do this:
 
     sub a from [a.alt1 a.alt2 a.alt3];
-
-If you want to name the class and reference it in the rule, you can do this:
-
-    sub a from @aAlternates;
 
 Note that the keyword in the middle of the rule is *from* instead of *by*.
 
