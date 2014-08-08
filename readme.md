@@ -18,7 +18,9 @@ OpenType is writing direction agnostic, but the examples in this document are fo
 
 # Foundation Concepts
 
-Before we get into writing any code, let's first establish what we are actually building and how it works. This is probably the toughest thing to understand about OpenType features, but understanding the underlying mechanics will free you to build new and innovative features of your own.
+Before we start writing any code, let's first look at what the code will actually do. If you are reading this document just to find out how to do something simple like write a small caps feature, you may skip this section and jump ahead to the code snippets. But, if you want to develop complex, nuanced and amazing features, you really should read this section. Understanding the underlying mechanics of how features work will allow you to carry your vision all the way from how the glyphs the glyphs look to how the *behave*.
+
+Ready? Alright, let's get into some heavy stuff.
 
 ## Structures
 
