@@ -2,14 +2,24 @@
 
 **This is an in-progress rough draft. Your feedback is welcome!**
 
-This document will eventually be hosted on a small, static website. This site will either be generated with Sphinx or built directly as HTML files. If HTML is built directly, this [syntax highlighter](http://alexgorbatchev.com/SyntaxHighlighter/manual/brushes/custom.html) could be used with a customization to support .fea.
+This is currently a single Markdown formatted file. Once the first draft has been reviewed by a few peers I will convert this to Sphinx format. It will most likely end up as a small static website that I host. I considered using the great Read The Docs for this, but the .fea code will require a custom syntax highlighter and RTD doesn't seem to support that.
 
-The planned title is <drumroll> The OpenType Cookbook. I know that the document doesn't cover "OpenType" in totality, but, details details.
+This needs a nice title. OpenType Features Intro is only a placeholder. Your suggestions are more than welcome! A current list of potential titles:
+
+- OpenType Features and You
+- Introduction to OpenType Features
+- OpenType Feature Cookbook *
+- Learning OpenType Features *
+- Building Blocks of Features
+- OpenType Features – Fonts’ Secret Superpower 
+- OpenType Features in a Nutshell
+- The OpenType Features Cookbook 😜
+- OpenType Cookbook
 
 
 # Introduction
 
-OpenType features allow fonts to behave smartly. This behavior can do simple things (e.g. change letters to small caps) or they can do complex things (e.g. insert swashes, alternates, and ligatures to make text set in a script font feel handmade). This document aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you'll be able to create OpenType features that fit your design as perfectly as possible.
+OpenType features allow fonts to behave smartly. This behavior can do simple things (e.g. change letters to small caps) or they can do complex things (insert swashes, alternates, and ligatures to make text set in a script font feel handmade). This document aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you'll be able to create OpenType features to take your own design one step further.
 
 This document is written with the assumption that you have a basic working knowledge of the structure of a font. You need to know the differences between characters and glyphs, understand the coordinate system in glyphs and so on.
 
@@ -18,9 +28,7 @@ OpenType is writing direction agnostic, but the examples in this document are fo
 
 # Foundation Concepts
 
-Before we start writing any code, let's first look at what the code will actually do. If you are reading this document just to find out how to do something simple like write a small caps feature, you may skip this section and jump ahead to the code snippets. But, if you want to develop complex, nuanced and amazing features, you really should read this section. Understanding the underlying mechanics of how features work will allow you to carry your vision all the way from how the glyphs the glyphs look to how the *behave*.
-
-Ready? Alright, let's get into some heavy stuff.
+Before we get into writing any code, let's first establish what we are actually building and how it works. This is probably the toughest thing to understand about OpenType features, but understanding the underlying mechanics will free you to build new and innovative features of your own.
 
 ## Structures
 
@@ -28,7 +36,8 @@ In OpenType we can define behaviors that we want to happen upon request from use
 
 The actual behavior within the features are defined with rules. Following the small caps example above, you can define a rule that states that the `a` glyph should be replaced with `A.sc`.
 
-Within a feature, it is often necessary to group a set of rules together. This group of rules is called a lookup.
+Within a feature, it is often necessary to group a set of rules together. This group of rules is called a lookup.  
+_I think you might be jumping into lookups (an advanced concept) too early. While it is clear to us that every feature block basically is a lookup, I think it would be easier to first state really simple substitutions; e.g. ligatures._
 
 Visually, you can think of features, lookups and rules like this:
 
@@ -67,6 +76,9 @@ For example, let's assume that you have the following features, lookups and rule
             replace f f with f_f
             replace f i with f_i
             replace f l with f_l
+
+_Code shown in a code format – without actually being real code – might be problematic._  
+(Note: this is an odd example. there is no reason for the lookups, but I can't think of a way to show lookups at this point that doesn't make things overly complex.)
 
 Let's also assume that the user wants to apply small caps and ligatures to a glyph run that displays "Hello".
 
@@ -121,6 +133,10 @@ Here is our example, animated:
 The process is the same for positioning features, except that instead of rule evaluation stopping when a glyph is transformed, the evaluation is stopped when a glyph's position is changed.
 
 That's how processing works and it is the most complex part of OpenType features that you will need to understand. Got it? Great!
+
+(For you experts reading this: Yeah, I know this isn't technically 100% accurate. But, I don't really want to confuse everyone by going through the processing model with the GSUB and GPOS data structures. Those are different from the .fea syntax just enough to make things **very confusing** unless you know both sides of the process very well. So, I'm going to explain the processing model following the .fea structures.)
+
+_This whole Processing section made things feel very complex very fast. Can it be removed, moved to an Advanced Knowledge section, or moved to later in the document?_
 
 # Syntax Intro
 
@@ -428,7 +444,7 @@ What if we have a short context that you want to match, but a longer context tha
     ignore sub w o r' d s exclam;
     sub w o r' d s by r.alt;
 
-The ignore keyword followed by a backtrack (optional), target and lookahead (optional) creates the exception.
+The ignore keyword followed by a backtrack (optional), target and lookahead (optional) creates the exception. _It's very important to note that once you use a ' in the ignore, the following subsistution also needs to use a ', even if it is a simple case of sub group by group with no other contextual lookahead or backtrack._
 
 
 ## Advanced Techniques
