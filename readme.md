@@ -2,24 +2,14 @@
 
 **This is an in-progress rough draft. Your feedback is welcome!**
 
-This is currently a single Markdown formatted file. Once the first draft has been reviewed by a few peers I will convert this to Sphinx format. It will most likely end up as a small static website that I host. I considered using the great Read The Docs for this, but the .fea code will require a custom syntax highlighter and RTD doesn't seem to support that.
+This document will eventually be hosted on a small, static website. This site will either be generated with Sphinx or built directly as HTML files. If HTML is built directly, this [syntax highlighter](http://alexgorbatchev.com/SyntaxHighlighter/manual/brushes/custom.html) could be used with a customization to support .fea.
 
-This needs a nice title. OpenType Features Intro is only a placeholder. Your suggestions are more than welcome! A current list of potential titles:
-
-- OpenType Features and You
-- Introduction to OpenType Features
-- OpenType Feature Cookbook *
-- Learning OpenType Features *
-- Building Blocks of Features
-- OpenType Features – Fonts’ Secret Superpower 
-- OpenType Features in a Nutshell
-- The OpenType Features Cookbook 😜
-- OpenType Cookbook
+The planned title is <drumroll> The OpenType Cookbook. I know that the document doesn't cover "OpenType" in totality, but, details details.
 
 
 # Introduction
 
-OpenType features allow fonts to behave smartly. This behavior can do simple things (e.g. change letters to small caps) or they can do complex things (insert swashes, alternates, and ligatures to make text set in a script font feel handmade). This document aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you'll be able to create OpenType features to take your own design one step further.
+OpenType features allow fonts to behave smartly. This behavior can do simple things (e.g. change letters to small caps) or they can do complex things (e.g. insert swashes, alternates, and ligatures to make text set in a script font feel handmade). This document aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you'll be able to create OpenType features that fit your design as perfectly as possible.
 
 This document is written with the assumption that you have a basic working knowledge of the structure of a font. You need to know the differences between characters and glyphs, understand the coordinate system in glyphs and so on.
 
@@ -28,7 +18,9 @@ OpenType is writing direction agnostic, but the examples in this document are fo
 
 # Foundation Concepts
 
-Before we get into writing any code, let's first establish what we are actually building and how it works. This is probably the toughest thing to understand about OpenType features, but understanding the underlying mechanics will free you to build new and innovative features of your own.
+Before we start writing any code, let's first look at what the code will actually do. If you are reading this document just to find out how to do something simple like write a small caps feature, you may skip this section and jump ahead to the code snippets. But, if you want to develop complex, nuanced and amazing features, you really should read this section. Understanding the underlying mechanics of how features work will allow you to carry your vision all the way from how the glyphs the glyphs look to how the *behave*.
+
+Ready? Alright, let's get into some heavy stuff.
 
 ## Structures
 
@@ -36,8 +28,7 @@ In OpenType we can define behaviors that we want to happen upon request from use
 
 The actual behavior within the features are defined with rules. Following the small caps example above, you can define a rule that states that the `a` glyph should be replaced with `A.sc`.
 
-Within a feature, it is often necessary to group a set of rules together. This group of rules is called a lookup.  
-_I think you might be jumping into lookups (an advanced concept) too early. While it is clear to us that every feature block basically is a lookup, I think it would be easier to first state really simple substitutions; e.g. ligatures._
+Within a feature, it is often necessary to group a set of rules together. This group of rules is called a lookup.
 
 Visually, you can think of features, lookups and rules like this:
 
@@ -76,9 +67,6 @@ For example, let's assume that you have the following features, lookups and rule
             replace f f with f_f
             replace f i with f_i
             replace f l with f_l
-
-_Code shown in a code format – without actually being real code – might be problematic._  
-(Note: this is an odd example. there is no reason for the lookups, but I can't think of a way to show lookups at this point that doesn't make things overly complex.)
 
 Let's also assume that the user wants to apply small caps and ligatures to a glyph run that displays "Hello".
 
@@ -133,9 +121,6 @@ Here is our example, animated:
 The process is the same for positioning features, except that instead of rule evaluation stopping when a glyph is transformed, the evaluation is stopped when a glyph's position is changed.
 
 That's how processing works and it is the most complex part of OpenType features that you will need to understand. Got it? Great!
-
-(For you experts reading this: Yeah, I know this isn't technically 100% accurate. But, I don't really want to confuse everyone by going through the processing model with the GSUB and GPOS data structures. Those are different from the .fea syntax just enough to make things **very confusing** unless you know both sides of the process very well. So, I'm going to explain the processing model following the .fea structures.)
-
 
 # Syntax Intro
 
@@ -206,11 +191,10 @@ After a class has been defined, it can be referenced by name.
 A name for a glyph, class or lookup must adhere to the following constraints:
 
 - No more than 31 characters in length.
-- Only use characters in A-Z a-z 0-9 . _ (alphanumeric)
+- Only use characters in A-Z a-z 0-9 . _
 - Must not start with a number or a period.
 
-You should avoid naming anything with the same name as a [reserved keyword](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#2.c). If you do need to name a glyph with one of these names, precede an reference to the glyph with a `.` But, really, try to avoid needing to do this.  
-_Too specialized?_  
+You should avoid naming anything (including glyphs) with the same name as a [reserved keyword](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#2.c). If you do need to name a glyph with one of these names, precede an reference to the glyph with a `.` But, really, try to avoid needing to do this.
 
 # Rules
 
@@ -222,9 +206,6 @@ Substitutions are the most visually transformative thing that features can do to
 
 1. Target -- This is what will be replaced.
 2. Replacement -- This is what will be inserted in place of the target.
-
-
-_In my opionion, the use of the word “Target” here is confusing. “Target” could also mean the replacement glyph; and “Source” could mean the previously-existing glyph._ 
 
 The syntax for a substitution is:
 
@@ -247,10 +228,6 @@ To replace one thing with another, you do this:
 For example, to transform a to A.sc, you would do this:
 
     sub a by A.sc;
-
-If you have more than one thing that can be replaced with a single thing, you can use a class as the target and a glyph as the replacement:
-
-    sub [A A.alt1 A.alt2] by A.alt4;
 
 If you want to replace several things with corresponding things, you can use classes as both the target and the replacement. However, in this case the number of things in the two classes needs to be the same, unlike above.
 
@@ -292,16 +269,15 @@ For example, for a fi ligature, you would do this:
 
 You can also use classes as part of the target sequence:
 
-    sub [f f.alt] i by f_i;
-    sub f [i i.alt] by f_i;
-    sub [f f.alt] [i i.alt] by f_i;
     sub @f @i by f_i;
-    sub @f i by f_i;
-    sub f @i by f_i;
-    sub @f [i i.alt] by f_i;
-    sub [f f.alt] @i by f_i;
 
-(Obviously you wouldn't use all of these rules in real code since they do the same thing.)
+Or:
+
+    sub @f i by f_i;
+
+Or:
+
+    sub f @i by f_i;
 
 ### Replace One With Many
 
@@ -331,11 +307,7 @@ For example, to give the user several options to replace a with, you would do th
 
     sub a from [a.alt1 a.alt2 a.alt3];
 
-If you want to name the class and reference it in the rule, you can do this:
-
-    sub a from @aAlternates;
-
-Note that the keyword in the middle of the rule changes from *by* to *from*.
+Note that the keyword in the middle of the rule is *from* instead of *by*.
 
 ## Positioning
 
@@ -348,11 +320,13 @@ We're going to cover the simple rules in this document. The complex rules are am
 
 ### Position and Advance
 
-Before we go much further we need to talk about coordinate systems and value records. As you know, the coordinate system in fonts is based on X and Y axes. The X axes moves from left to right with numbers increasing as you move to the right. The Y axis moves from bottom to top with numbers increasing as you move up. The origin for these axis is the intersection of the 0 X coordinate, otherwise known as the baseline, and the 0 Y coordinate.
+Before we go much further we need to talk about coordinate systems and value records. As you know, the coordinate system in fonts is based on X and Y axes. The X axis moves from left to right with numbers increasing as you move to the right. The Y axis moves from bottom to top with numbers increasing as you move up. The origin for these axis is the intersection of the 0 X coordinate, otherwise known as the baseline, and the 0 Y coordinate.
 
     (illustration showing a g with the origin and axes highlighted)
 
 In the positioning rules, we can adjust the placement and advance of glyphs. The placement is the spot at which the origin of the glyph will be aligned. The advance is the width and the height of the glyph from the origin. In horizontal typesetting, the height will be zero and the width will be the width of the glyph. The placement and advance can each be broken down into X and Y values. Thus, there is an x placement, a y placement, an x advance and a y advance.
+
+_"width of the glyph" may be interpreted as the width of the outlines, whereas you mean outlines + sidebearings. I usually refer to it as "advanced width", but the term might be too technical. An illustration will definitely help here._
 
     (illustration showing a g with the placements and advance highlighted)
 
@@ -367,6 +341,8 @@ For example:
 In this case, the value record is adjusting the x placement to the right by one unit, the y placement up by two units, the x advance by 3 units and the y advance by four units.
 
 When the positioning features are started, each glyph in the glyph run has a value record of `<0 0 0 0>`. As the processing happens and rules are matched, these value records are modified cumulative. So, if one feature adjust a glyph's x placement by 10 units and then another feature adjust the glyph's x placement by 30 units, the glyph's x placement would be 40 units.
+
+_I think this paragraph has too much detail, and may be better placed later in the doc._
 
 The syntax for a positioning rule is:
 
@@ -389,6 +365,8 @@ To adjust the space around a single target, you do this:
 For example, to put some space to the left and right of the A, you would do this:
 
     pos A <10 0 20 0>;
+
+_Illustration here?_
 
 You can also use a class as the target:
 
@@ -419,6 +397,8 @@ If you do want to see all the ways that you can use glyphs and classes in this r
     pos @A [T Tbar] -50;
     pos [A Aacute] @T -50;
 
+_This is overkill like the ligature example. I suggest breaking up the lines as well._
+
 But, seriously, let your editor do this for you.
 
 
@@ -426,7 +406,7 @@ But, seriously, let your editor do this for you.
 
 The substitution and positioning rules that we have discussed so far are quite useful, but the real power is in triggering these rules only when certain conditions are met. These are known as contextual rules.
 
-Contextual rules allow us to specify a sequence before, a sequence after the target or both in a substitution or positioning rule. For example: replace `r` with `r.alt` if the `r` is preceded by `wo` and followed by `ds`. There are two new parts of this rule type in addition to the parts we defined in the substitution and positioning sections.
+Contextual rules allow us to specify a sequence before the target, a sequence after the target or both in a substitution or positioning rule. For example: replace `r` with `r.alt` if the `r` is preceded by `wo` and followed by `ds`. There are two new parts of this rule type in addition to the parts we defined in the substitution and positioning sections.
 
 1. Backtrack -- This is the sequence of things that occur before the target in the rule. This sequence can be composed of glyphs, classes or a mix of both.
 2. Lookahead -- This is the sequence of glyphs that occur after the target in the rule. Like the backtrack, this sequence can be composed of glyphs, classes or a mix of both.
@@ -443,10 +423,10 @@ All of the substitution and positioning rule types can be defined with a context
 
 - replace one with one: `sub a b' c by b.alt;`
 - replace many with one: `sub a b' c' d by b_c;`
-- replace one with many: `sub a b_c' d by b c;`
-- replace one from many: `sub a b' c from [b.alt1 b.alt2];`
+- replace one with many: `sub a b_c' d by b c;` _I don't think this syntax is allowed. To do this you need to do `b_c -> b c` in a standalone lookup, and then refer to that lookup in the context._
+- replace one from many: `sub a b' c from [b.alt1 b.alt2];` _I don't think this is supported either_
 - adjust position of one glyph: `pos A B' C <10 0 20 0>;`
-- adjust positioning of the space between two glyphs: `pos A B' C' D -50;`
+- adjust positioning of the space between two glyphs: `pos A B' C' D -50;` _The value record needs to be used after the context, not at the very end. This `pos A B' C' -50 D;` will compile, but I don't know if it will produce the desired results._
 
 Please note that just because you can apply this to all rule types doesn't mean that it always makes sense; or that you should.
 
@@ -510,6 +490,7 @@ Then, inside of your features you can have this lookup called by referencing its
 
 This is useful if you want to share some rules across multiple features.  
 _Example for sharing lookup?_  
+_A lookup for superior letters may be a good example; you can define the lookup inside `ordn`, and then reuse it in `sups`. An example with inferior numerals that uses `subs` and `sinf` may be even better._
 
 
 # Putting It All Together
@@ -548,7 +529,7 @@ Here is a basic example combined into the proper form:
 
     feature c2sc {
         sub @uppercase by @smallcaps;
-        sub @lowercase by @smallcaps;
+        sub @lowercase by @smallcaps; _Is this line necessary?_
         sub @figures by @figuresSmallcap;
         sub @punctuation by @punctuationSmallcap;
     } c2sc;
@@ -1290,6 +1271,7 @@ _Link to the Typotheque Table – still a good overview._
 - mark to mark positioning (why: too complex for this; not easy to test)
 - lookupflag (why: relates to the positioning rules that aren't covered)
 
+_I think that the cursive and the mark-related features are interesting, and actually not that difficult to write and to understand. But I agree that it does not need to be in version 1 of this document because they'll be only relevant to a small set of people._
 
 # Thanks
 
