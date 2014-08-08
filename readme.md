@@ -437,7 +437,7 @@ What if we have a short context that you want to match, but a longer context tha
     ignore sub w o r' d s exclam;
     sub w o r' d s by r.alt;
 
-The ignore keyword followed by a backtrack (optional), target and lookahead (optional) creates the exception.
+The ignore keyword followed by a backtrack (optional), target and lookahead (optional) creates the exception. _It's very important to note that once you use a ' in the ignore, the following subsistution also needs to use a ', even if it is a simple case of sub group by group with no other contextual lookahead or backtrack._
 
 
 ## Advanced Techniques
