@@ -410,14 +410,12 @@ Here is the words example from above in the correct syntax:
 
     sub w o r' d s by r.alt;
 
-All of the substitution and positioning rule types can be defined with a context.
+Most of the substitution and positioning rule types can be defined with a context.
 
 - replace one with one: `sub a b' c by b.alt;`
 - replace many with one: `sub a b' c' d by b_c;`
-- replace one with many: `sub a b_c' d by b c;` _I don't think this syntax is allowed. To do this you need to do `b_c -> b c` in a standalone lookup, and then refer to that lookup in the context._
-- replace one from many: `sub a b' c from [b.alt1 b.alt2];` _I don't think this is supported either_
 - adjust position of one glyph: `pos A B' C <10 0 20 0>;`
-- adjust positioning of the space between two glyphs: `pos A B' C' D -50;` _The value record needs to be used after the context, not at the very end. This `pos A B' C' -50 D;` will compile, but I don't know if it will produce the desired results._
+- adjust positioning of the space between two glyphs: `pos A B' C' -50 D;`
 
 Please note that just because you can apply this to all rule types doesn't mean that it always makes sense; or that you should.
 
