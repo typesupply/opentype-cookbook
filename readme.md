@@ -1272,6 +1272,8 @@ _I think that the cursive and the mark-related features are interesting, and act
 
 Thanks to the Adobe Type Department for developing the .fea syntax. It gets criticized from time to time, but it is actually a great abstraction of the GSUB, GPOS and GDEF binary data structures. I've tried, and failed, to invent a better syntax several times. .fea is hard to beat. Thanks Adobe!
 
+Special thanks to Ben Kiel, Frank Grießhammer and Miguel Sousa for graciously reading, editing and making suggestions about early drafts of this document.
+
 
 # Licenses, Copyrights and Credits
 
