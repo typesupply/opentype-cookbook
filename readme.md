@@ -4,7 +4,7 @@
 
 This document will eventually be hosted on a small, static website. This site will either be generated with Sphinx or built directly as HTML files. If HTML is built directly, this [syntax highlighter](http://alexgorbatchev.com/SyntaxHighlighter/manual/brushes/custom.html) could be used with a customization to support .fea.
 
-The planned title is <drumroll> The OpenType Cookbook. I know that the document doesn't cover "OpenType" in totality, but, details details.
+The planned title is <drumroll> The (Unofficial) OpenType Cookbook. I know that the document doesn't cover "OpenType" in totality, but, details details.
 
 
 # Introduction
