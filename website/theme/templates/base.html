@@ -4,6 +4,7 @@
     {% block head %}
     <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
     <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0; user-scalable=no">
 
     <link rel="stylesheet" href="{{ SITEURL }}/theme/styles/normalize.css">
     <link rel="stylesheet" href="{{ SITEURL }}/theme/styles/main.css">
@@ -12,10 +13,10 @@
 </head>
 
 <body id="index" class="home">
+<header>
+    <h1><a href="{{ SITEURL }}/">{{ SITENAME }}</a></h1>
+</header>
 <div id="wrapper">
-    <header>
-        <h1><a href="{{ SITEURL }}/">{{ SITENAME }}</a></h1>
-    </header>
 
     <nav id="menu">
         <ul>
