@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ DEFAULT_LANG }}">
 <head>
-        {% block head %}
-        <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
-        <meta charset="utf-8" />
-        {% endblock head %}
+    {% block head %}
+    <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/styles/normalize.css">
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/styles/main.css">
+
+    {% endblock head %}
 </head>
 
 <body id="index" class="home">
@@ -23,8 +27,11 @@
         </ul>
     </nav>
 
+    <article>
     {% block content %}
     {% endblock %}
+    </article>
+
 </div>
 </body>
 </html>

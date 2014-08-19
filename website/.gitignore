@@ -3,3 +3,5 @@
 cache/
 output/
 .DS_Store
+.sass-cache
+theme/static/fonts/

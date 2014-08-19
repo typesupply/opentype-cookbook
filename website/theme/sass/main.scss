@@ -1,0 +1,108 @@
+// FONTS
+// @mixin fontface($family, $src, $weight:normal, $style:normal) {
+//   font-family: $family;
+//   src:  url('/theme/static/fonts/' + $src + '.eot?#iefix') format('embedded-opentype'),
+//         url('/theme/static/fonts/' + $src + '.woff') format('woff'),
+//         url('/theme/static/fonts/' + $src + '.ttf')  format('truetype');
+//   font-weight: $weight;
+//   font-style: $style;
+// }
+
+@mixin fontface($family, $src, $weight:normal, $style:normal) {
+  font-family: $family;
+  src:  url('/theme/static/fonts/' + $src + '.otf') format('opentype');
+  font-weight: $weight;
+  font-style: $style;
+}
+
+@font-face {
+  @include fontface('Queue', 'Queue-Light');
+}
+@font-face {
+  @include fontface('Queue', 'Queue-Bold', bold, normal);
+}
+@font-face {
+  @include fontface('Queue', 'Queue-Light Italic', normal, italic);
+}
+
+
+// COLOURS
+$main: rgb(10, 120, 160);
+$secondary-light: rgb(230, 250, 130);
+$secondary-dark: rgb(0, 30, 60);
+$code-block: rgb(245, 255, 200);
+
+body {
+    font: 16px/21px 'Queue', sans-serif;
+    color: #000000;
+}
+
+nav {
+  width: 221px;
+  padding: 22px 0;
+
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+
+  background-color: $secondary-light;
+
+  ul {
+    padding: 0;
+    margin: 0 24px;
+
+    li {
+      list-style: none inside;
+      font: 16px/32px 'Queue', sans-serif;
+      color: $main;
+      border-bottom: 1px solid #ffffff;
+      &:last-child {
+        border-bottom: 0 none;
+      }
+
+      &.active {
+        font-weight: bold;
+      }
+
+      a {
+        color: $main;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+article {
+    width: 600px;
+
+    h1, h2, h3, h4 {
+        color: $main;
+        margin-bottom: 0;
+    }
+    h1 {
+        font-size: 40px;
+        line-height: 30px;
+    }
+    h2 {
+        font-size: 30px;
+        line-height: 30px;
+    }
+    h3 {
+        font-size: 25px;
+        line-height: 30px;
+    }
+    h4 {
+        font-size: 16px;
+        line-height: 30px;
+    }
+
+    a {
+      color: $main;
+      font-weight: bold;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+}
