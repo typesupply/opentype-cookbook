@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ DEFAULT_LANG }}">
+<head>
+        {% block head %}
+        <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
+        <meta charset="utf-8" />
+        {% endblock head %}
+</head>
+
+<body id="index" class="home">
+<div id="wrapper">
+    <header>
+        <h1><a href="{{ SITEURL }}/">{{ SITENAME }}</a></h1>
+    </header>
+
+    <nav id="menu">
+        <ul>
+        {% if DISPLAY_PAGES_ON_MENU %}
+            {% for p in PAGES|sort(attribute='sortorder') %}
+                <li{% if p == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+            {% endfor %}
+        {% endif %}
+        </ul>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>
