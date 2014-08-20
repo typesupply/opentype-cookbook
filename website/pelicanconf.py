@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 AUTHOR = u'Tal Leming'
 SITENAME = u'The OpenType Cookbook'
 SITEURL = 'http://opentypecookbook.com'
+SITESUBTITLE = "version 0.1 (beta)"
 
 PATH = 'content'
 

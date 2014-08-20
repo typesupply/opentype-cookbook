@@ -12,8 +12,20 @@ Ready? Alright, let's get into some heavy stuff.
 
 #### Head 4
 
+## Structures
+
 In OpenType we can define behaviors that we want to happen upon request from users. For example, the user may decide that text should be displayed with small caps. You, the type designer, can define which glyphs should be changed when this request is made by the user. These behaviors are defined in features. Features can do two things: they can substitute glyphs and they can adjust the positions of glyphs.
 
 The actual behavior within the features are defined with rules. Following the small caps example above, you can define a rule that states that the a glyph should be replaced with A.sc.
+
 Within a feature, it is often necessary to group a set of rules together. This group of rules is called a lookup.
+
 Visually, you can think of features, lookups and rules like this:
+
+## Processing
+
+When text is processed, the features that the user wants applied are gathered into two groups: substitution features and positioning features. The substitution features are processed first and then the positioning features are processed. The order in which you have defined the features, lookups and rules is the order in which they will be applied to the text. This order is very important.
+
+Features process sequences of glyphs. These glyph runs may represent a complete line of text or a sub-section of a line of text.
+
+For example, let's assume that you have the following features, lookups and rules:

@@ -1,30 +1,18 @@
 // FONTS
-// @mixin fontface($family, $src, $weight:normal, $style:normal) {
-//   font-family: $family;
-//   src:  url('/theme/static/fonts/' + $src + '.eot?#iefix') format('embedded-opentype'),
-//         url('/theme/static/fonts/' + $src + '.woff') format('woff'),
-//         url('/theme/static/fonts/' + $src + '.ttf')  format('truetype');
-//   font-weight: $weight;
-//   font-style: $style;
-// }
-
 @mixin fontface($family, $src, $weight:normal, $style:normal) {
   font-family: $family;
-  src:  url('/theme/static/fonts/' + $src + '.otf') format('opentype');
+  src:  url('../fonts/' + $src + '.woff') format('woff'),
+        url('../fonts/' + $src + '.ttf')  format('truetype');
   font-weight: $weight;
   font-style: $style;
 }
 
 @font-face {
-  @include fontface('Queue', 'Queue-Light');
+  @include fontface('Queue', 'queue-light');
 }
 @font-face {
-  @include fontface('Queue', 'Queue-Bold', bold, normal);
+  @include fontface('Queue', 'queue-bold', bold, normal);
 }
-@font-face {
-  @include fontface('Queue', 'Queue-Light Italic', normal, italic);
-}
-
 
 // COLOURS
 $main: rgb(10, 120, 160);
@@ -41,6 +29,7 @@ header {
   height: 118px;
   padding: 0;
   margin: 0;
+  position: relative;
 
   background: $main url('../furniture/header_arrow.png') no-repeat right center;
 
@@ -50,19 +39,35 @@ header {
     margin: 0 auto;
 
     a {
-      background: $main url('../furniture/opentype_cookbook_header.png') no-repeat right center;
       width: 588px;
       height: 100%;
       display: block;
       float: right;
+      margin-right: 20px;
+
+      background: $main url('../furniture/opentype_cookbook_header.png') no-repeat right center;
+
       text-indent: -9999px;
     }
+  }
+  h2 {
+    margin: 0 auto;
+    position: relative;
+    top: -35px;
+    left: 8px;
+    width: 860px;
+
+    color: $secondary-light;
+    font-weight: normal;
+    font-size: 14px;
+    text-align: right;
   }
 }
 
 #wrapper {
   width: 860px;
-  margin: 0 auto;
+  margin: 0 auto 30px;
+  overflow: hidden;
 }
 
 nav {
@@ -138,4 +143,15 @@ article {
         text-decoration: underline;
       }
     }
+}
+
+footer {
+  background: transparent url('../furniture/footer_arrow.png') no-repeat right top;
+
+  a {
+    margin: 0 20px;
+    padding: 0 20px;
+
+    background-color: #ffffff;
+  }
 }

@@ -1,20 +1,14 @@
 @font-face {
   font-family: "Queue";
-  src: url("/theme/static/fonts/Queue-Light.otf") format("opentype");
+  src: url("../fonts/queue-light.woff") format("woff"), url("../fonts/queue-light.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: "Queue";
-  src: url("/theme/static/fonts/Queue-Bold.otf") format("opentype");
+  src: url("../fonts/queue-bold.woff") format("woff"), url("../fonts/queue-bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal; }
-
-@font-face {
-  font-family: "Queue";
-  src: url("/theme/static/fonts/Queue-Light Italic.otf") format("opentype");
-  font-weight: normal;
-  font-style: italic; }
 
 body {
   font: 16px/21px 'Queue', sans-serif;
@@ -24,22 +18,35 @@ header {
   height: 118px;
   padding: 0;
   margin: 0;
+  position: relative;
   background: #0a78a0 url("../furniture/header_arrow.png") no-repeat right center; }
   header h1 {
     height: 118px;
     width: 860px;
     margin: 0 auto; }
     header h1 a {
-      background: #0a78a0 url("../furniture/opentype_cookbook_header.png") no-repeat right center;
       width: 588px;
       height: 100%;
       display: block;
       float: right;
+      margin-right: 20px;
+      background: #0a78a0 url("../furniture/opentype_cookbook_header.png") no-repeat right center;
       text-indent: -9999px; }
+  header h2 {
+    margin: 0 auto;
+    position: relative;
+    top: -35px;
+    left: 8px;
+    width: 860px;
+    color: #e6fa82;
+    font-weight: normal;
+    font-size: 14px;
+    text-align: right; }
 
 #wrapper {
   width: 860px;
-  margin: 0 auto; }
+  margin: 0 auto 30px;
+  overflow: hidden; }
 
 nav {
   width: 221px;
@@ -91,3 +98,10 @@ article {
     text-decoration: none; }
     article a:hover {
       text-decoration: underline; }
+
+footer {
+  background: transparent url("../furniture/footer_arrow.png") no-repeat right top; }
+  footer a {
+    margin: 0 20px;
+    padding: 0 20px;
+    background-color: #ffffff; }

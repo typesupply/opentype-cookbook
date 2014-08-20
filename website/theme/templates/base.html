@@ -15,6 +15,7 @@
 <body id="index" class="home">
 <header>
     <h1><a href="{{ SITEURL }}/">{{ SITENAME }}</a></h1>
+    <h2>{{ SITESUBTITLE }}</h2>
 </header>
 <div id="wrapper">
 
@@ -31,6 +32,20 @@
     <article>
     {% block content %}
     {% endblock %}
+
+    <footer>
+        {% set sorted_pages = PAGES|sort(attribute='sortorder') %}
+        {% for p in sorted_pages %}
+            {% if p == page %}
+                {% set next_index = loop.index %}
+                {% if not loop.last %}
+                    {% set next_page = sorted_pages[next_index|int] %}
+                    <a href="{{ next_page['url'] }}">Next: {{ next_page['title'] }}</a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </footer>
+
     </article>
 
 </div>
