@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "Queue";
   src: url("../fonts/queue-light.woff") format("woff"), url("../fonts/queue-light.ttf") format("truetype");
@@ -98,6 +99,42 @@ article {
     text-decoration: none; }
     article a:hover {
       text-decoration: underline; }
+  article code {
+    font-family: 'Queue', sans-serif;
+    color: #0a78a0; }
+  article ol {
+    padding-left: 1.5em;
+    list-style-type: none;
+    counter-reset: li-counter; }
+    article ol > li {
+      position: relative;
+      padding-left: 0.5em; }
+      article ol > li:before {
+        position: absolute;
+        top: 0;
+        left: -1.5em;
+        width: 1.5em;
+        display: block;
+        text-align: right;
+        font-weight: bold;
+        color: #0a78a0;
+        content: counter(li-counter) ".";
+        counter-increment: li-counter; }
+  article ul {
+    padding-left: 1.5em;
+    list-style-type: none; }
+    article ul > li {
+      position: relative;
+      padding-left: 0.5em; }
+      article ul > li:before {
+        position: absolute;
+        top: 0;
+        left: -1.8em;
+        width: 1.5em;
+        display: block;
+        text-align: right;
+        color: #0a78a0;
+        content: "•"; }
 
 footer {
   background: transparent url("../furniture/footer_arrow.png") no-repeat right top; }
