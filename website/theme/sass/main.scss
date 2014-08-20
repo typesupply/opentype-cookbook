@@ -101,8 +101,13 @@ nav {
       }
 
       a {
+        display: block;
         color: $main;
         text-decoration: none;
+
+        &:hover {
+          font-weight: bold;
+        }
       }
     }
   }

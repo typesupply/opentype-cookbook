@@ -72,8 +72,11 @@ nav {
       nav ul li.active {
         font-weight: bold; }
       nav ul li a {
+        display: block;
         color: #0a78a0;
         text-decoration: none; }
+        nav ul li a:hover {
+          font-weight: bold; }
 
 article {
   width: 600px;
