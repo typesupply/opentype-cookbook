@@ -11,9 +11,18 @@
   font-weight: bold;
   font-style: normal; }
 
+html {
+  height: 100%; }
+
 body {
   font: 16px/21px 'Queue', sans-serif;
-  color: #000000; }
+  color: #000000;
+  height: 100%; }
+
+#wrapper {
+  width: 100%;
+  overflow: hidden;
+  background-color: #ffffff; }
 
 header {
   height: 118px;
@@ -34,27 +43,29 @@ header {
       background: #0a78a0 url("../furniture/opentype_cookbook_header.png") no-repeat right center;
       text-indent: -9999px; }
   header h2 {
-    margin: 0 auto;
     position: relative;
-    top: -35px;
-    left: 8px;
-    width: 860px;
+    top: -47px;
+    margin-left: 770px;
     color: #e6fa82;
     font-weight: normal;
     font-size: 14px;
-    text-align: right; }
+    text-align: center; }
 
-#wrapper {
-  width: 860px;
-  margin: 0 auto 30px;
-  overflow: hidden; }
+#menu_toggle {
+  display: none; }
+
+#nav_wrapper {
+  width: 920px;
+  margin: 0 auto;
+  padding-left: 30px;
+  box-sizing: border-box; }
 
 nav {
   width: 221px;
   padding: 22px 0;
-  float: left;
   position: fixed;
   top: 92px;
+  z-index: 2;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
@@ -77,10 +88,16 @@ nav {
         text-decoration: none; }
         nav ul li a:hover {
           font-weight: bold; }
+  nav #menu_close {
+    display: none; }
 
 article {
-  width: 600px;
-  float: right; }
+  width: 580px;
+  position: relative;
+  left: 0;
+  margin: 0 auto;
+  padding-left: 250px;
+  background-color: #ffffff; }
   article h1, article h2, article h3, article h4 {
     color: #0a78a0;
     margin-bottom: 0; }
@@ -148,6 +165,107 @@ footer {
     padding: 0 20px;
     background-color: #ffffff; }
 
+@media only screen and (max-width: 920px) {
+  .no-js header, .no-js #nav_wrapper, .no-js #wrapper {
+    min-width: 920px; }
+  .no-js nav {
+    position: absolute; }
+
+  .js .loaded header, .js .loaded nav, .js .loaded article {
+    transition: left 0.2s;
+    -moz-transition: left 0.2s;
+    /* Firefox */
+    -webkit-transition: left 0.2s;
+    /* Safari and Chrome */
+    -o-transition: left 0.2s;
+    /* Opera */ }
+  .js #wrapper {
+    position: relative;
+    width: 100%; }
+  .js header {
+    width: 100%;
+    top: 0;
+    left: 0; }
+    .js header h1 {
+      width: auto;
+      text-align: center; }
+      .js header h1 a {
+        display: inline-block;
+        float: none; }
+    .js header h2 {
+      margin-left: 520px; }
+  .js .open-flyout article, .js .open-flyout header {
+    left: 221px; }
+  .js .open-flyout nav {
+    left: 0; }
+  .js #menu_toggle {
+    position: fixed;
+    left: 50%;
+    top: 70px;
+    margin-left: -374px;
+    display: block;
+    width: 56px;
+    height: 39px;
+    padding: 0;
+    background: transparent url("../furniture/nav_menu.png") no-repeat left top;
+    -webkit-background-size: 56px, 39px;
+    -o-background-size: 56px, 39px;
+    background-size: 56px, 39px; }
+  .js nav {
+    top: 0px;
+    left: -221px;
+    margin-left: 0;
+    height: 100%;
+    position: fixed;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px; }
+    .js nav #menu_close {
+      display: block;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      color: #0a78a0;
+      font-size: 24px; }
+  .js article {
+    margin: 0 auto;
+    padding-left: 0;
+    float: none;
+    overflow: hidden;
+    left: 0;
+    top: 0;
+    position: relative; } }
+@media only screen and (max-width: 660px) {
+  .js header {
+    height: 118px;
+    background-position: center center; }
+    .js header h1 {
+      height: 118px;
+      width: 100%; }
+      .js header h1 a {
+        width: 90%;
+        height: 100%;
+        float: none;
+        margin-right: 0;
+        background: #0a78a0 url("../furniture/opentype_cookbook_header.png") no-repeat center center;
+        -webkit-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        text-indent: -9999px; }
+    .js header h2 {
+      display: none;
+      position: relative;
+      top: -47px;
+      color: #e6fa82;
+      font-weight: normal;
+      font-size: 14px;
+      text-align: center; }
+  .js article {
+    width: auto;
+    margin-left: 20px;
+    margin-right: 20px; } }
 .highlight .hll {
   background-color: #49483e; }
 

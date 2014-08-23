@@ -1,17 +1,17 @@
 // FONTS
 @mixin fontface($family, $src, $weight:normal, $style:normal) {
-  font-family: $family;
-  src:  url('../fonts/' + $src + '.woff') format('woff'),
-        url('../fonts/' + $src + '.ttf')  format('truetype');
-  font-weight: $weight;
-  font-style: $style;
+    font-family: $family;
+    src:  url('../fonts/' + $src + '.woff') format('woff'),
+          url('../fonts/' + $src + '.ttf')  format('truetype');
+    font-weight: $weight;
+    font-style: $style;
 }
 
 @font-face {
-  @include fontface('Queue', 'queue-light');
+    @include fontface('Queue', 'queue-light');
 }
 @font-face {
-  @include fontface('Queue', 'queue-bold', bold, normal);
+    @include fontface('Queue', 'queue-bold', bold, normal);
 }
 
 // COLOURS
@@ -20,205 +20,248 @@ $secondary-light: rgb(230, 250, 130);
 $secondary-dark: rgb(0, 30, 60);
 $code-block: rgb(245, 255, 200);
 
+html {
+    height: 100%;
+}
+
 body {
     font: 16px/21px 'Queue', sans-serif;
     color: #000000;
-}
-
-header {
-  height: 118px;
-  padding: 0;
-  margin: 0;
-  position: relative;
-
-  background: $main url('../furniture/header_arrow.png') no-repeat right center;
-
-  h1 {
-    height: 118px;
-    width: 860px;
-    margin: 0 auto;
-
-    a {
-      width: 588px;
-      height: 100%;
-      display: block;
-      float: right;
-      margin-right: 20px;
-
-      background: $main url('../furniture/opentype_cookbook_header.png') no-repeat right center;
-
-      text-indent: -9999px;
-    }
-  }
-  h2 {
-    margin: 0 auto;
-    position: relative;
-    top: -35px;
-    left: 8px;
-    width: 860px;
-
-    color: $secondary-light;
-    font-weight: normal;
-    font-size: 14px;
-    text-align: right;
-  }
+    height: 100%;
 }
 
 #wrapper {
-  width: 860px;
-  margin: 0 auto 30px;
-  overflow: hidden;
+    width: 100%;
+    overflow: hidden;
+
+    background-color: #ffffff;
 }
 
-nav {
-  width: 221px;
-  padding: 22px 0;
-  float: left;
-  position: fixed;
-  top: 92px;
-
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
-
-  background-color: $secondary-light;
-
-  ul {
+header {
+    height: 118px;
     padding: 0;
-    margin: 0 24px;
+    margin: 0;
+    position: relative;
 
-    li {
-      list-style: none inside;
-      font: 16px/32px 'Queue', sans-serif;
-      color: $main;
-      border-bottom: 1px solid #ffffff;
-      &:last-child {
-        border-bottom: 0 none;
-      }
+    background: $main url('../furniture/header_arrow.png') no-repeat right center;
 
-      &.active {
-        font-weight: bold;
-      }
+    h1 {
+        height: 118px;
+        width: 860px;
+        margin: 0 auto;
 
-      a {
-        display: block;
-        color: $main;
-        text-decoration: none;
+        a {
+            width: 588px;
+            height: 100%;
+            display: block;
+            float: right;
+            margin-right: 20px;
 
-        &:hover {
-          font-weight: bold;
+            background: $main url('../furniture/opentype_cookbook_header.png') no-repeat right center;
+
+            text-indent: -9999px;
         }
-      }
     }
-  }
+    h2 {
+        position: relative;
+        top: -47px;
+        margin-left: 770px;
+
+        color: $secondary-light;
+        font-weight: normal;
+        font-size: 14px;
+        text-align: center;
+    }
+}
+
+#menu_toggle {
+    display: none;
+}
+
+#nav_wrapper {
+    width: 920px;
+    margin: 0 auto;
+    padding-left: 30px;
+    box-sizing: border-box;
+}
+nav {
+    width: 221px;
+    padding: 22px 0;
+    position: fixed;
+    top: 92px;
+    z-index: 2;
+
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+
+    background-color: $secondary-light;
+
+    ul {
+        padding: 0;
+        margin: 0 24px;
+
+        li {
+            list-style: none inside;
+            font: 16px/32px 'Queue', sans-serif;
+            color: $main;
+            border-bottom: 1px solid #ffffff;
+            &:last-child {
+                border-bottom: 0 none;
+            }
+
+            &.active {
+                font-weight: bold;
+            }
+
+            a {
+                display: block;
+                color: $main;
+                text-decoration: none;
+
+                &:hover {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    #menu_close {
+        display: none;
+    }
 }
 
 article {
-  width: 600px;
-  // margin-left: 250px;
-  float: right;
+    width: 580px;
+    position: relative;
+    left: 0;
+    margin: 0 auto;
+    padding-left: 250px;
 
-  h1, h2, h3, h4 {
-      color: $main;
-      margin-bottom: 0;
-  }
-  h1 {
-      font-size: 40px;
-      line-height: 30px;
-  }
-  h2 {
-      font-size: 30px;
-      line-height: 30px;
-  }
-  h3 {
-      font-size: 25px;
-      line-height: 30px;
-  }
-  h4 {
-      font-size: 16px;
-      line-height: 30px;
-  }
+    background-color: #ffffff;
 
-  a {
-    color: $main;
-    font-weight: bold;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
+    h1, h2, h3, h4 {
+        color: $main;
+        margin-bottom: 0;
     }
-  }
+    h1 {
+        font-size: 40px;
+        line-height: 30px;
+    }
+    h2 {
+        font-size: 30px;
+        line-height: 30px;
+    }
+    h3 {
+        font-size: 25px;
+        line-height: 30px;
+    }
+    h4 {
+        font-size: 16px;
+        line-height: 30px;
+    }
 
-  code {
-    font-family: 'Queue', sans-serif;
-    color: $main;
-  }
-
-  ol {
-    padding-left: 1.5em;
-
-    list-style-type: none;
-    counter-reset: li-counter;
-
-    & > li {
-      position: relative;
-      padding-left: 0.5em;
-
-      &:before {
-        position: absolute;
-        top: 0;
-        left: -1.5em;
-        width: 1.5em;
-        display: block;
-
-        text-align: right;
+    a {
+        color: $main;
         font-weight: bold;
-        color: $main;
+        text-decoration: none;
 
-        content: counter(li-counter) ".";
-        counter-increment: li-counter;
-      }
+        &:hover {
+            text-decoration: underline;
+        }
     }
-  }
 
-  ul {
-    padding-left: 1.5em;
-
-    list-style-type: none;
-
-    & > li {
-      position: relative;
-      padding-left: 0.5em;
-
-      &:before {
-        position: absolute;
-        top: 0;
-        left: -1.8em;
-        width: 1.5em;
-        display: block;
-
-        text-align: right;
+    code {
+        font-family: 'Queue', sans-serif;
         color: $main;
-
-        content: "•";
-      }
     }
-  }
 
-  .highlight pre {
-    font-family: 'Queue', sans-serif;
-  }
+    ol {
+        padding-left: 1.5em;
+
+        list-style-type: none;
+        counter-reset: li-counter;
+
+        & > li {
+            position: relative;
+            padding-left: 0.5em;
+
+            &:before {
+                position: absolute;
+                top: 0;
+                left: -1.5em;
+                width: 1.5em;
+                display: block;
+
+                text-align: right;
+                font-weight: bold;
+                color: $main;
+
+                content: counter(li-counter) ".";
+                counter-increment: li-counter;
+            }
+        }
+    }
+
+    ul {
+        padding-left: 1.5em;
+
+        list-style-type: none;
+
+        & > li {
+            position: relative;
+            padding-left: 0.5em;
+
+            &:before {
+                position: absolute;
+                top: 0;
+                left: -1.8em;
+                width: 1.5em;
+                display: block;
+
+                text-align: right;
+                color: $main;
+
+                content: "•";
+            }
+        }
+    }
+
+    .highlight pre {
+        font-family: 'Queue', sans-serif;
+    }
 }
 
 footer {
-  background: transparent url('../furniture/footer_arrow.png') no-repeat right top;
+    background: transparent url('../furniture/footer_arrow.png') no-repeat right top;
 
-  a {
-    margin: 0 20px;
-    padding: 0 20px;
+    a {
+        margin: 0 20px;
+        padding: 0 20px;
 
-    background-color: #ffffff;
-  }
+        background-color: #ffffff;
+    }
+}
+
+
+@media only screen and (max-width: 920px) {
+    .no-js {
+        header, #nav_wrapper, #wrapper {
+            min-width: 920px;
+        }
+        nav {
+            position: absolute;
+        }
+    }
+
+    .js {
+        @import 'medium';
+    }
+}
+@media only screen and (max-width: 660px) {
+    .js {
+        @import 'small';
+    }
 }
 
 @import 'pygment';

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ DEFAULT_LANG }}">
+<html lang="{{ DEFAULT_LANG }}" class="no-js">
 <head>
     {% block head %}
     <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
@@ -12,42 +12,86 @@
     {% endblock head %}
 </head>
 
-<body id="index" class="home">
-<header>
-    <h1><a href="{{ SITEURL }}/">{{ SITENAME }}</a></h1>
-    <h2>{{ SITESUBTITLE }}</h2>
-</header>
-<div id="wrapper">
-
-    <nav id="menu">
-        <ul>
-        {% if DISPLAY_PAGES_ON_MENU %}
-            {% for p in PAGES|sort(attribute='sortorder') %}
-                <li{% if p == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
-            {% endfor %}
-        {% endif %}
-        </ul>
-    </nav>
-
-    <article>
-    {% block content %}
-    {% endblock %}
-
-    <footer>
-        {% set sorted_pages = PAGES|sort(attribute='sortorder') %}
-        {% for p in sorted_pages %}
-            {% if p == page %}
-                {% set next_index = loop.index %}
-                {% if not loop.last %}
-                    {% set next_page = sorted_pages[next_index|int] %}
-                    <a href="{{ next_page['url'] }}">Next: {{ next_page['title'] }}</a>
-                {% endif %}
+<body id="index" class="">
+    <div id="nav_wrapper">
+        <nav id="menu">
+            <ul>
+            {% if DISPLAY_PAGES_ON_MENU %}
+                {% for p in PAGES|sort(attribute='sortorder') %}
+                    <li{% if p == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+                {% endfor %}
             {% endif %}
-        {% endfor %}
-    </footer>
+            </ul>
+        </nav>
+    </div>
 
-    </article>
+    <div id="wrapper">
+        <header>
+            <h1><a href="{{ SITEURL }}/">{{ SITENAME }}</a></h1>
+            <h2>{{ SITESUBTITLE }}</h2>
+            <a href="#" id="menu_toggle"></a>
+        </header>
 
-</div>
+        <article>
+            {% block content %}
+            {% endblock %}
+            <footer>
+                {% set sorted_pages = PAGES|sort(attribute='sortorder') %}
+                {% for p in sorted_pages %}
+                    {% if p == page %}
+                        {% set next_index = loop.index %}
+                        {% if not loop.last %}
+                            {% set next_page = sorted_pages[next_index|int] %}
+                            <a href="{{ next_page['url'] }}">Next: {{ next_page['title'] }}</a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </footer>
+        </article>
+    </div>
+
+    <script src="{{ SITEURL }}/theme/scripts/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        document.documentElement.className = document.documentElement.className.replace("no-js","js");
+
+        (function($) {
+            var nav_width = 221;
+            var nav = $('nav#menu');
+            var body = $('body');
+
+            var show_nav = function() {
+                body.addClass("open-flyout");
+                // $('#overlay').css({'left' : nav_width, 'right' : 0}).show();
+            };
+
+            var hide_nav = function() {
+                body.removeClass("open-flyout");
+                // $('#overlay').hide().css({'left' : 0, 'right' : 0});
+            };
+
+            // add a close button to menu
+            var menu_close = nav.prepend("<a href='#' id='menu_close'>×</a>");
+            $('#menu_close').on('click', function(ev) {
+                ev.preventDefault();
+                hide_nav();
+            });
+
+            $('#menu_toggle').on("click", function(ev) {
+                ev.preventDefault();
+                if(!body.hasClass("open-flyout")) {
+                    show_nav();
+                } else {
+                    hide_nav();
+                }
+            });
+        })(jQuery);
+
+        // Remove 'preload' class on DOM ready.
+        // Prevents flash of transition.
+        $('document').ready(function() {
+            $("body").addClass('loaded');
+        })
+
+    </script>
 </body>
 </html>
