@@ -162,7 +162,7 @@ footer {
   background: transparent url("../furniture/footer_arrow.png") no-repeat right top; }
   footer a {
     margin: 0 20px;
-    padding: 0 20px;
+    padding: 0 15px;
     background-color: #ffffff; }
 
 @media only screen and (max-width: 920px) {
