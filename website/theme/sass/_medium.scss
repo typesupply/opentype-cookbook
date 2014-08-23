@@ -61,9 +61,13 @@ header {
 nav {
     top: 0px;
     left: -221px;
+    padding-top: 40px;
     margin-left: 0;
     height: 100%;
     position: fixed;
+    box-sizing: border-box;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
 
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
@@ -76,9 +80,8 @@ nav {
         right: 10px;
 
         text-decoration: none;
-        font-weight: bold;
         color: $main;
-        font-size: 24px;
+        font-size: 40px;
     }
 }
 

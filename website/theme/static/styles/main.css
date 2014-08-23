@@ -214,9 +214,13 @@ footer {
   .js nav {
     top: 0px;
     left: -221px;
+    padding-top: 40px;
     margin-left: 0;
     height: 100%;
     position: fixed;
+    box-sizing: border-box;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px; }
@@ -226,9 +230,8 @@ footer {
       top: 10px;
       right: 10px;
       text-decoration: none;
-      font-weight: bold;
       color: #0a78a0;
-      font-size: 24px; }
+      font-size: 40px; }
   .js article {
     margin: 0 auto;
     padding-left: 0;
@@ -237,35 +240,31 @@ footer {
     left: 0;
     top: 0;
     position: relative; } }
-@media only screen and (max-width: 660px) {
+@media only screen and (max-width: 767px) {
+  .js #menu_toggle {
+    position: absolute;
+    margin-left: 10px;
+    left: 0; }
   .js header {
     height: 118px;
     background-position: center center; }
     .js header h1 {
       height: 118px;
-      width: 100%; }
+      width: 100%;
+      text-align: left; }
       .js header h1 a {
-        width: 90%;
         height: 100%;
         float: none;
-        margin-right: 0;
-        background: #0a78a0 url("../furniture/opentype_cookbook_header.png") no-repeat center center;
-        -webkit-background-size: contain;
-        -o-background-size: contain;
-        background-size: contain;
-        text-indent: -9999px; }
+        margin-left: 80px;
+        margin-right: 0; }
     .js header h2 {
-      display: none;
-      position: relative;
-      top: -47px;
-      color: #e6fa82;
-      font-weight: normal;
-      font-size: 14px;
-      text-align: center; }
+      display: none; } }
+@media only screen and (max-width: 767px) and (max-width: 620px) {
   .js article {
     width: auto;
     margin-left: 20px;
     margin-right: 20px; } }
+
 .highlight .hll {
   background-color: #49483e; }
 

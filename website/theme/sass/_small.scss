@@ -1,3 +1,9 @@
+#menu_toggle {
+    position: absolute;
+    margin-left: 10px;
+    left: 0;
+}
+
 header {
     height: 118px;
     background-position: center center;
@@ -6,34 +12,30 @@ header {
         height: 118px;
         width: 100%;
 
+        text-align: left;
+
         a {
-            width: 90%;
             height: 100%;
             float: none;
+            margin-left: 80px;
             margin-right: 0;
-
-            background: $main url('../furniture/opentype_cookbook_header.png') no-repeat center center;
-            -webkit-background-size: contain;
-            -o-background-size: contain;
-            background-size: contain;
-
-            text-indent: -9999px;
         }
     }
     h2 {
         display: none;
-        position: relative;
-        top: -47px;
+        // position: relative;
+        // top: -47px;
 
-        color: $secondary-light;
-        font-weight: normal;
-        font-size: 14px;
-        text-align: center;
+        // color: $secondary-light;
+        // font-weight: normal;
+        // font-size: 14px;
+        // text-align: center;
     }
 }
-
-article {
-    width: auto;
-    margin-left:20px;
-    margin-right: 20px;
+@media only screen and (max-width: 620px) {
+    article {
+        width: auto;
+        margin-left:20px;
+        margin-right: 20px;
+    }
 }
