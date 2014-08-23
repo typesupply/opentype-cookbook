@@ -10,4 +10,8 @@ The OpenType Cookbook website uses [Pelican](http://getpelican.com) as a static 
 
 3. Generate the static content into the output directory: ```make html```
 
+    OR
+
+    Generate AND run a development server with: ```make devserver```. Website can be previewed at [http://localhost:8000](http://localhost:8000).
+
 More options for publishing and previewing the website can be found in [Pelican's docs](http://docs.getpelican.com/en/3.4.0/publish.html).
