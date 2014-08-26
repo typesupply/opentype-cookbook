@@ -16,15 +16,9 @@ Within a feature, it is often necessary to group a set of rules together. This g
 
 Visually, you can think of features, lookups and rules like this:
 
-    feature
-      lookup
-        rule
-        rule
-        ...
-      lookup
-      ...
-    feature
-    ...
+![Structure of features, lookups and rules.](images/foundation-internal-structure.svg)
+
+(Note: In these illustrations if you see a jagged line cutting something off, it means "There is a bunch of the same kind of stuff so we'll cut it off to avoide too much repetition.")
 
 ## Processing
 
@@ -34,69 +28,21 @@ Features process sequences of glyphs. These glyph runs may represent a complete 
 
 For example, let's assume that you have the following features, lookups and rules:
 
-    feature: small caps
-        lookup: letters
-            replace a with A.sc
-            replace b with B.sc
-            ...
-            replace z with Z.sc
-        lookup: numbers
-            replace zero with zero.sc
-            ...
-            replace nine with nine.sc
-    feature: ligatures
-        lookup: basic
-            replace f f i with f_f_i
-            replace f f l with f_f_l
-            replace f f with f_f
-            replace f i with f_i
-            replace f l with f_l
+![Example features, lookups and rules.](images/foundation-example-features.svg)
 
 Let's also assume that the user wants to apply small caps and ligatures to a glyph run that displays "Hello".
 
 A glyph run is processed one feature at a time. So, here is what "Hello" will look like as it enters and exists each feature:
 
-    (this will be an illustration)
-    Hello > [feature: small caps] > Hello (with ello in .sc)
-    Hello (with ello in .sc) > [feature: ligatures] > Hello (with ello in .sc)
+![Feature processing.](images/foundation-processing-feature.svg)
 
 Within each feature, the glyph run is processed one lookup at a time. Here is what our example looks like as it moves through the small caps feature:
 
-    (this will be an illustration)
-    Hello > [lookup: letters] > Hello (with ello in .sc)
-    Hello (with ello in .sc) > [lookup: numbers] > Hello (with ello in .sc)
+![Lookup processing.](images/foundation-processing-lookup.svg)
 
 Within each lookup, things are a little different. The glyph run is passed one glyph at a time from beginning to end over each rule within the lookup. If a rule transforms the current glyph, the following rules are skipped for the current glyph. The next glyph is then current through the lookup. That's complex, so let's look at it with our example:
 
-    (this will be an illustration)
-    H ello > [replace a with A.sc] > H ello
-    H ello > [replace b with B.sc] > H ello
-    ...
-    H ello > [replace z with Z.sc] > H ello
-
-    e llo > [replace a with A.sc] > H e llo
-    e llo > [replace b with B.sc] > H e llo
-    ...
-    e llo > [replace e with E.sc] > H (E.sc) llo
-    (the rest are skipped)
-
-    l lo > [replace a with A.sc] > H(E.sc) l lo
-    l lo > [replace b with B.sc] > H(E.sc) l lo
-    ...
-    l lo > [replace l with L.sc] > H(E.sc) (L.sc) lo
-    (the rest are skipped)
-
-    l o > [replace a with A.sc] > H(E.sc)(L.sc) l o
-    l o > [replace b with B.sc] > H(E.sc)(L.sc) l o
-    ...
-    l o > [replace l with L.sc] > H(E.sc)(L.sc) (L.sc) o
-    (the rest are skipped)
-
-    o > [replace a with A.sc] > H(E.sc)(L.sc)(L.sc) o
-    o > [replace b with B.sc] > H(E.sc)(L.sc)(L.sc) o
-    ...
-    o > [replace o with O.sc] > H(E.sc)(L.sc)(L.sc) (O.sc)
-    (the rest are skipped)
+![Rule processing.](images/foundation-processing-rule.svg)
 
 Here is our example, animated:
 
