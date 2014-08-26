@@ -24,6 +24,7 @@ I don't have a set column width for class definitions or rules. I find that they
 
 I precede all comments with a single # followed by a space.
 
+    :::fea
     # This looks nice.
     #This does not.
 
@@ -33,6 +34,7 @@ Comments are always indented to the level of the code that they are meant to doc
 
 I structure my features like this:
 
+    :::fea
     # -----------------
     # Example Feature 1
     # -----------------
@@ -60,6 +62,7 @@ Features always have two blank lines between them and whatever is next in the fi
 
 Lookups are structured like this:
 
+    :::fea
     lookup ExampleLookup1 {
         # rules
     } ExampleLookup1;
@@ -78,6 +81,7 @@ There should be at least one blank line above a lookup and one blank line below.
 
 Classes are defined line this:
 
+    :::fea
     @exampleClass1 = [A B C];
     @exampleClass2 = [a b c];
 
@@ -89,6 +93,7 @@ Class names should be descriptive of the class' contents and purpose. For exampl
 
 If there are two or more classes that are intended for substituting with each other, readability can be greatly increased by using spaces between glyph names as alignment padding. For example:
 
+    :::fea
     @figures         = [zero     one     two];
     @figuresTabular  = [zero.tab one.tab two.tab];
     @figuresSmallCap = [zero.sc  one.sc  two.sc];
@@ -101,6 +106,7 @@ Rules are defined with the short version of the keywords, sub and pos, instead o
 
 Script and language definitions each increase the indentation level by one level until the next script or language definition or until the end of the feature. For example:
 
+    :::fea
     feature locl {
 
         script latn;
