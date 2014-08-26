@@ -18,6 +18,7 @@ Often we want to make substitutions based on the bounds of words and glyph runs.
 
 Unfortunately the specification is a bit vague about how these are supposed to be implemented. The Unicode specification details a word boundary detection algorithm and conceivably that's what would be used by the layout engines that are processing your font. That specification is quite thorough, but it thinks about word boundaries in a different way than type designers do (or at least the type designer writing this does). For example, where are the word boundaries in this text?
 
+    :::fea
     Hello “World!”
 
 They are at the o, the W and the d. *(I'm 99.999999% sure about this, but I should test it again.)* If we use this for swashes our W and d are likely to clash with the marks “ and ! around them. We often think of word boundaries as an empty space around words. If we want to use init and fina, we'll need to build in exceptions. You can certainly do that, but I generally do it all myself with some special classes:
@@ -28,6 +29,7 @@ They are at the o, the W and the d. *(I'm 99.999999% sure about this, but I shou
 
 With these, we can build lookups that handle boundary detection reasonable well enough for things like swashes.
 
+    :::fea
     lookup GlyphRunInitial {
         ignore sub @all @initialsOff';
         sub @initialsOff' by @initialsOn;
@@ -58,6 +60,7 @@ To be clear, you should not use this for shaping Arabic or anything like that. T
 
 The locl feature is specifically designed to implement global script and language specific changes that need to happen before any other features are processed. You can certainly put stylistic specific changes in other features, but the big important ones should be in locl.
 
+    :::fea
     feature locl {
 
         script latn;
@@ -77,6 +80,7 @@ I have used two different algorithms for implementing on-the-fly fractions. The 
 
 This method has been around for as long as I have been working on OpenType features. Adobe probably developed it in the very early days of the .fea language. It is probably still the most common implementation.
 
+    :::fea
     feature frac {
         @slash = [slash fraction];
 
@@ -96,7 +100,8 @@ I developed a new method that is built on the common form of writing fractions a
 
 With this users can globally activate fractions. The only drawback that I have found with this is that it doesn't allow numerators to be longer than 10 numbers long. In the unlikely event that a user runs into this problem, they can select the unconverted numerators and activate the numerator feature.
 
-     feature frac {
+    :::fea
+    feature frac {
 
         lookup FractionBar {
             ignore sub slash @figures @figures @figures @figures @figures @figures @figures @figures @figures @figures slash';
@@ -175,6 +180,7 @@ With this users can globally activate fractions. The only drawback that I have f
 
 The `numr` feature is designed to convert all numbers to numerators.
 
+    :::fea
     feature numr {
         sub @figures by @figuresNumerator;
     } numr;
@@ -183,6 +189,7 @@ The `numr` feature is designed to convert all numbers to numerators.
 
 The `dnom` feature is designed to convert all numbers to denominators.
 
+    :::fea
     feature dnom {
         sub @figures by @figuresDenominator;
     } dnom;
@@ -191,6 +198,7 @@ The `dnom` feature is designed to convert all numbers to denominators.
 
 The `sups` feature is for superscript forms.
 
+    :::fea
     feature sups {
         sub @figures by @figuresSuperscript;
         sub @letters by @lettersSuperscript;
@@ -200,6 +208,7 @@ The `sups` feature is for superscript forms.
 
 The `subs` feature is for subscript forms.
 
+    :::fea
     feature subs {
         sub @figures by @figuresSubscript;
         sub @letters by @lettersSubscript;
@@ -209,6 +218,7 @@ The `subs` feature is for subscript forms.
 
 If your font only includes one figure style, you don't need to do anything. If you do have more than one, you have to do some awkward things due to some odd behaviors in various applications. First off, it's best to define a feature for your default figures even though it will never be used. For example, in the demo font the default figures are lining and there are old style figures as alternates. First up we need to define the lining figures feature (lnum) even though it will never actually be used. Then we define the old style feature (onum).
 
+    :::fea
     feature lnum {
         sub @figuresOldStyle by @figures;
     } lnum;
@@ -219,6 +229,7 @@ If your font only includes one figure style, you don't need to do anything. If y
 
 Likewise, if your default figures are proportional and you have tabular alternates, you need to define the proportional figures feature (pnum) and then define the tabular figures feature (tnum).
 
+    :::fea
     feature pnum {
         sub @figuresTabular by @figures;
         sub @figuresOldStyleTabular by @figuresOldStyle;
@@ -233,6 +244,7 @@ Likewise, if your default figures are proportional and you have tabular alternat
 
 There are two features that invoke small caps: small caps `smcp` and “caps to small caps” or “all small caps” `c2sc`. The latter version is for situations in which the user wants everything possible, not just letters, to be converted to small cap forms. (something about not doing case conversion, but being aware of things like the germanbls, dotlessi?)
 
+    :::fea
     feature smcp {
         sub @lowercase by @smallCaps;
     } smcp;
@@ -247,12 +259,14 @@ There are two features that invoke small caps: small caps `smcp` and “caps to 
 
 There are two features that should be activated when the user indicates that they want all text converted to uppercase. The `case` feature transforms any glyphs that should be changed to an uppercase alternate. You should not define the transformation from lowercase to uppercase for alphabetic forms. The layout engine will do that for you.
 
+    :::fea
     feature case {
         sub @punctuationUppercaseOff by @punctuationUppercaseOn;
     } case;
 
 The `cpsp` feature allows you to define specific spacing for all caps settings:
 
+    :::fea
     feature cpsp {
         pos @uppercase <100 0 200 0>;
         pos @punctuationUppercaseOn <100 0 200 0>;
@@ -264,6 +278,7 @@ Note that these features will not be activated whenever the user types in all ca
 
 There are two swash features `swsh` `cswh`. I prefer to use the contextual version `cswh`. What this feature does will depend on the swash glyphs in your font.
 
+    :::fea
     feature cswh {
         ignore sub @filled @swashInitialsOff';
         sub @swashInitialsOff' by @swashInitialsOn;
@@ -273,6 +288,7 @@ There are two swash features `swsh` `cswh`. I prefer to use the contextual versi
 
 The titling alternates feature `titl` is, as its name suggests, for titling specific alternates.
 
+    :::fea
     feature titl {
         sub @uppercase by @titlingCaps;
     } titl;
@@ -287,6 +303,7 @@ There are several features that are designed to work with ligatures. The two mos
 
 The Common Ligatures feature is for ligatures that you think should be used almost all of the time.
 
+    :::fea
     feature liga {
         sub f i by f_i;
         sub f l by f_l;
@@ -294,12 +311,14 @@ The Common Ligatures feature is for ligatures that you think should be used almo
 
 The Discretionary Ligatures feature is for ligatures that you think should be used sparingly.
 
+    :::fea
     feature dlig {
         sub O O by O_O;
     } dlig;
 
 As everywhere else, the ordering of the rules is very important within these features. You should always order them from longest glyph sequence to shortest. For example:
 
+    :::fea
     sub o f f i by o_f_f_i; 
     sub f f i by f_f_i;
     sub f f by f_f;
@@ -313,6 +332,7 @@ There is one special feature that is used to determine the alternates displayed 
 
 There are a couple of different ways to define the rules in this feature, but I prefer to do it manually with individual one from many rules.
 
+    :::fea
     feature aalt {
         sub A from [A.swash A.title A.random1 A.random2 A.sc];
         sub B from [B.swash B.title B.random1 B.random2 B.sc];
@@ -380,6 +400,7 @@ Given enough alternates, this creates an effective illusion in a large block of 
 
 The code is very simple:
 
+    :::fea
     feature calt {
         @randomCycle1 = [@uppercase];
         @randomCycle2 = [A.random1 B.random1 C.random1 D.random1 E.random1 F.random1 G.random1 H.random1 I.random1 J.random1 K.random1 L.random1 M.random1 N.random1 O.random1 P.random1 Q.random1 R.random1 S.random1 T.random1 U.random1 V.random1 W.random1 X.random1 Y.random1 Z.random1];
@@ -399,6 +420,7 @@ For example:
 
 The code is lengthy, but fairly straightforward:
 
+    :::fea
     feature calt {
 
         @randomDuplicateSkip = [@uppercase];
@@ -498,6 +520,7 @@ This method is for dedicated randomization aficionados. A little history about h
 
 Before we get to rules, we establish several important classes. First we create two trigger classes. The first will contain half of the glyphs in the font and the next will contain the other half of the glyphs. These need to be randomly chosen. In other words, don't put A-Z in the same class. That won't produce the desired result. Next, we establish alternate states for glyphs. These states are defined in a series of classes. Each of these classes contain a glyph and its alternate. The next class contains the opposite of the previous class. For example:
 
+    :::fea
     @class1 = [A A.alt];
     @class2 = [A.alt A];
 
@@ -510,6 +533,7 @@ The glyph processing happens in a series of lookups that each pass over the enti
 Is it real randomization? No. Is it perfect? No. Is it incredibly complex and hard to write? Yes. (Unless you use a script to write it.) Can it be slow if a font contains a large number of glyphs and the glyph run being processed is very long? Yes. Is it awesome anyway? I think so.
 
 
+    :::fea
     feature calt {
         @randomQuantumTrigger1 = [A.random1 A.random2 B B.random2 C C.random1 C.random2 D D.random1 E.random1 G G.random2 H H.random2 I J K.random1 L.random2 N.random1 O O.random1 P.random1 P.random2 Q.random1 S S.random1 S.random2 T T.random1 U.random2 V W.random1 W.random2 X X.random1 Y Y.random1 Y.random2 Z.random2];
         @randomQuantumTrigger2 = [A B.random1 D.random2 E E.random2 F F.random1 F.random2 G.random1 H.random1 I.random1 I.random2 J.random1 J.random2 K K.random2 L L.random1 M M.random1 M.random2 N N.random2 O.random2 P Q Q.random2 R R.random1 R.random2 T.random2 U U.random1 V.random1 V.random2 W X.random2 Z Z.random1 space];
@@ -576,6 +600,7 @@ It's possible to extend the quantum randomization method above and use it to ran
 
 The code is similar to the substitution method. In this case, instead of states, the cumulative effect that lookups have on glyph records is used.
 
+    :::fea
     feature ss01 {
         @randomPositionQuantumTrigger1 = [A.random2 B B.random1 C.random2 D D.random1 E.random2 F F.random1 F.random2 G G.random2 H H.random2 I.random1 I.random2 J.random1 J.random2 K.random2 L.random1 M.random1 N O Q Q.random1 R S S.random1 T.random1 T.random2 U U.random1 U.random2 W.random1 X.random1 X.random2 Z Z.random2 space];
         @randomPositionQuantumTrigger2 = [A A.random1 B.random2 C C.random1 D.random2 E E.random1 G.random1 H.random1 I J K K.random1 L L.random2 M M.random2 N.random1 N.random2 O.random1 O.random2 P P.random1 P.random2 Q.random2 R.random1 R.random2 S.random2 T V V.random1 V.random2 W W.random2 X Y Y.random1 Y.random2 Z.random1];

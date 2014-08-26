@@ -17,6 +17,7 @@ The language system declarations must come first. After that, the order is up to
 
 Here is a basic example combined into the proper form:
 
+    :::fea
     languagesystem DFLT dflt;
     langaugesystem latn dflt;
 
@@ -43,6 +44,7 @@ Here is a basic example combined into the proper form:
 
 Note that there are no lookups declared. Why? The first lookup is implied to be anything before you define a lookup. Consider this example:
 
+    :::fea
     feature c2sc {
         sub @uppercase by @smallcaps;
 
@@ -53,6 +55,7 @@ Note that there are no lookups declared. Why? The first lookup is implied to be 
 
 The first rule, sub @uppercase by @smallcaps;, is implicitly in a lookup. The result is the same as this:
 
+    :::fea
     feature c2sc {
         lookup Uppercase {
             sub @uppercase by @smallcaps;
@@ -87,15 +90,18 @@ There are, of course, exceptions. The point is that you should think through thi
 
 If you are working on a family that shares features across multiple styles, it's cumbersome to store the features in each font source file. To get around this, you can store the features in an external file and reference them from the features in your font source file. To do this you use the include keyword:
 
+    :::fea
     include(features/family.fea);
 
 The text inside of the parenthesis must be the path to your external features file relative to the font source file. In the example above, the file family.fea is located in a folder called features right next to my font source file.
 
 You can even include multiple files in a single font source file. For example:
 
+    :::fea
     include(features/family.fea);
     include(features/bold-kern.fea);
 
 Even in other folders, below the current one:
 
+    :::fea
     include(../tables.fea);
