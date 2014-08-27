@@ -5,6 +5,12 @@
     <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0; user-scalable=no">
+    {% if page.summary %}
+    <meta name="description" content="{{ page.summary|striptags }}" />
+    {% endif %}
+    {% if AUTHOR %}
+    <meta name="author" content="{{ AUTHOR }}" />
+    {% endif %}
 
     <link rel="stylesheet" href="{{ SITEURL }}/theme/styles/normalize.css">
     <link rel="stylesheet" href="{{ SITEURL }}/theme/styles/main.css">
