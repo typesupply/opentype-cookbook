@@ -1,4 +1,5 @@
 Title: Introduction
+Slug: index
 Summary: Short version for index and feeds
 Sortorder: 1
 
@@ -10,6 +11,7 @@ OpenType is writing direction agnostic, but the examples in this document are fo
 
 ## Stuff to Add
 
-- getting help http://typedrawers.com?
 - who wrote this thing
+- this is unofficial
+- getting help http://typedrawers.com? FDK mailing list
 - donation button?
