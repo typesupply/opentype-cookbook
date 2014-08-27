@@ -1,3 +1,5 @@
+@import 'colors';
+
 // FONTS
 @mixin fontface($family, $src, $weight:normal, $style:normal) {
     font-family: $family;
@@ -14,18 +16,14 @@
     @include fontface('Queue', 'queue-bold', bold, normal);
 }
 
-// COLOURS
-$main: rgb(10, 120, 160);
-$secondary-light: rgb(230, 250, 130);
-$secondary-dark: rgb(0, 30, 60);
-$code-block: rgb(245, 255, 200);
 
 html {
     height: 100%;
 }
 
 body {
-    font: 16px/21px 'Queue', sans-serif;
+    font: 15px/23px 'Queue', sans-serif;
+    font-weight: 300;
     color: #000000;
     height: 100%;
 }
@@ -132,33 +130,39 @@ nav {
 }
 
 article {
-    width: 580px;
+    width: 600px;
     position: relative;
     left: 0;
     margin: 0 auto;
     padding-left: 250px;
+    padding-bottom: 80px;
 
     background-color: #ffffff;
 
     h1, h2, h3, h4 {
         color: $main;
-        margin-bottom: 0;
+        padding: 0;
+        margin: 1em 0 0.5em 0;
     }
     h1 {
-        font-size: 40px;
+        font-size: 35px;
         line-height: 30px;
     }
     h2 {
-        font-size: 30px;
-        line-height: 30px;
+        font-size: 25px;
+        line-height: 25px;
     }
     h3 {
-        font-size: 25px;
-        line-height: 30px;
+        font-size: 20px;
+        line-height: 25px;
     }
     h4 {
         font-size: 16px;
         line-height: 30px;
+    }
+
+    p {
+        margin: 0 0 0.5em 0;
     }
 
     a {
@@ -174,6 +178,8 @@ article {
     code {
         font-family: 'Queue', sans-serif;
         color: $main;
+        background: $code-block;
+        padding: 0 0.2em;
     }
 
     ol {
@@ -193,11 +199,17 @@ article {
                 width: 1.5em;
                 display: block;
 
+                color: $main;
                 text-align: right;
                 font-weight: bold;
-                color: $main;
+                -moz-font-feature-settings:"tnum" 1; 
+                -moz-font-feature-settings:"tnum=1"; 
+                -ms-font-feature-settings:"tnum" 1; 
+                -o-font-feature-settings:"tnum" 1; 
+                -webkit-font-feature-settings:"tnum" 1; 
+                font-feature-settings:"tnum" 1;
 
-                content: counter(li-counter) ".";
+                content: counter(li-counter);
                 counter-increment: li-counter;
             }
         }
@@ -210,7 +222,7 @@ article {
 
         & > li {
             position: relative;
-            padding-left: 0.5em;
+            padding-left: 0.2em;
 
             &:before {
                 position: absolute;
@@ -229,11 +241,14 @@ article {
 
     .highlight pre {
         font-family: 'Queue', sans-serif;
+        background: $code-block;
+        padding: 1em 1em 1em 1.5em;
     }
 }
 
 footer {
     background: transparent url('../furniture/footer_arrow.png') no-repeat right top;
+    margin-top: 50px;
 
     a {
         margin: 0 20px;
