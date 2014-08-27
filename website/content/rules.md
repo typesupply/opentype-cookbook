@@ -16,7 +16,7 @@ The syntax for a substitution is:
     :::fea
     substitute target by replacement;
 
-We can abbreviate substitute with sub to cut down on how much stuff we have to type, so let's do that:
+We can abbreviate `substitute` with `sub` to cut down on how much stuff we have to type, so let's do that:
 
     :::fea
     sub target by replacement;
@@ -30,9 +30,9 @@ To replace one thing with another, you do this:
     :::fea
     sub target by replacement;
 
-(In the .fea documentation, this is known as GSUB Lookup Type 1: Single Substitution.)
+*(In the .fea documentation, this is known as GSUB Lookup Type 1: Single Substitution.)*
 
-For example, to transform a to A.sc, you would do this:
+For example, to transform `a` to `A.sc`, you would do this:
 
     :::fea
     sub a by A.sc;
@@ -49,19 +49,20 @@ It's usually more readable to define the classes earlier in your code and then r
 
 The order of the glyphs in your classes in this situation is critical. In the example above, the classes will correspond with each other like this:
 
-    a -> A.sc
-    b -> B.sc
-    c -> C.sc
+    a → A.sc
+    b → B.sc
+    c → C.sc
 
 If you order the target and replacement classes incorrectly, things will go wrong. For example, if you have this as your rule:
 
+    :::fea
     sub [a b c] by [B.sc C.sc A.sc];
 
 The classes will correspond like this:
 
-    a -> B.sc
-    b -> C.sc
-    c -> A.sc
+    a → B.sc
+    b → C.sc
+    c → A.sc
 
 This is obviously undesired behavior, so keep your classes ordered properly.
 
@@ -70,11 +71,11 @@ This is obviously undesired behavior, so keep your classes ordered properly.
 To replace a sequence of things with one thing, you do this:
 
     :::fea
-    sub target sequence with replacement;
+    sub target sequence by replacement;
 
-(In the .fea documentation, this is known as GSUB Lookup Type 4: Ligature Substitution.)
+*(In the .fea documentation, this is known as GSUB Lookup Type 4: Ligature Substitution.)*
 
-For example, for a fi ligature, you would do this:
+For example, for a `fi` ligature, you would do this:
 
     :::fea
     sub f i by f_i;
@@ -100,9 +101,9 @@ To replace a sequence of things with a single thing, you do this:
     :::fea
     sub target by replacement sequence;
 
-(In the .fea documentation, this is known as GSUB Lookup Type 2: Multiple Substitution.)
+*(In the .fea documentation, this is known as GSUB Lookup Type 2: Multiple Substitution.)*
 
-For example, to convert an fi ligature back into f and i, you would do this:
+For example, to convert an `fi` ligature back into `f` and `i`, you would do this:
 
     :::fea
     sub f_i by f i;
@@ -116,16 +117,16 @@ To give the user a choice of alternates, you do this:
     :::fea
     sub target from replacement;
 
-(In the .fea documentation, this is known as GSUB Lookup Type 3: Alternate Substitution.)
+*(In the .fea documentation, this is known as GSUB Lookup Type 3: Alternate Substitution.)*
 
 The replacement must be a glyph class, and (unlike above) does not happen automatically, but usually requires active user interaction (e.g. picking glyphs from a selection of alternates).
 
-For example, to give the user several options to replace a with, you would do this:
+For example, to give the user several options to replace `a` with, you would do this:
 
     :::fea
     sub a from [a.alt1 a.alt2 a.alt3];
 
-Note that the keyword in the middle of the rule is *from* instead of *by*.
+Note that the keyword in the middle of the rule is `from` instead of `by`.
 
 ## Positioning
 
@@ -142,11 +143,11 @@ Before we go much further we need to talk about coordinate systems and value rec
 
     (illustration showing a g with the origin and axes highlighted)
 
-In the positioning rules, we can adjust the placement and advance of glyphs. The placement is the spot at which the origin of the glyph will be aligned. The advance is the width and the height of the glyph from the origin. In horizontal typesetting, the height will be zero and the width will be the width of the glyph. The placement and advance can each be broken down into X and Y values. Thus, there is an x placement, a y placement, an x advance and a y advance.
+In the positioning rules, we can adjust the *placement* and *advance* of glyphs. The placement is the spot at which the origin of the glyph will be aligned. The advance is the width and the height of the glyph from the origin. In horizontal typesetting, the height will be zero and the width will be the width of the glyph. The placement and advance can each be broken down into X and Y values. Thus, there is an x placement, a y placement, an x advance and a y advance.
 
     (illustration showing a g with the placements and advance highlighted. be sure to clearly show the advance width of the glyph.)
 
-The units that these values represent are the same units in which you have drawn your glyph. Together, these four values form a value record. In the .fea syntax, we express these value records like this:
+The units that these values represent are the same units in which you have drawn your glyph. Together, these four values form a *value record*. In the .fea syntax, we express these value records like this:
 
     :::fea
     <xPlacement yPlacement xAdvance yAdvance>
@@ -167,7 +168,7 @@ The syntax for a positioning rule is:
     :::fea
     position target valueRecord;
 
-We can abbreviate position with pos to cut down on how much stuff we have to type, so let's do that:
+We can abbreviate `position` with `pos` to cut down on how much stuff we have to type, so let's do that:
 
     :::fea
     pos target valueRecord;
@@ -181,9 +182,9 @@ To adjust the space around a single target, you do this:
     :::fea
     pos target valueRecord;
 
-(In the .fea documentation, this is known as GPOS Lookup Type 1: Single Adjustment Positioning.)
+*(In the .fea documentation, this is known as GPOS Lookup Type 1: Single Adjustment Positioning.)*
 
-For example, to put some space to the left and right of the A, you would do this:
+For example, to put some space to the left and right of the `A`, you would do this:
 
     :::fea
     pos A <10 0 20 0>;
@@ -197,13 +198,13 @@ To adjust the space between two targets, you do this:
     :::fea
     pos target1 target2 valueRecord;
 
-(In the .fea documentation, this is known as GPOS Lookup Type 2: Pair Adjustment Positioning.)
+*(In the .fea documentation, this is known as GPOS Lookup Type 2: Pair Adjustment Positioning.)*
 
 In this case, you can shorten the value record to be only the x advance adjustment. Or, you can use the full value record if you prefer that.
 
 This rule is used almost exclusively for kerning. In fact, this is so common that you shouldn't have to write any of these rules yourself. Your font and/or kerning editor should do this for you.
 
-You can use a class as target1, target2 or both:
+You can use a class as target 1, target 2 or both:
 
     :::fea
     pos @A T -50;
@@ -232,7 +233,7 @@ Contextual rules allow us to specify a sequence before the target, a sequence af
 
 The backtrack and lookahead are both optional. Either, or neither, can appear. If a sequence is present, it can contain one or more things.
 
-In addition to the backtrack and lookahead, a new character is needed in these rules: '. This character is used to mark the target of the rule.
+In addition to the backtrack and lookahead, a new character is needed in these rules: `'`. This character is used to mark the target of the rule.
 
 Here is the words example from above in the correct syntax:
 
@@ -246,21 +247,21 @@ Most of the substitution and positioning rule types can be defined with a contex
 - adjust position of one glyph: `pos A B' C <10 0 20 0>;`
 - adjust positioning of the space between two glyphs: `pos A B' C' -50 D;`
 
-Please note that just because you can apply this to all rule types doesn't mean that it always makes sense; or that you should.
+Please note that just because you *can* apply this to all rule types doesn't mean that it always makes sense; or that you should.
 
 ### Exceptions
 
-What if we have a short context that you want to match, but a longer context that contains the short context? For example, say we want to change the r in words but not in words!. To do that we can specify an exception to the contextual rule. For example:
+What if we have a short context that you want to match, but a longer context that contains the short context? For example, say we want to change the r in words but not in words!. To do that we can specify an *exception* to the contextual rule. For example:
 
     :::fea
     ignore sub w o r' d s exclam;
     sub w o r' d s by r.alt;
 
-The ignore keyword followed by a backtrack (optional), target and lookahead (optional) creates the exception.
+The `ignore` keyword followed by a backtrack (optional), target and lookahead (optional) creates the exception.
 
 ### Common Gotcha
 
-If you use a contextual rule or exception within a lookup, all of the rules within that lookup *must* also use the ' on the target of the rule. For example:
+If you use a contextual rule or exception within a lookup, all of the rules within that lookup *must* also use the `'` on the target of the rule. For example:
 
     :::fea
     sub a b' c by b.alt;
@@ -274,7 +275,7 @@ By now we have established the rules needed to make most features that you'll wa
 
 One of OpenType's best attributes is the way that it handles languages and scripts. We can define rules that only apply when the user has indicated that they are writing a particular language or using a particular script. To do this, we state the script and the language that the rules apply to. After these have been made, all subsequent rules in the feature belong to this language and script unless you declare another language and script.
 
-Let's look at an example. Let's say that we have a special IJ that should only be used when Dutch is the declared language. We need to say: when the script is latin and the language is Dutch, replace IJ with IJ.alt. Here is how we do that:
+Let's look at an example. Let's say that we have a special `IJ` that should only be used when Dutch is the declared language. We need to say: when the script is latin and the language is Dutch, replace `IJ` with `IJ.alt`. Here is how we do that:
 
     :::fea
     script latn;

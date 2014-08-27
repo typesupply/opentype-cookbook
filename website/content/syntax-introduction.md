@@ -2,11 +2,11 @@ Title: Syntax Introduction
 Summary: Short version for index and feeds
 Sortorder: 4
 
-We will be writing our features in the [Adobe OpenType Feature File Syntax](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html) (commonly referred to as ".fea"). .fea is a simple, text format that is easily editable in text and font editors. There are other syntaxes and tools for developing features, but .fea is the most widely supported and the most easily accessible. We'll be going through the important parts of .fea in detail, but for now we need to establish some basics.
+We will be writing our features in the [Adobe OpenType Feature File Syntax](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html) (commonly referred to as ".fea"). This is a simple, text format that is easily editable in text and font editors. There are other syntaxes and tools for developing features, but .fea is the most widely supported and the most easily accessible. We'll be going through the important parts of .fea in detail, but for now we need to establish some basics.
 
 ## Comments
 
-It's useful to be able to write comments about your code. To do this, add a # and everything from the # to the end of the line of text will be marked as a comment.
+It's useful to be able to write comments about your code. To do this, add a `#` and everything from the `#` to the end of the line of text will be marked as a comment.
 
     :::fea
     # This is a comment.
@@ -35,7 +35,7 @@ Brackets enclose the contents of a class.
 
 ## Features
 
-Features are identified with a four character tag. These are either [registered tags](https://www.microsoft.com/typography/otspec/featurelist.htm) or private tags. Unless you have a very good reason to create a private tag, you should always use the registered tags. Applications that support OpenType features use these tags to identify which features are supported in your font. For example, if you have a feature with the smcp tag, applications will know that your font supports small caps.
+Features are identified with a four character tag. These are either [registered tags](https://www.microsoft.com/typography/otspec/featurelist.htm) or private tags. Unless you have a very good reason to create a private tag, you should always use the registered tags. Applications that support OpenType features use these tags to identify which features are supported in your font. For example, if you have a feature with the `smcp` tag, applications will know that your font supports small caps.
 
 Features are defined with the feature keyword, the appropriate tag, a pair of braces, the tag again, and a semicolon.
 
@@ -60,7 +60,7 @@ You'll often run into situations where you want use a group of glyphs in a rule.
     :::fea
     [A E I O U Y]
 
-Classes can have a name assigned to them so that they can be used more than once. Class names follow the general naming rules and they are always preceded with an @. To create a named class you set the name, then an =, then the class definition and end it with a semicolon.
+Classes can have a name assigned to them so that they can be used more than once. Class names follow the general naming rules and they are always preceded with an `@`. To create a named class you set the name, then an `=`, then the class definition and end it with a semicolon.
 
     :::fea
     @vowels = [A E I O U Y];
@@ -78,5 +78,5 @@ A name for a glyph, class or lookup must adhere to the following constraints:
 - Only use characters in A-Z a-z 0-9 . _
 - Must not start with a number or a period.
 
-You should avoid naming anything (including glyphs) with the same name as a [reserved keyword](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#2.c). If you do need to name a glyph with one of these names, precede an reference to the glyph with a `.` But, really, try to avoid needing to do this.
+You should avoid naming anything (including glyphs) with the same name as a [reserved keyword](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#2.c). If you do need to name a glyph with one of these names, precede an reference to the glyph with a `\` But, really, try to avoid needing to do this.
 

@@ -4,7 +4,7 @@ Sortorder: 7
 
 Up until now, almost everything that has been discussed has been the official way to do things or established common practice. The next section is far more subjective as there are numerous ways to write the code to create certain behaviors. What follows includes my own personal opinion.
 
-I have prepared a demo font that includes all of the features and techniques defined below. You can open it up in your favorite font editor and play around with the features if you want to see how they work. The feature tags in the code below don't always match the tags in the font. I had to do it this way since there can't be more than one version of each feature.
+I have prepared a [demo font](downloads/otcb-demo.zip) that includes all of the features and techniques defined below. You can open it up in your favorite font editor and play around with the features if you want to see how they work. The feature tags in the code below don't always match the tags in the font. I had to do it this way since there can't be more than one version of each feature.
 
 The features in the demo font are by no means to complete or an indication of what is necessary to include in a particular feature. You should develop your own interpretation of what should be included in each feature based on the design of your font.
 
@@ -18,14 +18,14 @@ Often we want to make substitutions based on the bounds of words and glyph runs.
 
 Unfortunately the specification is a bit vague about how these are supposed to be implemented. The Unicode specification details a word boundary detection algorithm and conceivably that's what would be used by the layout engines that are processing your font. That specification is quite thorough, but it thinks about word boundaries in a different way than type designers do (or at least the type designer writing this does). For example, where are the word boundaries in this text?
 
-    :::fea
-    Hello “World!”
 
-They are at the o, the W and the d. *(I'm 99.999999% sure about this, but I should test it again.)* If we use this for swashes our W and d are likely to clash with the marks “ and ! around them. We often think of word boundaries as an empty space around words. If we want to use init and fina, we'll need to build in exceptions. You can certainly do that, but I generally do it all myself with some special classes:
+- Hello “World!”
 
-- all -- This class contains all glyphs.
-- filled -- This class contains all glyphs that contain positive space.
-- empty -- This glyph contains all glyphs that contain only negative space.
+They are at the `o`, the `W` and the `d`. *(I'm 99.999999% sure about this, but I should test it again.)* If we use this for swashes our `W` and `d` are likely to clash with the marks `“` and `!` around them. We often think of word boundaries as an empty space around words. If we want to use `init` and `fina`, we'll need to build in exceptions. You can certainly do that, but I generally do it all myself with some special classes:
+
+- `@all` -- This class contains all glyphs.
+- `@filled` -- This class contains all glyphs that contain positive space.
+- `@empty` -- This glyph contains all glyphs that contain only negative space.
 
 With these, we can build lookups that handle boundary detection reasonable well enough for things like swashes.
 
@@ -58,7 +58,7 @@ To be clear, you should not use this for shaping Arabic or anything like that. T
 
 ## Script And Language Specific Forms
 
-The locl feature is specifically designed to implement global script and language specific changes that need to happen before any other features are processed. You can certainly put stylistic specific changes in other features, but the big important ones should be in locl.
+The `locl` feature is specifically designed to implement global script and language specific changes that need to happen before any other features are processed. You can certainly put stylistic specific changes in other features, but the big important ones should be in `locl`.
 
     :::fea
     feature locl {
@@ -94,11 +94,11 @@ This method has been around for as long as I have been working on OpenType featu
 
 ### Method 2: Contextual
 
-Around 2006 Kent Lew asked me if I had any ideas for a better fraction implementation. Specifically, he was referring to the fact that with the existing implementation users had to manually select only the text that should be converted to fractions and apply the feature. If the feature was applied to more than just that text all numbers not in a fraction would be converted to numerators. This was a big problem in things like cookbooks where there could be thousands of little bits of text that had to be converted to fractions.
+Around 2006 [Kent Lew](http://www.fontbureau.com/people/KentLew/) asked me if I had any ideas for a better fraction implementation. Specifically, he was referring to the fact that with the existing implementation users had to manually select *only* the text that should be converted to fractions and apply the feature. If the feature was applied to more than just that text all numbers not in a fraction would be converted to numerators. This was a big problem in things like cookbooks where there could be *thousands* of little bits of text that had to be converted to fractions.
 
-I developed a new method that is built on the common form of writing fractions as an integer, a space, a numerator, a slash and a denominator. For example: 2 1/2. The code considers 1-10 numbers followed by a slash followed by 1 or more numbers to be a fraction. The slash is converted to a fraction bar, the numbers before the slash are converted to numerators and the numbers after the slash are converted to denominators. If the new fraction is preceded by a number followed by a space, the space is converted to a thin space to pull the fraction closer to the integer. After I published the first version of this code, Karsten Luecke pointed out some some problems with dates, German tax numbers and things like that. I published a new version that handles these properly and this version is below.
+I developed a new method that is built on the common form of writing fractions as an integer, a space, a numerator, a slash and a denominator. For example: `2 1/2`. The code considers 1-10 numbers followed by a slash followed by 1 or more numbers to be a fraction. The slash is converted to a fraction bar, the numbers before the slash are converted to numerators and the numbers after the slash are converted to denominators. If the new fraction is preceded by a number followed by a space, the space is converted to a thin space to pull the fraction closer to the integer. After I published the first version of this code, [Karsten Luecke](http://kltf.de) pointed out some some problems with dates, German tax numbers and things like that. I published a new version that handles these properly and this version is below.
 
-With this users can globally activate fractions. The only drawback that I have found with this is that it doesn't allow numerators to be longer than 10 numbers long. In the unlikely event that a user runs into this problem, they can select the unconverted numerators and activate the numerator feature.
+With this users can *globally* activate fractions. The only drawback that I have found with this is that it doesn't allow numerators to be longer than 10 numbers long. In the unlikely event that a user runs into this problem, they can select the unconverted numerators and activate the numerator feature.
 
     :::fea
     feature frac {
@@ -216,7 +216,7 @@ The `subs` feature is for subscript forms.
 
 ## Figures
 
-If your font only includes one figure style, you don't need to do anything. If you do have more than one, you have to do some awkward things due to some odd behaviors in various applications. First off, it's best to define a feature for your default figures even though it will never be used. For example, in the demo font the default figures are lining and there are old style figures as alternates. First up we need to define the lining figures feature (lnum) even though it will never actually be used. Then we define the old style feature (onum).
+If your font only includes one figure style, you don't need to do anything. If you do have more than one, you have to do some awkward things due to some odd behaviors in various applications. First off, it's best to define a feature for your default figures even though it will never be used. For example, in the demo font the default figures are lining and there are old style figures as alternates. First up we need to define the lining figures feature (`lnum`) even though it will never actually be used. Then we define the old style feature (`onum`).
 
     :::fea
     feature lnum {
@@ -227,7 +227,7 @@ If your font only includes one figure style, you don't need to do anything. If y
         sub @figures by @figuresOldStyle;
     } onum;
 
-Likewise, if your default figures are proportional and you have tabular alternates, you need to define the proportional figures feature (pnum) and then define the tabular figures feature (tnum).
+Likewise, if your default figures are proportional and you have tabular alternates, you need to define the proportional figures feature (`pnum`) and then define the tabular figures feature (`tnum`).
 
     :::fea
     feature pnum {
@@ -242,7 +242,9 @@ Likewise, if your default figures are proportional and you have tabular alternat
 
 ## Small Caps
 
-There are two features that invoke small caps: small caps `smcp` and “caps to small caps” or “all small caps” `c2sc`. The latter version is for situations in which the user wants everything possible, not just letters, to be converted to small cap forms. (something about not doing case conversion, but being aware of things like the germanbls, dotlessi?)
+There are two features that invoke small caps: small caps `smcp` and “caps to small caps” or “all small caps” `c2sc`. The latter version is for situations in which the user wants everything possible, not just letters, to be converted to small cap forms.
+
+**(something about not doing case conversion, but being aware of things like the germanbls, dotlessi?)**
 
     :::fea
     feature smcp {
@@ -276,7 +278,7 @@ Note that these features will not be activated whenever the user types in all ca
 
 ## Swashes
 
-There are two swash features `swsh` `cswh`. I prefer to use the contextual version `cswh`. What this feature does will depend on the swash glyphs in your font.
+There are two swash features `swsh` and `cswh`. I prefer to use the contextual version `cswh`. What this feature does will depend on the swash glyphs in your font.
 
     :::fea
     feature cswh {
@@ -316,7 +318,7 @@ The Discretionary Ligatures feature is for ligatures that you think should be us
         sub O O by O_O;
     } dlig;
 
-As everywhere else, the ordering of the rules is very important within these features. You should always order them from longest glyph sequence to shortest. For example:
+As everywhere else, the ordering of the rules is very important within these features. You should always order them from longest target sequence to shortest. For example:
 
     :::fea
     sub o f f i by o_f_f_i; 
@@ -324,7 +326,7 @@ As everywhere else, the ordering of the rules is very important within these fea
     sub f f by f_f;
     sub f i by f_i;
 
-Would this sequence be ordered from bottom to top, the `f_f_i` and `o_f_f_i`  would have no chance of ever occurring, since their source glyphs already would have been converted beforehand.
+Would this sequence be ordered from bottom to top, the `f_f_i` and `o_f_f_i` would have no chance of ever occurring, since their source glyphs already would have been converted beforehand.
 
 ## Manual Alternate Access
 
@@ -382,11 +384,11 @@ Small caps and swashes are fun, but for me the real fun is in making fonts do un
 
 ### Randomization
 
-Everyone wants their font to look like the glyphs were randomly drawn. But, let's establish something first: No one will ever do randomization better than LettError did in their famous Beowolf. No one. Still want try some randomization? Okay.
+Everyone wants their font to look like the glyphs were randomly drawn. But, let's establish something first: No one will ever do randomization better than [LettError](http://letterror.com) did in their famous [Beowolf](http://letterror.com/beowolf). **No one.** Still want try some randomization? Okay.
 
-Randomization is a bit of a Holy Grail in the OpenType world. The problem is that it's not actually possible for a couple of reasons. For one thing, we can only select from alternates, not actually modify glyph outlines. For another, for true pseudo-randomization there needs to be an external source that influences the random selection process and we can't build a random seed generator with the OpenType tables. So, we have to fake it. There are a number of methods that can be used to do this. I have three that I like.
+Randomization is a bit of a Holy Grail in the OpenType world. The problem is that it's not actually possible for a couple of reasons. For one thing, we can only select from alternates, not actually modify glyph outlines. For another, for true pseudo-randomization there needs to be an external source that influences the random selection process and we can't build a [random seed](http://en.wikipedia.org/wiki/Random_seed) generator with the OpenType tables. So, we have to fake it. There are a number of methods that can be used to do this. I have three that I like.
 
-(PS: That `rand` "random alternates" feature in the OpenType Layout Tag Registry? It's not supported widely, if at all. Sorry.)
+*(PS: That `rand` "random alternates" feature in the OpenType Layout Tag Registry? It's not supported widely, if at all. Sorry.)*
 
 #### Method 1: Endless Cycle
 
@@ -397,6 +399,8 @@ For example:
     (illustration of AAAAAAAAAAAA in the demo font)
 
 Given enough alternates, this creates an effective illusion in a large block of text.
+
+    (illustration of a large block of text in the demo font)
 
 The code is very simple:
 
@@ -518,15 +522,15 @@ The code is lengthy, but fairly straightforward:
 
 This method is for dedicated randomization aficionados. A little history about how this came about: in 2005 I wanted to see if I could come up with a randomization technique that produced less predictable results than the methods above. I realized that I could use the text that the feature is transforming as a pseudo-pseudo-random seed. I was reading a tiny bit about quantum mechanics around the same time and my very limited understanding of some of the experiments in that field gave me an idea. That's a story that I won't get into here. Anyway, the code is long and convoluted, but the idea is pretty simple. I'll give you an overview.
 
-Before we get to rules, we establish several important classes. First we create two trigger classes. The first will contain half of the glyphs in the font and the next will contain the other half of the glyphs. These need to be randomly chosen. In other words, don't put A-Z in the same class. That won't produce the desired result. Next, we establish alternate states for glyphs. These states are defined in a series of classes. Each of these classes contain a glyph and its alternate. The next class contains the opposite of the previous class. For example:
+Before we get to rules, we establish several important classes. First we create two *trigger* classes. The first will contain half of the glyphs in the font and the next will contain the other half of the glyphs. These need to be randomly chosen. In other words, don't put A-Z in the same class. That won't produce the desired result. Next, we establish *alternate states* for glyphs. These states are defined in a series of classes. Each of these classes contain a glyph and its alternate. The next class contains the opposite of the previous class. For example:
 
     :::fea
     @class1 = [A A.alt];
     @class2 = [A.alt A];
 
-Finally, we establish a skip class that contains everything in the font.
+Finally, we establish a *skip* class that contains everything in the font.
 
-The glyph processing happens in a series of lookups that each pass over the entire glyph run. As a glyph, let's call it P, is being processed the lookup backtracks a specific number of glyphs. The glyph at the beginning of that backtrack, let's call it B, is then tested against a class, let's call it @T. Importantly, @T only contains half of the glyphs in the font. If B is in @T, P is switched to an alternate state. Thus, each glyph state is dependent on the state of all the glyphs that precede it. Given that the text is most likely going to have unpredictable letter combinations, we get a fairly effective randomization. For example:
+The glyph processing happens in a series of lookups that each pass over the entire glyph run. As a glyph, let's call it `P`, is being processed the lookup backtracks a specific number of glyphs. The glyph at the beginning of that backtrack, let's call it `B`, is then tested against a class, let's call it `@T`. Importantly, `@T` only contains half of the glyphs in the font. If `B` is in `@T`, `P` is switched to an alternate state. Thus, each glyph state is dependent on the state of all the glyphs that precede it. Given that the text is most likely going to have unpredictable letter combinations, we get a fairly effective randomization. For example:
 
     (illustration of the same string repeated in the demo font)
 
@@ -596,7 +600,11 @@ Is it real randomization? No. Is it perfect? No. Is it incredibly complex and ha
 
 #### Bonus: Quantum Positioning
 
-It's possible to extend the quantum randomization method above and use it to randomly shift glyphs around. Possible, but probably not advisable. The support for this is almost certainly going to be uneven.
+It's possible to extend the quantum randomization method above and use it to randomly shift glyphs around.
+
+    (illustration of a large block of text in the demo font)
+
+Possible, but probably not advisable. The support for this is almost certainly going to be uneven.
 
 The code is similar to the substitution method. In this case, instead of states, the cumulative effect that lookups have on glyph records is used.
 

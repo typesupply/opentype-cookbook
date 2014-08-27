@@ -19,7 +19,7 @@ Here is a basic example combined into the proper form:
 
     :::fea
     languagesystem DFLT dflt;
-    langaugesystem latn dflt;
+    languagesystem latn dflt;
 
     @lowercase = [a    b    c];
     @uppercase = [A    B    C];
@@ -88,7 +88,7 @@ There are, of course, exceptions. The point is that you should think through thi
 
 ## Including an External File
 
-If you are working on a family that shares features across multiple styles, it's cumbersome to store the features in each font source file. To get around this, you can store the features in an external file and reference them from the features in your font source file. To do this you use the include keyword:
+If you are working on a family that shares features across multiple styles, it's cumbersome to store the features in each font source file. To get around this, you can store the features in an external file and reference them from the features in your font source file. To do this you use the `include` keyword:
 
     :::fea
     include(features/family.fea);
