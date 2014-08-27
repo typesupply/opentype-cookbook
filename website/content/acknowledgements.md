@@ -10,6 +10,8 @@ Thanks to [Ben Kiel](http://benkiel.com), [Frank Grießhammer](http://frgr.de) a
 
 Thanks to [Frederik Berlean](http://typemytype.com) for many things, especially his [Pygments lexer for the .fea syntax](https://github.com/typemytype/OpenTypeFeatureLexer).
 
+Finally, thanks to [Ken Barber](http://typeandlettering.com) for designing typefaces that needed feature behavior that had never existed before.
+
 
 # Licenses, Copyrights and Credits
 

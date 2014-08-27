@@ -8,3 +8,8 @@ This document is written with the assumption that you have a basic working knowl
 
 OpenType is writing direction agnostic, but the examples in this document are for left to right writing systems. Refer to the official OpenType specifications for further information on this matter.
 
+## Stuff to Add
+
+- getting help http://typedrawers.com?
+- who wrote this thing
+- donation button?
