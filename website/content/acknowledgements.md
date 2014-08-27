@@ -1,10 +1,10 @@
 Title: Acknowledgements
 Summary: Short version for index and feeds
-Sortorder: 9
+Sortorder: 8
 
 Thanks to the Adobe Type Department for developing the .fea syntax. It gets criticized from time to time, but it is actually a great abstraction of the GSUB, GPOS and GDEF binary data structures. I've tried, and failed, to invent a better syntax several times. .fea is hard to beat. Thanks Adobe!
 
-Thanks to [Ben Kiel](http://benkiel.com), [Frank Grießhammer](http://frgr.de) and [Miguel Sousa](http://blog.typekit.com/2006/07/03/welcome_miguel/) for graciously reading, editing and making suggestions about early drafts of this document.
+Thanks to [Ben Kiel](http://benkiel.com), [Frank Grießhammer](http://frgr.de) and [Miguel Sousa](http://adobe.com/type) for graciously reading, editing and making suggestions about early drafts of this document.
 
 [Brook Elgie](http://brookelgie.com) built the infrastructure for the site and did most of the styling work. I am hugely thankful for his efforts because CSS and me are not friends.
 

@@ -1,6 +1,6 @@
 Title: Rules
 Summary: Short version for index and feeds
-Sortorder: 5
+Sortorder: 4
 
 Now that we have introduced some terminology, covered the way text is processed and established the general syntax rules, we can get into the fun part: actually doing stuff.
 
