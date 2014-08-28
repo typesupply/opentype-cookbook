@@ -53,7 +53,7 @@ Note that there are no lookups declared. Why? The first lookup is implied to be 
         } Lowercase;
     } c2sc;
 
-The first rule, sub @uppercase by @smallcaps;, is implicitly in a lookup. The result is the same as this:
+The first rule, `sub @uppercase by @smallcaps;`, is implicitly in a lookup. The result is the same as this:
 
     :::fea
     feature c2sc {
