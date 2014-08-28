@@ -125,7 +125,7 @@ article {
     article a:hover {
       text-decoration: underline; }
   article code {
-    font-family: "Queue", sans-serif;
+    font-family: "Queue Mono", sans-serif;
     color: #0a78a0;
     background: #faffe1;
     padding: 0 0.2em; }
@@ -169,7 +169,7 @@ article {
         color: #0a78a0;
         content: "•"; }
   article .highlight pre {
-    font-family: "Queue", sans-serif;
+    font-family: "Queue Mono", sans-serif;
     background: #faffe1;
     padding: 1em 1em 1em 1.5em; }
 
