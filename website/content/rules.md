@@ -92,6 +92,7 @@ Or:
 
 Or:
 
+    :::fea
     sub f @i by f_i;
 
 ### Replace One With Many
