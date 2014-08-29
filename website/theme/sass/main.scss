@@ -41,7 +41,7 @@ header {
     margin: 0;
     position: relative;
 
-    background: $main url('../furniture/header_arrow.png') no-repeat right center;
+    background: $blue url('../furniture/header_arrow.png') no-repeat right center;
 
     h1 {
         height: 118px;
@@ -55,7 +55,7 @@ header {
             float: right;
             margin-right: 20px;
 
-            background: $main url('../furniture/opentype_cookbook_header.png') no-repeat right center;
+            background: $blue url('../furniture/opentype_cookbook_header.png') no-repeat right center;
 
             text-indent: -9999px;
         }
@@ -65,7 +65,7 @@ header {
         top: -47px;
         margin-left: 770px;
 
-        color: $secondary-light;
+        color: $yellow;
         font-weight: normal;
         font-size: 14px;
         text-align: center;
@@ -93,7 +93,7 @@ nav {
     -moz-border-radius: 8px;
     border-radius: 8px;
 
-    background-color: $secondary-light;
+    background-color: $yellow;
 
     ul {
         padding: 0;
@@ -102,7 +102,7 @@ nav {
         li {
             list-style: none inside;
             font: 16px/32px 'Queue', sans-serif;
-            color: $main;
+            color: $blue;
             border-bottom: 1px solid #ffffff;
             &:last-child {
                 border-bottom: 0 none;
@@ -114,7 +114,7 @@ nav {
 
             a {
                 display: block;
-                color: $main;
+                color: $blue;
                 text-decoration: none;
 
                 &:hover {
@@ -140,7 +140,7 @@ article {
     background-color: #ffffff;
 
     h1, h2, h3, h4 {
-        color: $main;
+        color: $blue;
         padding: 0;
         margin: 1em 0 0.5em 0;
     }
@@ -166,7 +166,7 @@ article {
     }
 
     a {
-        color: $main;
+        color: $blue;
         font-weight: bold;
         text-decoration: none;
 
@@ -177,8 +177,8 @@ article {
 
     code {
         font-family: 'Queue Mono', sans-serif;
-        color: $main;
-        background: $code-block;
+        color: $blue;
+        background: $yellow-light;
         padding: 0 0.2em;
     }
 
@@ -199,7 +199,7 @@ article {
                 width: 1.5em;
                 display: block;
 
-                color: $main;
+                color: $blue;
                 text-align: right;
                 font-weight: bold;
                 -moz-font-feature-settings:"tnum" 1; 
@@ -232,7 +232,7 @@ article {
                 display: block;
 
                 text-align: right;
-                color: $main;
+                color: $blue;
 
                 content: "•";
             }
@@ -241,7 +241,7 @@ article {
 
     .highlight pre {
         font-family: 'Queue Mono', sans-serif;
-        background: $code-block;
+        background: $yellow-light;
         padding: 1em 1em 1em 1.5em;
     }
 }

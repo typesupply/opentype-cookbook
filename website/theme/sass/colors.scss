@@ -1,28 +1,30 @@
 // COLOURS
 
 // Main
-$main: rgb(10, 120, 160);
-$secondary-light: rgb(230, 250, 130);
-$secondary-dark: rgb(0, 30, 60);
-$code-block: rgb(250, 255, 225);
+$blue: rgb(10, 120, 160);
+$blue-dark: rgb(0, 30, 60);
+$yellow: rgb(230, 250, 130);
+$yellow-light: rgb(250, 255, 225);
+$green: rgb(0, 150, 50);
+$red: rgb(245, 100, 100);;
 
 // Code Highlighting
 // comment
 $highlight-comment: rgba(0, 0, 0, 0.6);
 // feature, lookup
-$highlight-namespace: $main;
+$highlight-namespace: $blue;
 // keyword
-$highlight-keyword: $main;
+$highlight-keyword: $blue;
 // token
 $highlight-punctuation: black;
 // contextual target marker
-$highlight-tag: rgb(0, 150, 50);
+$highlight-tag: $green;
 // feature name, lookup name
 $highlight-class: $highlight-tag;
 // glyph name
 $highlight-name: $highlight-punctuation;
 // class name
-$highlight-function: rgb(245, 100, 100);
+$highlight-function: $red;
 // string
 $highlight-string: black;
 // number
