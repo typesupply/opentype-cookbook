@@ -84,14 +84,17 @@ header {
 }
 nav {
     width: 221px;
-    padding: 22px 0;
+    padding: 45px 0 22px 0;
     position: fixed;
-    top: 92px;
+    top: 0;
     z-index: 2;
 
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    border-radius: 8px;
+    -webkit-border-bottom-right-radius: 8px;
+    -webkit-border-bottom-left-radius: 8px;
+    -moz-border-radius-bottomright: 8px;
+    -moz-border-radius-bottomleft: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
 
     background-color: $yellow;
 
