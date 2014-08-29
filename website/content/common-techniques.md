@@ -396,11 +396,11 @@ This method is useful when you don't have a preferred version of a glyph. For ex
 
 For example:
 
-    (illustration of AAAAAAAAAAAA in the demo font)
+![Cyclical randomization.](images/techniques-random-1-line.svg)
 
 Given enough alternates, this creates an effective illusion in a large block of text.
 
-    (illustration of a large block of text in the demo font)
+![Cyclical randomization.](images/techniques-random-1-block.svg)
 
 The code is very simple:
 
@@ -420,7 +420,7 @@ This method is useful if you want to tightly control the deployment of alternate
 
 For example:
 
-    (illustration of BOOKKEEPING in the demo font)
+![Duplicate elimination randomization.](images/techniques-random-2-line.svg)
 
 The code is lengthy, but fairly straightforward:
 
@@ -532,7 +532,7 @@ Finally, we establish a *skip* class that contains everything in the font.
 
 The glyph processing happens in a series of lookups that each pass over the entire glyph run. As a glyph, let's call it `P`, is being processed the lookup backtracks a specific number of glyphs. The glyph at the beginning of that backtrack, let's call it `B`, is then tested against a class, let's call it `@T`. Importantly, `@T` only contains half of the glyphs in the font. If `B` is in `@T`, `P` is switched to an alternate state. Thus, each glyph state is dependent on the state of all the glyphs that precede it. Given that the text is most likely going to have unpredictable letter combinations, we get a fairly effective randomization. For example:
 
-    (illustration of the same string repeated in the demo font)
+![Quantum randomization.](images/techniques-random-3-block.svg)
 
 Is it real randomization? No. Is it perfect? No. Is it incredibly complex and hard to write? Yes. (Unless you use a script to write it.) Can it be slow if a font contains a large number of glyphs and the glyph run being processed is very long? Yes. Is it awesome anyway? I think so.
 
@@ -602,7 +602,7 @@ Is it real randomization? No. Is it perfect? No. Is it incredibly complex and ha
 
 It's possible to extend the quantum randomization method above and use it to randomly shift glyphs around.
 
-    (illustration of a large block of text in the demo font)
+![Quantum random positioning.](images/techniques-random-positioning-block.svg)
 
 Possible, but probably not advisable. The support for this is almost certainly going to be uneven.
 
