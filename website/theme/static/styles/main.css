@@ -172,6 +172,8 @@ article {
     font-family: "Queue Mono", sans-serif;
     background: #faffe1;
     padding: 1em 1em 1em 1.5em; }
+  article img {
+    margin: 1em 0; }
 
 footer {
   background: transparent url("../furniture/footer_arrow.png") no-repeat right top;
