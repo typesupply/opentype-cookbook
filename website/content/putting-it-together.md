@@ -37,7 +37,6 @@ Here is a basic example combined into the proper form:
 
     feature c2sc {
         sub @uppercase by @smallcaps;
-        sub @lowercase by @smallcaps; _Is this line necessary?_
         sub @figures by @figuresSmallcap;
         sub @punctuation by @punctuationSmallcap;
     } c2sc;

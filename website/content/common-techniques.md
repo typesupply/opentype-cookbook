@@ -21,7 +21,7 @@ Unfortunately the specification is a bit vague about how these are supposed to b
 
 - Hello “World!”
 
-They are at the `o`, the `W` and the `d`. *(I'm 99.999999% sure about this, but I should test it again.)* If we use this for swashes our `W` and `d` are likely to clash with the marks `“` and `!` around them. We often think of word boundaries as an empty space around words. If we want to use `init` and `fina`, we'll need to build in exceptions. You can certainly do that, but I generally do it all myself with some special classes:
+They are at the `o`, the `W` and the `d`. If we use this for swashes our `W` and `d` are likely to clash with the marks `“` and `!` around them. We often think of word boundaries as an empty space around words. If we want to use `init` and `fina`, we'll need to build in exceptions. You can certainly do that, but I generally do it all myself with some special classes:
 
 - `@all` -- This class contains all glyphs.
 - `@filled` -- This class contains all glyphs that contain positive space.
@@ -96,7 +96,7 @@ This method has been around for as long as I have been working on OpenType featu
 
 Around 2006 [Kent Lew](http://www.fontbureau.com/people/KentLew/) asked me if I had any ideas for a better fraction implementation. Specifically, he was referring to the fact that with the existing implementation users had to manually select *only* the text that should be converted to fractions and apply the feature. If the feature was applied to more than just that text all numbers not in a fraction would be converted to numerators. This was a big problem in things like cookbooks where there could be *thousands* of little bits of text that had to be converted to fractions.
 
-I developed a new method that is built on the common form of writing fractions as an integer, a space, a numerator, a slash and a denominator. For example: `2 1/2`. The code considers 1-10 numbers followed by a slash followed by 1 or more numbers to be a fraction. The slash is converted to a fraction bar, the numbers before the slash are converted to numerators and the numbers after the slash are converted to denominators. If the new fraction is preceded by a number followed by a space, the space is converted to a thin space to pull the fraction closer to the integer. After I published the first version of this code, [Karsten Luecke](http://kltf.de) pointed out some some problems with dates, German tax numbers and things like that. I published a new version that handles these properly and this version is below.
+I developed a new method that is built on the common form of writing fractions as an integer, a space, a numerator, a slash and a denominator. For example: "2 1/2". The code considers 1-10 numbers followed by a slash followed by 1 or more numbers to be a fraction. The slash is converted to a fraction bar, the numbers before the slash are converted to numerators and the numbers after the slash are converted to denominators. If the new fraction is preceded by a number followed by a space, the space is converted to a thin space to pull the fraction closer to the integer. After I published the first version of this code, [Karsten Luecke](http://kltf.de) pointed out some some problems with dates, German tax numbers and things like that. I published a new version that handles these properly and this version is below.
 
 With this users can *globally* activate fractions. The only drawback that I have found with this is that it doesn't allow numerators to be longer than 10 numbers long. In the unlikely event that a user runs into this problem, they can select the unconverted numerators and activate the numerator feature.
 
@@ -243,8 +243,6 @@ Likewise, if your default figures are proportional and you have tabular alternat
 ## Small Caps
 
 There are two features that invoke small caps: small caps `smcp` and “caps to small caps” or “all small caps” `c2sc`. The latter version is for situations in which the user wants everything possible, not just letters, to be converted to small cap forms.
-
-**(something about not doing case conversion, but being aware of things like the germanbls, dotlessi?)**
 
     :::fea
     feature smcp {

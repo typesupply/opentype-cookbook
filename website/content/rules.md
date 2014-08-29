@@ -251,11 +251,11 @@ Most of the substitution and positioning rule types can be defined with a contex
 - adjust position of one glyph: `pos A B' C <10 0 20 0>;`
 - adjust positioning of the space between two glyphs: `pos A B' C' -50 D;`
 
-Please note that just because you *can* apply this to all rule types doesn't mean that it always makes sense; or that you should.
+Please note that just because you *can* apply this to a rule type doesn't mean that it always makes sense; or that you should.
 
 ### Exceptions
 
-What if we have a short context that you want to match, but a longer context that contains the short context? For example, say we want to change the r in words but not in words!. To do that we can specify an *exception* to the contextual rule. For example:
+What if we have a short context that you want to match, but a longer context that contains the short context? For example, say we want to change the r in "words" but not in "words!". To do that we can specify an *exception* to the contextual rule. For example:
 
     :::fea
     ignore sub w o r' d s exclam;
