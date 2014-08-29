@@ -44,10 +44,6 @@ Within each lookup, things are a little different. The glyph run is passed one g
 
 ![Rule processing.](images/foundation-processing-rule.svg)
 
-Here is our example, animated:
-
-    (ideally I will be able to include an animation of a complete processing run)
-
 The process is the same for positioning features, except that instead of rule evaluation stopping when a glyph is replaced, the evaluation is stopped when a glyph's position is changed.
 
 That's how processing works and it is the most complex part of OpenType features that you will need to understand. Got it? Great!
