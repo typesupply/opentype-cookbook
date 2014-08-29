@@ -193,8 +193,6 @@ For example, to put some space to the left and right of the `A`, you would do th
     :::fea
     pos A <10 0 20 0>;
 
-		(illustration showing before and after)
-
 ### Adjust the Space Between Two Glyphs
 
 To adjust the space between two targets, you do this:
