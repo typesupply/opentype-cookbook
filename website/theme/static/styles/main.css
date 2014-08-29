@@ -26,22 +26,22 @@ body {
   background-color: #ffffff; }
 
 header {
-  height: 118px;
+  height: 136px;
   padding: 0;
   margin: 0;
   position: relative;
-  background: #0a78a0 url("../furniture/header_arrow.png") no-repeat right center; }
+  background: #0a78a0 url("../furniture/header_arrow.svg") no-repeat right top; }
   header h1 {
-    height: 118px;
+    height: 136px;
     width: 860px;
     margin: 0 auto; }
     header h1 a {
-      width: 588px;
+      width: 601px;
       height: 100%;
       display: block;
       float: right;
-      margin-right: 20px;
-      background: #0a78a0 url("../furniture/opentype_cookbook_header.png") no-repeat right center;
+      margin-right: 0px;
+      background: #0a78a0 url("../furniture/opentype_cookbook_header.svg") no-repeat right top;
       text-indent: -9999px; }
   header h2 {
     position: relative;
@@ -63,7 +63,7 @@ header {
 
 nav {
   width: 221px;
-  padding: 45px 0 22px 0;
+  padding: 69px 0 22px 0;
   position: fixed;
   top: 0;
   z-index: 2;
@@ -82,6 +82,8 @@ nav {
       font: 16px/32px "Queue", sans-serif;
       color: #0a78a0;
       border-bottom: 1px solid white; }
+      nav ul li:first-child {
+        border-top: 1px solid white; }
       nav ul li:last-child {
         border-bottom: 0 none; }
       nav ul li.active {
@@ -179,7 +181,7 @@ article {
     margin: 1em 0; }
 
 footer {
-  background: transparent url("../furniture/footer_arrow.png") no-repeat right top;
+  background: transparent url("../furniture/footer_arrow.svg") no-repeat right top;
   margin-top: 50px; }
   footer a {
     margin: 0 20px;
@@ -228,7 +230,7 @@ footer {
     width: 56px;
     height: 39px;
     padding: 0;
-    background: transparent url("../furniture/nav_menu.png") no-repeat left top;
+    background: transparent url("../furniture/nav_menu.svg") no-repeat left top;
     -webkit-background-size: 56px, 39px;
     -o-background-size: 56px, 39px;
     background-size: 56px, 39px; }
