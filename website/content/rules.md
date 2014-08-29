@@ -162,10 +162,6 @@ In this case, the value record is adjusting the x placement to the right by 10 u
 
 ![Modified value record.](images/rules-modified-value-record.svg)
 
-When the positioning features are started, each glyph in the glyph run has a value record of `<0 0 0 0>`. As the processing happens and rules are matched, these value records are modified cumulative. So, if one feature adjust a glyph's x placement by 10 units and then another feature adjust the glyph's x placement by 30 units, the glyph's x placement would be 40 units.
-
-_I think this paragraph has too much detail, and may be better placed later in the doc._
-
 The syntax for a positioning rule is:
 
     :::fea
@@ -177,6 +173,11 @@ We can abbreviate `position` with `pos` to cut down on how much stuff we have to
     pos target valueRecord;
 
 Targets can be classes. These classes can be referenced by name or they can be defined as an unnamed class inside of a rule.
+
+#### Cumulative Effect
+
+When the positioning features are started, each glyph in the glyph run has a value record of `<0 0 0 0>`. As the processing happens and rules are matched, these value records are modified cumulative. So, if one feature adjust a glyph's x placement by 10 units and then another feature adjust the glyph's x placement by 30 units, the glyph's x placement would be 40 units.
+
 
 ### Adjust the Position of One Glyph
 
