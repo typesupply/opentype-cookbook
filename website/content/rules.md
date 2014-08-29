@@ -142,11 +142,11 @@ We're going to cover the simple rules in this document. The complex rules are am
 
 Before we go much further we need to talk about coordinate systems and value records. As you know, the coordinate system in fonts is based on X and Y axes. The X axis moves from left to right with numbers increasing as you move to the right. The Y axis moves from bottom to top with numbers increasing as you move up. The origin for these axis is the intersection of the 0 X coordinate, otherwise known as the baseline, and the 0 Y coordinate.
 
-    (illustration showing a g with the origin and axes highlighted)
+![Origin and axes.](images/rules-origin-axes.svg)
 
 In the positioning rules, we can adjust the *placement* and *advance* of glyphs. The placement is the spot at which the origin of the glyph will be aligned. The advance is the width and the height of the glyph from the origin. In horizontal typesetting, the height will be zero and the width will be the width of the glyph. The placement and advance can each be broken down into X and Y values. Thus, there is an x placement, a y placement, an x advance and a y advance.
 
-    (illustration showing a g with the placements and advance highlighted. be sure to clearly show the advance width of the glyph.)
+![Value record.](images/rules-value-record.svg)
 
 The units that these values represent are the same units in which you have drawn your glyph. Together, these four values form a *value record*. In the .fea syntax, we express these value records like this:
 
@@ -156,9 +156,11 @@ The units that these values represent are the same units in which you have drawn
 For example:
 
     :::fea
-    <1 2 3 4>
+    <10 20 30 40>
 
-In this case, the value record is adjusting the x placement to the right by one unit, the y placement up by two units, the x advance by 3 units and the y advance by four units.
+In this case, the value record is adjusting the x placement to the right by 10 units, the y placement up by 20 units, the x advance by 30 units and the y advance by 40 units.
+
+![Modified value record.](images/rules-modified-value-record.svg)
 
 When the positioning features are started, each glyph in the glyph run has a value record of `<0 0 0 0>`. As the processing happens and rules are matched, these value records are modified cumulative. So, if one feature adjust a glyph's x placement by 10 units and then another feature adjust the glyph's x placement by 30 units, the glyph's x placement would be 40 units.
 
