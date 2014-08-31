@@ -229,11 +229,11 @@ article {
                 color: $blue;
                 text-align: right;
                 font-weight: bold;
-                -moz-font-feature-settings:"tnum" 1; 
-                -moz-font-feature-settings:"tnum=1"; 
-                -ms-font-feature-settings:"tnum" 1; 
-                -o-font-feature-settings:"tnum" 1; 
-                -webkit-font-feature-settings:"tnum" 1; 
+                -moz-font-feature-settings:"tnum" 1;
+                -moz-font-feature-settings:"tnum=1";
+                -ms-font-feature-settings:"tnum" 1;
+                -o-font-feature-settings:"tnum" 1;
+                -webkit-font-feature-settings:"tnum" 1;
                 font-feature-settings:"tnum" 1;
 
                 content: counter(li-counter);
@@ -275,6 +275,7 @@ article {
 
     img {
         margin: 1em 0;
+        width: 100%;
     }
 }
 
