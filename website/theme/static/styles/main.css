@@ -1,21 +1,51 @@
 @charset "UTF-8";
 @font-face {
-  font-family: "Queue";
-  src: url("../fonts/queue-light.woff") format("woff"), url("../fonts/queue-light.ttf") format("truetype");
-  font-weight: normal;
+  font-family: "Queue Web";
+  src: url("../fonts/queueweb-light.woff") format("woff");
+  font-weight: 300;
   font-style: normal; }
 
 @font-face {
-  font-family: "Queue";
-  src: url("../fonts/queue-bold.woff") format("woff"), url("../fonts/queue-bold.ttf") format("truetype");
-  font-weight: bold;
+  font-family: "Queue Web";
+  src: url("../fonts/queueweb-lightitalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic; }
+
+@font-face {
+  font-family: "Queue Web";
+  src: url("../fonts/queueweb-book.woff") format("woff");
+  font-weight: 400;
+  font-style: normal; }
+
+@font-face {
+  font-family: "Queue Web";
+  src: url("../fonts/queueweb-medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal; }
+
+@font-face {
+  font-family: "Queue Web";
+  src: url("../fonts/queueweb-bold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal; }
+
+@font-face {
+  font-family: "Queue Mono Web";
+  src: url("../fonts/queuemonoweb-light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal; }
+
+@font-face {
+  font-family: "Queue Mono Web";
+  src: url("../fonts/queuemonoweb-medium.woff") format("woff");
+  font-weight: 400;
   font-style: normal; }
 
 html {
   height: 100%; }
 
 body {
-  font: 15px/23px "Queue", sans-serif;
+  font: 15px/23px "Queue Web", sans-serif;
   font-weight: 300;
   color: #000000;
   height: 100%; }
@@ -79,7 +109,8 @@ nav {
     margin: 0 24px; }
     nav ul li {
       list-style: none inside;
-      font: 16px/32px "Queue", sans-serif;
+      font: 16px/32px "Queue Web", sans-serif;
+      font-weight: 400;
       color: #0a78a0;
       border-bottom: 1px solid white; }
       nav ul li:first-child {
@@ -87,13 +118,13 @@ nav {
       nav ul li:last-child {
         border-bottom: 0 none; }
       nav ul li.active {
-        font-weight: bold; }
+        font-weight: 600; }
       nav ul li a {
         display: block;
         color: #0a78a0;
         text-decoration: none; }
         nav ul li a:hover {
-          font-weight: bold; }
+          font-weight: 600; }
   nav #menu_close {
     display: none; }
 
@@ -108,7 +139,8 @@ article {
   article h1, article h2, article h3, article h4 {
     color: #0a78a0;
     padding: 0;
-    margin: 1em 0 0.5em 0; }
+    margin: 1em 0 0.5em 0;
+    font-weight: 600; }
   article h1 {
     font-size: 35px;
     line-height: 30px; }
@@ -121,16 +153,19 @@ article {
   article h4 {
     font-size: 16px;
     line-height: 30px; }
+  article strong {
+    font-weight: 500; }
   article p {
     margin: 0 0 0.5em 0; }
   article a {
     color: #0a78a0;
-    font-weight: bold;
+    font-weight: 500;
     text-decoration: none; }
     article a:hover {
       text-decoration: underline; }
   article code {
-    font-family: "Queue Mono", sans-serif;
+    font-family: "Queue Mono Web", sans-serif;
+    font-weight: 500;
     color: #0a78a0;
     background: #faffe1;
     padding: 0 0.2em; }
@@ -174,7 +209,8 @@ article {
         color: #0a78a0;
         content: "•"; }
   article .highlight pre {
-    font-family: "Queue Mono", sans-serif;
+    font-family: "Queue Mono Web", sans-serif;
+    font-weight: 300;
     background: #faffe1;
     padding: 1em 1em 1em 1.5em; }
   article img {

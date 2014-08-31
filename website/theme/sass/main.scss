@@ -3,17 +3,31 @@
 // FONTS
 @mixin fontface($family, $src, $weight:normal, $style:normal) {
     font-family: $family;
-    src:  url('../fonts/' + $src + '.woff') format('woff'),
-          url('../fonts/' + $src + '.ttf')  format('truetype');
+    src:  url('../fonts/' + $src + '.woff') format('woff');
     font-weight: $weight;
     font-style: $style;
 }
 
 @font-face {
-    @include fontface('Queue', 'queue-light');
+    @include fontface('Queue Web', 'queueweb-light', 300);
 }
 @font-face {
-    @include fontface('Queue', 'queue-bold', bold, normal);
+    @include fontface('Queue Web', 'queueweb-lightitalic', 300, italic);
+}
+@font-face {
+    @include fontface('Queue Web', 'queueweb-book', 400);
+}
+@font-face {
+    @include fontface('Queue Web', 'queueweb-medium', 500);
+}
+@font-face {
+    @include fontface('Queue Web', 'queueweb-bold', 600);
+}
+@font-face {
+    @include fontface('Queue Mono Web', 'queuemonoweb-light', 300);
+}
+@font-face {
+    @include fontface('Queue Mono Web', 'queuemonoweb-medium', 400);
 }
 
 
@@ -22,7 +36,7 @@ html {
 }
 
 body {
-    font: 15px/23px 'Queue', sans-serif;
+    font: 15px/23px 'Queue Web', sans-serif;
     font-weight: 300;
     color: #000000;
     height: 100%;
@@ -104,7 +118,8 @@ nav {
 
         li {
             list-style: none inside;
-            font: 16px/32px 'Queue', sans-serif;
+            font: 16px/32px 'Queue Web', sans-serif;
+            font-weight: 400;
             color: $blue;
             border-bottom: 1px solid #ffffff;
             &:first-child {
@@ -115,7 +130,7 @@ nav {
             }
 
             &.active {
-                font-weight: bold;
+                font-weight: 600;
             }
 
             a {
@@ -124,7 +139,7 @@ nav {
                 text-decoration: none;
 
                 &:hover {
-                    font-weight: bold;
+                    font-weight: 600;
                 }
             }
         }
@@ -149,6 +164,7 @@ article {
         color: $blue;
         padding: 0;
         margin: 1em 0 0.5em 0;
+        font-weight: 600;
     }
     h1 {
         font-size: 35px;
@@ -167,13 +183,17 @@ article {
         line-height: 30px;
     }
 
+    strong {
+        font-weight: 500;
+    }
+
     p {
         margin: 0 0 0.5em 0;
     }
 
     a {
         color: $blue;
-        font-weight: bold;
+        font-weight: 500;
         text-decoration: none;
 
         &:hover {
@@ -182,7 +202,8 @@ article {
     }
 
     code {
-        font-family: 'Queue Mono', sans-serif;
+        font-family: 'Queue Mono Web', sans-serif;
+        font-weight: 500;
         color: $blue;
         background: $yellow-light;
         padding: 0 0.2em;
@@ -246,7 +267,8 @@ article {
     }
 
     .highlight pre {
-        font-family: 'Queue Mono', sans-serif;
+        font-family: 'Queue Mono Web', sans-serif;
+        font-weight: 300;
         background: $yellow-light;
         padding: 1em 1em 1em 1.5em;
     }
