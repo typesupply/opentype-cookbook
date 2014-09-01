@@ -6,6 +6,8 @@ Sortorder: 3
 
 Before we start writing any code, let's first look at what the code will actually do. If you are reading this document just to find out how to do something simple like write a small caps feature, you may skip this section and jump ahead to the [code snippets]({filename}introduction.md). But, if you want to develop complex, nuanced and amazing features, you really should read this section. Understanding the underlying mechanics of how features work will allow you to carry your vision all the way from how the glyphs the glyphs look to how the behave.
 
+# A main header with "quotes" in it
+
     Codeblocks are created by indenting in the source.
 
     These:
