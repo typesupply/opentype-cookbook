@@ -8,8 +8,8 @@ Now that we have introduced some terminology, covered the way text is processed 
 
 Substitutions are the most visually transformative thing that features can do to text. And, they are easy to understand. There are two main parts to a substitution:
 
-1. Target -- This is what will be replaced.
-2. Replacement -- This is what will be inserted in place of the target.
+1. Target — This is what will be replaced.
+2. Replacement — This is what will be inserted in place of the target.
 
 The syntax for a substitution is:
 
@@ -133,8 +133,8 @@ Note that the keyword in the middle of the rule is `from` instead of `by`.
 
 Positioning glyphs may not be as visually interesting as what can be achieved with substitution, but the positioning support in OpenType is incredibly powerful and important. The positioning rules can be broken into two separate categories:
 
-1. Simple Rules -- These adjust either the space around one glyph or the space between two glyphs.
-2. Mind-Blowingly Complex and Astonishingly Powerful Rules -- These do things like properly shift combining marks to align precisely with the base forms in Arabic and Devanagari so that things look incredibly spontaneous and beautiful.
+1. Simple Rules — These adjust either the space around one glyph or the space between two glyphs.
+2. Mind-Blowingly Complex and Astonishingly Powerful Rules — These do things like properly shift combining marks to align precisely with the base forms in Arabic and Devanagari so that things look incredibly spontaneous and beautiful.
 
 We’re going to cover the simple rules in this document. The complex rules are amazing, but too advanced for now.
 
@@ -230,8 +230,8 @@ The substitution and positioning rules that we have discussed so far are quite u
 
 Contextual rules allow us to specify a sequence before the target, a sequence after the target or both in a substitution or positioning rule. For example: replace `r` with `r.alt` if the `r` is preceded by `wo` and followed by `ds`. There are two new parts of this rule type in addition to the parts we defined in the substitution and positioning sections.
 
-1. Backtrack -- This is the sequence of things that occur before the target in the rule. This sequence can be composed of glyphs, classes or a mix of both.
-2. Lookahead -- This is the sequence of glyphs that occur after the target in the rule. Like the backtrack, this sequence can be composed of glyphs, classes or a mix of both.
+1. Backtrack — This is the sequence of things that occur before the target in the rule. This sequence can be composed of glyphs, classes or a mix of both.
+2. Lookahead — This is the sequence of glyphs that occur after the target in the rule. Like the backtrack, this sequence can be composed of glyphs, classes or a mix of both.
 
 The backtrack and lookahead are both optional. Either, or neither, can appear. If a sequence is present, it can contain one or more things.
 
@@ -271,7 +271,7 @@ If you use a contextual rule or exception within a lookup, all of the rules with
 
 ## Advanced Techniques
 
-By now we have established the rules needed to make most features that you’ll want to add to your fonts--small caps, ligatures, tabular figures, etc. But, when you want to do some more complex things, you’ll need a few more things.
+By now we have established the rules needed to make most features that you’ll want to add to your fonts—small caps, ligatures, tabular figures, etc. But, when you want to do some more complex things, you’ll need a few more things.
 
 ### Language Systems
 
