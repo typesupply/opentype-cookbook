@@ -16,7 +16,7 @@ The syntax for a substitution is:
     :::fea
     substitute target by replacement;
 
-We can abbreviate `substitute` with `sub` to cut down on how much stuff we have to type, so let's do that:
+We can abbreviate `substitute` with `sub` to cut down on how much stuff we have to type, so let’s do that:
 
     :::fea
     sub target by replacement;
@@ -42,7 +42,7 @@ If you want to replace several things with corresponding things, you can use cla
     :::fea
     sub [a b c] by [A.sc B.sc C.sc];
 
-It's usually more readable to define the classes earlier in your code and then reference them by name.
+It’s usually more readable to define the classes earlier in your code and then reference them by name.
 
     :::fea
     sub @lowercase by @smallcaps;
@@ -109,7 +109,7 @@ For example, to convert an `fi` ligature back into `f` and `i`, you would do thi
     :::fea
     sub f_i by f i;
 
-Classes can't be used as the target or the replacement in this rule type.
+Classes can’t be used as the target or the replacement in this rule type.
 
 ### Replace One From Many
 
@@ -136,7 +136,7 @@ Positioning glyphs may not be as visually interesting as what can be achieved wi
 1. Simple Rules -- These adjust either the space around one glyph or the space between two glyphs.
 2. Mind-Blowingly Complex and Astonishingly Powerful Rules -- These do things like properly shift combining marks to align precisely with the base forms in Arabic and Devanagari so that things look incredibly spontaneous and beautiful.
 
-We're going to cover the simple rules in this document. The complex rules are amazing, but too advanced for now.
+We’re going to cover the simple rules in this document. The complex rules are amazing, but too advanced for now.
 
 ### Position and Advance
 
@@ -167,7 +167,7 @@ The syntax for a positioning rule is:
     :::fea
     position target valueRecord;
 
-We can abbreviate `position` with `pos` to cut down on how much stuff we have to type, so let's do that:
+We can abbreviate `position` with `pos` to cut down on how much stuff we have to type, so let’s do that:
 
     :::fea
     pos target valueRecord;
@@ -176,7 +176,7 @@ Targets can be classes. These classes can be referenced by name or they can be d
 
 #### Cumulative Effect
 
-When the positioning features are started, each glyph in the glyph run has a value record of `<0 0 0 0>`. As the processing happens and rules are matched, these value records are modified cumulative. So, if one feature adjust a glyph's x placement by 10 units and then another feature adjust the glyph's x placement by 30 units, the glyph's x placement would be 40 units.
+When the positioning features are started, each glyph in the glyph run has a value record of `<0 0 0 0>`. As the processing happens and rules are matched, these value records are modified cumulative. So, if one feature adjust a glyph’s x placement by 10 units and then another feature adjust the glyph’s x placement by 30 units, the glyph’s x placement would be 40 units.
 
 
 ### Adjust the Position of One Glyph
@@ -204,7 +204,7 @@ To adjust the space between two targets, you do this:
 
 In this case, you can shorten the value record to be only the x advance adjustment. Or, you can use the full value record if you prefer that.
 
-This rule is used almost exclusively for kerning. In fact, this is so common that you shouldn't have to write any of these rules yourself. Your font and/or kerning editor should do this for you.
+This rule is used almost exclusively for kerning. In fact, this is so common that you shouldn’t have to write any of these rules yourself. Your font and/or kerning editor should do this for you.
 
 You can use a class as target 1, target 2 or both:
 
@@ -249,11 +249,11 @@ Most of the substitution and positioning rule types can be defined with a contex
 - adjust position of one glyph: `pos A B' C <10 0 20 0>;`
 - adjust positioning of the space between two glyphs: `pos A B' C' -50 D;`
 
-Please note that just because you *can* apply this to a rule type doesn't mean that it always makes sense; or that you should.
+Please note that just because you *can* apply this to a rule type doesn’t mean that it always makes sense; or that you should.
 
 ### Exceptions
 
-What if we have a short context that you want to match, but a longer context that contains the short context? For example, say we want to change the r in "words" but not in "words!". To do that we can specify an *exception* to the contextual rule. For example:
+What if we have a short context that you want to match, but a longer context that contains the short context? For example, say we want to change the r in `words` but not in `words!`. To do that we can specify an *exception* to the contextual rule. For example:
 
     :::fea
     ignore sub w o r' d s exclam;
@@ -271,13 +271,13 @@ If you use a contextual rule or exception within a lookup, all of the rules with
 
 ## Advanced Techniques
 
-By now we have established the rules needed to make most features that you'll want to add to your fonts--small caps, ligatures, tabular figures, etc. But, when you want to do some more complex things, you'll need a few more things.
+By now we have established the rules needed to make most features that you’ll want to add to your fonts--small caps, ligatures, tabular figures, etc. But, when you want to do some more complex things, you’ll need a few more things.
 
 ### Language Systems
 
-One of OpenType's best attributes is the way that it handles languages and scripts. We can define rules that only apply when the user has indicated that they are writing a particular language or using a particular script. To do this, we state the script and the language that the rules apply to. After these have been made, all subsequent rules in the feature belong to this language and script unless you declare another language and script.
+One of OpenType’s best attributes is the way that it handles languages and scripts. We can define rules that only apply when the user has indicated that they are writing a particular language or using a particular script. To do this, we state the script and the language that the rules apply to. After these have been made, all subsequent rules in the feature belong to this language and script unless you declare another language and script.
 
-Let's look at an example. Let's say that we have a special `IJ` that should only be used when Dutch is the declared language. We need to say: when the script is latin and the language is Dutch, replace `IJ` with `IJ.alt`. Here is how we do that:
+Let’s look at an example. Let’s say that we have a special `IJ` that should only be used when Dutch is the declared language. We need to say: when the script is latin and the language is Dutch, replace `IJ` with `IJ.alt`. Here is how we do that:
 
     :::fea
     script latn;

@@ -2,11 +2,11 @@ Title: Syntax Introduction
 Summary: Short version for index and feeds
 Sortorder: 3
 
-We will be writing our features in the [Adobe OpenType Feature File Syntax](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html) (commonly referred to as ".fea"). This is a simple, text format that is easily editable in text and font editors. There are other syntaxes and tools for developing features, but .fea is the most widely supported and the most easily accessible. We'll be going through the important parts of .fea in detail, but for now we need to establish some basics.
+We will be writing our features in the [Adobe OpenType Feature File Syntax](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html) (commonly referred to as “.fea”). This is a simple, text format that is easily editable in text and font editors. There are other syntaxes and tools for developing features, but .fea is the most widely supported and the most easily accessible. We’ll be going through the important parts of .fea in detail, but for now we need to establish some basics.
 
 ## Comments
 
-It's useful to be able to write comments about your code. To do this, add a `#` and everything from the `#` to the end of the line of text will be marked as a comment.
+It’s useful to be able to write comments about your code. To do this, add a `#` and everything from the `#` to the end of the line of text will be marked as a comment.
 
     :::fea
     # This is a comment.
@@ -23,7 +23,7 @@ Some characters have special meanings in .fea.
 
 ### ;
 
-A semicolon indicates the closing of something--a feature, lookup, rule, etc. These are important.
+A semicolon indicates the closing of something—a feature, lookup, rule, etc. These are important.
 
 ### {}
 
@@ -55,7 +55,7 @@ Lookups are defined in a similar way to features. They have a name, but the name
 
 ## Classes
 
-You'll often run into situations where you want use a group of glyphs in a rule. These groups are called classes and they are defined with a list of glyph names or class names inside of brackets.
+You’ll often run into situations where you want use a group of glyphs in a rule. These groups are called classes and they are defined with a list of glyph names or class names inside of brackets.
 
     :::fea
     [A E I O U Y]

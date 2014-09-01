@@ -3,13 +3,13 @@ Slug: index
 Summary: Short version for index and feeds
 Sortorder: 1
 
-OpenType features allow fonts to behave smartly. This behavior can do simple things (e.g. change letters to small caps) or they can do complex things (e.g. insert swashes, alternates, and ligatures to make text set in a script font feel handmade). This document aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you'll be able to create OpenType features that fit your design as perfectly as possible.
+OpenType features allow fonts to behave smartly. This behavior can do simple things (e.g. change letters to small caps) or they can do complex things (e.g. insert swashes, alternates, and ligatures to make text set in a script font feel handmade). This document aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you’ll be able to create OpenType features that fit your design as perfectly as possible.
 
-This document is written with the assumption that you have a basic working knowledge of the structure of a font. You need to know the differences between characters and glyphs, understand the coordinate system in glyphs and so on. If you aren't familiar with that, go study the basics and then come back. This will all make a lot more sense that way.
+This document is written with the assumption that you have a basic working knowledge of the structure of a font. You need to know the differences between characters and glyphs, understand the coordinate system in glyphs and so on. If you aren’t familiar with that, go study the basics and then come back. This will all make a lot more sense that way.
 
 ## Your Author
 
-I'm [Tal Leming](http://typesupply.com) and I started developing OpenType features around 2002 or 2003. Since then I have developed the OpenType features for a number of [fonts](http://www.houseind.com/fonts/edbenguiatfonts) [that](http://www.houseind.com/fonts/studiolettering) [do](http://christianschwartz.com/local.shtml) [weird](https://www.typotheque.com/fonts/julien/about) [things](https://www.typotheque.com/fonts/irma). I only write OpenType features for my own fonts now, so I am semi-retired from day-to-day OpenType feature programming. However I teach type design at [MICA](http://mica.edu) and a number of my students have expressed interest in developing their own OpenType features and there wasn't a good from the ground up introduction to this and...here we are. (Hi to my students!)
+I’m [Tal Leming](http://typesupply.com) and I started developing OpenType features around 2002 or 2003. Since then I have developed the OpenType features for a number of [fonts](http://www.houseind.com/fonts/edbenguiatfonts) [that](http://www.houseind.com/fonts/studiolettering) [do](http://christianschwartz.com/local.shtml) [weird](https://www.typotheque.com/fonts/julien/about) [things](https://www.typotheque.com/fonts/irma). I only write OpenType features for my own fonts now, so I am semi-retired from day-to-day OpenType feature programming. However I teach type design at [MICA](http://mica.edu) and a number of my students have expressed interest in developing their own OpenType features and there wasn’t a good from the ground up introduction to this and...here we are. (Hi to my students!)
 
 ## Unofficial
 
@@ -17,7 +17,7 @@ This document is not written by, sponsored by, supported, endorsed or whatever b
 
 ## Getting Help
 
-If you have trouble understanding anything, need help with your features or anything like that, please post your questions on the [UAFDKOML (Unofficial Adobe Font Developent Kit For OpenType Mailing List)](https://groups.google.com/forum/#!forum/uafdkoml) or start a discussion on [Type Drawers](http://typedrawers.com). I'm unfortunately not able to help with questions directly due to time constraints.
+If you have trouble understanding anything, need help with your features or anything like that, please post your questions on the [UAFDKOML (Unofficial Adobe Font Developent Kit For OpenType Mailing List)](https://groups.google.com/forum/#!forum/uafdkoml) or start a discussion on [Type Drawers](http://typedrawers.com). I’m unfortunately not able to help with questions directly due to time constraints.
 
 ## Feedback
 
