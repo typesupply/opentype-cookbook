@@ -136,7 +136,7 @@ Positioning glyphs may not be as visually interesting as what can be achieved wi
 1. Simple Rules — These adjust either the space around one glyph or the space between two glyphs.
 2. Mind-Blowingly Complex and Astonishingly Powerful Rules — These do things like properly shift combining marks to align precisely with the base forms in Arabic and Devanagari so that things look incredibly spontaneous and beautiful.
 
-We’re going to cover the simple rules in this document. The complex rules are amazing, but too advanced for now.
+We’re going to cover the simple rules in this cookbook. The complex rules are amazing, but too advanced for now.
 
 ### Position and Advance
 

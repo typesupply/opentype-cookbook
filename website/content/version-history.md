@@ -6,9 +6,6 @@ Sortorder: 9
 
 - write article summaries
 - responsive logos and styling
-- mention github management in intro
-- letters, string input and glyph names as code not ""
-- replace "document" with "cookbook"
 - something about general methodology: design, patterns, behavior, code. could go in putting it together
 
 ### September 3, 2014
