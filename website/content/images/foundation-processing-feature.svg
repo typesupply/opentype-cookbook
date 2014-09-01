@@ -3,6 +3,16 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="600px" height="151px" viewBox="0 0 600 151" enable-background="new 0 0 600 151" xml:space="preserve">
+	 <style type="text/css">
+		 <![CDATA[
+			@font-face {
+				font-family: "Queue Web";
+				src: url("../theme/fonts/queueweb-light.woff") format("woff");
+				font-weight: 300;
+				font-style: normal;
+			}
+		]]>
+	</style>
 <path fill="#0A78A0" d="M600,146c0,2.75-2.25,5-5,5H5c-2.75,0-5-2.25-5-5V5c0-2.75,2.25-5,5-5h590c2.75,0,5,2.25,5,5V146z"/>
 <polygon fill="#E6FA82" points="198,80 213,65 198,50 387,50 402,65 387,80 "/>
 <g>
@@ -27,7 +37,7 @@
 		c0-3.676-1.436-5.391-4.375-5.391c-2.94,0-4.41,1.715-4.41,5.391v9.556c0,3.676,1.47,5.391,4.41,5.391
 		C526.801,77.38,528.236,75.665,528.236,71.989z"/>
 </g>
-<text transform="matrix(1 0 0 1 230.729 70.5)" fill="#0A78A0" font-family="'Queue-Light'" font-size="16">feature: small caps</text>
+<text transform="matrix(1 0 0 1 230.729 70.5)" fill="#0A78A0" font-family="'Queue Web'" font-weight="300" font-size="16">feature: small caps</text>
 <polygon fill="#E6FA82" points="198,131 213,116 198,101 387,101 402,116 387,131 "/>
 <g>
 	<path fill="#FFFFFF" d="M67.495,103.247h4.656v11.866h9.206v-11.866h4.656V129.5h-4.656v-12.881h-9.206V129.5h-4.656V103.247z"/>
@@ -49,15 +59,15 @@
 		c0-3.676-1.436-5.391-4.375-5.391c-2.94,0-4.41,1.715-4.41,5.391v9.556c0,3.676,1.47,5.391,4.41,5.391
 		C526.801,128.38,528.236,126.665,528.236,122.989z"/>
 </g>
-<text transform="matrix(1 0 0 1 235.8569 121.5)" fill="#0A78A0" font-family="'Queue-Light'" font-size="16">feature: ligatures</text>
+<text transform="matrix(1 0 0 1 235.8569 121.5)" fill="#0A78A0" font-family="'Queue Web'" font-weight="300" font-size="16">feature: ligatures</text>
 <line fill="none" stroke="#001E3C" stroke-miterlimit="10" x1="20" y1="34.5" x2="188" y2="34.5"/>
 <line fill="none" stroke="#001E3C" stroke-miterlimit="10" x1="216" y1="34.5" x2="384" y2="34.5"/>
 <line fill="none" stroke="#001E3C" stroke-miterlimit="10" x1="412" y1="34.5" x2="580" y2="34.5"/>
 <polyline fill="none" stroke="#E6FA82" stroke-miterlimit="10" points="40.5,115.5 20.5,115.5 20.5,90.5 579.5,90.5 579.5,65.5 
 	569.5,65.5 "/>
-<text transform="matrix(1 0 0 1 88.4404 24.5)" fill="#001E3C" font-family="'Queue-Light'" font-size="16">INPUT</text>
-<text transform="matrix(1 0 0 1 257.4326 24.5)" fill="#001E3C" font-family="'Queue-Light'" font-size="16">PROCESSOR</text>
-<text transform="matrix(1 0 0 1 460.2568 24.5)" fill="#001E3C" font-family="'Queue-Light'" font-size="16">OUTPUT</text>
+<text transform="matrix(1 0 0 1 88.4404 24.5)" fill="#001E3C" font-family="'Queue Web'" font-weight="300" font-size="16">INPUT</text>
+<text transform="matrix(1 0 0 1 257.4326 24.5)" fill="#001E3C" font-family="'Queue Web'" font-weight="300" font-size="16">PROCESSOR</text>
+<text transform="matrix(1 0 0 1 460.2568 24.5)" fill="#001E3C" font-family="'Queue Web'" font-weight="300" font-size="16">OUTPUT</text>
 <line fill="none" stroke="#001E3C" stroke-miterlimit="10" x1="0" y1="65.5" x2="40.5" y2="65.5"/>
 <polyline fill="none" stroke="#001E3C" stroke-miterlimit="10" points="30.5,55.5 40.5,65.5 30.5,75.5 "/>
 <polyline fill="none" stroke="#E6FA82" stroke-miterlimit="10" points="30.5,105.5 40.5,115.5 30.5,125.5 "/>

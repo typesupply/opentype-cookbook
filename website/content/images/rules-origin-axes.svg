@@ -3,6 +3,16 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="600px" height="405px" viewBox="0 0 600 405" enable-background="new 0 0 600 405" xml:space="preserve">
+	 <style type="text/css">
+		 <![CDATA[
+			@font-face {
+				font-family: "Queue Web";
+				src: url("../theme/fonts/queueweb-light.woff") format("woff");
+				font-weight: 300;
+				font-style: normal;
+			}
+		]]>
+	</style>
 <rect fill="#FAFFE1" width="600" height="405"/>
 <g>
 	<path fill="#E6FA82" d="M142.801,318.862V97.666h46.4l1.199,29.2c10-20.801,31.199-33.2,55.199-33.2h2
@@ -35,8 +45,8 @@
 </g>
 <line fill="none" stroke="#F56464" stroke-miterlimit="10" x1="80" y1="50.5" x2="266" y2="50.5"/>
 <line fill="none" stroke="#F56464" stroke-miterlimit="10" x1="334" y1="50.5" x2="580" y2="50.5"/>
-<text transform="matrix(1 0 0 1 170.3506 370.5703)" fill="#F56464" font-family="'Queue-Light'" font-size="16">origin</text>
-<text transform="matrix(1 0 0 1 279.3203 56.3662)" fill="#F56464" font-family="'Queue-Light'" font-size="16">x axis</text>
+<text transform="matrix(1 0 0 1 170.3506 370.5703)" fill="#F56464" font-family="'Queue Web'" font-weight="300" font-size="16">origin</text>
+<text transform="matrix(1 0 0 1 279.3203 56.3662)" fill="#F56464" font-family="'Queue Web'" font-weight="300" font-size="16">x axis</text>
 <circle fill="#F56464" cx="124.802" cy="318.863" r="5"/>
 <polyline fill="none" stroke="#F56464" stroke-miterlimit="10" points="570,40.5 580,50.5 570,60.5 "/>
 <polyline fill="none" stroke="#F56464" stroke-miterlimit="10" points="90,60.5 80,50.5 90,40.5 "/>
@@ -44,7 +54,7 @@
 <polyline fill="none" stroke="#F56464" stroke-miterlimit="10" points="134.802,343.006 134.802,328.863 148.943,328.863 "/>
 <line fill="none" stroke="#F56464" stroke-miterlimit="10" x1="50.5" y1="20" x2="50.5" y2="200.366"/>
 <line fill="none" stroke="#F56464" stroke-miterlimit="10" x1="50.5" y1="235.366" x2="50.5" y2="385.366"/>
-<text transform="matrix(1 0 0 1 30.0283 223.8672)" fill="#F56464" font-family="'Queue-Light'" font-size="16">y axis</text>
+<text transform="matrix(1 0 0 1 30.0283 223.8672)" fill="#F56464" font-family="'Queue Web'" font-weight="300" font-size="16">y axis</text>
 <polyline fill="none" stroke="#F56464" stroke-miterlimit="10" points="60.5,375.366 50.5,385.366 40.5,375.366 "/>
 <polyline fill="none" stroke="#F56464" stroke-miterlimit="10" points="40.5,30 50.5,20 60.5,30 "/>
 </svg>

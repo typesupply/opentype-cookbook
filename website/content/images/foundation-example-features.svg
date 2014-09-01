@@ -3,16 +3,26 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="600px" height="624px" viewBox="0 0 600 624" enable-background="new 0 0 600 624" xml:space="preserve">
+	 <style type="text/css">
+		 <![CDATA[
+			@font-face {
+				font-family: "Queue Web";
+				src: url("../theme/fonts/queueweb-light.woff") format("woff");
+				font-weight: 300;
+				font-style: normal;
+			}
+		]]>
+	</style>
 <path fill="#0A78A0" d="M5,624c-2.75,0-5-2.25-5-5V447c0-2.75,2.25-5,5-5h590c2.75,0,5,2.25,5,5v172c0,2.75-2.25,5-5,5H5z"/>
 <path fill="#E6FA82" d="M580,599c0,2.75-2.25,5-5,5H25c-2.75,0-5-2.25-5-5V487c0-2.75,2.25-5,5-5h550c2.75,0,5,2.25,5,5V599z"/>
 <path fill="#0A78A0" d="M5,437c-2.75,0-5-2.25-5-5V5c0-2.75,2.25-5,5-5h590c2.75,0,5,2.25,5,5v427c0,2.75-2.25,5-5,5H5z"/>
-<text transform="matrix(1 0 0 1 20 29)" fill="#E6FA82" font-family="'Queue-Light'" font-size="16">feature: small caps</text>
-<text transform="matrix(1 0 0 1 20 471)" fill="#E6FA82" font-family="'Queue-Light'" font-size="16">feature: ligatures</text>
+<text transform="matrix(1 0 0 1 20 29)" fill="#E6FA82" font-family="'Queue Web'" font-weight="300" font-size="16">feature: small caps</text>
+<text transform="matrix(1 0 0 1 20 471)" fill="#E6FA82" font-family="'Queue Web'" font-weight="300" font-size="16">feature: ligatures</text>
 <rect x="40" y="522" fill="#0A78A0" width="520" height="30"/>
-<text transform="matrix(1 0 0 1 60 543)" fill="#E6FA82" font-family="'Queue-Light'" font-size="16">replace f i with f_i</text>
-<text transform="matrix(1 0 0 1 40 511)" fill="#0A78A0" font-family="'Queue-Light'" font-size="16">lookup: basic</text>
+<text transform="matrix(1 0 0 1 60 543)" fill="#E6FA82" font-family="'Queue Web'" font-size="16">replace f i with f_i</text>
+<text transform="matrix(1 0 0 1 40 511)" fill="#0A78A0" font-family="'Queue Web'" font-weight="300" font-size="16">lookup: basic</text>
 <rect x="40" y="554" fill="#0A78A0" width="520" height="30"/>
-<text transform="matrix(1 0 0 1 60 575)" fill="#E6FA82" font-family="'Queue-Light'" font-size="16">replace f l with f_l</text>
+<text transform="matrix(1 0 0 1 60 575)" fill="#E6FA82" font-family="'Queue Web'" font-weight="300" font-size="16">replace f l with f_l</text>
 <g>
 	<defs>
 		<path id="SVGID_1_" d="M580,45c0-2.75-2.25-5-5-5H25c-2.75,0-5,2.25-5,5v119.998L28.578,168l28.579-10l28.575,10l28.575-10
@@ -25,18 +35,18 @@
 	</clipPath>
 	<rect x="40" y="80" clip-path="url(#SVGID_2_)" fill="#0A78A0" width="520" height="30"/>
 	<g clip-path="url(#SVGID_2_)">
-		<text transform="matrix(1 0 0 1 60 101)" fill="#E6FA82" font-family="'Queue-Light'" font-size="16">replace a with A.sc</text>
+		<text transform="matrix(1 0 0 1 60 101)" fill="#E6FA82" font-family="'Queue Web'" font-weight="300" font-size="16">replace a with A.sc</text>
 	</g>
 	<g clip-path="url(#SVGID_2_)">
-		<text transform="matrix(1 0 0 1 40 69)" fill="#0A78A0" font-family="'Queue-Light'" font-size="16">lookup: letters</text>
+		<text transform="matrix(1 0 0 1 40 69)" fill="#0A78A0" font-family="'Queue Web'" font-weight="300" font-size="16">lookup: letters</text>
 	</g>
 	<rect x="40" y="112" clip-path="url(#SVGID_2_)" fill="#0A78A0" width="520" height="30"/>
 	<g clip-path="url(#SVGID_2_)">
-		<text transform="matrix(1 0 0 1 60 133)" fill="#E6FA82" font-family="'Queue-Light'" font-size="16">replace b with B.sc</text>
+		<text transform="matrix(1 0 0 1 60 133)" fill="#E6FA82" font-family="'Queue Web'" font-weight="300" font-size="16">replace b with B.sc</text>
 	</g>
 	<rect x="40" y="144" clip-path="url(#SVGID_2_)" fill="#0A78A0" width="520" height="30"/>
 	<g clip-path="url(#SVGID_2_)">
-		<text transform="matrix(1 0 0 1 60 165)" fill="#E6FA82" font-family="'Queue-Light'" font-size="16">replace c with C.sc</text>
+		<text transform="matrix(1 0 0 1 60 165)" fill="#E6FA82" font-family="'Queue Web'" font-weight="300" font-size="16">replace c with C.sc</text>
 	</g>
 </g>
 <g>
@@ -52,7 +62,7 @@
 	<rect x="40" y="144" clip-path="url(#SVGID_4_)" fill="#0A78A0" width="520" height="30"/>
 	<rect x="40" y="176" clip-path="url(#SVGID_4_)" fill="#0A78A0" width="520" height="30"/>
 	<g clip-path="url(#SVGID_4_)">
-		<text transform="matrix(1 0 0 1 60 197)" fill="#E6FA82" font-family="'Queue-Light'" font-size="16">replace z with Z.sc</text>
+		<text transform="matrix(1 0 0 1 60 197)" fill="#E6FA82" font-family="'Queue Web'" font-weight="300" font-size="16">replace z with Z.sc</text>
 	</g>
 </g>
 <polyline fill="none" stroke="#E6FA82" stroke-miterlimit="10" points="20,164.998 28.578,168 57.157,158 85.732,168 114.308,158 
@@ -73,18 +83,18 @@
 	</clipPath>
 	<rect x="40" y="271" clip-path="url(#SVGID_6_)" fill="#0A78A0" width="520" height="30"/>
 	<g clip-path="url(#SVGID_6_)">
-		<text transform="matrix(1 0 0 1 60 292)" fill="#E6FA82" font-family="'Queue-Light'" font-size="16">replace zero with zero.sc</text>
+		<text transform="matrix(1 0 0 1 60 292)" fill="#E6FA82" font-family="'Queue Web'" font-weight="300" font-size="16">replace zero with zero.sc</text>
 	</g>
 	<g clip-path="url(#SVGID_6_)">
-		<text transform="matrix(1 0 0 1 40 260)" fill="#0A78A0" font-family="'Queue-Light'" font-size="16">lookup: numbers</text>
+		<text transform="matrix(1 0 0 1 40 260)" fill="#0A78A0" font-family="'Queue Web'" font-weight="300" font-size="16">lookup: numbers</text>
 	</g>
 	<rect x="40" y="303" clip-path="url(#SVGID_6_)" fill="#0A78A0" width="520" height="30"/>
 	<g clip-path="url(#SVGID_6_)">
-		<text transform="matrix(1 0 0 1 60 324)" fill="#E6FA82" font-family="'Queue-Light'" font-size="16">replace one with one.sc</text>
+		<text transform="matrix(1 0 0 1 60 324)" fill="#E6FA82" font-family="'Queue Web'" font-weight="300" font-size="16">replace one with one.sc</text>
 	</g>
 	<rect x="40" y="335" clip-path="url(#SVGID_6_)" fill="#0A78A0" width="520" height="30"/>
 	<g clip-path="url(#SVGID_6_)">
-		<text transform="matrix(1 0 0 1 60 356)" fill="#E6FA82" font-family="'Queue-Light'" font-size="16">replace two with two.sc</text>
+		<text transform="matrix(1 0 0 1 60 356)" fill="#E6FA82" font-family="'Queue Web'" font-weight="300" font-size="16">replace two with two.sc</text>
 	</g>
 </g>
 <g>
@@ -100,7 +110,7 @@
 	<rect x="40" y="335" clip-path="url(#SVGID_8_)" fill="#0A78A0" width="520" height="30"/>
 	<rect x="40" y="367" clip-path="url(#SVGID_8_)" fill="#0A78A0" width="520" height="30"/>
 	<g clip-path="url(#SVGID_8_)">
-		<text transform="matrix(1 0 0 1 60 388)" fill="#E6FA82" font-family="'Queue-Light'" font-size="16">replace nine with nine.sc</text>
+		<text transform="matrix(1 0 0 1 60 388)" fill="#E6FA82" font-family="'Queue Web'" font-weight="300" font-size="16">replace nine with nine.sc</text>
 	</g>
 </g>
 <polyline fill="none" stroke="#E6FA82" stroke-miterlimit="10" points="20,355.998 28.578,359 57.157,349 85.732,359 114.308,349 

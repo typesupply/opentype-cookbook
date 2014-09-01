@@ -3,6 +3,16 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="600px" height="451.366px" viewBox="0 0 600 451.366" enable-background="new 0 0 600 451.366" xml:space="preserve">
+	 <style type="text/css">
+		 <![CDATA[
+			@font-face {
+				font-family: "Queue Web";
+				src: url("../theme/fonts/queueweb-light.woff") format("woff");
+				font-weight: 300;
+				font-style: normal;
+			}
+		]]>
+	</style>
 <path fill="#0A78A0" d="M595,0H5C2.25,0,0,2.25,0,5v40.5l28.578,10l28.579-10l28.575,10l28.575-10l28.574,10l28.573-10l28.57,10
 	l28.57-10l28.566,10l28.572-10l28.572,10l28.57-10l28.57,10l28.571-10l28.569,10l28.572-10l28.569,10l28.567-10l28.568,10l28.566-10
 	L600,55.5V5C600,2.25,597.75,0,595,0z"/>
@@ -48,7 +58,7 @@
 			c0-3.535-1.12-5.285-4.025-5.285s-3.99,1.75-3.99,5.285v6.686c0,3.535,1.085,5.286,3.99,5.286S521.271,161.565,521.271,158.03z"/>
 	</g>
 	<g clip-path="url(#SVGID_2_)">
-		<text transform="matrix(1 0 0 1 231.8169 156.3662)" fill="#0A78A0" font-family="'Queue-Light'" font-size="16">replace a with A.sc</text>
+		<text transform="matrix(1 0 0 1 231.8169 156.3662)" fill="#0A78A0" font-family="'Queue Web'" font-weight="300" font-size="16">replace a with A.sc</text>
 	</g>
 	<polyline clip-path="url(#SVGID_2_)" fill="none" stroke="#E6FA82" stroke-miterlimit="10" points="40.5,201.366 20.5,201.366 
 		20.5,176.366 579.5,176.366 579.5,151.366 569.5,151.366 	"/>
@@ -83,7 +93,7 @@
 			c0-3.535-1.12-5.285-4.025-5.285s-3.99,1.75-3.99,5.285v6.686c0,3.535,1.085,5.286,3.99,5.286S521.271,110.565,521.271,107.03z"/>
 	</g>
 	<g clip-path="url(#SVGID_2_)">
-		<text transform="matrix(1 0 0 1 232.3608 105.3662)" fill="#0A78A0" font-family="'Queue-Light'" font-size="16">replace z with Z.sc</text>
+		<text transform="matrix(1 0 0 1 232.3608 105.3662)" fill="#0A78A0" font-family="'Queue Web'" font-weight="300" font-size="16">replace z with Z.sc</text>
 	</g>
 	<polyline clip-path="url(#SVGID_2_)" fill="none" stroke="#001E3C" stroke-miterlimit="10" points="40.5,150.366 20.5,150.366 
 		20.5,125.366 579.5,125.366 579.5,100.366 569.5,100.366 	"/>
@@ -118,7 +128,7 @@
 			c0-3.535-1.12-5.285-4.025-5.285s-3.99,1.75-3.99,5.285v6.686c0,3.535,1.085,5.286,3.99,5.286S521.271,59.565,521.271,56.03z"/>
 	</g>
 	<g clip-path="url(#SVGID_2_)">
-		<text transform="matrix(1 0 0 1 231.7612 54.3662)" fill="#0A78A0" font-family="'Queue-Light'" font-size="16">replace y with Y.sc</text>
+		<text transform="matrix(1 0 0 1 231.7612 54.3662)" fill="#0A78A0" font-family="'Queue Web'" font-weight="300" font-size="16">replace y with Y.sc</text>
 	</g>
 	<polyline clip-path="url(#SVGID_2_)" fill="none" stroke="#E6FA82" stroke-miterlimit="10" points="40.5,99.366 20.5,99.366 
 		20.5,74.366 579.5,74.366 579.5,49.366 569.5,49.366 	"/>
@@ -155,7 +165,7 @@
 			c0-3.535-1.12-5.285-4.025-5.285s-3.99,1.75-3.99,5.285v6.686c0,3.535,1.085,5.286,3.99,5.286S521.271,212.565,521.271,209.03z"/>
 	</g>
 	<g clip-path="url(#SVGID_2_)">
-		<text transform="matrix(1 0 0 1 231.3848 207.3662)" fill="#0A78A0" font-family="'Queue-Light'" font-size="16">replace b with B.sc</text>
+		<text transform="matrix(1 0 0 1 231.3848 207.3662)" fill="#0A78A0" font-family="'Queue Web'" font-weight="300" font-size="16">replace b with B.sc</text>
 	</g>
 	<polyline clip-path="url(#SVGID_2_)" fill="none" stroke="#E6FA82" stroke-miterlimit="10" points="40.5,252.367 20.5,252.367 
 		20.5,227.367 579.5,227.367 579.5,202.366 569.5,202.366 	"/>
@@ -194,7 +204,7 @@
 			/>
 	</g>
 	<g clip-path="url(#SVGID_2_)">
-		<text transform="matrix(1 0 0 1 232.1528 258.3667)" fill="#0A78A0" font-family="'Queue-Light'" font-size="16">replace c with C.sc</text>
+		<text transform="matrix(1 0 0 1 232.1528 258.3667)" fill="#0A78A0" font-family="'Queue Web'" font-weight="300" font-size="16">replace c with C.sc</text>
 	</g>
 	<polyline clip-path="url(#SVGID_2_)" fill="none" stroke="#E6FA82" stroke-miterlimit="10" points="40.5,303.367 20.5,303.367 
 		20.5,278.367 579.5,278.367 579.5,253.367 569.5,253.367 	"/>
@@ -233,7 +243,7 @@
 			/>
 	</g>
 	<g clip-path="url(#SVGID_2_)">
-		<text transform="matrix(1 0 0 1 231.1929 309.3667)" fill="#0A78A0" font-family="'Queue-Light'" font-size="16">replace d with D.sc</text>
+		<text transform="matrix(1 0 0 1 231.1929 309.3667)" fill="#0A78A0" font-family="'Queue Web'" font-weight="300" font-size="16">replace d with D.sc</text>
 	</g>
 	<polyline clip-path="url(#SVGID_2_)" fill="none" stroke="#E6FA82" stroke-miterlimit="10" points="40.5,354.367 20.5,354.367 
 		20.5,329.367 579.5,329.367 579.5,304.367 569.5,304.367 	"/>
@@ -268,7 +278,7 @@
 			c0-3.535-1.12-5.285-4.025-5.285s-3.99,1.75-3.99,5.285v6.686c0,3.535,1.085,5.285,3.99,5.285S520.15,365.566,520.15,362.031z"/>
 	</g>
 	<g clip-path="url(#SVGID_2_)">
-		<text transform="matrix(1 0 0 1 231.9849 360.3667)" fill="#0A78A0" font-family="'Queue-Light'" font-size="16">replace e with E.sc</text>
+		<text transform="matrix(1 0 0 1 231.9849 360.3667)" fill="#0A78A0" font-family="'Queue Web'" font-weight="300" font-size="16">replace e with E.sc</text>
 	</g>
 	<polyline clip-path="url(#SVGID_2_)" fill="none" stroke="#001E3C" stroke-miterlimit="10" points="40.5,405.367 20.5,405.367 
 		20.5,380.367 579.5,380.367 579.5,355.367 569.5,355.367 	"/>
@@ -299,7 +309,7 @@
 			c0-3.535-1.12-5.285-4.025-5.285s-3.99,1.75-3.99,5.285v6.686c0,3.535,1.085,5.285,3.99,5.285S520.15,416.566,520.15,413.031z"/>
 	</g>
 	<g clip-path="url(#SVGID_2_)">
-		<text transform="matrix(1 0 0 1 231.8169 411.3667)" fill="#0A78A0" font-family="'Queue-Light'" font-size="16">replace a with A.sc</text>
+		<text transform="matrix(1 0 0 1 231.8169 411.3667)" fill="#0A78A0" font-family="'Queue Web'" font-weight="300" font-size="16">replace a with A.sc</text>
 	</g>
 	<polyline clip-path="url(#SVGID_2_)" fill="none" stroke="#E6FA82" stroke-miterlimit="10" points="40.5,456.367 20.5,456.367 
 		20.5,431.367 579.5,431.367 579.5,406.367 569.5,406.367 	"/>
@@ -330,13 +340,13 @@
 			c0-3.535-1.12-5.285-4.025-5.285s-3.99,1.75-3.99,5.285v6.686c0,3.535,1.085,5.285,3.99,5.285S520.15,467.566,520.15,464.031z"/>
 	</g>
 	<g clip-path="url(#SVGID_2_)">
-		<text transform="matrix(1 0 0 1 231.3848 462.3667)" fill="#0A78A0" font-family="'Queue-Light'" font-size="16">replace b with B.sc</text>
+		<text transform="matrix(1 0 0 1 231.3848 462.3667)" fill="#0A78A0" font-family="'Queue Web'" font-weight="300" font-size="16">replace b with B.sc</text>
 	</g>
 </g>
 <line fill="none" stroke="#001E3C" stroke-miterlimit="10" x1="20" y1="34.5" x2="188" y2="34.5"/>
 <line fill="none" stroke="#001E3C" stroke-miterlimit="10" x1="216" y1="34.5" x2="384" y2="34.5"/>
 <line fill="none" stroke="#001E3C" stroke-miterlimit="10" x1="412" y1="34.5" x2="580" y2="34.5"/>
-<text transform="matrix(1 0 0 1 88.4404 24.5)" fill="#001E3C" font-family="'Queue-Light'" font-size="16">INPUT</text>
-<text transform="matrix(1 0 0 1 257.4326 24.5)" fill="#001E3C" font-family="'Queue-Light'" font-size="16">PROCESSOR</text>
-<text transform="matrix(1 0 0 1 460.2568 24.5)" fill="#001E3C" font-family="'Queue-Light'" font-size="16">OUTPUT</text>
+<text transform="matrix(1 0 0 1 88.4404 24.5)" fill="#001E3C" font-family="'Queue Web'" font-weight="300" font-size="16">INPUT</text>
+<text transform="matrix(1 0 0 1 257.4326 24.5)" fill="#001E3C" font-family="'Queue Web'" font-weight="300" font-size="16">PROCESSOR</text>
+<text transform="matrix(1 0 0 1 460.2568 24.5)" fill="#001E3C" font-family="'Queue Web'" font-weight="300" font-size="16">OUTPUT</text>
 </svg>

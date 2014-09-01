@@ -3,6 +3,16 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="600px" height="405px" viewBox="0 0 600 405" enable-background="new 0 0 600 405" xml:space="preserve">
+	 <style type="text/css">
+		 <![CDATA[
+			@font-face {
+				font-family: "Queue Web";
+				src: url("../theme/fonts/queueweb-light.woff") format("woff");
+				font-weight: 300;
+				font-style: normal;
+			}
+		]]>
+	</style>
 <rect fill="#FAFFE1" width="600" height="405"/>
 <g>
 	<path fill="#FFFFFF" d="M142.801,318.862V97.666h46.4l1.199,29.2c10-20.801,31.199-33.2,55.199-33.2h2
@@ -42,16 +52,16 @@
 <circle fill="#F56464" cx="144.802" cy="278.863" r="5"/>
 <line fill="none" stroke="#F56464" stroke-width="5" stroke-miterlimit="10" x1="520" y1="239.5" x2="550" y2="239.5"/>
 <line fill="none" stroke="#F56464" stroke-miterlimit="10" x1="470" y1="49.5" x2="520" y2="49.5"/>
-<text transform="matrix(1 0 0 1 390 55.3662)" fill="#F56464" font-family="'Queue-Light'" font-size="16">x advance</text>
+<text transform="matrix(1 0 0 1 390 55.3662)" fill="#F56464" font-family="'Queue Web'" font-weight="300" font-size="16">x advance</text>
 <polyline fill="none" stroke="#F56464" stroke-miterlimit="10" points="510,39.5 520,49.5 510,59.5 "/>
 <line fill="none" stroke="#F56464" stroke-width="5" stroke-miterlimit="10" x1="535.5" y1="34" x2="535.5" y2="64"/>
-<text transform="matrix(1 0 0 1 190.3506 330.5703)" fill="#F56464" font-family="'Queue-Light'" font-size="16">y placement</text>
-<text transform="matrix(1 0 0 1 37.3354 231.3652)" fill="#F56464" font-family="'Queue-Light'" font-size="16">x placement</text>
+<text transform="matrix(1 0 0 1 190.3506 330.5703)" fill="#F56464" font-family="'Queue Web'" font-weight="300" font-size="16">y placement</text>
+<text transform="matrix(1 0 0 1 37.3354 231.3652)" fill="#F56464" font-family="'Queue Web'" font-weight="300" font-size="16">x placement</text>
 <line fill="none" stroke="#F56464" stroke-miterlimit="10" x1="154.802" y1="288.863" x2="184.801" y2="318.863"/>
 <polyline fill="none" stroke="#F56464" stroke-miterlimit="10" points="154.802,303.006 154.802,288.863 168.943,288.863 "/>
 <line fill="none" stroke="#F56464" stroke-miterlimit="10" x1="134.802" y1="268.863" x2="104.803" y2="238.863"/>
 <polyline fill="none" stroke="#F56464" stroke-miterlimit="10" points="134.802,254.721 134.802,268.863 120.66,268.863 "/>
 <line fill="none" stroke="#F56464" stroke-miterlimit="10" x1="535.5" y1="169.362" x2="535.5" y2="219.362"/>
-<text transform="matrix(1 0 0 1 500.4365 157.8633)" fill="#F56464" font-family="'Queue-Light'" font-size="16">y advance</text>
+<text transform="matrix(1 0 0 1 500.4365 157.8633)" fill="#F56464" font-family="'Queue Web'" font-weight="300" font-size="16">y advance</text>
 <polyline fill="none" stroke="#F56464" stroke-miterlimit="10" points="545.5,209.362 535.5,219.362 525.5,209.362 "/>
 </svg>
