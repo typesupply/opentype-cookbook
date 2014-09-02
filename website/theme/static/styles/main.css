@@ -4,48 +4,41 @@
   src: url("../fonts/queueweb-light.woff") format("woff");
   font-weight: 300;
   font-style: normal; }
-
 @font-face {
   font-family: "Queue Web";
   src: url("../fonts/queueweb-lightitalic.woff") format("woff");
   font-weight: 300;
   font-style: italic; }
-
 @font-face {
   font-family: "Queue Web";
   src: url("../fonts/queueweb-book.woff") format("woff");
   font-weight: 400;
   font-style: normal; }
-
 @font-face {
   font-family: "Queue Web";
   src: url("../fonts/queueweb-medium.woff") format("woff");
   font-weight: 500;
   font-style: normal; }
-
 @font-face {
   font-family: "Queue Web";
   src: url("../fonts/queueweb-bold.woff") format("woff");
   font-weight: 600;
   font-style: normal; }
-
 @font-face {
   font-family: "Queue Mono Web";
   src: url("../fonts/queuemonoweb-light.woff") format("woff");
   font-weight: 300;
   font-style: normal; }
-
 @font-face {
   font-family: "Queue Mono Web";
   src: url("../fonts/queuemonoweb-medium.woff") format("woff");
   font-weight: 400;
   font-style: normal; }
-
 html {
   height: 100%; }
 
 body {
-  font: 15px/23px "Queue Web", sans-serif;
+  font: 15px/23px 'Queue Web', sans-serif;
   font-weight: 300;
   color: #000000;
   height: 100%; }
@@ -109,12 +102,12 @@ nav {
     margin: 0 24px; }
     nav ul li {
       list-style: none inside;
-      font: 16px/32px "Queue Web", sans-serif;
+      font: 16px/32px 'Queue Web', sans-serif;
       font-weight: 400;
       color: #0a78a0;
-      border-bottom: 1px solid white; }
+      border-bottom: 1px solid #ffffff; }
       nav ul li:first-child {
-        border-top: 1px solid white; }
+        border-top: 1px solid #ffffff; }
       nav ul li:last-child {
         border-bottom: 0 none; }
       nav ul li.active {
@@ -164,7 +157,7 @@ article {
     article a:hover {
       text-decoration: underline; }
   article code {
-    font-family: "Queue Mono Web", sans-serif;
+    font-family: 'Queue Mono Web', sans-serif;
     font-weight: 500;
     color: #0a78a0;
     background: #faffe1;
@@ -209,11 +202,11 @@ article {
         color: #0a78a0;
         content: "•"; }
   article .highlight pre {
-    font-family: "Queue Mono Web", sans-serif;
+    font-family: 'Queue Mono Web', sans-serif;
     font-weight: 300;
     background: #faffe1;
     padding: 1em 1em 1em 1.5em; }
-  article img {
+  article img, article object {
     margin: 1em 0;
     width: 100%; }
 
