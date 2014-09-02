@@ -1,24 +1,27 @@
 #menu_toggle {
     position: absolute;
     margin-left: 10px;
+    top: 61px;
     left: 0;
 }
 
 header {
-    height: 118px;
-    background-position: center center;
+    height: 110px;
+    background-image: url('../furniture/header_arrow_small.svg');
+
 
     h1 {
-        height: 118px;
+        height: 110px;
         width: 100%;
-
         text-align: left;
 
         a {
+            width: 170px;
             height: 100%;
+            display: block;
             float: none;
-            margin-left: 80px;
-            margin-right: 0;
+            margin-left: 65px;
+            background-image: url('../furniture/opentype_cookbook_header_small.svg');
         }
     }
     h2 {
@@ -37,5 +40,22 @@ header {
         width: auto;
         margin-left:20px;
         margin-right: 20px;
+
+        h1 {
+            font-size: 30px;
+            line-height: 25px;
+        }
+        h2 {
+            font-size: 20px;
+            line-height: 20px;
+        }
+        h3 {
+            font-size: 18px;
+            line-height: 23px;
+        }
+        h4 {
+            font-size: 16px;
+            line-height: 30px;
+        }
     }
 }

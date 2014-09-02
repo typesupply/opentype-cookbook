@@ -4,41 +4,48 @@
   src: url("../fonts/queueweb-light.woff") format("woff");
   font-weight: 300;
   font-style: normal; }
+
 @font-face {
   font-family: "Queue Web";
   src: url("../fonts/queueweb-lightitalic.woff") format("woff");
   font-weight: 300;
   font-style: italic; }
+
 @font-face {
   font-family: "Queue Web";
   src: url("../fonts/queueweb-book.woff") format("woff");
   font-weight: 400;
   font-style: normal; }
+
 @font-face {
   font-family: "Queue Web";
   src: url("../fonts/queueweb-medium.woff") format("woff");
   font-weight: 500;
   font-style: normal; }
+
 @font-face {
   font-family: "Queue Web";
   src: url("../fonts/queueweb-bold.woff") format("woff");
   font-weight: 600;
   font-style: normal; }
+
 @font-face {
   font-family: "Queue Mono Web";
   src: url("../fonts/queuemonoweb-light.woff") format("woff");
   font-weight: 300;
   font-style: normal; }
+
 @font-face {
   font-family: "Queue Mono Web";
   src: url("../fonts/queuemonoweb-medium.woff") format("woff");
   font-weight: 400;
   font-style: normal; }
+
 html {
   height: 100%; }
 
 body {
-  font: 15px/23px 'Queue Web', sans-serif;
+  font: 15px/23px "Queue Web", sans-serif;
   font-weight: 300;
   color: #000000;
   height: 100%; }
@@ -102,12 +109,12 @@ nav {
     margin: 0 24px; }
     nav ul li {
       list-style: none inside;
-      font: 16px/32px 'Queue Web', sans-serif;
+      font: 16px/32px "Queue Web", sans-serif;
       font-weight: 400;
       color: #0a78a0;
-      border-bottom: 1px solid #ffffff; }
+      border-bottom: 1px solid white; }
       nav ul li:first-child {
-        border-top: 1px solid #ffffff; }
+        border-top: 1px solid white; }
       nav ul li:last-child {
         border-bottom: 0 none; }
       nav ul li.active {
@@ -157,7 +164,7 @@ article {
     article a:hover {
       text-decoration: underline; }
   article code {
-    font-family: 'Queue Mono Web', sans-serif;
+    font-family: "Queue Mono Web", sans-serif;
     font-weight: 500;
     color: #0a78a0;
     background: #faffe1;
@@ -202,7 +209,7 @@ article {
         color: #0a78a0;
         content: "•"; }
   article .highlight pre {
-    font-family: 'Queue Mono Web', sans-serif;
+    font-family: "Queue Mono Web", sans-serif;
     font-weight: 300;
     background: #faffe1;
     padding: 1em 1em 1em 1.5em; }
@@ -254,7 +261,7 @@ footer {
   .js #menu_toggle {
     position: fixed;
     left: 50%;
-    top: 70px;
+    top: 87px;
     margin-left: -374px;
     display: block;
     width: 56px;
@@ -297,26 +304,41 @@ footer {
   .js #menu_toggle {
     position: absolute;
     margin-left: 10px;
+    top: 61px;
     left: 0; }
   .js header {
-    height: 118px;
-    background-position: center center; }
+    height: 110px;
+    background-image: url("../furniture/header_arrow_small.svg"); }
     .js header h1 {
-      height: 118px;
+      height: 110px;
       width: 100%;
       text-align: left; }
       .js header h1 a {
+        width: 170px;
         height: 100%;
+        display: block;
         float: none;
-        margin-left: 80px;
-        margin-right: 0; }
+        margin-left: 65px;
+        background-image: url("../furniture/opentype_cookbook_header_small.svg"); }
     .js header h2 {
       display: none; } }
 @media only screen and (max-width: 767px) and (max-width: 620px) {
   .js article {
     width: auto;
     margin-left: 20px;
-    margin-right: 20px; } }
+    margin-right: 20px; }
+    .js article h1 {
+      font-size: 30px;
+      line-height: 25px; }
+    .js article h2 {
+      font-size: 20px;
+      line-height: 20px; }
+    .js article h3 {
+      font-size: 18px;
+      line-height: 23px; }
+    .js article h4 {
+      font-size: 16px;
+      line-height: 30px; } }
 
 .highlight .c {
   color: rgba(0, 0, 0, 0.6); }
