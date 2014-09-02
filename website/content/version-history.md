@@ -1,10 +1,6 @@
 Title: Version History
 Sortorder: 9
 
-### Before Launch
-
-- something about general methodology: design, patterns, behavior, code. could go in putting it together
-
 ### September 4, 2014
 
 Initial version.
@@ -16,6 +12,7 @@ Initial version.
 - Update the fonts used for all text to include kerning. (I'm working on it!)
 - Illustrations for each feature in Common Techniques.
 - Animated step through of the processing sequence in Foundation Concepts.
+- Add something about the methodology for developing complex features: don't dive into code. Rather make some examples of what you want the final result to look like, find the visual patterns within that and build the code from there.
 
 #### Distant Future
 
