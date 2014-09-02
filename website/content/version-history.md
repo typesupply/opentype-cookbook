@@ -3,7 +3,6 @@ Sortorder: 9
 
 ### Before Launch
 
-- responsive logos and styling
 - something about general methodology: design, patterns, behavior, code. could go in putting it together
 
 ### September 4, 2014
