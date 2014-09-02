@@ -1,6 +1,5 @@
 Title: Introduction
 Slug: index
-Summary: Short version for index and feeds
 Sortorder: 1
 
 OpenType features allow fonts to behave smartly. This behavior can do simple things (e.g. change letters to small caps) or they can do complex things (e.g. insert swashes, alternates, and ligatures to make text set in a script font feel handmade). This cookbook aims to be a designer friendly introduction to understanding and developing these features. The goal is not to teach you how to write a small caps feature or a complex script feature. Rather, the goal is to teach you the logic and techniques for developing features. Once you understand those, you’ll be able to create OpenType features that fit your design as perfectly as possible.

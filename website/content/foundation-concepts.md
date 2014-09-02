@@ -1,5 +1,4 @@
 Title: Foundation Concepts
-Summary: Short version for index and feeds
 Sortorder: 2
 
 Before we start writing any code, let’s first look at what the code will actually do. If you are reading this cookbook just to find out how to do something simple like write a small caps feature, you may skip this section and jump ahead to the [code snippets](common-techniques.html). But, if you want to develop complex, nuanced, amazing features, you really should read this section. Understanding the underlying mechanics of how features work will allow you to carry your vision all the way from how the glyphs the glyphs *look* to how the *behave*.

@@ -1,5 +1,4 @@
 Title: Acknowledgements
-Summary: Short version for index and feeds
 Sortorder: 8
 
 Thanks to the Adobe Type Department for developing the .fea syntax. It gets criticized from time to time, but it is actually a great abstraction of the GSUB, GPOS and GDEF binary data structures. I’ve tried, and failed, to invent a better syntax several times. .fea is hard to beat. Thanks Adobe!

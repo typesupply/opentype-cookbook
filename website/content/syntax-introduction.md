@@ -1,5 +1,4 @@
 Title: Syntax Introduction
-Summary: Short version for index and feeds
 Sortorder: 3
 
 We will be writing our features in the [Adobe OpenType Feature File Syntax](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html) (commonly referred to as “.fea”). This is a simple, text format that is easily editable in text and font editors. There are other syntaxes and tools for developing features, but .fea is the most widely supported and the most easily accessible. We’ll be going through the important parts of .fea in detail, but for now we need to establish some basics.

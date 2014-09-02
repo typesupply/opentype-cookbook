@@ -1,5 +1,4 @@
 Title: Putting it Together
-Summary: Short version for index and feeds
 Sortorder: 5
 
 You now have the building blocks for writing everything from simple to complex features and you understand how it is actually going to work. Right? Great! Now, let’s start looking at the bigger picture.

@@ -1,5 +1,4 @@
 Title: Common Techniques
-Summary: Short version for index and feeds
 Sortorder: 6
 
 Up until now, almost everything that has been discussed has been the official way to do things or established common practice. The next section is far more subjective as there are numerous ways to write the code to create certain behaviors. What follows includes my own personal opinion.

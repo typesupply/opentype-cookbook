@@ -1,5 +1,4 @@
 Title: Style Guide
-Summary: Short version for index and feeds
 Sortorder: 7
 
 I like to make my code look nice. I’m a designer, so I’ll even go so far as to say that I try to make it look typographic. My goal is to make it comfortable to read because, as [Guido van Rossum](http://en.wikipedia.org/wiki/Guido_van_Rossum) once put it, code is read much more often than it is written. Debugging problems is not fun. Debugging problems in poorly structured, hard to read code is a bag of hurt.
