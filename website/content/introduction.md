@@ -24,7 +24,7 @@ If you have trouble understanding anything, need help with your features or anyt
 
 ## Donations
 
-If you think this cookbook has been useful in your day to day work and you want to support the development of it, feel free to drop a tip or donation into the pot over on [Pledgie](https://pledgie.com/campaigns/26563). Or you can contact me [directly](http://typesupply.com/contact) if you would prefer to do it that way.
+If you think this cookbook has been useful in your day to day work and you want to support the development of it, feel free to drop a tip or donation into the hat over on [Pledgie](https://pledgie.com/campaigns/26563). Or you can contact me [directly](http://typesupply.com/contact) if you would prefer to do it that way.
 
 ### Students
 
