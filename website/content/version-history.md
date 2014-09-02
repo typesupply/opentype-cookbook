@@ -13,6 +13,7 @@ Initial version.
 
 #### Near Future
 
+- Update the fonts used for all text to include kerning. (I'm working on it!)
 - Illustrations for each feature in Common Techniques.
 - Animated step through of the processing sequence in Foundation Concepts.
 
