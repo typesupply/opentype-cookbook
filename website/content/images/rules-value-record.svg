@@ -2,7 +2,7 @@
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="600px" height="405px" viewBox="0 0 600 405" enable-background="new 0 0 600 405" xml:space="preserve">
+	 width="600px" height="405px" viewBox="0 0 600 405" enable-background="new 0 0 600 405" xml:space="preserve" preserveAspectRatio="xMinYMin meet">
 	 <style type="text/css">
 		 <![CDATA[
 			@font-face {
@@ -23,7 +23,7 @@
 <g>
 	<g>
 		<line fill="none" stroke="#0A78A0" stroke-miterlimit="10" x1="124.5" y1="0" x2="124.5" y2="1.5"/>
-		
+
 			<line fill="none" stroke="#0A78A0" stroke-miterlimit="10" stroke-dasharray="2.9778,2.9778" x1="124.5" y1="4.478" x2="124.5" y2="402.011"/>
 		<line fill="none" stroke="#0A78A0" stroke-miterlimit="10" x1="124.5" y1="403.5" x2="124.5" y2="405"/>
 	</g>
@@ -31,7 +31,7 @@
 <g>
 	<g>
 		<line fill="none" stroke="#0A78A0" stroke-miterlimit="10" x1="475.5" y1="0" x2="475.5" y2="1.5"/>
-		
+
 			<line fill="none" stroke="#0A78A0" stroke-miterlimit="10" stroke-dasharray="2.9778,2.9778" x1="475.5" y1="4.478" x2="475.5" y2="402.011"/>
 		<line fill="none" stroke="#0A78A0" stroke-miterlimit="10" x1="475.5" y1="403.5" x2="475.5" y2="405"/>
 	</g>
