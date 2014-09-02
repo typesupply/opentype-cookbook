@@ -17,3 +17,5 @@ Initial version.
 #### Distant Future
 
 - Include information and examples for the additional positioning rule types.
+- Add a troubleshooting section. ([See this commit for a list.](https://github.com/typesupply/opentype-feature-intro/commit/00ae80400faf8f645cfab58b1b1b1a6c2e4dfd7f))
+- Add a section detailing what isn't covered by this cookbook. ([See this commit for a list.](https://github.com/typesupply/opentype-feature-intro/commit/00ae80400faf8f645cfab58b1b1b1a6c2e4dfd7f))
