@@ -20,7 +20,7 @@ If you have trouble understanding anything, need help with your features or anyt
 
 ## Feedback & Contributions
 
-[This source for the text of this cookbook is on GitHub.]((https://github.com/typesupply/opentype-feature-intro)). If you spot errors, have suggestions about making something more clear and so on, please open an issue or submit a pull request over there. If you would rather get in touch with me directly, feel free to do that [here](http://typesupply.com/contact).
+[This source for the text of this cookbook is on GitHub.](https://github.com/typesupply/opentype-feature-intro). If you spot errors, have suggestions about making something more clear and so on, please open an issue or submit a pull request over there. If you would rather get in touch with me directly, feel free to do that [here](http://typesupply.com/contact).
 
 ## Donations
 
