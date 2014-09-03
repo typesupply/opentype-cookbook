@@ -1,1 +1,1 @@
-Welcome to The Unofficial OpenType Cookbook. Feel free to peruse this information in it's raw state here. But, it's much nicer in its compiled form on [opentypecookbook.com](http://opentypecookbook.com).
+Welcome to The Unofficial OpenType Cookbook. Feel free to peruse this information in its raw state here. But, it's much nicer in its compiled form on [opentypecookbook.com](http://opentypecookbook.com).
