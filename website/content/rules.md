@@ -74,7 +74,7 @@ To replace a sequence of things with one thing, you do this:
 
 *(In the .fea documentation, this is known as GSUB Lookup Type 4: Ligature Substitution.)*
 
-For example, for a `fi` ligature, you would do this:
+For example, for an `fi` ligature, you would do this:
 
     :::fea
     sub f i by f_i;
@@ -175,7 +175,7 @@ Targets can be classes. These classes can be referenced by name or they can be d
 
 #### Cumulative Effect
 
-When the positioning features are started, each glyph in the glyph run has a value record of `<0 0 0 0>`. As the processing happens and rules are matched, these value records are modified cumulative. So, if one feature adjust a glyph’s x placement by 10 units and then another feature adjust the glyph’s x placement by 30 units, the glyph’s x placement would be 40 units.
+When the positioning features are started, each glyph in the glyph run has a value record of `<0 0 0 0>`. As the processing happens and rules are matched, these value records are modified cumulatively. So, if one feature adjusts a glyph’s x placement by 10 units and then another feature adjusts the glyph’s x placement by 30 units, the glyph’s x placement would be 40 units.
 
 
 ### Adjust the Position of One Glyph
@@ -329,11 +329,11 @@ This is useful if you want to share some rules across multiple features.
     lookup Inferiors {
         sub @inferiorOff by @inferiorOn;
     } Inferiors;
-  
+
     feature subs {
         lookup Inferiors;
     } subs;
-  
+
     feature sinf {
         lookup Inferiors;
     } sinf;

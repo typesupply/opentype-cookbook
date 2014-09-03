@@ -77,5 +77,5 @@ A name for a glyph, class or lookup must adhere to the following constraints:
 - Only use characters in A-Z a-z 0-9 . _
 - Must not start with a number or a period.
 
-You should avoid naming anything (including glyphs) with the same name as a [reserved keyword](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#2.c). If you do need to name a glyph with one of these names, precede an reference to the glyph with a `\` But, really, try to avoid needing to do this.
+You should avoid naming anything (including glyphs) with the same name as a [reserved keyword](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#2.c). If you do need to name a glyph with one of these names, precede a reference to the glyph with a `\` But, really, try to avoid needing to do this.
 
