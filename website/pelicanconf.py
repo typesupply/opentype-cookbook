@@ -6,6 +6,8 @@ AUTHOR = u'Tal Leming'
 SITENAME = u'The OpenType Cookbook'
 SITEURL = 'http://opentypecookbook.com'
 
+GOOGLE_ANALYTICS = "UA-37604844-2"
+
 PATH = 'content'
 
 TIMEZONE = 'America/New_York'
