@@ -96,7 +96,7 @@ Or:
 
 ### Replace One With Many
 
-To replace a sequence of things with a single thing, you do this:
+To replace a single thing with a sequence of things, you do this:
 
     :::fea
     sub target by replacement sequence;
