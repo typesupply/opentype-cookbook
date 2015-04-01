@@ -327,7 +327,7 @@ Would this sequence be ordered from bottom to top, the `f_f_i` and `o_f_f_i` wou
 
 ## Manual Alternate Access
 
-There is one special feature that is used to determine the alternates displayed in the glyph access palette in popular design software. This feature `aalt` is processed after all other substitution features regardless of where you have it ordered in your feature definitions.
+There is one special feature, `aalt`, that is used to determine the alternates displayed in the glyph access palette in popular design software.
 
 There are a couple of different ways to define the rules in this feature, but I prefer to do it manually with individual one from many rules.
 
@@ -374,6 +374,16 @@ There are a couple of different ways to define the rules in this feature, but I 
         sub questiondown from [questiondown.uc];
         sub at from [at.uc];
     } aalt;
+
+Another way to define this is to use the `feature` keyword. This will magically build a list of possible alternates from any referenced features. For example, if you want to build your list of alternates from the small caps (`smcp`) and caps to small caps (`c2sc`) features, you could do this:
+
+    :::fea
+    feature aalt {
+        feature smcp;
+        feature c2sc;
+    } aalt;
+
+If you use this `feature` keyword, the `aalt` feature **must** be defined *before* the referenced features. So, put this at the top of your feature definitions to be safe.
 
 ## Fun Stuff
 
