@@ -18,6 +18,8 @@ GITHUB_URL = 'https://github.com/typesupply/opentype-feature-intro'
 
 DEFAULT_PAGINATION = False
 
+MD_EXTENSIONS = ['headerid']
+
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
 
