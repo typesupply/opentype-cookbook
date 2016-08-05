@@ -1,0 +1,20 @@
+language: python
+
+python:
+    - "2.7"
+
+install:
+    - pip install pelican markdown
+    - npm install
+
+script:
+    - cd website
+    - pelican -o ../output
+    - cd ../
+
+deploy:
+    provider: script
+    script: npm run deploy
+    skip_cleanup: true
+    on:
+        branch: master

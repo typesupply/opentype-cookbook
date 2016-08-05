@@ -1,0 +1,13 @@
+{
+  "name": "opentypecookbook",
+  "author": "Tal Leming (http://typesupply.com)",
+  "homepage": "http://opentypecookbook.com",
+  "private": true,
+  "devDependencies": {
+    "surge": "0.18.0"
+  },
+  "scripts": {
+    "predeploy": "echo 'User-agent: *\nDisallow: /' > ./build/robots.txt",
+    "deploy": "surge ./output opentypecookbook-example.kennethormandy.com"
+  }
+}
