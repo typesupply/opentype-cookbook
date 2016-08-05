@@ -7,7 +7,7 @@
     "surge": "0.18.0"
   },
   "scripts": {
-    "predeploy": "echo 'User-agent: *\nDisallow: /' > ./build/robots.txt",
+    "predeploy": "echo 'User-agent: *\nDisallow: /' > ./output/robots.txt",
     "deploy": "surge ./output opentypecookbook-example.kennethormandy.com"
   }
 }
