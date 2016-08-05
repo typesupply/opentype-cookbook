@@ -2,3 +2,4 @@
 website/content/images/illustrations.ai
 
 output/
+*.log*
