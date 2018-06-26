@@ -64,7 +64,7 @@ The `locl` feature is specifically designed to implement global script and langu
 
         script latn;
 
-            language NLD exclude_dflt;
+            language NLD;
                 lookup DutchIJ {
                     sub IJ by IJ.dutch;
                 } DutchIJ;
