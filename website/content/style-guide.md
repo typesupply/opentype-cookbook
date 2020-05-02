@@ -112,19 +112,19 @@ Script and language definitions each increase the indentation level by one level
 
         script latn;
 
-            language TRK exclude_dflt;
+            language TRK;
 
                 lookup IDOT {
                     sub i' by idotaccent;
                 } IDOT;
 
-            language AZE exclude_dflt;
+            language AZE;
                 lookup IDOT;
 
-            language CRT exclude_dflt;
+            language CRT;
                 lookup IDOT;
 
-            language ROM exclude_dflt;
+            language ROM;
 
                 lookup SCEDILLA {
                     sub scedilla by uni0219;

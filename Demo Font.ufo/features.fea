@@ -34,7 +34,7 @@ feature locl {
 
     script latn;
 
-        language NLD exclude_dflt;
+        language NLD;
             lookup DutchIJ {
                 sub IJ by IJ.dutch;
             } DutchIJ;
