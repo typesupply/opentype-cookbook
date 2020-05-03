@@ -20,53 +20,56 @@ The language system declarations must come first. After that, the order is up to
 
 Here is a basic example combined into the proper form:
 
-    :::fea
-    languagesystem DFLT dflt;
-    languagesystem latn dflt;
+```opentype_feature_file
+languagesystem DFLT dflt;
+languagesystem latn dflt;
 
-    @lowercase = [a    b    c];
-    @uppercase = [A    B    C];
-    @smallcaps = [A.sc B.sc C.sc];
+@lowercase = [a    b    c];
+@uppercase = [A    B    C];
+@smallcaps = [A.sc B.sc C.sc];
 
-    @figures         = [zero    one    two];
-    @figuresSmallcap = [zero.sc one.sc two.sc];
+@figures         = [zero    one    two];
+@figuresSmallcap = [zero.sc one.sc two.sc];
 
-    @punctuation         = [exclam];
-    @punctuationSmallcap = [exclam.sc];
+@punctuation         = [exclam];
+@punctuationSmallcap = [exclam.sc];
 
-    feature smcp {
-        sub @lowercase by @smallcaps;
-    } smcp;
+feature smcp {
+    sub @lowercase by @smallcaps;
+} smcp;
 
-    feature c2sc {
-        sub @uppercase by @smallcaps;
-        sub @figures by @figuresSmallcap;
-        sub @punctuation by @punctuationSmallcap;
-    } c2sc;
+feature c2sc {
+    sub @uppercase by @smallcaps;
+    sub @figures by @figuresSmallcap;
+    sub @punctuation by @punctuationSmallcap;
+} c2sc;
+```
 
 Note that there are no lookups declared. Why? The first lookup is implied to be anything before you define a lookup. Consider this example:
 
-    :::fea
-    feature c2sc {
-        sub @uppercase by @smallcaps;
+```opentype_feature_file
+feature c2sc {
+    sub @uppercase by @smallcaps;
 
-        lookup Lowercase {
-            sub @lowercase by @smallcaps;
-        } Lowercase;
-    } c2sc;
+    lookup Lowercase {
+        sub @lowercase by @smallcaps;
+    } Lowercase;
+} c2sc;
+```
 
 The first rule, `sub @uppercase by @smallcaps;`, is implicitly in a lookup. The result is the same as this:
 
-    :::fea
-    feature c2sc {
-        lookup Uppercase {
-            sub @uppercase by @smallcaps;
-        } Uppercase;
+```opentype_feature_file
+feature c2sc {
+    lookup Uppercase {
+        sub @uppercase by @smallcaps;
+    } Uppercase;
 
-        lookup Lowercase {
-            sub @lowercase by @smallcaps;
-        } Lowercase;
-    } c2sc;
+    lookup Lowercase {
+        sub @lowercase by @smallcaps;
+    } Lowercase;
+} c2sc;
+```
 
 That’s pretty much how you combine things. There will be more examples that demonstrate advanced techniques that you can study later.
 
@@ -92,18 +95,21 @@ There are, of course, exceptions. The point is that you should think through thi
 
 If you are working on a family that shares features across multiple styles, it’s cumbersome to store the features in each font source file. To get around this, you can store the features in an external file and reference them from the features in your font source file. To do this you use the `include` keyword:
 
-    :::fea
-    include(features/family.fea);
+```opentype_feature_file
+include(features/family.fea);
+```
 
 The text inside of the parenthesis must be the path to your external features file relative to the font source file. In the example above, the file family.fea is located in a folder called features right next to my font source file.
 
 You can even include multiple files in a single font source file. For example:
 
-    :::fea
-    include(features/family.fea);
-    include(features/bold-kern.fea);
+```opentype_feature_file
+include(features/family.fea);
+include(features/bold-kern.fea);
+```
 
 Even in other folders, below the current one:
 
-    :::fea
-    include(../tables.fea);
+```opentype_feature_file
+include(../tables.fea);
+```

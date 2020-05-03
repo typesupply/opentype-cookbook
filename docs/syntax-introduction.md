@@ -11,8 +11,9 @@ We will be writing our features in the [Adobe OpenType Feature File Syntax](http
 
 It’s useful to be able to write comments about your code. To do this, add a `#` and everything from the `#` to the end of the line of text will be marked as a comment.
 
-    :::fea
-    # This is a comment.
+```opentype_feature_file
+# This is a comment.
+```
 
 Comments are ignored when your font is compiled, so you can write anything you want in your comments.
 
@@ -42,36 +43,41 @@ Features are identified with a four character tag. These are either [registered 
 
 Features are defined with the feature keyword, the appropriate tag, a pair of braces, the tag again, and a semicolon.
 
-    :::fea
-    feature smcp {
-        # lookups and rules go here
-    } smcp;
+```opentype_feature_file
+feature smcp {
+    # lookups and rules go here
+} smcp;
+```
 
 ## Lookups
 
 Lookups are defined in a similar way to features. They have a name, but the name is not restricted to four characters or to a tag database. You can make up your own name, as long as it follows the general naming rules.
 
-    :::fea
-    lookup Letters {
-        # rules go here
-    } Letters;
+```opentype_feature_file
+lookup Letters {
+    # rules go here
+} Letters;
+```
 
 ## Classes
 
 You’ll often run into situations where you want use a group of glyphs in a rule. These groups are called classes and they are defined with a list of glyph names or class names inside of brackets.
 
-    :::fea
-    [A E I O U Y]
+```opentype_feature_file
+[A E I O U Y]
+```
 
 Classes can have a name assigned to them so that they can be used more than once. Class names follow the general naming rules and they are always preceded with an `@`. To create a named class you set the name, then an `=`, then the class definition and end it with a semicolon.
 
-    :::fea
-    @vowels = [A E I O U Y];
+```opentype_feature_file
+@vowels = [A E I O U Y];
+```
 
 After a class has been defined, it can be referenced by name.
 
-    :::fea
-    @vowels
+```opentype_feature_file
+@vowels
+```
 
 ## General Naming Rules
 

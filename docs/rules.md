@@ -16,13 +16,15 @@ Substitutions are the most visually transformative thing that features can do to
 
 The syntax for a substitution is:
 
-    :::fea
-    substitute target by replacement;
+```opentype_feature_file
+substitute target by replacement;
+```
 
 We can abbreviate `substitute` with `sub` to cut down on how much stuff we have to type, so let’s do that:
 
-    :::fea
-    sub target by replacement;
+```opentype_feature_file
+sub target by replacement;
+```
 
 Targets and replacements can often be classes. These classes can be referenced by name or they can be defined as an unnamed class inside of a rule.
 
@@ -30,25 +32,29 @@ Targets and replacements can often be classes. These classes can be referenced b
 
 To replace one thing with another, you do this:
 
-    :::fea
-    sub target by replacement;
+```opentype_feature_file
+sub target by replacement;
+```
 
 *(In the .fea documentation, this is known as GSUB Lookup Type 1: Single Substitution.)*
 
 For example, to transform `a` to `A.sc`, you would do this:
 
-    :::fea
-    sub a by A.sc;
+```opentype_feature_file
+sub a by A.sc;
+```
 
 If you want to replace several things with corresponding things, you can use classes as both the target and the replacement. However, in this case the number of things in the two classes needs to be the same, unlike above.
 
-    :::fea
-    sub [a b c] by [A.sc B.sc C.sc];
+```opentype_feature_file
+sub [a b c] by [A.sc B.sc C.sc];
+```
 
 It’s usually more readable to define the classes earlier in your code and then reference them by name.
 
-    :::fea
-    sub @lowercase by @smallcaps;
+```opentype_feature_file
+sub @lowercase by @smallcaps;
+````
 
 The order of the glyphs in your classes in this situation is critical. In the example above, the classes will correspond with each other like this:
 
@@ -58,8 +64,9 @@ The order of the glyphs in your classes in this situation is critical. In the ex
 
 If you order the target and replacement classes incorrectly, things will go wrong. For example, if you have this as your rule:
 
-    :::fea
-    sub [a b c] by [B.sc C.sc A.sc];
+```opentype_feature_file
+sub [a b c] by [B.sc C.sc A.sc];
+```
 
 The classes will correspond like this:
 
@@ -73,44 +80,51 @@ This is obviously undesired behavior, so keep your classes ordered properly.
 
 To replace a sequence of things with one thing, you do this:
 
-    :::fea
-    sub target sequence by replacement;
+```opentype_feature_file
+sub target sequence by replacement;
+```
 
 *(In the .fea documentation, this is known as GSUB Lookup Type 4: Ligature Substitution.)*
 
 For example, for an `fi` ligature, you would do this:
 
-    :::fea
-    sub f i by f_i;
+```opentype_feature_file
+sub f i by f_i;
+```
 
 You can also use classes as part of the target sequence:
 
-    :::fea
-    sub @f @i by f_i;
+```opentype_feature_file
+sub @f @i by f_i;
+```
 
 Or:
 
-    :::fea
-    sub @f i by f_i;
+```opentype_feature_file
+sub @f i by f_i;
+```
 
 Or:
 
-    :::fea
-    sub f @i by f_i;
+```opentype_feature_file
+sub f @i by f_i;
+```
 
 ### Replace One With Many
 
 To replace a single thing with a sequence of things, you do this:
 
-    :::fea
-    sub target by replacement sequence;
+```opentype_feature_file
+sub target by replacement sequence;
+```
 
 *(In the .fea documentation, this is known as GSUB Lookup Type 2: Multiple Substitution.)*
 
 For example, to convert an `fi` ligature back into `f` and `i`, you would do this:
 
-    :::fea
-    sub f_i by f i;
+```opentype_feature_file
+sub f_i by f i;
+```
 
 Classes can’t be used as the target or the replacement in this rule type.
 
@@ -118,8 +132,9 @@ Classes can’t be used as the target or the replacement in this rule type.
 
 To give the user a choice of alternates, you do this:
 
-    :::fea
-    sub target from replacement;
+```opentype_feature_file
+sub target from replacement;
+```
 
 *(In the .fea documentation, this is known as GSUB Lookup Type 3: Alternate Substitution.)*
 
@@ -127,8 +142,9 @@ The replacement must be a glyph class, and (unlike above) does not happen automa
 
 For example, to give the user several options to replace `a` with, you would do this:
 
-    :::fea
-    sub a from [a.alt1 a.alt2 a.alt3];
+```opentype_feature_file
+sub a from [a.alt1 a.alt2 a.alt3];
+```
 
 Note that the keyword in the middle of the rule is `from` instead of `by`.
 
@@ -153,13 +169,15 @@ In the positioning rules, we can adjust the *placement* and *advance* of glyphs.
 
 The units that these values represent are the same units in which you have drawn your glyph. Together, these four values form a *value record*. In the .fea syntax, we express these value records like this:
 
-    :::fea
-    <xPlacement yPlacement xAdvance yAdvance>
+```opentype_feature_file
+<xPlacement yPlacement xAdvance yAdvance>
+```
 
 For example:
 
-    :::fea
-    <10 20 30 40>
+```opentype_feature_file
+<10 20 30 40>
+```
 
 In this case, the value record is adjusting the x placement to the right by 10 units, the y placement up by 20 units, the x advance by 30 units and the y advance by 40 units.
 
@@ -167,13 +185,15 @@ In this case, the value record is adjusting the x placement to the right by 10 u
 
 The syntax for a positioning rule is:
 
-    :::fea
-    position target valueRecord;
+```opentype_feature_file
+position target valueRecord;
+```
 
 We can abbreviate `position` with `pos` to cut down on how much stuff we have to type, so let’s do that:
 
-    :::fea
-    pos target valueRecord;
+```opentype_feature_file
+pos target valueRecord;
+```
 
 Targets can be classes. These classes can be referenced by name or they can be defined as an unnamed class inside of a rule.
 
@@ -186,22 +206,25 @@ When the positioning features are started, each glyph in the glyph run has a val
 
 To adjust the space around a single target, you do this:
 
-    :::fea
-    pos target valueRecord;
+```opentype_feature_file
+pos target valueRecord;
+```
 
 *(In the .fea documentation, this is known as GPOS Lookup Type 1: Single Adjustment Positioning.)*
 
 For example, to put some space to the left and right of the `A`, you would do this:
 
-    :::fea
-    pos A <10 0 20 0>;
+```opentype_feature_file
+pos A <10 0 20 0>;
+```
 
 ### Adjust the Space Between Two Glyphs
 
 To adjust the space between two targets, you do this:
 
-    :::fea
-    pos target1 target2 valueRecord;
+```opentype_feature_file
+pos target1 target2 valueRecord;
+```
 
 *(In the .fea documentation, this is known as GPOS Lookup Type 2: Pair Adjustment Positioning.)*
 
@@ -211,18 +234,21 @@ This rule is used almost exclusively for kerning. In fact, this is so common tha
 
 You can use a class as target 1, target 2 or both:
 
-    :::fea
-    pos @A T -50;
+```opentype_feature_file
+pos @A T -50;
+```
 
 Or:
 
-    :::fea
-    pos A @T -50;
+```opentype_feature_file
+pos A @T -50;
+```
 
 Or:
 
-    :::fea
-    pos @A @T -50;
+```opentype_feature_file
+pos @A @T -50;
+```
 
 But, seriously, let your editor write these rules for you.
 
@@ -242,8 +268,9 @@ In addition to the backtrack and lookahead, a new character is needed in these r
 
 Here is the words example from above in the correct syntax:
 
-    :::fea
-    sub w o r' d s by r.alt;
+```opentype_feature_file
+sub w o r' d s by r.alt;
+```
 
 Most of the substitution and positioning rule types can be defined with a context.
 
@@ -258,9 +285,10 @@ Please note that just because you *can* apply this to a rule type doesn’t mean
 
 What if we have a short context that you want to match, but a longer context that contains the short context? For example, say we want to change the r in `words` but not in `words!`. To do that we can specify an *exception* to the contextual rule. For example:
 
-    :::fea
-    ignore sub w o r' d s exclam;
-    sub w o r' d s by r.alt;
+```opentype_feature_file
+ignore sub w o r' d s exclam;
+sub w o r' d s by r.alt;
+```
 
 The `ignore` keyword followed by a backtrack (optional), target and lookahead (optional) creates the exception.
 
@@ -268,9 +296,10 @@ The `ignore` keyword followed by a backtrack (optional), target and lookahead (o
 
 If you use a contextual rule or exception within a lookup, all of the rules within that lookup *must* also use the `'` on the target of the rule. For example:
 
-    :::fea
-    sub a b' c by b.alt;
-    sub d' by d.alt;
+```opentype_feature_file
+sub a b' c by b.alt;
+sub d' by d.alt;
+```
 
 ## Advanced Techniques
 
@@ -282,34 +311,39 @@ One of OpenType’s best attributes is the way that it handles languages and scr
 
 Let’s look at an example. Let’s say that we have a special `IJ` that should only be used when Dutch is the declared language. We need to say: when the script is latin and the language is Dutch, replace `IJ` with `IJ.alt`. Here is how we do that:
 
-    :::fea
-    script latn;
-    language NLD;
-    sub IJ by IJ.dutch;
+```opentype_feature_file
+script latn;
+language NLD;
+sub IJ by IJ.dutch;
+```
 
 The script tags are defined [here](https://www.microsoft.com/typography/otspec/scripttags.htm) and language tags are defined [here](http://www.microsoft.com/typography/developers/opentype/languagetags.aspx).
 
 If you add language or script specific rules you also need to register that the features include a particular language and script combination, known as a language system, before any of your feature definitions. This is the syntax:
 
-    :::fea
-    languagesystem script language;
+```opentype_feature_file
+languagesystem script language;
+```
 
 And in our example, we would do this:
 
-    :::fea
-    languagesystem latn NLD;
+```opentype_feature_file
+languagesystem latn NLD;
+```
 
 Before you define any specific language system, you should always declare this:
 
-    :::fea
-    languagesystem DFLT dflt;
+```opentype_feature_file
+languagesystem DFLT dflt;
+```
 
 This will register all rules for a fallback system in case an OpenType layout engine gets confused about which language or script your features apply to. Additionally, before you register a script with a specific language, you should register it with the default language for the same reason. So, the complete set of language system statements would look like this:
 
-    :::fea
-    languagesystem DFLT dflt;
-    languagesystem latn dflt;
-    languagesystem latn NLD;
+```opentype_feature_file
+languagesystem DFLT dflt;
+languagesystem latn dflt;
+languagesystem latn NLD;
+```
 
 ### Lookups
 
@@ -317,27 +351,30 @@ We studied lookups when we went through the feature processing model, but they d
 
 You can also reuse lookups if they are declared outside of a feature. To do this, define your lookup like this:
 
-    :::fea
-    lookup Example {
-        # rules go here
-    } Example;
+```opentype_feature_file
+lookup Example {
+    # rules go here
+} Example;
+```
 
 Then, inside of your features you can have this lookup called by referencing its name:
 
-    :::fea
-    lookup Example;
+```opentype_feature_file
+lookup Example;
+```
 
 This is useful if you want to share some rules across multiple features.
 
-    :::fea
-    lookup Inferiors {
-        sub @inferiorOff by @inferiorOn;
-    } Inferiors;
+```opentype_feature_file
+lookup Inferiors {
+    sub @inferiorOff by @inferiorOn;
+} Inferiors;
 
-    feature subs {
-        lookup Inferiors;
-    } subs;
+feature subs {
+    lookup Inferiors;
+} subs;
 
-    feature sinf {
-        lookup Inferiors;
-    } sinf;
+feature sinf {
+    lookup Inferiors;
+} sinf;
+```

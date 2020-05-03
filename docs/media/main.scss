@@ -30,6 +30,31 @@ $text-color:       #000;
 $background-color: #fff;
 
 
+// -----------------
+// Code Highlighting
+// -----------------
+
+// comment
+$highlight-comment: rgba(0, 0, 0, 0.6);
+// feature, lookup
+$highlight-namespace: $blue;
+// keyword
+$highlight-keyword: $blue;
+// token
+$highlight-punctuation: black;
+// contextual target marker
+$highlight-tag: $green;
+// feature name, lookup name
+$highlight-class: $highlight-tag;
+// glyph name
+$highlight-name: $highlight-punctuation;
+// class name
+$highlight-function: $red;
+// string
+$highlight-string: black;
+// number
+$highlight-number: black;
+
 // -------------------
 // Partials from _sass
 // -------------------

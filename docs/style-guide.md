@@ -27,9 +27,10 @@ I don’t have a set column width for class definitions or rules. I find that th
 
 I precede all comments with a single # followed by a space.
 
-    :::fea
-    # This looks nice.
-    #This does not.
+```opentype_feature_file
+# This looks nice.
+#This does not.
+```
 
 Comments are always indented to the level of the code that they are meant to document. Sudden horizontal shifts are jarring.
 
@@ -39,23 +40,24 @@ I like to use proper title and sentence casing in comments with occasional all u
 
 I structure my features like this:
 
-    :::fea
-    # -----------------
-    # Example Feature 1
-    # -----------------
+```opentype_feature_file
+# -----------------
+# Example Feature 1
+# -----------------
 
-    feature xmp1 {
-        # rules, lookups, etc.
-    } xmp1;
+feature xmp1 {
+    # rules, lookups, etc.
+} xmp1;
 
 
-    # -----------------
-    # Example Feature 2
-    # -----------------
+# -----------------
+# Example Feature 2
+# -----------------
 
-    feature xmp2 {
-        # rules, lookups, etc.
-    } xmp2;
+feature xmp2 {
+    # rules, lookups, etc.
+} xmp2;
+```
 
 Each feature, or group of features in the case of interrelated features like figure styles, gets a human readable header with line of hyphens above and below. The number of hyphens matches the number of characters in the header. One blank line follows this.
 
@@ -67,14 +69,15 @@ Features always have two blank lines between them and whatever is next in the fi
 
 Lookups are structured like this:
 
-    :::fea
-    lookup ExampleLookup1 {
-        # rules
-    } ExampleLookup1;
+```opentype_feature_file
+lookup ExampleLookup1 {
+    # rules
+} ExampleLookup1;
 
-    lookup ExampleLookup2 {
-        # rules
-    } ExampleLookup2;
+lookup ExampleLookup2 {
+    # rules
+} ExampleLookup2;
+```
 
 The lookup begins at the current indent level with the keyword, a space, the lookup name, a space and the opening brace. It is closed with an unindented closing brace, a space, the lookup name and the closing semicolon. Between the opening and closing lines, the indentation level of any line containing text is increased one level.
 
@@ -86,9 +89,10 @@ There should be at least one blank line above a lookup and one blank line below.
 
 Classes are defined line this:
 
-    :::fea
-    @exampleClass1 = [A B C];
-    @exampleClass2 = [a b c];
+```opentype_feature_file
+@exampleClass1 = [A B C];
+@exampleClass2 = [a b c];
+```
 
 The definition begins at the current indent level with the `@` special character, the class name, a space, an `=`, a space, the opening bracket, a space delimited list of glyph names in a meaningful order, a closing bracket and the closing semicolon.
 
@@ -98,10 +102,11 @@ Class names should be descriptive of the class’ contents and purpose. For exam
 
 If there are two or more classes that are intended for substituting with each other, readability can be greatly increased by using spaces between glyph names as alignment padding. For example:
 
-    :::fea
-    @figures         = [zero     one     two];
-    @figuresTabular  = [zero.tab one.tab two.tab];
-    @figuresSmallCap = [zero.sc  one.sc  two.sc];
+```opentype_feature_file
+@figures         = [zero     one     two];
+@figuresTabular  = [zero.tab one.tab two.tab];
+@figuresSmallCap = [zero.sc  one.sc  two.sc];
+```
 
 ## Rules
 
@@ -111,28 +116,29 @@ Rules are defined with the short version of the keywords, `sub` and `pos`, inste
 
 Script and language definitions each increase the indentation level by one level until the next script or language definition or until the end of the feature. For example:
 
-    :::fea
-    feature locl {
+```opentype_feature_file
+feature locl {
 
-        script latn;
+    script latn;
 
-            language TRK;
+        language TRK;
 
-                lookup IDOT {
-                    sub i' by idotaccent;
-                } IDOT;
+            lookup IDOT {
+                sub i' by idotaccent;
+            } IDOT;
 
-            language AZE;
-                lookup IDOT;
+        language AZE;
+            lookup IDOT;
 
-            language CRT;
-                lookup IDOT;
+        language CRT;
+            lookup IDOT;
 
-            language ROM;
+        language ROM;
 
-                lookup SCEDILLA {
-                    sub scedilla by uni0219;
-                    sub Scedilla by uni0218;
-                } SCEDILLA;
+            lookup SCEDILLA {
+                sub scedilla by uni0219;
+                sub Scedilla by uni0218;
+            } SCEDILLA;
 
-    } locl;
+} locl;
+```
