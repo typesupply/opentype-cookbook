@@ -5,6 +5,14 @@ title: Version History
 order: 9
 ---
 
+Major changes are noted here. For a complete list of changes, refer to the [commits](https://github.com/typesupply/opentype-cookbook/commits/master).
+
+### May 3, 2020
+
+- Converted the site to work with GitHub Pages.
+- [Ben Kiel updated the fraction feature example.](https://github.com/typesupply/opentype-cookbook/pull/22)
+- [Jose Sole corrected the use of `exclude_dflt`.](https://github.com/typesupply/opentype-cookbook/pull/23)
+
 ### September 4, 2014
 
 Initial version.
