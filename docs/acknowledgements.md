@@ -9,9 +9,9 @@ Thanks to the Adobe Type Department for developing the .fea syntax. It gets crit
 
 Thanks to [Ben Kiel](http://benkiel.com), [Frank Grießhammer](http://frgr.de), [Miguel Sousa](http://adobe.com/type) and [Erik van Blokland](http://letterror.com) for graciously reading, editing and making suggestions about early drafts of this cookbook.
 
-[Brook Elgie](http://brookelgie.com) built the infrastructure for the site and did most of the styling work. I am hugely thankful for his efforts because CSS and me are not friends.
+[Brook Elgie](http://brookelgie.com) built the original infrastructure for the site and did most of the styling work. I am hugely thankful for his efforts because CSS and me are not friends. I ported his work to work with Jekyll on GitHub Pages.
 
-Thanks to [Frederik Berlean](http://typemytype.com) for many things, especially his [Pygments lexer for the .fea syntax](https://github.com/typemytype/OpenTypeFeatureLexer).
+Thanks to [Frederik Berlean](http://typemytype.com) for many things. Thanks to him and [Thom Janssen](http://hallotype.nl) for their [.fea Rouge lexer](https://github.com/rouge-ruby/rouge/pull/864).
 
 Thanks to [Mr. Ken Barber](http://typeandlettering.com) for designing typefaces that needed bizarre feature behavior that had never existed before.
 
