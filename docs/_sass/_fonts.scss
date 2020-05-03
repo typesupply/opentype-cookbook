@@ -1,0 +1,28 @@
+@mixin fontface($family, $src, $weight:normal, $style:normal) {
+    font-family: $family;
+    src:  url('fonts/' + $src + '.woff') format('woff');
+    font-weight: $weight;
+    font-style: $style;
+}
+
+@font-face {
+    @include fontface('Queue Web', 'queueweb-light', 300);
+}
+@font-face {
+    @include fontface('Queue Web', 'queueweb-lightitalic', 300, italic);
+}
+@font-face {
+    @include fontface('Queue Web', 'queueweb-book', 400);
+}
+@font-face {
+    @include fontface('Queue Web', 'queueweb-medium', 500);
+}
+@font-face {
+    @include fontface('Queue Web', 'queueweb-bold', 600);
+}
+@font-face {
+    @include fontface('Queue Mono Web', 'queuemonoweb-light', 300);
+}
+@font-face {
+    @include fontface('Queue Mono Web', 'queuemonoweb-medium', 400);
+}

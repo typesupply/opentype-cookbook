@@ -1,0 +1,22 @@
+title: The OpenType Cookbook
+email: tal@typesupply.com
+description: >-
+  An introduction to OpenType features for type designers.
+baseurl: ""
+url: "http://opentypecookbook.com"
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+permalink: /:title/
+
+plugins:
+  - rouge
+exclude:
+    - Gemfile
+    - Gemfile.lock
+    - LICENSE
+    - README.md
+    - CNAME

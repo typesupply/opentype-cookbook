@@ -1,0 +1,11 @@
+<footer class="site-footer">
+  {% assign sorted_pages = site.pages | sort:"order" %}
+  {% for item in sorted_pages %}
+    {% if forloop.last == false %}
+      {% if item.title == page.title %}
+        {% assign next_page = sorted_pages[forloop.index] %}
+        <a href="{{ next_page.url }}">Next: {{ next_page.title }}</a>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</footer>

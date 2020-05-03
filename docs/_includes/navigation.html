@@ -1,0 +1,17 @@
+<div id="nav_wrapper">
+    <nav id="menu">
+        <ul>
+            {% assign sorted_pages = site.pages | sort:"order" %}
+            {% for item in sorted_pages %}
+                {% if item.navigation %}
+                    <li>
+                        <a
+                            {% if item.url == page.url %}class="active"{% endif %}
+                            href="{{ item.url | prepend: site.baseurl }}">{{ item.title }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </nav>
+</div>

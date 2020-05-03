@@ -1,0 +1,41 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@charset "utf-8";
+
+
+// ------
+// Colors
+// ------
+
+$blue: rgb(10, 120, 160);
+$blue-dark: rgb(0, 30, 60);
+$yellow: rgb(230, 250, 130);
+$yellow-light: rgb(250, 255, 225);
+$green: rgb(0, 150, 50);
+$red: rgb(245, 100, 100);;
+
+
+// ----
+// Text
+// ----
+
+$base-font-family: 'Queue Web', sans-serif;
+$base-font-size: 15px;
+$base-font-weight: 300;
+$base-line-height: 23px;
+
+$text-color:       #000;
+$background-color: #fff;
+
+
+// -------------------
+// Partials from _sass
+// -------------------
+
+@import
+	"base",
+	"fonts",
+	"syntax-highlighting"
+;

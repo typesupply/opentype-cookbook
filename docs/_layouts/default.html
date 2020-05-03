@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  {% include head.html %}
+  <body id="index" class="">
+    {% include navigation.html %}
+    <div id="wrapper">
+        {% include header.html %}
+        <article>
+          <h1>{{ page.title }}</h1>
+          {{ content }}
+          {% include footer.html %}
+        </article>
+    </div>
+
+    <script src="{{ "/media/scripts/jquery-1.11.1.min.js" | prepend: site.baseurl }}" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        document.documentElement.className = document.documentElement.className.replace("no-js","js");
+
+        (function($) {
+            var nav_width = 221;
+            var nav = $('nav#menu');
+            var body = $('body');
+
+            var show_nav = function() {
+                body.addClass("open-flyout");
+            };
+
+            var hide_nav = function() {
+                body.removeClass("open-flyout");
+            };
+
+            // add a close button to menu
+            var menu_close = nav.prepend("<a href='#' id='menu_close'>×</a>");
+            $('#menu_close').on('click', function(ev) {
+                ev.preventDefault();
+                hide_nav();
+            });
+
+            $('#menu_toggle').on("click", function(ev) {
+                ev.preventDefault();
+                if(!body.hasClass("open-flyout")) {
+                    show_nav();
+                } else {
+                    hide_nav();
+                }
+            });
+        })(jQuery);
+
+        // Remove 'preload' class on DOM ready.
+        // Prevents flash of transition.
+        $('document').ready(function() {
+            $("body").addClass('loaded');
+        })
+    </script>
+
+  </body>
+</html>
