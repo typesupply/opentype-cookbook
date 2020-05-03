@@ -27,7 +27,7 @@ If you have trouble understanding anything, need help with your features or anyt
 
 ## Donations
 
-If you think this cookbook has been useful in your day to day work and you want to support the development of it, feel free to *(hang on, I'm waiting to be approved for thew GitHub Sponsor program)*. Or you can make a one-time contribution through (PayPal)[https://paypal.me/typesupply]. Or contact me [directly](http://typesupply.com/contact) if you would prefer to do it that way.
+If you think this cookbook has been useful in your day to day work and you want to support the development of it, feel free to *(hang on, I'm waiting to be approved for the GitHub Sponsor program)*. Or you can make a one-time contribution through [PayPal](https://paypal.me/typesupply). Or contact me [directly](http://typesupply.com/contact) if you would prefer to do it that way.
 
 ### Students
 
