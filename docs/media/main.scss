@@ -34,8 +34,9 @@ $background-color: #fff;
 // Partials from _sass
 // -------------------
 
+@import url("http://static.typesupply.com/opentype-cookbook/fonts.css");
+
 @import
 	"base",
-	"fonts",
 	"syntax-highlighting"
 ;
