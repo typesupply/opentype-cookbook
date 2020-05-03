@@ -7,7 +7,7 @@
 		 <![CDATA[
 			@font-face {
 				font-family: "Queue Web";
-				src: url("../fonts/queueweb-light.woff") format("woff");
+				src: url("http://static.typesupply.com/opentype-cookbook/queueweb-light.woff") format("woff");
 				font-weight: 300;
 				font-style: normal;
 			}
