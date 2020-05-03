@@ -11,7 +11,7 @@ This cookbook is written with the assumption that you have a basic working knowl
 
 ## Your Author
 
-I’m [Tal Leming](http://typesupply.com) and I started developing OpenType features around 2002 or 2003. Since then I have developed the OpenType features for a number of [fonts](http://www.houseind.com/fonts/edbenguiatfonts) [that](http://www.houseind.com/fonts/studiolettering) [do](http://christianschwartz.com/local.shtml) [weird](https://www.typotheque.com/fonts/julien/about) [things](https://www.typotheque.com/fonts/irma). I only write OpenType features for my own fonts now, so I am semi-retired from day-to-day OpenType feature programming. However I teach type design at [MICA](http://mica.edu) and a number of my students have expressed interest in developing their own OpenType features and there wasn’t a good from the ground up introduction to this and...here we are. (Hi to my students!)
+I’m [Tal Leming](http://typesupply.com) and I started developing OpenType features around 2002 or 2003. Since then I have developed the OpenType features for a number of [fonts](http://www.houseind.com/fonts/edbenguiatfonts) [that](http://www.houseind.com/fonts/studiolettering) [do](http://christianschwartz.com/local.shtml) [weird](https://www.typotheque.com/fonts/julien/about) [things](https://www.typotheque.com/fonts/irma). I only write OpenType features for my own fonts now, so I am semi-retired from day-to-day OpenType feature programming. Back when I had time, I taught a type design class at [MICA](http://mica.edu) and a number of my students expressed interest in developing their own OpenType features and there wasn’t a good from the ground up introduction to this and...here we are. (Hi to my former students!)
 
 ## Unofficial
 
