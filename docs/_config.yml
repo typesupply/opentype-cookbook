@@ -2,7 +2,7 @@ title: The OpenType Cookbook
 email: tal@typesupply.com
 description: >-
   An introduction to OpenType features for type designers.
-baseurl: ""
+baseurl: "/opentype-cookbook"
 url: "http://opentypecookbook.com"
 
 markdown: kramdown
