@@ -317,7 +317,7 @@ language NLD;
 sub IJ by IJ.dutch;
 ```
 
-The script tags are defined [here](https://www.microsoft.com/typography/otspec/scripttags.htm) and language tags are defined [here](http://www.microsoft.com/typography/developers/opentype/languagetags.aspx).
+The script tags are defined [here](https://docs.microsoft.com/typography/opentype/spec/scripttags) and language tags are defined [here](https://docs.microsoft.com/typography/opentype/spec/languagetags).
 
 If you add language or script specific rules you also need to register that the features include a particular language and script combination, known as a language system, before any of your feature definitions. This is the syntax:
 
