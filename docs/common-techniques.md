@@ -89,10 +89,7 @@ This method has been around for as long as I have been working on OpenType featu
 feature frac {
     @slash = [slash fraction];
 
-    lookup FractionNumerators {
-        sub @figures by @figuresNumerator;
-    } FractionNumerators;
-
+    sub @figures by @figuresNumerator;
     sub [@slash @figuresDenominator] @figuresNumerator' by @figuresDenominator;
     sub slash by fraction;
 } frac;
