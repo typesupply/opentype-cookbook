@@ -28,7 +28,7 @@ They are at the `o`, the `W` and the `d`. If we use this for swashes our `W` and
 
 - `@all` — This class contains all glyphs.
 - `@filled` — This class contains all glyphs that contain positive space.
-- `@empty` — This glyph contains all glyphs that contain only negative space.
+- `@empty` — This class contains all glyphs that contain only negative space.
 
 With these, we can build lookups that handle boundary detection reasonable well enough for things like swashes.
 
