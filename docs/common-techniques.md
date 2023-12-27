@@ -71,7 +71,7 @@ feature locl {
 
         language NLD;
             lookup DutchIJ {
-                sub IJ by IJ.dutch;
+                sub I J by IJ.dutch;
             } DutchIJ;
 
 } locl;
