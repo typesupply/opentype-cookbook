@@ -87,7 +87,7 @@ There should be at least one blank line above a lookup and one blank line below.
 
 ## Classes
 
-Classes are defined line this:
+Classes are defined like this:
 
 ```opentype_feature_file
 @exampleClass1 = [A B C];
