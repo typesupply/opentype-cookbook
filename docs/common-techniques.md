@@ -412,7 +412,7 @@ Small caps and swashes are fun, but for me the real fun is in making fonts do un
 
 ### Randomization
 
-Everyone wants their font to look like the glyphs were randomly drawn. But, let’s establish something first: No one will ever do randomization better than [LettError](http://letterror.com) did in their famous [Beowolf](http://letterror.com/fonts/beowolf). **No one.** Still want try some randomization? Okay.
+Everyone wants their font to look like the glyphs were randomly drawn. But, let’s establish something first: No one will ever do randomization better than [LettError](http://letterror.com) did in their famous [Beowolf](https://letterror.com/fonts/randomfonts.html). **No one.** Still want try some randomization? Okay.
 
 Randomization is a bit of a Holy Grail in the OpenType world. The problem is that it’s not actually possible for a couple of reasons. For one thing, we can only select from alternates, not actually modify glyph outlines. For another, for true pseudo-randomization there needs to be an external source that influences the random selection process and we can’t build a [random seed](http://en.wikipedia.org/wiki/Random_seed) generator with the OpenType tables. So, we have to fake it. There are a number of methods that can be used to do this. I have three that I like.
 
